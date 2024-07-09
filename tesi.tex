@@ -1,0 +1,84 @@
+\documentclass[12pt]{report}
+\usepackage[top=2.5cm, bottom=2.5cm, left=4cm, right=2.5cm, centering]{geometry}
+\linespread{1.5}
+% Librerie utili
+\usepackage[italian]{babel} % applicazione regole di scrittura per la lingua italiana 
+\usepackage[utf8]{inputenc} % codifica UTF-8
+\usepackage{scrlayer-scrpage} % stili pagina per il frontespizio
+\ifoot[]{}
+\cfoot[]{}
+\usepackage{hyperref}
+\ofoot[\pagemark]{\pagemark}
+\pagestyle{scrplain}
+\usepackage{mathptmx} % font Times New Roman (sim
+\usepackage{graphicx}
+\usepackage{csquotes} % per le citazioni "in blocco"
+\appto{\bibsetup}{\raggedright}
+\usepackage{titlesec} % per la formattazione dei titoli delle sezioni, capitoli etc.
+\usepackage{float} % per il posizionamento delle immagini
+\usepackage{listings} % per il codice di programmazione
+\renewcommand{\lstlistingname}{Code}% Listing -> Codice
+\usepackage{xcolor}  % stile del codice
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{navy}{HTML}{000080}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\titleformat{\chapter}[block]
+  {\normalfont\LARGE\bfseries}{\thechapter.}{0.5em}{\LARGE}
+\titlespacing*{\chapter}{0pt}{-20pt}{25pt}
+
+\lstdefinelanguage{CLI}{
+  keywords={feature, install,list},
+  keywordstyle=\color{codepurple}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+}
+
+\lstset{
+   language=CLI,
+   breaklines=true,
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   rulecolor=\color{black},
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b,
+   backgroundcolor=\color{backcolour},
+   frame=single,
+}
+
+
+\begin{document}
+\input{Introbuzione.tex}
+% contesto, obiettivo del lavoro, organizzazione tesi
+\input{Contesto.tex}
+% software define networking 
+%intent-based networking
+%controller stato dell'arte
+
+\input{Teraflow.tex}
+%motivi nascita teraflow
+%sintesi architettura
+%componenti service e policy
+%P4
+%gRPC
+%Mininet
+\input{Policy.tex}
+\input{Conclusioni.tex}
+\input{Appendice.tex}
+
+%\bibliographystyle{plain} % We choose the "plain" reference style
+%\bibliography{bibliography}
+%per controller sdn https://dl.acm.org/doi/epdf/10.1145/2534169.2491193
+
+\bibliographystyle{unsrt} 
+\bibliography{bibliografia}
+\end{document}

@@ -1,0 +1,53 @@
+\chapter{Controller SDN}
+\label{ch:SDN}
+
+L'architettura tradizionale di rete si basa su dispositivi fisici di interconnessione, switch e router, che collegano più host a livello locale e permettono di scambiarsi informazioni.
+Questi dispositivi, situati al livello rete dello stack TCP/IP, implementano al loro interno sia funzioni del piano di controllo (control plane),
+ossia l'instradamento dei datagrammi, che funzioni del piano dati (data plane) che si occupa dell' inoltro del traffico. Tali operazioni sono basate sulla destinazione
+e sono effettuate grazie alle decisioni della parte controllo che ha il compito di aggiornare la tabella di inoltro. 
+In questo caso si hanno due tipi di algoritmi di instradamento: 
+\begin{itemize}
+\item decentralizzati: nessun nodo conosce la topologia di tutta la rete ma ha informazioni solo dai nodi vicini. 
+\item globali: si basano sulla conoscenza della topologia di tutta la rete. Questa soluzione
+porta allo scambio di molti messaggi di broadcast e non è efficiente in quanto ogni
+nodo si occupa di calcolare soltanto la propria tabella.
+\end{itemize}
+Entrambi gli approcci necessitano di un algoritmo di routing in esecuzione su ciascun router che, attraverso un apposito protocollo, 
+scambia messaggi con gli altri componenti della rete per prendere decisioni. Questo introduce ritardi non rendendo la rete adatta alle nuove esigenze delle applicazioni moderne altamente dinamiche.
+%Questo tipo di reti utilizzano controller centralizzati
+%il livello rete interconnette reti eterogenee
+%Una limitazione dei controller centralizzati infatti è la configurazione statica tra gli switch e il controller.
+\\Il Software Defined Networking (SDN) è un'architettura di rete proposta negli ultimi anni dalla Open Networking Foundation (ONF) \cite{ONF} per rimediare ai problemi di scalabilità e affidabilità dei controller decentralizzati.
+SDN è un nuovo paradigma dinamico, gestibile e facilmente adattabile grazie alla separazione del piano di controllo dal piano dati rendendo così possibile un disaccoppiamento tra hardware e software per la gestione di device con API diverse.
+\\La base di questo paradigma è un controller remoto che, interagendo con i Control Agents
+locali, riceve informazioni sui collegamenti e sul traffico in tempo reale ed è in grado di
+configurare autonomamente i device collegati sulla base degli eventi notificati. Lo scopo
+principale è quindi ridurre e semplificare il carico di amministrazione.
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{sdn.png}
+    \caption{struttura di una rete SDN}
+    \label{fig:sdn}
+\end{figure}
+%foto  https://community.fs.com/it/article/what-is-software-defined-networking-sdn.html
+Come si può notare dalla figura \ref{fig:sdn} la rete viene suddivisa in tre livelli: Infrastructure layer, Control layer e Application layer.
+Partendo dal livello più basso troviamo l'infrastruttura di rete il cui unico compito è implementare il piano dati. 
+Questa divisione consente di evitare algoritmi
+di routing per il forwarding dei pacchetti all'interno dei dispositivi di rete visto che sarà
+gestito dai livelli sovrastanti. I dispositivi dovranno solo essere in grado di comunicare gli
+eventi che si verificano nella rete al controller.
+\\Nel control layer viene situato il controller SDN che tramite API northbound (NBI) e southbound (SBI), tipicamente implementata tramite OpenFlow, permette di comunicare con
+gli altri due livelli. Questo livello consente il monitoraggio e l'implementazione del piano
+dati. Il controller è logicamente centralizzato, anche se fisicamente può essere distribuito, permettendo al piano di gestione (management plane) sovrastante di interagire con un
+unico punto di controllo. E' in grado di configurare e di gestire rapidamente le risorse di rete tramite programmi dinamici e automatizzati. Consente infatti di imporre regole di
+inoltro ai dispositivi sottostanti, dopo aver calcolato il percorso migliore, tramite la manipolazione delle tabelle di routing mediante delle API SBI.
+\\L'application layer comprende le applicazioni e i servizi che sfruttano le capacità della
+rete SDN per la realizzazione del piano di gestione. Grazie a questo livello si possono
+definire policy da implementare all'interno della rete. Queste regole sono comunicate al
+controller tramite le API NBI e quest'ultimo si occuperà di farle rispettare mediante il costante monitoraggio delle risorse. 
+Questo disaccoppiamento dei vari livelli, al contrario dell'approccio
+tradizionale, permette alla rete di diventare direttamente programmabile da un'unica unità
+centrale che mantiene una visione globale e di astrarre l'infrastruttura sottostante ai vari servizi per poter far fronte alle difficoltà di gestione che si sono ritrovate nelle reti
+moderne.
+%\section{OpenFlow}
+%https://opennetworking.org/wp-content/uploads/2013/05/TR-535_ONF_SDN_Evolution.pdf  pagine 8

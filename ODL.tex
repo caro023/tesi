@@ -1,0 +1,50 @@
+\chapter{ODL}
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{ODL-Architecture.png}
+    \caption{Architettura del controller OpenDayLight}
+    \label{fig:ArchODL}
+\end{figure}
+OpenDaylight \cite{ODL} è un progetto open source che utiliza protocolli aperti al fine di fornire controlli centralizzati e gestire il monitoring della rete.
+Fa parte della fondazione LF Networking \cite{LFN} che si occupa di stanziare e coordinare il supporto a progetti open source coinvolti nello spostamento o nella comunicazione di dati su una rete.
+Ciò semplifica il coinvolgimento dei membri e aumenta la collaborazione tra i progetti e gli organismi di standardizzazione.
+%Lo scopo principale è far crescere l'ecosistema di ODL per facilitare la collaborazione tra sviluppatori, utenti finali e aziende associate a LFV per produrre tecnologie più pertinenti e affidabili.
+\\ODL è un framework scritto in Java che consente di soddisfare esigenze specifiche dell'utente e fornire quindi alta flessibilità.
+La caratteristica principale è la sua architettura costituita da microservizi che un utente può decidere se abilitare o meno. 
+Di default sono tutti disabilitati così da permettere una totale personalizzazione.
+Per la gestione dei moduli a runtime e l'installazione di funzionalità Karaf da implementare nel software di ODL viene utilizzato Apache Karaf \cite{Apache}.
+Attraverso il framework MD-SAL (Model-Driven Service Abstraction Layer) permette agli sviluppatori di creare nuove features sotto forma di servizi e protocolli collegati tra loro.
+\\Per far fronte ai problemi di scalabilità, disponibilità e persistenza dei dati si possono avere più instanze di ODL distribuite su macchine differenti che cooperano tra loro attraverso il meccanismo dei cluster.
+La comunicazione con le applicazioni si realizza grazie a diverse API northbound quali REST o NETCONF, mentre per interagire 
+con i dispositivi di rete offre supporto a diversi protocolli southbound come OpenFlow o NETCONF.
+
+
+\section {Installazione}
+Il controller viene eseguito all'interno di una Java Virtual Machine (JVM), quindi è necessario verificare quali versioni di Java supporta la distribuzione che si decide di installare.
+La versione stabile più recente di ODL è compatibile con le versioni di Java superiori alla 17, mentre per le versioni più datate quest'ultime non vanno bene. 
+Per l'installazione si deve scaricare la distribuzione desiderata che si trova sul loro sito ufficiale nella pagina di download del software \cite{InstallODL}.
+Successivamente è necessario fare l'unzip del file, navigare nella cartella e eseguire il seguente comando da terminale per avviare il controller.
+\begin{lstlisting}[language=CLI]
+./bin/karaf
+\end{lstlisting}
+La versione di ODL dell'immagine \ref{fig:installazione} è Potassium.
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{odl/Potassium.png}
+    \caption{Installazione ODL}
+    \label{fig:installazione}
+\end{figure}
+\\Successivamente, si può trovare una lista completa delle feature disponibili eseguendo il seguente comando.
+\begin{lstlisting}[language=CLI]
+feature:list
+\end{lstlisting}
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{odl/feature.png}
+    \caption{Alcune features disponibili}
+    \label{fig:feature}
+\end{figure}
+Per installarle invece 
+\begin{lstlisting}[language=CLI]
+feature:install <feature1> <feature2>..
+\end{lstlisting}

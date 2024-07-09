@@ -1,0 +1,31 @@
+\chapter{Appendice}
+
+\section {Installazione}
+Il controller viene eseguito all'interno di una Java Virtual Machine (JVM), quindi è necessario verificare quali versioni di Java supporta la distribuzione che si decide di installare.
+La versione stabile più recente di ODL è compatibile con le versioni di Java superiori alla 17, mentre per le versioni più datate quest'ultime non vanno bene. 
+Per l'installazione si deve scaricare la distribuzione desiderata che si trova sul loro sito ufficiale nella pagina di download del software \cite{InstallODL}.
+Successivamente è necessario fare l'unzip del file, navigare nella cartella e eseguire il seguente comando da terminale per avviare il controller.
+\begin{lstlisting}[language=CLI]
+./bin/karaf
+\end{lstlisting}
+La versione di ODL dell'immagine \ref{fig:installazione} è Potassium.
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{odl/Potassium.png}
+    \caption{Installazione ODL}
+    \label{fig:installazione}
+\end{figure}
+\\Successivamente, si può trovare una lista completa delle feature disponibili eseguendo il seguente comando.
+\begin{lstlisting}[language=CLI]
+feature:list
+\end{lstlisting}
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{odl/feature.png}
+    \caption{Alcune features disponibili}
+    \label{fig:feature}
+\end{figure}
+Per installarle invece 
+\begin{lstlisting}[language=CLI]
+feature:install <feature1> <feature2>..
+\end{lstlisting}

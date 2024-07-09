@@ -1,0 +1,23 @@
+\chapter{Mininet}
+Mininet \cite{mininet} è un sistema open source di orchestrazione per l'emulazione di reti in grado di creare una realistica rete virtuale.
+Presenta delle API e un interprete Python che consentono di definire degli script attraverso i quali è possibile creare delle topologie di rete.
+Ciò è possibile anche tramite Command line interface (CLI)  e possono essere sia predefinite che personalizzate tramite la possibilità di 
+aggiungere e rimuovere switch, router, host, controller e link.
+\\Mininet mette a disposizione tre livelli differenti di API:
+\begin{itemize}
+\item Low-level: consiste nelle classi dei nodi e dei link istanziati individualmente e usati per creare una rete.
+\item Mid-level: aggiunge un containter per nodi e link, l'oggetto Mininet, e fornisce metodi per la configurazione di rete.
+\item High-level: aggiunge l'astrazione della topologia di rete, la classe Topo. Offre la possibilità di creare modelli di topologia riusabili passandoli al comando mn da linea di comando.
+\end{itemize}
+Per rendere la rete più realistica e adatta a esperimenti di test si possono configurare i link come up o down e inserire metriche specifiche 
+come possono essere quelle di banda, ritardo, perdita o massima lunghezza della coda di recezione.
+Gli host su Mininet condividono il filesystem root del server sottostante. 
+Ciò significa che non è necessario copiare dati tra gli host presenti.
+Un effetto collaterale di questa condivisione si può ritrovare quando un programma richiede specifiche di configurazione in quanto si dovrà creare un differente 
+file di configurazione per ogni host presente e specificarlo come opzione di avvio del programma. 
+%Inoltre ci possono essere collisioni tra file se si prova a creare lo stesso file nella stessa directory di più hosts.
+%Mininet mette a disposizione una GUI (miniedit) utile per visualizzare lo stato della rete durante gli esperimenti svolti.
+Mininet è stato progettato per essere facilmente integrabile con altri software e sistemi di rete.
+Consente di connettere un controller remoto agli switch, indipendentemente dal PC su cui è installato, in modo da fornire un ambiente adatto allo sviluppo e al test.
+E' possibile quindi collegare un controller SDN che supporta OpenFlow.
+

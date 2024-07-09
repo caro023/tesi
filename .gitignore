@@ -1,0 +1,10 @@
+# Ignora tutte le cartelle specificate
+odl/
+documento/
+teraflow/
+
+# Ignora tutti i file PNG
+*.png
+
+# Ignora tutti i file HTML
+*.html

@@ -1,0 +1,248 @@
+The TeraFlow SDN controller is a new type of secure cloud-native SDN controller that will radically
+advance the state-of-the-art in B5G networks. This new SDN controller will be able to integrate with
+the current NFV and MEC frameworks, provide revolutionary features for flow management (service
+layer), and provide optical/microwave network equipment integration (infrastructure layer). 
+
+These capabilities will also incorporate enhanced security using ML (Machine Learning) and forensic
+evidence for multi-tenancy based on DLT (Distributed Ledger Technology).
+
+The focus of the TeraFlow project is to develop a Carrier Grade SDN controller for B5G networks.
+“Carrier Grade” refers to well-tested networks or infrastructures with extremely high levels of
+reliability, redundancy, and security. 
+Use cases for IP, optical, and microwave networks will be studied and demonstrated in commercial
+and open-source solutions based on standard interfaces. The covered network domains for the
+proposed solution are transport scenarios integrated with (edge) computing and storage resources.
+TeraFlow will demonstrate its dynamic adaptation based on flows and applications requirements.
+TeraFlow covers a wide variety of network types, ranging from distributed edge-computing, through
+a transport backhaul (including optical and microwave solutions), to the network core. In addition,
+TeraFlow provides carrier-grade connectivity services for B5G networks.
+
+3.3. Service
+Two different kinds of service are considered:
+• Layer 2/3 services: L2/L3VPN services
+• Layer 0: Optical or Microwave services
+
+3.5. Monitoring
+This use case describes the necessary information (including alarms and events) collected directly from
+network elements through multiple protocols, such as NETCONF/YANG or by streaming telemetry
+(gRPC) feeding the event manager. The received data shall be stored, analysed, and retrieved to
+perform additional closed-loop automation and big data analysis.
+
+5.1.4. Monitoring
+Notification subscription requirement:
+• [REQ-MON-01] TeraFlow OS shall allow external subscriptions to the notification service to
+enable visualisation of relevant data at a higher level of abstraction, thus assisting the
+TeraFlow OS in identifying potential problems and gaining dynamicity. Moreover, external
+agents (subscribers) shall be notified of events related to network/slice data (e.g., topology or
+connectivity) depending on the nature of the subscription.
+
+MONITORING
+The Retriever is in charge of pulling metrics from all the different monitored components, different
+components will implement different protocols/interfaces for the KPI provisioning, for that reason we
+have included a set of submodules within the retriever that will connects to the monitored elements
+using the required protocols.
+All the extracted data will be stored in the Metrics Database, providing dimensional data with time
+series and key-value pairs in addition to powerful querying and aggregation mechanisms for accessing
+the collected data. The Metrics Database has direct integration with a data visualization tool offering
+a wide variety of visualization panels and real time graphics for better observability.
+
+The updated architecture also incorporates an Alarm Manager in order to provide an alarm system to
+the TFS Controller. The alarm system allows configuration of alarm timeouts, alarm frequency, and
+KPI value ranges. When the value of a monitored KPI exceeds the configured value range during the
+alarm frequency time period the Alarm Manager will notify the component that originally created the
+alarm.Provide sufficient information about network metrics (KPIs) and other relevant
+metrics to assist the life-cycle automation and high performance of the
+components.
+
+2.9. Path Computation
+The PathComp Component is an element in the TFS Controller handling the route and transport
+resource selection for the incoming network connectivity services. It operates as a server, receiving
+requests from the Service Component and, interacting with the Context Component, retrieves
+information about the underlying topologies to seek feasible paths and resources fulfilling the
+demanded network service requirements. Moreover, the PathComp Component represents a single and specialised entity where
+different algorithms can be hosted. This permits that any new algorithm to be used does not
+impact on other TFS components
+
+POLICY
+Policy Management Component provides means to schedule network management
+operations in response to events, based on the event-condition-action policy model drafted
+by the IETF [10]. Such policies can be applied either at the level of individual devices (i.e.,
+device-level policies) or across entire network domain.
+TFS provides a powerful mechanism to express policy conditions encoded as AND/ORseparated policy condition patterns, where each pattern is in turn expressed in the form of:
+Monitoring.KPI, numericComparisonOperator, Monitroing.KPIValue.
+When these conditions are met (e.g., a Monitoring KPI exceeds a specific
+value, falls within a certain range, etc.) the Monitoring Component raises alarms which are
+sent back to the origin component (i.e., the component that requested the conditional query)
+for internal consumption. When the Policy Management Component receives such an alarm
+on a conditional query, it triggers an action as a response.Reacting to (conditional) policy events means allowing the TFS Controller to apply certain
+actions to restore a given set of devices or services back to a desired state
+A policy rule shall be associated with a service ID. When a service ID is
+provided, the Policy Component will query the Context database to automatically fetch the
+set of devices that this service is traversing. When a service ID is not provided, the Policy
+Component will iterate a list of devices in the policy rule object, to identify which devices
+should comply to the input policy.
+A policy rule shall be associated with a policy state, which indicates
+whether this policy is (i) inserted, (ii) validated, (iii) provisioned, (iv) actively enforced, or (v)
+failed. A policy rule shall be associated with a policy type, indicating whether
+this policy applies to a single device (i.e., device-level policy) or a network segment
+POLICY MANAGER Automatically translates high-level network policy rules to actual configuration
+applied to devices and services. A policy rule may generate configuration across
+an entire network domain, thus may need to configure multiple devices(interaction with SBI). 
+The Policy Components uses Monitoring Services to create alarms on
+conditional KPI queries. Once a KPI reaches certain value or falls within a
+range of values, an alarm triggers the policy enforcement.
+Policy Management services, the Policy component exploits a publish-subscribe
+TeraFlowSDN mechanism to dynamically associate policy conditions with relevant events that require
+immediate actions.
+Integrating the Policy component with the Monitoring component has made it
+possible to associate policy conditions (i.e., statements on the value of KPIs monitored by the
+Monitoring component) with alarms using the alarm subsystem of the Monitoring component. When
+a registered KPI value exceeds some predefined thresholds, the Monitoring component uses the
+Events API channel of the TeraFlowSDN controller to notify subscribed components 
+
+
+2.19. Web User Interface (WebUI)
+The Web-based User Interface (WebUI) is one of the microservices that make up the TFS Controller.
+The WebUI enables a network operator to manually interact with the TFS Controller to perform
+configuration operations and inspect the state of the network.
+
+Topology monitoring requirements: It is expected that the SDN controller shall gather data on
+topology events and be able to use the notification system to inform subscribers. The basic preliminary
+actions to be monitored/notified in this regard are:
+• [REQ-MON-02] Addition of a new topology element 
+• [REQ-MON-03] Modification of parameters of existing elements in the topology 
+• [REQ-MON-04] Status of operational changes of existing elements (e.g., up/down status),
+assuming both control plane level (network element-SDN controller) and data plane level
+(inter network components).
+• [REQ-MON-05] Deletion of elements in the topology.
+Connectivity monitoring requirements: The SDN controller will be able to collect data related to the
+connectivity of the elements in two different views: network or slice. In this regard, the main features
+to be monitored (or notified to subscribers) are:
+• [REQ-MON-06] New connectivity-service element inserted/removed in/from the network/slice.
+• [REQ-MON-07] Status change of existing connectivity-service element in the network/slice.
+• [REQ-MON-08] Status change of the switching conditions of an existing connection element in the network/slice.
+Microservice life-cycle monitoring requirements: The SDN controller will report on metrics that
+inform on the lifecycle operations of the microservices within the TeraFlow OS deployment.
+Functionalities that shall be monitored/notified according to the typical phases of a microservices life
+cycle are:
+• [REQ-MON-09] Downshifting monitoring/notification, cloud-to-edge operations shall be
+notified to subscribers to guarantee cloud-to-edge migrations.
+• [REQ-MON-10] Runtime monitoring/notification will be targeted to enable external
+monitoring of microservice’s runtime metrics usage, e.g., power, CPU, storage, memory, or
+bandwidth.
+• [REQ-MON-11] Edge-to-cloud load balancing monitoring/notification, subscribers shall be
+notified of edge-to-cloud migration operations when required.
+
+Automated configuration and management through NBI (e.g., REST/gRPC)
+and SBI (e.g., NETCONF/YANG) interfaces based on open standards.
+
+5.1.9. Distributed Ledger and Smart Contracts
+• [REQ-DLT-01] The TeraFlow SDN Controller shall be able to interact with other SDN Controllers
+using DLT to rent resources from respective local carriers and local carriers may lease their
+owned networks to each other to achieve better network utilization efficiency.
+
+REQUISITI NON FUNZIONALI
+5.2.1. Performance
+• [REQ-PERF-01] The TeraFlow SDN controller shall provide an increase by an order of
+magnitude (x10) of the flow processing capabilities of current SDN controllers. This results in
+the ability to handle a Tera of connectivity services.
+
+5.2.2. Usability
+• [REQ-USA-01] The TeraFlow SDN controller shall provide a user interface that allows triggering
+a default service within seconds.
+• [REQ-USA-02] The SDN controller shall provide a system to enable subscribers to visualize the
+metrics in a friendly and customizable manner according to their needs. 
+
+5.2.3. Scalability
+• [REQ-SCA-01] The SDN controller shall provide autonomous replication of micro-services to
+support high numbers of incoming requests
+
+5.2.5. Reliability
+• [REQ-REL-01] The SDN controller shall monitor micro-services and per-flow status to apply
+healing mechanisms (e.g., component restart, flow redirection) both from a control and a data
+plane perspective.
+
+The cloud-native software architecture is based on container-based services (containers are a
+lightweight virtualization technique), which are deployed as microservices and managed on elastic
+infrastructure through agile DevOps processes and continuous delivery workflows.
+Moreover, in the context of B5G networks, the TeraFlow OS
+can interact with other network elements, such as NFV and MEC orchestrators, as well as OSS/BSS. 
+
+The most important benefit is application
+resiliency, where microservices are monitored and restarted in case of misbehaviour.
+The inter-domain component allows the interaction of a TeraFlow OS instance with peer TeraFlow OS
+instances which manage different network domains. The inter-domain communication services can
+be classified into two types: inter-domain between administrative domains vs. inter-domain between
+technology domains (within one administrative domain).
+
+TeraFlow core micro-services are tightly interrelated and collaborate to provide a complete smart
+connectivity service. Once a Transport Network Slice request is received, the Slice Manager translates
+this request to the Service component.
+The Monitoring Component will handle the subscriptions from other components, through the
+Subscription Manager submodule located in the Monitoring Core
+Provide sufficient information about network metrics (KPIs) and other relevant
+metrics to assist the life-cycle automation and high performance of the
+components.
+
+AUTOMATIONS
+Automatically add/update a physical or virtual device to/in the network with zero
+manual intervention or local configuration, while ensuring that the correct
+certificates, software, device configuration parameters, and device pipeline
+definition are installed. 
+
+KUBERNETES
+In this section, we present several features that are not provided by any component, but they are
+related to the selected technology (Kubernetes). These features are: auto-scaling, self-healing, and
+load balancing.The Auto-Scaling component focuses on the autonomous replication of micro-services to support high
+amount of load in terms of incoming requests. The Self-Healing component monitors micro-services and per-flow status to apply healing mechanisms
+(e.g., component restart, flow redirection) both from a control and a data plane perspective. We will use two features from Kubernetes for providing self-healing mechanisms: liveness and
+readiness probes. The kubelet uses liveness probes to know when to restart a container. The kubelet
+uses readiness probes to know when a container is ready to start accepting traffic.Load-balancing allows the distribution of flow and slice requests among the micro-services component
+replicas. 
+
+7.1.1. NorthBound Interfaces (NBI)
+Several interfaces are proposed to be used as NorthBound Interfaces, being summarized in L3/L2
+network models, Traffic Engineering (TE) tunnels, and IETF Transport Network Slices.
+
+INTERAZIONE CON ONOS
+TeraFlow embraces the ONF initiatives around P4 by integrating ONOS, Stratum, and P4 into the
+TeraFlow ecosystem. In D3.1, we describe how the TeraFlow SDN controller will cooperate with ONOS
+to manage next-generation SDN whiteboxes based on the P4 paradigm.
+
+gRPC
+Google Remote Procedure Calls (gRPC) [BRE19] is a protocol based on HTTP/2 as a transport protocol
+and it uses protocol buffers encodings for transported messages. As it is based on HTTP/2 transport
+protocol and uses byte-oriented encoding, it introduces low latency. gRPC has been used in highly
+scalable and distributed systems. It has been decided to be used as internal protocol in TeraFlow SDN
+Controller. Data models for gRPC are described using Protocol Buffers. 
+PROTO BuffersProtocol Buffers are a language-neutral, platform-neutral extensible mechanism for serializing
+structured data. All protocol buffers are part of TeraFlow SDN source code, and they are available at:
+https://gitlab.com/teraflow-h2020/controller/-/tree/develop/proto
+
+HOW TO DECIDE THE PATH
+. If two or more k paths have the same end-to-end power_path, the tie is broken,
+choosing the path offering the lowest end-to-delay. If the tie remains, the path having the
+largest available bandwidth on the most congested link is selected.
+
+Secondly, if the routing over the active network subset fails, all the network devices and ports
+(i.e., both powered up and off) are considered. Then, the same criteria as above are followed,
+i.e., out of the k computed feasible paths, the one with the lowest end-to-end path energy is
+chosen; If there is tie between two or more paths, as above, the delay and the available
+bandwidth policies are adopted.
+
+For the sake of comparison, a regular K-SP algorithm is used where the computed k paths are sorted
+by i) the number of hops, ii) end-to-end delay, and iii) the available bandwidth. Note that with this
+algorithm, no end-to-end energy path minimization is targeted. Once the path is chosen, the resulting
+power_path it is computed for comparison purposes with the EAR approach.
+
+COME SI CREA UNA KPI
+PAGIN 29/180 DI D3.2
+. KPI creation: In this preliminary step a concrete TFS component defines its own KPI in a
+KpiDescriptor format. Based on its data model in a KpiDescriptor the requester can define the
+KPI according to a KpiSampleType, DeviceId, ServiceId or ConnectionId among others. For the
+sake of this example, we assume that the KPI is related to an existing DeviceId. The TFS
+component, by using the monitoring client, executes the gRPC SetKpi method passing the
+KpiDescriptor as a request message. Then the monitoring gRPC Service receives the requests
+and tries to store the descriptor in the MgmtDB which assigns a KpiId in case the combination
+of fields defined in the KpiDescriptor does not exist in the MgmtDB. Finally, the Monitoring
+Service returns the KpiId to the TFS Component.

@@ -1,0 +1,49 @@
+\begin{thebibliography}{10}
+
+\bibitem{ONF}
+Open networking foundation.
+\newblock \url{https://opennetworking.org/}.
+
+\bibitem{ONOS}
+Onos.
+\newblock \url{https://opennetworking.org/onos/}.
+
+\bibitem{osgi}
+Osgi.
+\newblock \url{https://www.osgi.org/}.
+
+\bibitem{Apache}
+Apache karaf.
+\newblock \url{https://kafka.apache.org/}.
+
+\bibitem{ODL}
+Opendaylight.
+\newblock \url{https://www.opendaylight.org/}.
+
+\bibitem{LFN}
+Lfnetworking.
+\newblock \url{https://lfnetworking.org/}.
+
+\bibitem{TeraFlow}
+Teraflow.
+\newblock \url{https://www.teraflow-h2020.eu/%}.
+
+\bibitem{Horizon}
+Progetto horizon 2020.
+\newblock
+  \url{https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-2020_en}.
+
+\bibitem{etsi}
+Etsi.
+\newblock \url{https://www.etsi.org/}.
+
+\bibitem{ProtoBuf}
+Protocol buffer delle componenti in teraflow.
+\newblock
+  \url{https://gitlab.com/teraflow-h2020/controller/-/tree/develop/proto}.
+
+\bibitem{InstallODL}
+Installazione opendaylight.
+\newblock \url{https://docs.opendaylight.org/en/latest/downloads.html}.
+
+\end{thebibliography}

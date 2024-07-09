@@ -1,0 +1,44 @@
+\chapter{ONOS}
+Open Newtwork Operating System (ONOS) \cite{ONOS} è uno dei controller SDN più noti. 
+E' un progetto nato dalla Open Networking Foundation (ONF) \cite{ONF} al fine di soddisfare le esigenze degli operatori per poter costruire reali soluzioni SDN/NFV.
+I principali obiettivi sono quelli di introdurre modularità del codice, configurabilità, separazione di interessi e agnosticismo dei protocolli.
+\\Per adattarsi alle esigenze degli utenti è necessario poter sviluppare una piattaforma applicativa modulare ed estendibile.
+Per questo motivo la base dell'architettura di ONOS è costituita da una piattaforma di applicazioni distributite collocata sopra OSGi \cite{osgi} e Apache Karaf \cite{Apache}. 
+Queste applicazioni offrono delle funzionalità di base e sostegno al livello superiore il quale fornisce una serie di controlli di rete e astrazioni di configurazione necessarie per il corretto funzionamento del controller.
+Per estendere le funzionalità a seconda delle esigenze sono invece necessarie delle applicazioni ONOS aggiuntive che si comportano come una estenzione di quelle già presenti. 
+Ognuna di esse è gestita da un singolo sottosistema che all'interno del controller è rappresentato da un modulo.
+I moduli attualmente installabili che si possono incorporare a quelli inizialmente offerti dal sistema sono più di 100.
+Tutti i servizi principali sono scritti in Java come bundles all'interno del Karaf OSGi container così da permettere l'installazione e l'esecuzione dinamicamente.
+\\ONOS supporta diverse API northbound tra cui:
+\begin{itemize}
+\item GUI: offre un'interfaccia grafica per interagire con l'utente
+\item REST API: facilita l'integrazione con sistemi di orchestrazione e altri controller 
+\item gRPC: per un'interazione ad alte prestazioni tra applicazioni e altre entità o protocolli della piattaforma
+\end{itemize}
+Per quanto riguarda le API southbound supportante fornisce diversi adattatori che rendono il sistema indipendente dai vari protocolli.
+\\ONOS è sviluppato come un sistema simmetrico distribuito in cui ogni entità, dal punto di vista software, è indentica alle altre. 
+In caso di guasto di una componente le altre sono in grado di sostenere il carico di lavoro assicurando disponibilità.
+Pur essendo fisicamente disaggregato offre una visione logicamente centralizzata al fine di fornire l'accesso di ogni informazione alle applicazioni.
+\\Per far fronte ai cambiamenti del carico di lavoro o dell'ambiente è dinamicamente scalabile, ossia offre una replica virtualmente illimitata della capacità del piano di controllo.
+
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{archonos.png}
+    \caption{Architettura di ONOS}
+    \label{fig:img3}
+\end{figure}
+
+
+
+%altra avaibility provided da core distrubuiti (sonos) 
+%variety of devices strong abstraction
+%OSGi is a component system for Java that allows modules to be installed and run dynamically in a single JVM. 
+%Since ONOS runs in the JVM, it can run on several underlying OS platforms. 
+
+%designed come modular e estensible entity
+%develop as a distributed system. is built as a symmetric system dove ogni nodo è software-wise identical
+%ogni componente può fare le stesse cose, è fisicamente distribuito, tutte le informazioni sono reperibili
+%è dynamicly scalable 
+%tutti i messaggi is provided on top of one single messagin substrate cosicchè è più fscile da configurare
+%Semplice aggiungere o configurare device e servizi con model based dynamic configurarion.
+%Da controllo real-time per dataplane nativi SDN device con OpenFlow o P4 support
