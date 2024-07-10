@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.23)  10 JUL 2024 16:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.23)  10 JUL 2024 20:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -489,7 +489,7 @@ LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 14
 (C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-<sdn.png, id=87, 516.7305pt x 334.24875pt>
+<sdn.png, id=91, 516.7305pt x 334.24875pt>
 File: sdn.png Graphic file (type png)
 <use sdn.png>
 Package pdftex.def Info: sdn.png  used on input line 37.
@@ -502,7 +502,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1}) h
                                                   \__shipout_drop_firstpage_...
 l.65 
       <./sdn.png>]
-<archonos.png, id=101, 817.25325pt x 453.49425pt>
+<archonos.png, id=105, 817.25325pt x 453.49425pt>
 File: archonos.png Graphic file (type png)
 <use archonos.png>
 Package pdftex.def Info: archonos.png  used on input line 72.
@@ -513,7 +513,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2}) h
                                                   \__shipout_drop_firstpage_...
 l.87 \begin{itemize}
                      <./archonos.png>]
-<ODL-Architecture.png, id=119, 853.1875pt x 479.7925pt>
+<ODL-Architecture.png, id=123, 853.1875pt x 479.7925pt>
 File: ODL-Architecture.png Graphic file (type png)
 <use ODL-Architecture.png>
 Package pdftex.def Info: ODL-Architecture.png  used on input line 110.
@@ -530,7 +530,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3}) h
 l.149 
        <./ODL-Architecture.png>] [8]) (Teraflow.tex [9]
 Capitolo 3.
-<architetturatf.png, id=146, 598.03426pt x 368.577pt>
+<architetturatf.png, id=152, 598.03426pt x 368.577pt>
 File: architetturatf.png Graphic file (type png)
 <use architetturatf.png>
 Package pdftex.def Info: architetturatf.png  used on input line 5.
@@ -543,7 +543,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) h
                                                   \__shipout_drop_firstpage_...
 l.35 \begin{itemize}
                      <./architetturatf.png>] [11]
-<componenti.png, id=164, 464.937pt x 417.35925pt>
+<componenti.png, id=170, 464.937pt x 417.35925pt>
 File: componenti.png Graphic file (type png)
 <use componenti.png>
 Package pdftex.def Info: componenti.png  used on input line 53.
@@ -558,7 +558,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2}) h
                                                   \__shipout_drop_firstpage_...
 l.80 
       <./componenti.png>] [14] [15]
-<p4.png, id=186, 467.94826pt x 351.11176pt>
+<p4.png, id=194, 467.94826pt x 351.11176pt>
 File: p4.png Graphic file (type png)
 <use p4.png>
 Package pdftex.def Info: p4.png  used on input line 146.
@@ -572,24 +572,35 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3.3}) h
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.179 
-       <./p4.png>] [18]) (Policy.tex [19] [20]
+       <./p4.png>] [18]
+<mininet.png, id=212, 712.46175pt x 393.26926pt>
+File: mininet.png Graphic file (type png)
+<use mininet.png>
+Package pdftex.def Info: mininet.png  used on input line 193.
+(pdftex.def)             Requested size: 429.3521pt x 237.00151pt.
+ [19
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.209 \begin{itemize}
+                      <./mininet.png>] [20] [21] [22]) (Policy.tex [23]
 Capitolo 4.
-) (Conclusioni.tex [21
+) (Conclusioni.tex [24
 
 ]
 Capitolo 5.
-) (Appendice.tex [22
+) (Appendice.tex [25
 
 ]
 Capitolo 6.
-<odl/Potassium.png, id=223, 762.4485pt x 226.446pt>
+<odl/Potassium.png, id=251, 762.4485pt x 226.446pt>
 File: odl/Potassium.png Graphic file (type png)
 <use odl/Potassium.png>
 Package pdftex.def Info: odl/Potassium.png  used on input line 14.
 (pdftex.def)             Requested size: 429.3521pt x 127.51721pt.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 20.
-<odl/feature.png, id=224, 1088.26575pt x 237.88875pt>
+<odl/feature.png, id=252, 1088.26575pt x 237.88875pt>
 File: odl/feature.png Graphic file (type png)
 <use odl/feature.png>
 Package pdftex.def Info: odl/feature.png  used on input line 24.
@@ -597,34 +608,44 @@ Package pdftex.def Info: odl/feature.png  used on input line 24.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (tesi.bbl [23
+) (tesi.bbl [26
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.1 \begin{thebibliography}{10}
-                                <./odl/Potassium.png>] [24
+                                <./odl/Potassium.png>] [27
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.1 \begin{thebibliography}{10}
                                 <./odl/feature.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 32--35
+Underfull \hbox (badness 10000) in paragraph at lines 28--31
+[]\OT1/ptm/m/n/12 Modulo nic di odl.  []$\OT1/cmtt/m/n/12 https : / / test-[]odl-[]docs . readthedocs . io / en /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--31
+\OT1/cmtt/m/n/12 stable-[]boron / user-[]guide / network-[]intent-[]composition-[](nic )
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--40
 \OT1/cmtt/m/n/12 funding / funding-[]opportunities / funding-[]programmes-[]and-[]open-[]calls /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 41--44
+Underfull \hbox (badness 10000) in paragraph at lines 46--49
 []\OT1/ptm/m/n/12 Protocol buf-fer del-le com-po-nen-ti in te-ra-flow.  []$\OT1/cmtt/m/n/12 https : / / gitlab . com /
  []
 
 
-Underfull \hbox (badness 2521) in paragraph at lines 50--52
+Underfull \hbox (badness 2521) in paragraph at lines 63--65
 []\OT1/ptm/m/n/12 Installazione open-day-light.  []$\OT1/cmtt/m/n/12 https : / / docs . opendaylight . org / en / latest /
  []
 
-) [25
+) [28
 
 ] (tesi.aux)
  ***********
@@ -636,20 +657,20 @@ L3 programming layer <2024-01-04>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `tesi.out' has not changed.
-(rerunfilecheck)             Checksum: 4E52085B29B3E959DB33094983AAA5DE;2615.
+(rerunfilecheck)             Checksum: 4A5E41A151B73BC43B3AC2E810E6BC7A;2818.
  ) 
 Here is how much of TeX's memory you used:
- 15405 strings out of 474486
- 270929 string characters out of 5743755
+ 15435 strings out of 474486
+ 271259 string characters out of 5743755
  1951542 words of memory out of 5000000
- 37409 multiletter control sequences out of 15000+600000
- 577275 words of font info for 72 fonts, out of 8000000 for 9000
+ 37424 multiletter control sequences out of 15000+600000
+ 580224 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  123i,21n,121p,453b,1177s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb>
-Output written on tesi.pdf (25 pages, 1470857 bytes).
+<C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on tesi.pdf (28 pages, 1590699 bytes).
 PDF statistics:
- 304 PDF objects out of 1000 (max. 8388607)
- 72 named destinations out of 1000 (max. 500000)
- 193 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 347 PDF objects out of 1000 (max. 8388607)
+ 80 named destinations out of 1000 (max. 500000)
+ 206 words of extra memory for PDF output out of 10000 (max. 10000000)
 

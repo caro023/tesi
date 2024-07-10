@@ -133,7 +133,7 @@ e REST per comunicare con le applicazioni esterne al controller.
 \\Per far fronte ai problemi di scalabilità, disponibilità e persistenza dei dati si possono avere più instanze di ODL distribuite su macchine differenti che cooperano tra loro attraverso il meccanismo dei cluster.
 \\
 \\ODL per gestire gli intenti aveva messo a disposizione una NorthBound Interface che successivamente è stata abbandonata nelle release successive a Boron.
-\\Network Intent Composition (NIC) è l'interfaccia che permette all'utente di esprimere uno stato desiderato in una forma neutrale rispetto all'implementazione, detto intento. Quest'ultimo verrà applicato tramite la modifica delle risorse disponibili 
+\\Network Intent Composition (NIC) \cite{nic} è l'interfaccia che permette all'utente di esprimere uno stato desiderato in una forma neutrale rispetto all'implementazione, detto intento. Quest'ultimo verrà applicato tramite la modifica delle risorse disponibili 
 grazie alla gestione dei servizi da parte del controller sulla base delle specifiche.
 Gli intenti sono descritti al controller tramite l'interfaccia NBI che mette a disposizione la semantica necessaria per la generalizzazione e l'astrazione delle policy, invece di specificare i comandi di configurazione dei dispositivi come il resto delle interfacce NBI.
 E' responsabilità dell'implementazione della NIC trasformare l'intento nelle regole di configurazione delle risorse.

@@ -75,7 +75,7 @@ Ogni evento è composto da una KPI che identifica la regola a cui si riferisce, 
 Per il corretto funzionamento la componente di Monitoring deve essere in grado di recuperare le metriche da tutti i diversi dispositivi monitorati.
 Questi implementano spesso protocolli diversi per notificare le KPI, per questo motivo sono stati inclusi una serie di sottomoduli che si connettono 
 agli elementi monitorati utilizzando i protocolli SBI necessari. I dati estratti vengono memorizzati nel Metrics Database così da poter fornire dati dimensionali 
-con serie temporali visualizzabili su Grafana.
+con serie temporali visualizzabili su Grafana \cite{grafana}.
 Tuttavia quanto si tratta di gestire topologie più complesse che coinvolgono molti dispositivi è necessario un livello di astrazione superiore per specificare la connessione tra vari end-points. A tal fine si introduce il Service-level. 
 
 \subsection{Service Level Abstraction}
@@ -147,7 +147,7 @@ E' progettato per trasportare messaggi peer-to-peer in modo distribuito e non du
     \caption{Workflow di P4 sul piano dati}
     \label{fig:p4}
 \end{figure}
-P4, che sta per "Programming Protocol-indipendent Packet Processor",  è un linguaggio di programmazione ad alto livello che consente di descrivere il comportamento di un elemento di rete e del piano dati in modo flessibile.
+P4 \cite{p4}, che sta per "Programming Protocol-indipendent Packet Processor",  è un linguaggio di programmazione ad alto livello che consente di descrivere il comportamento di un elemento di rete e del piano dati in modo flessibile.
 Il linguaggio permette di personalizzare il modo in cui i dispositivi di rete elaborano i pacchetti, senza essere vincolati a un set predefinito di protocolli.
 \\P4 è stato introdotto per l'esigenza di superare le limitazioni con cui si stava interfacciando OpenFlow.
 Per quest'ultimo protocollo l'hardware e il software non erano più sincronizzati. In alcuni casi 
@@ -188,24 +188,98 @@ P4 rappresenta un passo significativo verso reti più flessibili e programmabili
 Si propone come una soluzione innovativa e versatile per superare le limitazioni degli attuali protocolli e dispositivi di rete offrendo un linguaggio dinamico e indipendente dall'hardware
 
 \section{Mininet}
-Mininet \cite{mininet} è un sistema open source di orchestrazione per l'emulazione di reti in grado di creare una realistica rete virtuale.
-Presenta delle API e un interprete Python che consentono di definire degli script attraverso i quali è possibile creare delle topologie di rete.
-Ciò è possibile anche tramite Command line interface (CLI)  e possono essere sia predefinite che personalizzate tramite la possibilità di 
-aggiungere e rimuovere switch, router, host, controller e link.
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{mininet.png}
+    \caption{Rete mininet}
+    \label{fig:mininet}
+\end{figure}
+Mininet \cite{mininet} è un sistema open source di orchestrazione per l'emulazione di reti su un unico ambiente Linux, permettendo di simulare l'intera rete su un singolo computer.
+E' ampiamente utilizzato per la creazione, il test e la sperimentazione di reti virtuali realistiche.
+Rispetto ad altri emulatori presenti in circolazione, che emulano ogni dispositivo su una macchina virtuale, Mininet offre una serie di vantaggi. 
+Inanzitutto, permette l'avviamento rapido di una rete, la capacità di eseguire test e programmi con tipologie ampie e personalizzate. 
+Inoltre, consente di personalizzare l'inoltro dei pacchetti per testare diverse funzionalità con la possibilità di condividere e replicare il codice.
+A tal proposito Mininet presenta delle API e un interprete Python che consentono di definire e gestire facilmente delle topologie di rete.
+Ciò è possibile anche tramite interfaccia a riga di comando (CLI). In entambi i casi possono essere sia predefinite che personalizzate con la possibilità di 
+aggiungere e rimuovere switch, router, host, controller e link, tutti eseguiti su un unico computer.
+Mininet utilizza infatti dei container di virtualizzazione leggera per creare nodi di rete, ognuno con la propria pila di rete in modo tale che possano comunicare con gli 
+altri nodi nella rete virtuale come farebbero in una rete fisica. 
+Ciò consente di testare nuove applicazioni, protocolli e algoritmi in un ambiente controllato e modificabile prima di implementarli su reti reali.
 \\Mininet mette a disposizione tre livelli differenti di API:
 \begin{itemize}
 \item \textbf{Low-level}: consiste nelle classi dei nodi e dei link istanziati individualmente e usati per creare una rete.
 \item \textbf{Mid-level}: aggiunge un containter per nodi e link, l'oggetto Mininet, e fornisce metodi per la configurazione di rete.
 \item \textbf{High-level}: aggiunge l'astrazione della topologia di rete, la classe Topo. Offre la possibilità di creare modelli di topologia riusabili passandoli al comando mn da linea di comando.
 \end{itemize}
+
 Per rendere la rete più realistica e adatta a esperimenti di test si possono configurare i link come up o down e inserire metriche specifiche 
 come possono essere quelle di banda, ritardo, perdita o massima lunghezza della coda di recezione.
 Gli host su Mininet condividono il filesystem root del server sottostante. 
-Ciò significa che non è necessario copiare dati tra gli host presenti.
-Un effetto collaterale di questa condivisione si può ritrovare quando un programma richiede specifiche di configurazione in quanto si dovrà creare un differente 
-file di configurazione per ogni host presente e specificarlo come opzione di avvio del programma. 
+Ciò significa che non è necessario trasferire file tra gli host virtuali perché tutti accedono agli stessi file direttamente.
+Tuttavia, questa condivisione del filesystem può creare problemi se un programma ha bisogno di file di configurazione specifici per ogni host. 
+In tal caso, è necessario creare un file di configurazione separato per ogni host e specificare quale file utilizzare quando si avvia il programma.
+Un'altra limitazione riguarda la condivisione delle risorse del sistema su cui è in esecuzione che dovranno essere bilanciate tra gli host della rete.
 %Inoltre ci possono essere collisioni tra file se si prova a creare lo stesso file nella stessa directory di più hosts.
 %Mininet mette a disposizione una GUI (miniedit) utile per visualizzare lo stato della rete durante gli esperimenti svolti.
-Mininet è stato progettato per essere facilmente integrabile con altri software e sistemi di rete.
-Consente di connettere un controller remoto agli switch, indipendentemente dal PC su cui è installato, in modo da fornire un ambiente adatto allo sviluppo e al test.
-E' possibile quindi collegare un controller SDN che supporta OpenFlow.
+\\Mininet è stato progettato per essere facilmente integrabile con altri software e sistemi di rete.
+Consente anche di connettere un controller SDN remoto, quindi esterno alla rete, agli switch, indipendentemente dal PC su cui è installato, in modo da fornire un ambiente adatto allo sviluppo e al test.
+
+
+\subsection{Alcuni comandi fondamentali}
+\textbf{Linea di comando}
+\\Inanzitutto è fondamentale creare una topologia di rete con il seguente comando:
+\\\textit{\$ sudo mn}
+\\Di default viene inizializzata la topologia minimale (--topo=minimal) che consiste in uno switch connesso a due host e un controller OpenFlow.
+All'interno di Mininet si possono trovare altre topologie disponibili e visualizzabili con il comando \\\textit{\$sudo mn -h} \\che si possono specificare tramite l'opzione $--topo$.
+%scrivi le varie topologie
+%--topo single, 3 uno switch con 3 host
+\\Per avviare la topologia esistono diverse opzioni da poter applicare.Ad esempio, l'opzione $--controller$ seguito dall'indirizzo IP specifica il controller al quale gli switch dovranno collegarsi al posto 
+del predefinito offerto da Mininet.
+%riguarda
+\\Una volta creata la topologia per avere informazioni su di essa esistono diversi comandi:
+%mettere output/immagini
+\begin{itemize}
+    \item \textit{ nodes}: per visualizzare i nodi presenti.
+    \item \textit{ net}: per visualizzare i nodi e i link presenti.
+    \item \textit{ dump}: per visualizzare tutte le informazioni di dump dei nodi.
+    \item \textit{h1 ifconfig}: per visualizzare le interfacce del nodo h1.
+\end{itemize}
+
+Alcuni comandi per interagire con la rete e fare dei test minimali sono:
+\begin{itemize}
+    \item \textit{ h1 ping -c 1 h2 }: verifica il corretto funzionamento del percorso tra h1 e h2.
+    \item \textit{ pingall}: esegue il ping tra tutti gli host connessi alla rete.
+    \item \textit{ iperf}: esegue un test di banda tra 2 degli host della rete.
+    \item \textit{xterm h1}: permette di avviare il terminale relativo al nodo h1.
+    \item \textit{exit}: esce dalla rete.
+\end{itemize}
+
+Per manipolare le metriche relative ai link invece vengono messi a disposizione i seguenti comandi:
+\begin{itemize}
+    \item \textit{ link s1 h1 down}: disabilita un link, in questo caso quello tra lo switch s1 e l'host h1.
+    \item \textit{ link s1 h1 up}: attiva un link, in questo caso quello tra lo switch s1 e l'host h1.
+    \item \textit{s2 tc qdisc add dev s2-eth2 root netem loss 50\% }: aggiunge una packet loss del 50\% sulla porta eth2 dello switch s2.
+    \item \textit{s2 tc qdisc add dev s2-eth2 root netem delay 200ms}: aggiunge un ritardo di 200ms sulla porta eth2 dello switch s2.
+    \item \textit{s2 tc qdisc del dev s2-eth2 root netem loss 50\% }: elimina una packet loss del 50\% sulla porta eth2 dello switch s2.
+    \item \textit{s2 tc qdisc del dev s2-eth2 root netem delay 200ms}: elimina un ritardo di 200ms sulla porta eth2 dello switch s2.
+\end{itemize} 
+
+\textbf{API Python}
+\\Le API Python di Mininet permettono di creare e gestire topologie di rete in modo più flessibile e programmabile. 
+Di seguito esponiamo alcune classi e comandi della Mid-level API:
+\begin{itemize}
+    \item \textit{Mininet}: classe per creare e gestire la rete. Il costruttore prende in input diversi parametri la topologia, gli host, gli switch,i controller, i link e ritorna un oggetto di rete.
+    \item \textit{addSwitch()}: aggiunge uno switch alla topologia.
+    \item \textit{addHost()}: aggiunge un host alla topologia.
+    \item \textit{addLink()}: aggiunge un link alla topologia. Si possono specificare paramentri come la banda espressa in Mbit (bw=10 ), il ritardo (delay='5ms'), massima dimensione della coda espressa in numero di pacchetti (max\_queue\_size=1000), la loss espressa in percentuale (loss=10)
+    \item \textit{start}: avvia la rete
+    \item \textit{stop}: esce dalla rete
+    \item \textit{pingall}: esegue il ping tra tutti gli host connessi alla rete
+    \item \textit{h1.cmd('comando da eseguire')}: esegue un comando su h1 da CLI e prende l'output
+\end{itemize}
+
+Con le API in Python si può anche estendere il comando \textit{mn} usando l'opzione \textit{--custom} per invocare la topologia ricreata nello script.
+\\\textit{sudo mn --your\_script.py --topo your\_topo}
+
+
+

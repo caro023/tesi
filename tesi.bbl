@@ -24,6 +24,11 @@ Opendaylight.
 Lfnetworking.
 \newblock \url{https://lfnetworking.org/}.
 
+\bibitem{nic}
+Modulo nic di odl.
+\newblock
+  \url{https://test-odl-docs.readthedocs.io/en/stable-boron/user-guide/network-intent-composition-(nic)-user-guide.html#}.
+
 \bibitem{TeraFlow}
 Teraflow.
 \newblock \url{https://www.teraflow-h2020.eu/%}.
@@ -41,6 +46,14 @@ Etsi.
 Protocol buffer delle componenti in teraflow.
 \newblock
   \url{https://gitlab.com/teraflow-h2020/controller/-/tree/develop/proto}.
+
+\bibitem{grafana}
+Grafana.
+\newblock \url{https://grafana.com/}.
+
+\bibitem{p4}
+P4.
+\newblock \url{https://p4.org/}.
 
 \bibitem{mininet}
 Mininet.
