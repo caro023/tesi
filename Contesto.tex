@@ -67,6 +67,12 @@ di gestione incontrate nelle reti moderne.
 
 \section{Controller allo stato dell'arte}
 \subsection{ONOS}
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{archonos.png}
+    \caption{Architettura di ONOS}
+    \label{fig:img3}
+\end{figure}
 Open Newtwork Operating System (ONOS) \cite{ONOS} è uno dei controller SDN più noti. 
 E' un progetto nato dalla Open Networking Foundation (ONF) \cite{ONF} al fine di soddisfare le esigenze degli operatori per poter costruire reali soluzioni SDN/NFV.
 I principali obiettivi sono quelli di introdurre modularità del codice, configurabilità, separazione di interessi e agnosticismo dei protocolli.
@@ -79,9 +85,9 @@ I moduli attualmente installabili che si possono incorporare a quelli inizialmen
 Tutti i servizi principali sono scritti in Java come bundles all'interno del Karaf OSGi container così da permettere l'installazione e l'esecuzione dinamicamente.
 \\ONOS supporta diverse API northbound tra cui:
 \begin{itemize}
-\item GUI: offre un'interfaccia grafica per interagire con l'utente
-\item REST API: facilita l'integrazione con sistemi di orchestrazione e altri controller 
-\item gRPC: per un'interazione ad alte prestazioni tra applicazioni e altre entità o protocolli della piattaforma
+\item \textbf{GUI}: offre un'interfaccia grafica per interagire con l'utente
+\item \textbf{REST API}: facilita l'integrazione con sistemi di orchestrazione e altri controller 
+\item \textbf{gRPC}: per un'interazione ad alte prestazioni tra applicazioni e altre entità o protocolli della piattaforma
 \end{itemize}
 Per quanto riguarda le API southbound supportante fornisce diversi adattatori che rendono il sistema indipendente dai vari protocolli.
 \\ONOS è sviluppato come un sistema simmetrico distribuito in cui ogni entità, dal punto di vista software, è indentica alle altre. 
@@ -92,12 +98,7 @@ consentendo una replica virtualmente illimitata della capacità del piano di con
 Grazie alla sua architettura distribuita e al supporto per diverse API consente di gestire reti in modo efficiente e scalabile.
 Inoltre è facilmente integrabile con sistemi di orchestrazione esistenti, migliorando la flessibilità e la 
 reattività.
-\begin{figure}[h]
-    \centering
-   \includegraphics[width=1\textwidth]{archonos.png}
-    \caption{Architettura di ONOS}
-    \label{fig:img3}
-\end{figure}
+
 
 %tutti i messaggi is provided on top of one single messagin substrate cosicchè è più fscile da configurare
 %Semplice aggiungere o configurare device e servizi con model based dynamic configurarion.

@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex tesi"] 1720528631.05752 "tesi.aux" "tesi.bbl" "tesi" 1720529484.13488 0
+["bibtex tesi"] 1720602894.96999 "tesi.aux" "tesi.bbl" "tesi" 1720606260.51261 0
   "./bibliografia.bib" 1715337925 1482 54f170f0df01b70e42f48105fce52b44 ""
   "C:/Users/ferra/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/unsrt.bst" 1291864736 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "tesi.aux" 1720529482 4605 c3ce4e5545b84d721ba2fdf7b0b6df4c "pdflatex"
+  "tesi.aux" 1720606259 4605 bbf5c9d3e512dbfb4b5546b405235a19 "pdflatex"
   (generated)
   "tesi.bbl"
   "tesi.blg"
   (rewritten before read)
-["pdflatex"] 1720529478.93535 "c:/Users/ferra/OneDrive/Desktop/teraflow/tesi.tex" "tesi.pdf" "tesi" 1720529484.1369 0
+["pdflatex"] 1720606258.46844 "c:/Users/ferra/OneDrive/Desktop/teraflow/tesi.tex" "tesi.pdf" "tesi" 1720606260.51323 0
   "Appendice.tex" 1720466388 1489 9e2d1c145c5e168ee79950dcb81c8f7d ""
   "C:/Users/ferra/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1715245698 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/ferra/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1711176081 24225046 1293be5e8510e6cb6d5e78ef29de72a4 ""
@@ -110,20 +110,20 @@
   "C:/Users/ferra/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/ferra/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "Conclusioni.tex" 1720466330 21 038f0bb4ad53af5249d0846a816e28ef ""
-  "Contesto.tex" 1720529477 15282 abb31883d4e0bf51a8fab574ababcddd ""
+  "Contesto.tex" 1720544534 15311 0fafc8daac2016ffddcbafc0cbb861e2 ""
   "Introbuzione.tex" 1720465913 22 8ed87c0e3573f1b88b22078a97cf6a34 ""
   "ODL-Architecture.png" 1714839799 71040 139f9d3a5ebaf47a81e9f21824a60338 ""
   "Policy.tex" 1720466283 71 df5dacbacb235f34d621c5904325077a ""
-  "Teraflow.tex" 1720511976 7468 e2565f95d70db6038eb3633608357f8d ""
+  "Teraflow.tex" 1720606257 14048 bd6342f46a2e7fc6196c82142711f92d ""
   "architetturatf.png" 1714662149 444143 6152f44210624c85714b7059496daf94 ""
   "archonos.png" 1715249915 377061 b56f18563f62828c1a5696c8f573af0e ""
   "c:/Users/ferra/OneDrive/Desktop/teraflow/tesi.tex" 1720466411 2535 a4984ed0b6ace257bf2e2c29af04fb3e ""
   "odl/Potassium.png" 1714842585 36098 fa070d0e7e43e5d49f8ea80dd5e060c2 ""
   "odl/feature.png" 1715336292 52515 3164f29892de9a9cee537a484589bd8c ""
   "sdn.png" 1714663580 236791 c195cb0819127de77de61307c403c4d5 ""
-  "tesi.aux" 1720529482 4605 c3ce4e5545b84d721ba2fdf7b0b6df4c "pdflatex"
-  "tesi.bbl" 1720528631 1143 b7861a1ec3c11cc142d124ab5ab09d1d "bibtex tesi"
-  "tesi.out" 1720529482 2439 efba2f8371bea8d7ac5854086a45f3a7 "pdflatex"
+  "tesi.aux" 1720606259 4605 bbf5c9d3e512dbfb4b5546b405235a19 "pdflatex"
+  "tesi.bbl" 1720602895 1143 b7861a1ec3c11cc142d124ab5ab09d1d "bibtex tesi"
+  "tesi.out" 1720606259 2439 efba2f8371bea8d7ac5854086a45f3a7 "pdflatex"
   "tesi.tex" 1720466411 2535 a4984ed0b6ace257bf2e2c29af04fb3e ""
   (generated)
   "tesi.aux"
