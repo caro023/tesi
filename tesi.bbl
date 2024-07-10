@@ -42,6 +42,10 @@ Protocol buffer delle componenti in teraflow.
 \newblock
   \url{https://gitlab.com/teraflow-h2020/controller/-/tree/develop/proto}.
 
+\bibitem{mininet}
+Mininet.
+\newblock \url{https://mininet.org/}.
+
 \bibitem{InstallODL}
 Installazione opendaylight.
 \newblock \url{https://docs.opendaylight.org/en/latest/downloads.html}.

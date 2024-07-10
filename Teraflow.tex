@@ -22,10 +22,13 @@ al quale tutti i membri della comunità ETSI (European Telecommunications Standa
 \\Un ulteriore proposito è di riuscire a diminuire il gap tra ciò che le industrie richiedono e ciò che si può ricavare dagli standard SDN.
 Questo controller, che è ancora in fase di sviluppo, sarà in grado di integrarsi con gli attuali framework NFV e MEC e fornire l'integrazione delle 
 apparecchiature di rete ottica e a microonde. E' inoltre in grado di interfacciarsi con altri controller come ONOS, ma anche altre istanze di TeraFlow che gestiscono diversi domini di rete, per poter sfruttare alcune funzionalità.
-\\TeraFlow segue un'architettura nativa cloud, basata su container (tecniche di virtualizzazione leggera) sviluppati sopra un ambiente basato su Kubernetes presso la sede del CTTC a Barcellona. Kubernetes presenta
+\\Segue un'architettura nativa cloud, basata su container (tecniche di virtualizzazione leggera) sviluppati sopra un ambiente basato su Kubernetes presso la sede del CTTC a Barcellona. Kubernetes presenta
 diverse funzionalità che garantiscono al controller dinamicità, autoriparazione, integrità e bilanciamento del carico.
 Ogni container o componente ha delle responsabilità specifiche e definisce un microservizio che interagisce con gli altri attraverso la connessione di rete rendendo il controller disaggregato.
 Le componenti principali sono implementate in Java (solo quelle di Automation e Policy) e Python.
+Per ottimizzare l'accesso concorrente e gestire la configurazione di rete, TeraFlow utilizza una componente chiamata Context. Questa componente memorizza la configurazione di rete, inclusi topologie, dispositivi, 
+collegamenti e servizi, in un database No-SQL. La componente ottimizza l'accesso concorrente e garantisce la coerenza dei dati gestiti dai vari componenti del controller SDN.
+La componente di Monitoring invece gestisce le diverse metriche configurate per le apparecchiature e i servizi di rete, memorizzando i dati di monitoraggio relativi alle Key Performance Indicators (KPI) selezionate.
 I servizi sono semplici e dettagliati rendendo possibile l'uso di protocolli leggeri.
 Dal punto di vista della sicurezza utilizza un sistema di Machine Learning per la prevenzione e la mitigazione di attacchi.
 \\Altri elementi fondamentali del controller sono rappresentati da:
@@ -45,8 +48,14 @@ comunicazione tra le sue componenti. E' stato preferito a REST per la sua capaci
 Questo protocollo sfrutta i Protocol Buffers per definire in modo preciso gli schemi dei messaggi condivisi scambiati tra le componenti, quindi i vari servizi che esse implementano con le adeguate funzioni da usare.
 I Protocol Buffers sono un meccanismo indipendente dalla piattaforma e dal linguaggio per la serializzazione delle strutture dati. Ogni componente di TeraFlow implementa i propri 
 Protocol Buffers, dettagliati nella pagina dedicata del sito \cite{ProtoBuf}.
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{componenti.png}
+    \caption{Interazione tra alcune componenti in TeraFlow}
+    \label{fig:p4}
+\end{figure}
 
-\section{Device Level Abstraction}
+\subsection{Device Level Abstraction}
 Il Device Level Abstraction permette l'interazione con i dispositivi presenti all'interno della rete e corrisponde all'Infrastructure layer descritto nell'architettura SDN \ref{ch:SDN}.
 Una componente fondamentale per questo livello di astrazione è la componente SBI.
 Per far comunicare più tipi di device possibili con il controller la componente presenta eterogeneità offrendo supporto a differenti protocolli.
@@ -69,18 +78,18 @@ agli elementi monitorati utilizzando i protocolli SBI necessari. I dati estratti
 con serie temporali visualizzabili su Grafana.
 Tuttavia quanto si tratta di gestire topologie più complesse che coinvolgono molti dispositivi è necessario un livello di astrazione superiore per specificare la connessione tra vari end-points. A tal fine si introduce il Service-level. 
 
-\section{Service Level Abstraction}
+\subsection{Service Level Abstraction}
 Il Service Level è responsabile della creazione e dell'aggiornamento dei servizi di rete.
 Questo livello di astrazione permette agli utenti di definire intenti specifici per la connessione tra gli end-points attraverso la componente di Service.
 %Un utente può selezionare un path scelto o chiedere al controller di determinarne uno che rispetti determinati requisiti. 
 La componente di Service supporta diversi tipi di servizi ed è in grado di utilizzare vari protocolli per configurare i dispositivi di rete.
 Inoltre implementa una Service Handler API che consente agli operatori di rete di definire i comportamenti necessari per ciascun tipo di servizio.
 \begin{itemize}
-    \item L2-VPN: servizio per dispositivi OpenConfig
-    \item L3-VPN: servizio per dispositivi emulati o OpenConfig con supporto per ACLs
-    \item Connectivity: servizio per dispositivi TAPI
-    \item L2 service Handler: servizio per dispositivi P4
-    \item Microwave service Handler
+    \item \textbf{L2-VPN}: servizio per dispositivi OpenConfig
+    \item \textbf{L3-VPN}: servizio per dispositivi emulati o OpenConfig con supporto per ACLs
+    \item \textbf{Connectivity}: servizio per dispositivi TAPI
+    \item \textbf{L2 service Handler}: servizio per dispositivi P4
+    \item \textbf{Microwave service Handler}
 \end{itemize}
 La componente ha al suo interno un blocco gRPC che espone una NBI al resto delle componenti del controller. 
 Gestisce i vari servizi inviando richieste di calcolo del percorso alla PathComp e successivamente, grazie a uno scheduler, si occupa di
@@ -97,7 +106,7 @@ Per automatizzare e rendere reattivo questo processo agli eventi che si verifica
 %Per astrarre la complessità del livello sottostante all'utente la componente di service è in grado di tradurre l'intento in un insieme di regole che propaga all'SBI (sempre attraverso file JSON)
 %cosicchè venga configurato ogni device all'interno del percorso per stabilire la connessione.
 
-\section{Management Level Abstraction}
+\subsection{Management Level Abstraction}
 Questo livello di astrazione è stato introdotto per consentire l'interazione dinamica con la componente di Service per la creazione, l'aggiornamento o l'eliminazione di un servizio in risposta agli eventi notificati.
 Una delle componenti fondamentali che ne fanno parte è la componente di Policy.
 Si occupa di definire condizioni di politica che possono essere aplicate sia a livello di singoli dispositivi che a livello di dominio della rete.
@@ -127,6 +136,76 @@ L'integrazione della componente di Policy con quella di Monitoring ha reso quind
 
 
 %\section {Hackfest }
-\section{gRPC}
+\section{gRPC} \label{grpc}
 GRPC è un protocollo basato sul protocollo di trasporto HTTP/2 che utilizza la codifica orientata ai byte introducendo così bassa latenza.
 E' progettato per trasportare messaggi peer-to-peer in modo distribuito e non durevole consentendo a più servizi lo scambio di informazioni attraverso un bus condiviso.
+
+\section{P4}
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{p4.png}
+    \caption{Workflow di P4 sul piano dati}
+    \label{fig:p4}
+\end{figure}
+P4, che sta per "Programming Protocol-indipendent Packet Processor",  è un linguaggio di programmazione ad alto livello che consente di descrivere il comportamento di un elemento di rete e del piano dati in modo flessibile.
+Il linguaggio permette di personalizzare il modo in cui i dispositivi di rete elaborano i pacchetti, senza essere vincolati a un set predefinito di protocolli.
+\\P4 è stato introdotto per l'esigenza di superare le limitazioni con cui si stava interfacciando OpenFlow.
+Per quest'ultimo protocollo l'hardware e il software non erano più sincronizzati. In alcuni casi 
+gli switch non riuscivano a supportare tutte le funzionalità che OpenFlow poteva offrire a causa delle limitazioni hardware, in quanto progettati per supportare un insieme fisso di protocolli e funzionalità. 
+Per introdurre un cambiamento dell'hardware sono richiesti vari sforzi per lo sviluppo e il finanziamento, inoltre richiederebbe mesi se non anni per essere portato a termine.
+\\P4 è nato quindi con l'obiettivo di definire nuove astrazioni per programmare il piano dati senza dover andare incontro alle limitazioni riscontrate.
+Offre un linguaggio di programmazione che permette di definire regole per cui i pacchetti vengono processati direttamente nei dispositivi di rete.
+Di seguito vengono indicati i vari passi che si eseguono durante un flusso di lavoro di un programma P4 che si possono ritrovare anche nell'immagine \ref{fig:p4}.
+%Permette di definire la tabella, le azioni e the counters per poi essere applicate a elementi hardware o software switch allo stesso modo.
+%P4 ha un interfaccia per analizzare pacchetti e match campi nell'header. In questo modo abbiamo un accoppiamento tra hardware e software.
+\\Un programma P4 è costituito da diverse sezioni, ognuna delle quali descrive un aspetto specifico del trattamento dei pacchetti.
+La dichiarazione degli header permette di dichiarare gli header dei protocolli che si vogliono analizzare e riconoscere o inventare nuovi headers per scopi di ricerca o esperimenti.
+Questo include campi come indirizzi IP, numeri di porta e tutti i dati di protocollo.
+Il Parser specifica come estrarre e interpretare i vari header dai pacchetti. Esso definisce uno stato macchina che determina, attraverso gli header in arrivo, come passare da uno stato all'altro. 
+La Pipeline di Elaborazione comprende tabelle e azioni che definiscono come i pacchetti vengono processati dopo aver effettuato il parsing.
+%guarda se mettere separato tabelle e azioni
+I Controlli del flusso coordinano il parser, le tabelle di elaborazione e le azioni. Definiscono quindi i controlli necessari per il flusso corretto di un pacchetto.
+\\Dopo aver definito il programma esso viene mandato al compilatore P4 che genera due tipi di output. 
+Il primo è un file binario P4 ed è ciò che viene installato all'interno del dispositivo target.
+Questo file binario è specifico per un target e quindi per uno specifico hardware (ad esempio Asics, fpga..).
+Il secondo output è indipendente dal target ed è diretto verso la parte NorthBound del controller. Questo è chiamato P4 info e genera i metadati necessari per consentire al piano di controllo e al piano
+dati di comunicare attraverso P4 Runtime.
+\\P4Runtime è un API messa a disposizione da P4 che permette al controller di connettersi ai dispositivi, vedere cosa c'è attualmente nel pipeline 
+e poter mandare le configurazioni rilevanti nella relativa tabella. Permette inoltre di definire il piano dati in modo dinamico collegandolo al piano di controllo. 
+Per il piano di controllo, P4Runtime protegge i dettagli hardware del piano dati ed è indipendente dalle funzionalità e dal protocollo supportati.
+P4Runtime riesce quindi a raggiunge l'indipendenza dal target, dal pipeline e dal protocollo.
+\\I nodi programmabili che possono essere ottenuti tramite software o hardware sono definiti P4 target.
+Essi hanno una pipeline di elaborazione dei pacchetti la cui struttura è specifica per il target ed è descritta da un determinato modello di architettura.
+
+%E' lo schema del pipeline descritto al controller in modo da nascondere il tipo di dispositivi presenti nella rete.
+I principali obiettivi quindi includono:
+\begin{itemize}
+    \item \textbf{Protocollo-indipendenza}: P4 non è vincolato a nessun protocollo specifico consentendo addirittura di definire nuovi protocolli o modificare quelli esistenti
+    \item \textbf{Target-indipendenza}: Il codice può essere compilato per una varità di target sia hardware che software
+    \item \textbf{Riprogrammabilità}: permette di aggiornare e modificare il comportamento del dataplane in tempo reale rispondendo ai cambiamenti nei requisiti di rete.
+\end{itemize}
+P4 rappresenta un passo significativo verso reti più flessibili e programmabili, consentendo agli sviluppatori di adattare e innovare rapidamente in risposta ai cambiamenti nei requisiti di rete.
+Si propone come una soluzione innovativa e versatile per superare le limitazioni degli attuali protocolli e dispositivi di rete offrendo un linguaggio dinamico e indipendente dall'hardware
+
+\section{Mininet}
+Mininet \cite{mininet} è un sistema open source di orchestrazione per l'emulazione di reti in grado di creare una realistica rete virtuale.
+Presenta delle API e un interprete Python che consentono di definire degli script attraverso i quali è possibile creare delle topologie di rete.
+Ciò è possibile anche tramite Command line interface (CLI)  e possono essere sia predefinite che personalizzate tramite la possibilità di 
+aggiungere e rimuovere switch, router, host, controller e link.
+\\Mininet mette a disposizione tre livelli differenti di API:
+\begin{itemize}
+\item \textbf{Low-level}: consiste nelle classi dei nodi e dei link istanziati individualmente e usati per creare una rete.
+\item \textbf{Mid-level}: aggiunge un containter per nodi e link, l'oggetto Mininet, e fornisce metodi per la configurazione di rete.
+\item \textbf{High-level}: aggiunge l'astrazione della topologia di rete, la classe Topo. Offre la possibilità di creare modelli di topologia riusabili passandoli al comando mn da linea di comando.
+\end{itemize}
+Per rendere la rete più realistica e adatta a esperimenti di test si possono configurare i link come up o down e inserire metriche specifiche 
+come possono essere quelle di banda, ritardo, perdita o massima lunghezza della coda di recezione.
+Gli host su Mininet condividono il filesystem root del server sottostante. 
+Ciò significa che non è necessario copiare dati tra gli host presenti.
+Un effetto collaterale di questa condivisione si può ritrovare quando un programma richiede specifiche di configurazione in quanto si dovrà creare un differente 
+file di configurazione per ogni host presente e specificarlo come opzione di avvio del programma. 
+%Inoltre ci possono essere collisioni tra file se si prova a creare lo stesso file nella stessa directory di più hosts.
+%Mininet mette a disposizione una GUI (miniedit) utile per visualizzare lo stato della rete durante gli esperimenti svolti.
+Mininet è stato progettato per essere facilmente integrabile con altri software e sistemi di rete.
+Consente di connettere un controller remoto agli switch, indipendentemente dal PC su cui è installato, in modo da fornire un ambiente adatto allo sviluppo e al test.
+E' possibile quindi collegare un controller SDN che supporta OpenFlow.
