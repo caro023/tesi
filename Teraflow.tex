@@ -44,15 +44,15 @@ Il suo focus è sviluppare un controller SDN Carrier Grade (reti o infrastruttur
 %L'architettura è basata su microservizi interconnessi da un bus grpc.
 \section{Componenti}
 TeraFlow utilizza un bus gRPC (Google Remote Procedure Call) come protocollo interno per la 
-comunicazione tra le sue componenti. E' stato preferito a REST per la sua capacità più concreta di descrivere le interazioni tra entità.
-Questo protocollo sfrutta i Protocol Buffers per definire in modo preciso gli schemi dei messaggi condivisi scambiati tra le componenti, quindi i vari servizi che esse implementano con le adeguate funzioni da usare.
+comunicazione tra le sue componenti. Questo protocollo è stato preferito a REST per la sua capacità più concreta di descrivere le interazioni tra entità in modo efficiente e preciso.
+gRPC sfrutta i Protocol Buffers per definire in modo preciso gli schemi dei messaggi condivisi e scambiati tra le componenti,  consentendo ai vari servizi di implementare le adeguate funzioni di comunicazione.
 I Protocol Buffers sono un meccanismo indipendente dalla piattaforma e dal linguaggio per la serializzazione delle strutture dati. Ogni componente di TeraFlow implementa i propri 
 Protocol Buffers, dettagliati nella pagina dedicata del sito \cite{ProtoBuf}.
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{componenti.png}
     \caption{Interazione tra alcune componenti in TeraFlow}
-    \label{fig:p4}
+    \label{fig:componenti}
 \end{figure}
 
 \subsection{Device Level Abstraction}
@@ -137,8 +137,31 @@ L'integrazione della componente di Policy con quella di Monitoring ha reso quind
 
 %\section {Hackfest }
 \section{gRPC} \label{grpc}
-GRPC è un protocollo basato sul protocollo di trasporto HTTP/2 che utilizza la codifica orientata ai byte introducendo così bassa latenza.
-E' progettato per trasportare messaggi peer-to-peer in modo distribuito e non durevole consentendo a più servizi lo scambio di informazioni attraverso un bus condiviso.
+
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{grpc.png}
+    \caption{Funzionamento del protocollo gRPC}
+    \label{fig:grpc}
+\end{figure}
+Google Remote Procedure Calls (gRPC) è un framework OpenSource sviluppato da Google per facilitare la comunicazione tra applicazioni distribuite. Permette di
+connettere, invocare, operare e fare debug di programmi eterogenei in modo semplice.
+E' basato sul protocollo di trasporto HTTP/2, che supporta la comunicazione bidirezionale. 
+Consente di definire i servizi, i loro metodi di comunicazione e trasportare messaggi attraverso dei file di descrizione dell'interfaccia detti Protocol Buffer, o più semplicemente file proto.
+I file proto sono un meccanismo indipendente dal linguaggio e dalla piattaforma per la serializzazione delle strutture dati. Questo sistema di serializzazione è più efficiente rispetto a formati come JSON o XML
+in termini sia di dimensione dei messaggi ma anche di velocità di serializzazione e deserializzazione.
+%A differenza degli altri protocolli RPC la richiesta viene mandata a più di un server usando multicast o comunicazione point-to-point. 
+\\Per sviluppare un'applicazione gRPC è necessario definire un'interfaccia dei servizi. Questa contiene informazioni su come il servizio deve essere usato e quali sono i metodi, i parametri e 
+il formato da utilizzare per i messaggi. Tutti i metodi specificati nella definizione di questa interfaccia possono essere invocati dal client da remoto.
+Utilizzando il compilatore Protobuf, si può generare il codice lato server (server skeleton) e il codice lato client (client stub) nel linguaggio desiderato.
+\\Quando il gRPC client invoca un servizio gRPC, il lato client utilizza i protocol buffer per serializzare la chiamata di procedura remota nel formato appropriato. 
+Successivamente, la richiesta viene mandata tramite HTTP/2. Sul lato server, viene deserializzata e viene invocata la relativa procedura usando i protocol buffers.
+La risposta segue il flusso inverso da server a client.
+\\Il framework gRPC sottostante gestisce tutta le complessità che normalmente sono associate all'imposizione di vincoli di servizio, serializzazione dati, comunicazioni di rete, autentificazione e molto altro.
+gRPC è progettato per trasportare messaggi peer-to-peer in modo distribuito e non durevole, consentendo a più servizi di scambiarsi informazioni attraverso un bus condiviso.
+Grazie all'uso di HTTP/2 e alla codifica orientata ai byte, gRPC riesce a introdurre bassa latenza, rendendolo adatto a sistemi altamente distribuiti e scalabili. 
+Un'altra caratteristica importante è la sicurezza. Supporta nativamente il protocollo TLS (Transport Layer Security), garantendo che le comunicazioni tra i servizi siano cifrate e sicure.
+
 
 \section{P4}
 \begin{figure}[h]
@@ -280,6 +303,7 @@ Di seguito esponiamo alcune classi e comandi della Mid-level API:
 
 Con le API in Python si può anche estendere il comando \textit{mn} usando l'opzione \textit{--custom} per invocare la topologia ricreata nello script.
 \\\textit{sudo mn --your\_script.py --topo your\_topo}
+
 
 
 
