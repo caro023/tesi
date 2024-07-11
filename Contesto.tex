@@ -64,6 +64,37 @@ di gestione incontrate nelle reti moderne.
 %https://opennetworking.org/wp-content/uploads/2013/05/TR-535_ONF_SDN_Evolution.pdf  pagine 8
 
 \section{Intent-based Networking}
+L'Intent-Based Networking (IBN) è un paradigma innovativo per la gestione delle reti che permette di separare la complessità di implementazione dal livello di gestione.
+Esso è nato per rispondere alla crescente ampiezza e dinamicità delle reti moderne, dove la gestione tradizionale basata su comandi manuali e configurazioni dettagliate non è più sostenibile.
+Negli ultimi anni, grazie a nuove tecnologie come il 5G o l'Internet of Things (IoT), diverse applicazioni stanno emergendo in differenti campi industriali.
+\\In questo contesto, le implementazioni cloud si sono esteste ed è diventato essenziale aumentare le capacità di elaborazione, eseguire servizi distribuiti e garantire il 
+comportamento interattivo che queste nuove applicazioni richiedono.
+Sono state concepite diverse tecnologie emergenti, tra cui l'IBN, per far fronte a queste necessità. Ognuna ha differenti obiettivi e spesso si integrano tra loro.
+\\Il Multi-Access Edge Computing (MEC) fornisce funzionalità cloud alla rete per migliorare la qualità dei servizi offerti in tempo reale portando della capacità di calcolo fino ai punti di accesso.
+\\Il Network Function Virtualization (NFV) permette di distribuire le funzioni di rete (firewall, NAT, DPI) come apparecchi virtuali. Questi vengono forniti in modo flessibile al cloud, consentendo 
+così modelli innovativi di fornitura di servizi che migliorano la flessibilità e l'agilità della rete.
+\\Il Software Defined Networking (SDN) consente di semplificare la gestione di rete e utilizzare al meglio le risorse facilitando la virtualizzazione all'interno. In particolare riesce a 
+fornire servizi più efficienti per la definizione di percorsi dei dati.
+\\Nonostante queste innovazioni, rimane un divario semantico tra le esigenze delle aziende e gli obiettivi dei service provider che devono continuamente adattare e proteggere la rete in un panorama orientato ai servizi.
+L'IBN nasce come un approccio nuovo, concepito dall'IETF \cite{ietf}. Si occupa della gestione della rete per astrarne la complessità permettendo agli utenti finali di concentrarsi sugli obiettivi di performance senza preoccuparsi dei dettagli tecnici.
+Gli utenti possono esprimere i propri obiettivi, a livello di applicazione o di servizio, attraverso direttive di alto livello, gli intenti.
+\\Gli intenti sono espressi in un linguaggio naturale che descrive i risultati desiderati, lasciando al sistema IBN il compito di tradurli.
+Un intento di rete si riferisce infatti a un livello di astrazione in cui la logica dell'applicazione è espressa in termini di cosa deve essere fatto, utilizzando regole di semantica, piuttosto che di come deve essere implementato.
+\\Esistono due tipi di intenti, prescrittivi e descrittivi.
+Un intento descrittivo utilizza istruzioni di alto livello, come "consentire il traffico tra X e Y", invece un intento prescrittivo contiene un'informazione 
+più specifica, come "da X:10.0.0.2 a Y:10.0.0.1 set rule=allow".
+L'idea centrale dell'IBN è che non sono specificati i dettagli di implementazione della rete; piuttosto, è la rete stessa che deve eseguire le azioni necessarie per soddisfare gli intenti espressi.
+In questo modo le applicazioni non devono gestire le direttive di rete di basso livello specifiche della tecnologia. Infatti i livelli applicativi possono interagire con l'Intent Layer evitando di apprendere il linguaggio tecnico-specifico del sistema sottostante.
+L'approccio IBN è reso possibile grazie la mediazione di un Intent Orchestration Layer, che gestisce e regola il ciclo di vita delle richieste di intenti provenienti dalle applicazioni attraverso operazioni 
+di adempimento e garanzia in un flusso di lavoro a ciclo chiuso.
+Queste operazioni, oltre a includere la traduzione e l'eventuale orchestrazione di configurazione per la realizzazione dei singoli intenti, mirano a garantire che la rete rispetti effettivamente l'intento desiderato 
+sulla base della raccolta, aggregazione e valutazione in tempo reale dei dati di monitoraggio.
+L'IBN fa uso di un Intent Repository, un database in grado di interagire con i moduli di gestione e traduzione 
+degli intenti per fornire la mappatura tra l'intento e la sua configurazione.
+Questo paradigma offre vantaggi anche ai fornitori di rete, infatti permette di migliorare l'agilità, la disponibilità
+e la gestione delle reti a un livello di astrazione più elevato e verificare continuamente che gli obiettivi siano raggiunti. 
+
+%L'IBN si integra con queste tecnologie 
 
 \section{Controller allo stato dell'arte}
 \subsection{ONOS}

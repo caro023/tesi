@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex tesi"] 1720690074.47352 "tesi.aux" "tesi.bbl" "tesi" 1720690080.91082 0
-  "./bibliografia.bib" 1720618585 1853 629019e0b5679131cdef3cffa18e20a7 ""
+["bibtex tesi"] 1720711156.75139 "tesi.aux" "tesi.bbl" "tesi" 1720711163.05905 0
+  "./bibliografia.bib" 1720711115 1945 3c0b8f3621f952a425b6ee9f58e97b79 ""
   "C:/Users/ferra/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/unsrt.bst" 1291864736 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "tesi.aux" 1720690079 6078 2c521bf10ccab9b1978251596b30152a "pdflatex"
+  "tesi.aux" 1720711161 6113 8ac072de1b2be55b423027a03f62be5d "pdflatex"
   (generated)
   "tesi.bbl"
   "tesi.blg"
   (rewritten before read)
-["pdflatex"] 1720690075.13515 "c:/Users/ferra/OneDrive/Desktop/teraflow/tesi.tex" "tesi.pdf" "tesi" 1720690080.91216 0
+["pdflatex"] 1720711157.34759 "c:/Users/ferra/OneDrive/Desktop/teraflow/tesi.tex" "tesi.pdf" "tesi" 1720711163.06027 0
   "Appendice.tex" 1720466388 1489 9e2d1c145c5e168ee79950dcb81c8f7d ""
   "C:/Users/ferra/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1715245698 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/ferra/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs10.tfm" 1720594318 688 37338d6ab346c2f1466b29e195316aa4 ""
@@ -123,7 +123,7 @@
   "C:/Users/ferra/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/ferra/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "Conclusioni.tex" 1720466330 21 038f0bb4ad53af5249d0846a816e28ef ""
-  "Contesto.tex" 1720624635 15322 10d8e10ec3142eb9e4fd806ea8321227 ""
+  "Contesto.tex" 1720711143 19857 dc9421f5b8cd80ebff6cb8754532aecd ""
   "Introbuzione.tex" 1720465913 22 8ed87c0e3573f1b88b22078a97cf6a34 ""
   "ODL-Architecture.png" 1714839799 71040 139f9d3a5ebaf47a81e9f21824a60338 ""
   "Policy.tex" 1720466283 71 df5dacbacb235f34d621c5904325077a ""
@@ -138,9 +138,9 @@
   "odl/feature.png" 1715336292 52515 3164f29892de9a9cee537a484589bd8c ""
   "p4.png" 1720618547 61765 bdb3462dcc87312d2a2017cf2ff3abde ""
   "sdn.png" 1714663580 236791 c195cb0819127de77de61307c403c4d5 ""
-  "tesi.aux" 1720690079 6078 2c521bf10ccab9b1978251596b30152a "pdflatex"
-  "tesi.bbl" 1720690074 1510 ca5ea4b68f05cbcd58a00dc61e0823db "bibtex tesi"
-  "tesi.out" 1720690079 2818 4a5e41a151b73bc43b3ac2e810e6bc7a "pdflatex"
+  "tesi.aux" 1720711161 6113 8ac072de1b2be55b423027a03f62be5d "pdflatex"
+  "tesi.bbl" 1720711157 1575 3fe2fd18a4dd169455aa4bb3b7d11017 "bibtex tesi"
+  "tesi.out" 1720711161 2818 4a5e41a151b73bc43b3ac2e810e6bc7a "pdflatex"
   "tesi.tex" 1720466411 2535 a4984ed0b6ace257bf2e2c29af04fb3e ""
   (generated)
   "tesi.aux"
