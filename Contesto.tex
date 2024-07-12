@@ -1,4 +1,5 @@
 \chapter{Contesto}
+\label{cap:contesto}
 \section{Software Defined Networking}
 \label{ch:SDN}
 
@@ -64,6 +65,7 @@ di gestione incontrate nelle reti moderne.
 %https://opennetworking.org/wp-content/uploads/2013/05/TR-535_ONF_SDN_Evolution.pdf  pagine 8
 
 \section{Intent-based Networking}
+\label{ch:IBN}
 L'Intent-Based Networking (IBN) è un paradigma innovativo per la gestione delle reti che permette di separare la complessità di implementazione dal livello di gestione.
 Esso è nato per rispondere alla crescente ampiezza e dinamicità delle reti moderne, dove la gestione tradizionale basata su comandi manuali e configurazioni dettagliate non è più sostenibile.
 Negli ultimi anni, grazie a nuove tecnologie come il 5G o l'Internet of Things (IoT), diverse applicazioni stanno emergendo in differenti campi industriali.
@@ -94,7 +96,10 @@ degli intenti per fornire la mappatura tra l'intento e la sua configurazione.
 Questo paradigma offre vantaggi anche ai fornitori di rete, infatti permette di migliorare l'agilità, la disponibilità
 e la gestione delle reti a un livello di astrazione più elevato e verificare continuamente che gli obiettivi siano raggiunti. 
 
-%L'IBN si integra con queste tecnologie 
+%L’IBN utilizza l’automazione e l’orchestrazione per modificare il modo in cui vengono distribuite le configurazioni. In che modo? Incorporando l’apprendimento automatico e l’intelligenza artificiale per automatizzare le attività amministrative della rete, creando un sistema di networking autogestito.
+
+%In pratica, in un sistema IBN tutti i dispositivi di rete sono impostati in automatico per soddisfare la richiesta sull’intera rete, a prescindere da dove si connetta l’utente: VLAN, subnet, ACL così come tutte le altre risorse di rete, vengono identificate automaticamente e configurate secondo le migliori prassi. L’intento (detto anche obiettivo) viene definito dall’amministratore di rete una sola volta, utilizzando un cruscotto centralizzato. Da quel momento in poi sarà l’intelligenza della rete a garantire l’obiettivo in modo tale che, anche se dovessero esserci modifiche alla rete, il sistema sarà in grado di presidiare la configurazione scatenando tutte le azioni correttive necessarie.
+
 
 \section{Controller allo stato dell'arte}
 \subsection{ONOS}

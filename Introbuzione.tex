@@ -1,1 +1,35 @@
 \chapter{Introduzione}
+L'evoluzione delle reti moderne, l'incremento delle esigenze di prestazioni e affidabilità, insieme con l'aumento della quantità di traffico, 
+hanno portato alla necessità di nuovi paradigmi di gestione e controllo delle reti.
+%\textit{Servizi altamente esigenti come il 5G/6G si sono insinuati in questo contesto.}
+\\In questo contesto, il Software Defined Networking (SDN)\ref{ch:SDN} rivoluziona la gestione delle reti attraverso un approccio centralizzato e programmabile, separando il piano di controllo dal piano dati.
+Questa separazione permette agli amministratori di rete di semplificare configurazioni complesse e di introdurre politiche di rete dinamiche e affidabili.
+\\Tuttavia le funzioni degli ambienti SDN riguardano il funzionamento dei dispositivi, come ad esempio \textit{"consenti il traffico tra X e Y solo se appartiene alla VLAN Z"}, andando a impostare
+le regole per consentire il flusso desiderato.
+\\D'altra parte,l’Intent-Based Networking (IBN) \ref{ch:IBN}, o Networking basato su intenti, è un paradigma che mira a separare ulteriormente la complessità di implementazione dal livello di gestione. 
+%Questa metodologia permette di affrontare le nuove sfide per la gestione delle reti.
+%L'idea fondamentale dell'IBN è di poter esprimere i propri obiettivi per il comportamento della rete specificando intenti ad alto livello.
+IBN affronta le sfide emergenti fornendo un'astrazione di alto livello dove gli obiettivi per il comportamento della rete possono essere espressi in modo chiaro e intuitivo.
+Esempi di intenti includono: \textit{"consenti alle applicazioni contabili di accedere al server XYZ, ma non consentire l’accesso alle applicazioni di produzione"} oppure
+\textit{"Mantenere sempre un'elevata qualità del servizio e un'elevata larghezza di banda per gli utenti di un certo livello"}.
+Il framework IBN si occuperà di elaborare questi intenti e apportare le modifiche necessarie nella configurazione dei dispositivi di rete affichè essi vengano rispettati. 
+Questo approccio consente alla rete di adattarsi dinamicamente sulla base dei cambiamenti in tempo reale, gestendo le complessità in modo autonomo.
+%Questa astrazione di secondo livello è la differenza principale quando si tratta di reti basate su intenti rispetto a SDN.
+\\L'obiettivo della tesi è l'implementazione di un intento in Teraflow, uno dei più recenti controller SDN.
+Inizialmente è stato necessario comprendere l'architettura del controller, incluse le sue componenti, per capire le loro interazioni con l'ambiente circostante e la gestione dei servizi e delle politiche.
+Per comprendere meglio il funzionamento del software, sono stati eseguiti dei casi di test forniti dagli amministratori per simulare e valutare il comportamento del sistema in contesti applicativi specifici.
+Successivamente, si è passati alla fase di sperimentazione.
+Non avendo a disposizione una rete reale, è stato utilizzato l'emulatore di reti Mininet \ref{ch:Mininet} come ambiente di test.
+\\Partendo da file esistenti, si è creato il contesto necessario e un servizio tra due end-points.
+Al servizio è stata associata una politica per mantenere i livelli di loss ratio e latenza sotto una determinata soglia.
+Alla politica viene associata un'azione nel caso le richieste non fossero più rispettate, in questo caso è stato scelto il ricalcolo del percorso come azione.
+Per monitorare dinamicamente in tempo reale la qualità del servizio, è stato implementato un probe che, attraverso il ping tra i due end-point, misura le due metriche e invia 
+i relativi valori.
+\\Il resto del documento sarà organizzato come segue.
+\\Nel capitolo \ref{cap:contesto} verrà esposto il contesto. All'interno ci sarà un'analisi approfondita del Software Defined Networking (SDN)
+e verranno illustrati alcuni dei principali controller SDN presenti sul mercato. Parallelamente nello stesso capitolo verrà, introdotto anche l'Intent-Based Networking (IBN).
+\\Nel capitolo \ref{cap:teraflow} verrà descritto in modo approfondito il controller Teraflow su cui si incentra la tesi.
+Verrà delineata l'architettura e l'interazione necessaria tra le componenti affinche la politica venga rispettata.
+Saranno inoltre introdotti gli strumenti utilizzati nella sperimentazione, tra cui P4, gRPC e Mininet, spiegando il loro scopo.
+Nel capitolo \ref{cap:policy} viene descritta, dopo aver introdotto la teoria necessaria, la parte pratica e il fulcro di questo lavoro.
+Infine, nell’ultimo capitolo, verranno presentate le conclusioni.
