@@ -1,2 +1,39 @@
 \chapter{Studio e sperimentazione della gestione di policy in Teraflow}
 \label{cap:policy}
+Lo scopo della tesi è quello di stabilire una connessione, attraverso dispositivi che supportano p4, tra due end points nella rete che rispetti determinate caratteristiche utilizzando il controller SDN Teraflow.
+Inizialmente, attraverso il Service Level, è stato introdotto un servizio nella rete sotto forma di intento per stabilire la connessione e il percorso. 
+Successivamente, tramite il Management Level, è stata inserita una politica basata sugli eventi. Questa politica permette agli operatori 
+di associare a un servizio scelto un service level agreement (SLA) con specifiche condizioni che devono essere rispettate a run time.
+%end-to-end
+%tutte queste info sono persistite in un database logicamente centralizzato, fisicamente distribuito e scalabile, dato dalla componente di Context
+\\Per iniziare il lavoro si è partiti da una demo già esitente per poi apportare delle modifiche successivamente.
+\\\textbf{Servizio end-to-end}
+\\Come già detto in precedenza il Devide Level sfrutta una South-Bound Interface (SBI) per interagire con i device tramite l'API P4Runtime. 
+Inizialmente, il codice p4 compilato viene copiato nel pod SBI per poter inserire le giuste configurazioni nelle tabelle dei dispositivi.
+Il passo successivo è registrare i dispositivi e i link al controller SDN per permettere una corretta comunicazione tra di essi.
+A questo punto, siamo in grado di richiedere una connessione tra due end points specificando solamente i dispositivi finali tramite un servizio.
+La componente di Service, ricevuta la richiesta, si rivolge alla PathComp per calcolare un percorso.
+Per eseguire questa operazione la PathComp utilizza delle informazioni della rete che persistono nel database logicamente centralizzato della componente di Context.
+\\Una volta ricevuto il percorso, la componente di Service configura i dispositivi lungo il percorso tramite l'SBI.
+Per mantenere questo processo agnostico rispetto ai dettagli della tecnologia, la componente di Service 
+sfrutta una definizione minima permettendo agli utenti di esprimete cosa vogliono connettere, lasciando che sia il sistema sottostante a decidere come realizzare la connessione reale.
+La componente traduce automaticamente questa definizione minimale del servizio in modelli di configurazioni astratte dei dispositivi. 
+Queste vengono a loro volta tradotte in regole P4 dal driver del dispositivo P4 della SBI.
+\\\textbf{Constraints e action rules}
+\\Nella demo non erano presenti ma abbiamo introdotto dei contraisnt o vincoli che dovevano essere rispettati dal servizio.
+%spiegare cosa sono i constraits, guarda i deliverable
+%dire che non sono implementati
+%run-time-->loss+latenza
+\\\textbf{Politica}
+\\Una parte fondamentale nei sistemi moderni è la gestione a run-time del servizio stabilito.
+A tale scopo, si sfrutta la componente di Monitoring, che permette di associare il monitoraggio delle metriche nel proprio database,
+con condizioni che devono essere rispettate.
+Quando queste condizioni non vengono soddisfatte, la componente di Monitoring solleva un allarme che fa scattare l'azione prestabilita.
+\\Nella sperimentazione abbiamo introdotto una politica per il servizio stabilito con due condizioni: una per la latenza (che non deve superare i 100ms) e una per la loss (che non deve superare il 20\%).
+Queste due condizioni sono legate tra loro tramite un "OR", quindi appena una delle due non è più rispettata, viene invocata l'azione.
+In questo caso l'azione consiste nel ricalcolo del percorso.
+\\\textbf{Verifica}
+
+%parte di test in mininet
+%modifica alla topologia della demo
+%probe

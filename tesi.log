@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.23)  12 JUL 2024 15:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.23)  18 JUL 2024 11:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -604,22 +604,22 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3.5}) h
 l.238 \end{itemize}
                     <./mininet.png>] [25] [26]) (Policy.tex [27]
 Capitolo 4.
-) (Conclusioni.tex [28
+[28
 
-]
+]) (Conclusioni.tex [29]
 Capitolo 5.
-) (Appendice.tex [29
+) (Appendice.tex [30
 
 ]
 Capitolo 6.
-<odl/Potassium.png, id=278, 762.4485pt x 226.446pt>
+<odl/Potassium.png, id=282, 762.4485pt x 226.446pt>
 File: odl/Potassium.png Graphic file (type png)
 <use odl/Potassium.png>
 Package pdftex.def Info: odl/Potassium.png  used on input line 14.
 (pdftex.def)             Requested size: 429.3521pt x 127.51721pt.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 20.
-<odl/feature.png, id=279, 1088.26575pt x 237.88875pt>
+<odl/feature.png, id=283, 1088.26575pt x 237.88875pt>
 File: odl/feature.png Graphic file (type png)
 <use odl/feature.png>
 Package pdftex.def Info: odl/feature.png  used on input line 24.
@@ -627,14 +627,14 @@ Package pdftex.def Info: odl/feature.png  used on input line 24.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (tesi.bbl [30
+) (tesi.bbl [31
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.1 \begin{thebibliography}{10}
-                                <./odl/Potassium.png>] [31
+                                <./odl/Potassium.png>] [32
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
@@ -664,9 +664,9 @@ Underfull \hbox (badness 2521) in paragraph at lines 67--69
 []\OT1/ptm/m/n/12 Installazione open-day-light.  []$\OT1/cmtt/m/n/12 https : / / docs . opendaylight . org / en / latest /
  []
 
-[32
+[33
 
-]) [33] (tesi.aux)
+]) [34] (tesi.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -675,17 +675,17 @@ Package rerunfilecheck Info: File `tesi.out' has not changed.
 (rerunfilecheck)             Checksum: 4A5E41A151B73BC43B3AC2E810E6BC7A;2818.
  ) 
 Here is how much of TeX's memory you used:
- 15457 strings out of 474486
- 271509 string characters out of 5743755
+ 15458 strings out of 474486
+ 271516 string characters out of 5743755
  1951542 words of memory out of 5000000
  37439 multiletter control sequences out of 15000+600000
  580224 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  123i,21n,121p,788b,1177s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on tesi.pdf (33 pages, 1649375 bytes).
+Output written on tesi.pdf (34 pages, 1652586 bytes).
 PDF statistics:
- 381 PDF objects out of 1000 (max. 8388607)
- 87 named destinations out of 1000 (max. 500000)
+ 385 PDF objects out of 1000 (max. 8388607)
+ 88 named destinations out of 1000 (max. 500000)
  211 words of extra memory for PDF output out of 10000 (max. 10000000)
 

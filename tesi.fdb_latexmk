@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex tesi"] 1720789478.31751 "tesi.aux" "tesi.bbl" "tesi" 1720791199.87597 0
+["bibtex tesi"] 1721293780.55147 "tesi.aux" "tesi.bbl" "tesi" 1721295954.61979 0
   "./bibliografia.bib" 1720711115 1945 3c0b8f3621f952a425b6ee9f58e97b79 ""
   "C:/Users/ferra/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/unsrt.bst" 1291864736 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "tesi.aux" 1720791198 6459 968f49dd8093bdcbd4a0abbedf739357 "pdflatex"
+  "tesi.aux" 1721295953 6459 c33def5aa5f513d9feee0b1927e1d9e4 "pdflatex"
   (generated)
   "tesi.bbl"
   "tesi.blg"
   (rewritten before read)
-["pdflatex"] 1720791193.81264 "c:/Users/ferra/OneDrive/Desktop/teraflow/tesi.tex" "tesi.pdf" "tesi" 1720791199.87793 0
+["pdflatex"] 1721295948.96763 "c:/Users/ferra/OneDrive/Desktop/teraflow/tesi.tex" "tesi.pdf" "tesi" 1721295954.62123 0
   "Appendice.tex" 1720466388 1489 9e2d1c145c5e168ee79950dcb81c8f7d ""
   "C:/Users/ferra/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1715245698 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/ferra/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs10.tfm" 1720594318 688 37338d6ab346c2f1466b29e195316aa4 ""
@@ -126,7 +126,7 @@
   "Contesto.tex" 1720789470 20889 5f6ed2304e1c8f19e82a0b31d672ba28 ""
   "Introbuzione.tex" 1720791192 4586 dcb11eb1a8872c42b65032c15505b2e3 ""
   "ODL-Architecture.png" 1714839799 71040 139f9d3a5ebaf47a81e9f21824a60338 ""
-  "Policy.tex" 1720789470 91 7b67a50192579ae2adb1df0551d85116 ""
+  "Policy.tex" 1721295947 3723 b91e83aa781dd5b5b6ca3e44e90935f0 ""
   "Teraflow.tex" 1720789470 30565 784b62558533105cde5a6055bcf616bb ""
   "architetturatf.png" 1714662149 444143 6152f44210624c85714b7059496daf94 ""
   "archonos.png" 1715249915 377061 b56f18563f62828c1a5696c8f573af0e ""
@@ -138,9 +138,9 @@
   "odl/feature.png" 1715336292 52515 3164f29892de9a9cee537a484589bd8c ""
   "p4.png" 1720618547 61765 bdb3462dcc87312d2a2017cf2ff3abde ""
   "sdn.png" 1714663580 236791 c195cb0819127de77de61307c403c4d5 ""
-  "tesi.aux" 1720791198 6459 968f49dd8093bdcbd4a0abbedf739357 "pdflatex"
-  "tesi.bbl" 1720789478 1575 3fe2fd18a4dd169455aa4bb3b7d11017 "bibtex tesi"
-  "tesi.out" 1720791198 2818 4a5e41a151b73bc43b3ac2e810e6bc7a "pdflatex"
+  "tesi.aux" 1721295953 6459 c33def5aa5f513d9feee0b1927e1d9e4 "pdflatex"
+  "tesi.bbl" 1721293781 1575 3fe2fd18a4dd169455aa4bb3b7d11017 "bibtex tesi"
+  "tesi.out" 1721295953 2818 4a5e41a151b73bc43b3ac2e810e6bc7a "pdflatex"
   "tesi.tex" 1720466411 2535 a4984ed0b6ace257bf2e2c29af04fb3e ""
   (generated)
   "tesi.aux"
