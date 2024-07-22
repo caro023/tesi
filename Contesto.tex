@@ -37,10 +37,10 @@ principale è quindi ridurre e semplificare il carico di amministrazione per i s
     \centering
    \includegraphics[width=1\textwidth]{sdn.png}
     \caption{struttura di una rete SDN}
-    \label{fig:sdn}
+    \label{fig:sdnF}
 \end{figure}
 %foto  https://community.fs.com/it/article/what-is-software-defined-networking-sdn.html
-\\Come si può notare dalla figura \ref{fig:sdn} la rete viene suddivisa in tre livelli: Infrastructure layer, Control layer e Application layer.
+\\Come si può notare dalla figura \ref{fig:sdnF} la rete viene suddivisa in tre livelli: Infrastructure layer, Control layer e Application layer.
 Partendo dal livello più basso troviamo l'infrastruttura di rete il cui unico compito è implementare il piano dati, ossia la parte che supporta un protocollo condiviso per comunicare con il controller e gestire
 i paccchetti sulla base delle configurazioni imposte da quest'ultimo. 
 Questa divisione consente di evitare algoritmi
@@ -71,7 +71,7 @@ Esso è nato per rispondere alla crescente ampiezza e dinamicità delle reti mod
 Negli ultimi anni, grazie a nuove tecnologie come il 5G o l'Internet of Things (IoT), diverse applicazioni stanno emergendo in differenti campi industriali.
 \\In questo contesto, le implementazioni cloud si sono esteste ed è diventato essenziale aumentare le capacità di elaborazione, eseguire servizi distribuiti e garantire il 
 comportamento interattivo che queste nuove applicazioni richiedono.
-Sono state concepite diverse tecnologie emergenti, tra cui l'IBN, per far fronte a queste necessità. Ognuna ha differenti obiettivi e spesso si integrano tra loro.
+Sono state concepite diverse tecnologie emergenti, tra cui l'IBN, per far fronte a queste necessità. Ognuna ha differenti obiettivi e spesso si integrano tra loro \cite{ibn}.
 \\Il Multi-Access Edge Computing (MEC) fornisce funzionalità cloud alla rete per migliorare la qualità dei servizi offerti in tempo reale portando della capacità di calcolo fino ai punti di accesso.
 \\Il Network Function Virtualization (NFV) permette di distribuire le funzioni di rete (firewall, NAT, DPI) come apparecchi virtuali. Questi vengono forniti in modo flessibile al cloud, consentendo 
 così modelli innovativi di fornitura di servizi che migliorano la flessibilità e l'agilità della rete.
@@ -84,7 +84,7 @@ Gli utenti possono esprimere i propri obiettivi, a livello di applicazione o di 
 Un intento di rete si riferisce infatti a un livello di astrazione in cui la logica dell'applicazione è espressa in termini di cosa deve essere fatto, utilizzando regole di semantica, piuttosto che di come deve essere implementato.
 \\Esistono due tipi di intenti, prescrittivi e descrittivi.
 Un intento descrittivo utilizza istruzioni di alto livello, come "consentire il traffico tra X e Y", invece un intento prescrittivo contiene un'informazione 
-più specifica, come "da X:10.0.0.2 a Y:10.0.0.1 set rule=allow".
+più specifica, come "da X:10.0.0.2 a Y:10.0.0.1 set rule=allow"\cite{ibn2}.
 L'idea centrale dell'IBN è che non sono specificati i dettagli di implementazione della rete; piuttosto, è la rete stessa che deve eseguire le azioni necessarie per soddisfare gli intenti espressi.
 In questo modo le applicazioni non devono gestire le direttive di rete di basso livello specifiche della tecnologia. Infatti i livelli applicativi possono interagire con l'Intent Layer evitando di apprendere il linguaggio tecnico-specifico del sistema sottostante.
 L'approccio IBN è reso possibile grazie la mediazione di un Intent Orchestration Layer, che gestisce e regola il ciclo di vita delle richieste di intenti provenienti dalle applicazioni attraverso operazioni 
@@ -147,7 +147,7 @@ reattività.
     \caption{Architettura del controller OpenDayLight}
     \label{fig:ArchODL}
 \end{figure}
-OpenDaylight \cite{ODL} è un progetto open source che utilizza protocolli aperti al fine di fornire controlli centralizzati e gestire il monitoring della rete.
+OpenDaylight\cite{ODL} è un progetto open source che utilizza protocolli aperti al fine di fornire controlli centralizzati e gestire il monitoring della rete.
 Fa parte della fondazione LF Networking \cite{LFN} che si occupa di stanziare e coordinare il supporto a progetti open source coinvolti nello spostamento o nella comunicazione di dati su una rete.
 Ciò semplifica il coinvolgimento dei membri e aumenta la collaborazione tra i progetti e gli organismi di standardizzazione.
 %Lo scopo principale è far crescere l'ecosistema di ODL per facilitare la collaborazione tra sviluppatori, utenti finali e aziende associate a LFV per produrre tecnologie più pertinenti e affidabili.

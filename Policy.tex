@@ -3,7 +3,7 @@
 Lo scopo della tesi è quello di stabilire una connessione tra due end points nella rete che rispetti determinate caratteristiche utilizzando il controller SDN Teraflow.
 Inizialmente, attraverso il Service Level, è stato introdotto un servizio nella rete sotto forma di intento per stabilire la connessione e il percorso. 
 Successivamente, tramite il Management Level, è stata inserita una politica basata sugli eventi. Questa politica permette agli operatori 
-di associare a un servizio scelto un service level agreement (SLA) con specifiche condizioni che devono essere rispettate a run time.
+di associare a un servizio scelto un service level agreement (SLA) con specifiche condizioni che devono essere rispettate durante l'esecuzione.
 %end-to-end
 %tutte queste info sono persistite in un database logicamente centralizzato, fisicamente distribuito e scalabile, dato dalla componente di Context
 \\Per iniziare il lavoro si è partiti da una demo già esitente per poi apportare delle modifiche successivamente.
@@ -48,7 +48,7 @@ In questo caso l'azione consiste nel ricalcolo del percorso.
 %MODIFICA O LA FOTO O LA DESCRIZIONE
 \begin{figure}[h]
     \centering
-   \includegraphics[width=1\textwidth]{policy loss,latency.png}
+   \includegraphics[width=1\textwidth]{policy 100 20.png}
     \caption{Politica creata in fase di sperimentazione}
     \label{fig:policy}
 \end{figure}
@@ -61,7 +61,15 @@ Successivamente per dimostrare la politica basata sul servizio e il ricalcolo de
 Ad esempio, abbiamo utilizzato il comando \textit{switch2 tc qdisc add dev switch2-eth2 root netem delay 200ms} per aggiungere un ritardo di 200ms oppure il comando \textit{switch2 tc qdisc add dev switch2-eth2 root netem loss 50\%}
  per simulare una perdita di pacchetti del 50\%. Inoltre, abbiamo disattivato un link tra due switch con il comando \textit{link switch6 switch7 down}.
 \\Questi cambiamenti sono stati monitorati grazie a un probe in Python, una funzionalità che rileva lo stato di integrità delle istanze dell'applicazione.
-Il probe cattura le metriche di loss e latenza per poi inviarle alla componente di Monitoring.
+Inizialmente, si avvia l'agent che, ascoltando gli eventi della componente di context, crea due KPI Id differenti per loss e latenza ogni volta che si viene creato un servizio \ref{fig:agent}.
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=0.5\textwidth]{create new event ag.png}
+    \caption{Creazione delle due KPI id}
+    \label{fig:agent}
+\end{figure}
+Successivamente si attiva un secondo script che riesce a monitorare le due differenti metriche attraverso il comando ping del terminale e le invia tramite una socket all'agent.
+L'agent, ottenuti i relativi valori, li inoltra alla componente di monitoring tramite una KPI composta dal valore, il kpi id corretto e un timestamp.
 \\La componente, ricevute le metriche, riconosce che è avvenuto un cambiamento nella rete e solleva un allarme per una potenziale violazione della politica che sarà poi validata dalla componente di policy.
 Questo evento causa l'esecuzione dell'azione predefinita nella politica, ovvero l'aggiornamento del percorso.
 Quando il nuovo percorso è calcolato dalla Path Comp, la componente di Service compila una lista di configurazioni di dispositivi per stabilire un nuovo percorso
@@ -69,4 +77,7 @@ seguita da un'altra lista di comandi per la cancellazione del vecchio. Questi co
 tramite il P4Runtime.
 \\In tutte e tre le tipologie di alterazione della rete, si è riscontrato un cambiamento del percorso per rispettare le condizioni desiderate. 
 %Inoltre, si è notato che una volta rimosso il ritardo, la perdita di pacchetti, o riattivato un link, il controller percepisce questo cambiamento e modifica automaticamente il percorso precedente, poiché è memorizzato nel database della Path Comp come percorso preferito per le sue caratteristiche.
-
+\cite{p4Article}, \cite{tesiSDN:2017}
+\cite{demo}, 
+\cite{ibn},
+\cite{tesiSDN:2020}

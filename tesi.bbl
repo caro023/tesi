@@ -4,9 +4,21 @@
 Open networking foundation.
 \newblock \url{https://opennetworking.org/}.
 
+\bibitem{ibn}
+B.~Martini, M.~Gharbaoui, and P.~Castoldi.
+\newblock Intent-based zero-touch service chaining layer for software-defined
+  edge cloud networks.
+\newblock {\em Computer Networks}, 212:109034, 2022.
+
 \bibitem{ietf}
 Ietf.
 \newblock \url{https://www.ietf.org/}.
+
+\bibitem{ibn2}
+Nathan Sousa, Nazrul Islam, Danny Perez, and Christian Esteve~Rothenberg.
+\newblock Policy-driven network traffic rerouting through intent-based control
+  loops.
+\newblock 07 2019.
 
 \bibitem{ONOS}
 Onos.
@@ -55,13 +67,43 @@ Protocol buffer delle componenti in teraflow.
 Grafana.
 \newblock \url{https://grafana.com/}.
 
+\bibitem{grpc}
+grpc.
+\newblock \url{https://grpc.io/}.
+
 \bibitem{p4}
 P4.
 \newblock \url{https://p4.org/}.
 
+\bibitem{p4Article}
+Ya~Gao and Zhenling Wang.
+\newblock A review of p4 programmable data planes for network security.
+\newblock {\em Mobile Information Systems}, 2021(1):1257046, 2021.
+
 \bibitem{mininet}
 Mininet.
 \newblock \url{https://mininet.org/}.
+
+\bibitem{tesiSDN:2017}
+Nicholas Brasini.
+\newblock {\em Analisi e sviluppo di un’interfaccia web per gestire
+  controller SDN}.
+\newblock PhD thesis, Alma mater studiorum - universita’ di Bologna, 2017.
+
+\bibitem{demo}
+Panagiotis Famelis, Georgios~P. Katsikas, Vasilios Katopodis, Carlos Natalino,
+  Lluis~Gifre Renom, Ricardo Martinez, Ricard Vilalta, Dimitrios Klonidis,
+  Paolo Monti, Daniel King, and Adrian Farrel.
+\newblock P5: Event-driven policy framework for p4-based traffic engineering.
+\newblock In {\em 2023 IEEE 24th International Conference on High Performance
+  Switching and Routing (HPSR)}, pages 1--3, 2023.
+
+\bibitem{tesiSDN:2020}
+Daniel Barattini.
+\newblock Supporto a micro-servizi per controller ad alta scalabilità e
+  affidabilità.
+\newblock Master's thesis, Alma mater studiorum - universita’ di Bologna,
+  2020.
 
 \bibitem{InstallODL}
 Installazione opendaylight.

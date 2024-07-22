@@ -101,7 +101,6 @@ Riceve richieste dalla componente di Service e, interagendo con la componente di
 percorsi che soddisfino i requisiti del servizio di rete richiesto.
 La PathComp rappresenta un'entità singola e specializzata dove possono essere ospitati diversi algoritmi. Questo permette che qualsiasi nuovo algoritmo utilizzato non impatti su altre componenti del controller.
 Per confrontare i percorsi viene utilizzato inizialmente un algoritmo regolare K-SP dove i k percorsi sono ordinati per numero di passi (hop), ritardo end-to-end e larghezza di banda disponibile sul link più congestionato. 
-
 %Una volta scelto il percorso viene calcolato il risultato della power path con l'approccio EAR.
 Per automatizzare e rendere reattivo questo processo agli eventi che si verificano nello stato della rete, è essenziale introdurre un ulteriore livello di astrazione.
 %Per astrarre la complessità del livello sottostante all'utente la componente di service è in grado di tradurre l'intento in un insieme di regole che propaga all'SBI (sempre attraverso file JSON)
@@ -145,7 +144,7 @@ L'integrazione della componente di Policy con quella di Monitoring ha reso quind
     \caption{Funzionamento del protocollo gRPC}
     \label{fig:grpc}
 \end{figure}
-Google Remote Procedure Calls (gRPC) è un framework OpenSource sviluppato da Google per facilitare la comunicazione tra applicazioni distribuite. Permette di
+Google Remote Procedure Calls (gRPC\cite{grpc}) è un framework OpenSource sviluppato da Google per facilitare la comunicazione tra applicazioni distribuite. Permette di
 connettere, invocare, operare e fare debug di programmi eterogenei in modo semplice.
 E' basato sul protocollo di trasporto HTTP/2, che supporta la comunicazione bidirezionale. 
 Consente di definire i servizi, i loro metodi di comunicazione e trasportare messaggi attraverso dei file di descrizione dell'interfaccia detti Protocol Buffer, o più semplicemente file proto.
@@ -182,7 +181,7 @@ Offre un linguaggio di programmazione che permette di definire regole per cui i 
 Di seguito vengono indicati i vari passi che si eseguono durante un flusso di lavoro di un programma P4 che si possono ritrovare anche nell'immagine \ref{fig:p4}.
 %Permette di definire la tabella, le azioni e the counters per poi essere applicate a elementi hardware o software switch allo stesso modo.
 %P4 ha un interfaccia per analizzare pacchetti e match campi nell'header. In questo modo abbiamo un accoppiamento tra hardware e software.
-\\Un programma P4 è costituito da diverse sezioni, ognuna delle quali descrive un aspetto specifico del trattamento dei pacchetti.
+\\Un programma P4 è costituito da diverse sezioni \cite{p4Article}, ognuna delle quali descrive un aspetto specifico del trattamento dei pacchetti.
 La dichiarazione degli header permette di dichiarare gli header dei protocolli che si vogliono analizzare e riconoscere o inventare nuovi headers per scopi di ricerca o esperimenti.
 Questo include campi come indirizzi IP, numeri di porta e tutti i dati di protocollo.
 Il Parser specifica come estrarre e interpretare i vari header dai pacchetti. Esso definisce uno stato macchina che determina, attraverso gli header in arrivo, come passare da uno stato all'altro. 
