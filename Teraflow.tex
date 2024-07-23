@@ -8,7 +8,7 @@
     \label{fig:tfs}
 \end{figure}
 Il controller SDN su cui ci focalizzeremo è TeraFlow \cite{TeraFlow}. 
-\\TeraFlow è stato finanziato dall'unione europea per il programma di ricerca e innovazione Horizon 2020 \cite{Horizon}. 
+\\TeraFlow è stato finanziato dall'unione europea per il programma di ricerca e innovazione 5G PPP \cite{5GPPP}, ed ha preso il nome di Horizon 2020 \cite{Horizon}. 
 %Nonostante la quantità di controller SDN i fondatori di TeraFlow hanno riscontrato che molte delle soluzioni attuali sono costituite da un software monolitoco
 %in grado di sincronizzarsi con altri controller SDN distribuiti tramite protocolli specifici.
 %Il problema principale dei controller SDN `e il basso numero di contribuzioni che negli ul-timi anni o mesi si stanno sempre di pi`u diradando
@@ -24,15 +24,15 @@ al quale tutti i membri della comunità ETSI (European Telecommunications Standa
 Questo controller, che è ancora in fase di sviluppo, sarà in grado di integrarsi con gli attuali framework NFV e MEC e fornire l'integrazione delle 
 apparecchiature di rete ottica e a microonde. E' inoltre in grado di interfacciarsi con altri controller come ONOS, ma anche altre istanze di TeraFlow che gestiscono diversi domini di rete, per poter sfruttare alcune funzionalità.
 \\Segue un'architettura nativa cloud, basata su container (tecniche di virtualizzazione leggera) sviluppati sopra un ambiente basato su Kubernetes presso la sede del CTTC a Barcellona. Kubernetes presenta
-diverse funzionalità che garantiscono al controller dinamicità, autoriparazione, integrità e bilanciamento del carico.
+diverse funzionalità che garantiscono al controller dinamicità, autoriparazione, integrità e bilanciamento del carico \cite{D53} \cite{D14}.
 Ogni container o componente ha delle responsabilità specifiche e definisce un microservizio che interagisce con gli altri attraverso la connessione di rete rendendo il controller disaggregato.
 Le componenti principali sono implementate in Java (solo quelle di Automation e Policy) e Python.
 Per ottimizzare l'accesso concorrente e gestire la configurazione di rete, TeraFlow utilizza una componente chiamata Context. Questa componente memorizza la configurazione di rete, inclusi topologie, dispositivi, 
-collegamenti e servizi, in un database No-SQL. La componente ottimizza l'accesso concorrente e garantisce la coerenza dei dati gestiti dai vari componenti del controller SDN.
+collegamenti e servizi, in un database No-SQL\cite{D31}. La componente ottimizza l'accesso concorrente e garantisce la coerenza dei dati gestiti dai vari componenti del controller SDN.
 La componente di Monitoring invece gestisce le diverse metriche configurate per le apparecchiature e i servizi di rete, memorizzando i dati di monitoraggio relativi alle Key Performance Indicators (KPI) selezionate.
 I servizi sono semplici e dettagliati rendendo possibile l'uso di protocolli leggeri.
 Dal punto di vista della sicurezza utilizza un sistema di Machine Learning per la prevenzione e la mitigazione di attacchi.
-\\Altri elementi fondamentali del controller sono rappresentati da:
+\\Altri elementi fondamentali del controller sono rappresentati da\cite{D22}:
 \begin{itemize} 
     \item \textbf{usabilità}: realizzata grazie l'interfaccia utente webui che consente la configurazione di servizi predefiniti e la possibilità di visualizzare le metriche in modo personalizzabile in base alle esigenze.
     \item \textbf{scalabilità}: è intrinseca nel design del controller con la replicazione automatica di miscroservizi per gestire elevati volumi di richieste in ingresso.
@@ -44,17 +44,24 @@ Il suo focus è sviluppare un controller SDN Carrier Grade (reti o infrastruttur
 
 %L'architettura è basata su microservizi interconnessi da un bus grpc.
 \section{Componenti}
-TeraFlow utilizza un bus gRPC (Google Remote Procedure Call) come protocollo interno per la 
-comunicazione tra le sue componenti. Questo protocollo è stato preferito a REST per la sua capacità più concreta di descrivere le interazioni tra entità in modo efficiente e preciso.
-gRPC sfrutta i Protocol Buffers per definire in modo preciso gli schemi dei messaggi condivisi e scambiati tra le componenti,  consentendo ai vari servizi di implementare le adeguate funzioni di comunicazione.
-I Protocol Buffers sono un meccanismo indipendente dalla piattaforma e dal linguaggio per la serializzazione delle strutture dati. Ogni componente di TeraFlow implementa i propri 
-Protocol Buffers, dettagliati nella pagina dedicata del sito \cite{ProtoBuf}.
+Le componenti TeraFlow sono classificate in due categorie; le componenti principali del sistema operativo e le netapp sovrapposte. 
+Implementano tutte delle interfacce di comunicazione all'avanguardia indipendenti dal linguaggio di programmazione 
+per formare un potente sistema operativo di rete (Network Operating Sistem 'NOS') che fornisce servizi di connettività sulle infrastrutture di rete programmabili più avanzate tra cui P4, OpenConfig, TAPI...
+\\TeraFlow utilizza un bus gRPC (Google Remote Procedure Call) come protocollo interno per la 
+comunicazione tra di esse. Questo protocollo è stato preferito a REST per la sua capacità più concreta di descrivere le interazioni tra entità in modo efficiente e preciso.
+gRPC sfrutta i Protocol Buffers per definire in modo preciso gli schemi dei messaggi condivisi e scambiati tra le componenti,  consentendo ai vari servizi di implementare le adeguate funzioni di comunicazione indipendentemente dalla piattaforma e dal linguaggio.
+Ogni componente di TeraFlow implementa i propri Protocol Buffers. Questi si possono trovare nella pagina dedicata del sito \cite{ProtoBuf}.
+\\TeraFlow fornisce, inoltre, funzionalità di automazione SDN avanzate basate su policy e parti interessate. Nello specifico, TeraFlow Automation sfrutta 
+importanti eventi di sistema per realizzare la (ri)configurazione di servizi e dispositivi in modo zero-touch, contribuendo così notevolmente alla riduzione delle spese operative per gli operatori di rete\cite{Component}.
+
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{componenti.png}
     \caption{Interazione tra alcune componenti in TeraFlow}
     \label{fig:componenti}
 \end{figure}
+
+
 
 \subsection{Device Level Abstraction}
 Il Device Level Abstraction permette l'interazione con i dispositivi presenti all'interno della rete e corrisponde all'Infrastructure layer descritto nell'architettura SDN \ref{ch:SDN}.
@@ -135,32 +142,39 @@ L'integrazione della componente di Policy con quella di Monitoring ha reso quind
 %Un'esempio può essere una notifica alla componente di Service che si occuperà di modificare il percorso identificato precedentemente per far rispettare nuovamente i requisiti.
 
 
-%\section {Hackfest }
 \section{gRPC} \label{grpc}
-
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{grpc.png}
     \caption{Funzionamento del protocollo gRPC}
     \label{fig:grpc}
 \end{figure}
-Google Remote Procedure Calls (gRPC\cite{grpc}) è un framework OpenSource sviluppato da Google per facilitare la comunicazione tra applicazioni distribuite. Permette di
+RPC (Remote Procedure Call) era un popolare protocollo inter-processo\cite{librogrpc}.
+Esso utilizza uno scambio di messaggi con le caratteristiche di basso sovraccarico, semplicità e trasparenza.
+Per questi motivi è stato ampiamente usato per diverso tempo in sistemi applicativi distribuiti.
+Con RPC un client può invocare da remoto una funzione di un metodo.
+Un utente di RPC non può distinguere dove viene eseguita la procedura chiamata, infatti viente chiamata come una procedura locale \cite{grpcArt2}.
+Tuttavia la maggior parte delle convenzionali implementazioni sono complesse, dato che sono costruite sopra protocolli di comunicazione come TCP, che ostacolano l'interoperabilità e richiedono specifiche eccessive.
+\\Google Remote Procedure Calls (gRPC\cite{grpc}) è un framework OpenSource sviluppato da Google per facilitare la comunicazione tra applicazioni distribuite. Permette di
 connettere, invocare, operare e fare debug di programmi eterogenei in modo semplice.
-E' basato sul protocollo di trasporto HTTP/2, che supporta la comunicazione bidirezionale. 
-Consente di definire i servizi, i loro metodi di comunicazione e trasportare messaggi attraverso dei file di descrizione dell'interfaccia detti Protocol Buffer, o più semplicemente file proto.
-I file proto sono un meccanismo indipendente dal linguaggio e dalla piattaforma per la serializzazione delle strutture dati. Questo sistema di serializzazione è più efficiente rispetto a formati come JSON o XML
-in termini sia di dimensione dei messaggi ma anche di velocità di serializzazione e deserializzazione.
-%A differenza degli altri protocolli RPC la richiesta viene mandata a più di un server usando multicast o comunicazione point-to-point. 
+\\gRPC è basato sul protocollo di trasporto HTTP/2, che supporta la comunicazione bidirezionale. 
+Include supporto per il bilanciamento del carico, il tracciamento, il controllo dello stato e l'autentificazione\cite{grpcArt3} \cite{grpcArt1}.
+Inoltre, ha la capacità di supportare alte performance di streaming in modalità push da parte del server, consentendo l'indipendenza basata sul set di dati e definizioni, grazie ai metodi YANG,
+e la compressione di dati binari.
+\\Consente di definire i servizi, i loro metodi di comunicazione e trasportare messaggi attraverso dei file di descrizione dell'interfaccia detti Protocol Buffer, o più semplicemente file proto.
+\\I file proto sono un meccanismo indipendente dal linguaggio e dalla piattaforma per la serializzazione delle strutture dati. Questo sistema di serializzazione è più efficiente rispetto a formati come JSON o XML
+in termini sia di dimensione dei messaggi che di velocità di serializzazione e deserializzazione.
 \\Per sviluppare un'applicazione gRPC è necessario definire un'interfaccia dei servizi. Questa contiene informazioni su come il servizio deve essere usato e quali sono i metodi, i parametri e 
-il formato da utilizzare per i messaggi. Tutti i metodi specificati nella definizione di questa interfaccia possono essere invocati dal client da remoto.
-Utilizzando il compilatore Protobuf, si può generare il codice lato server (server skeleton) e il codice lato client (client stub) nel linguaggio desiderato.
-\\Quando il gRPC client invoca un servizio gRPC, il lato client utilizza i protocol buffer per serializzare la chiamata di procedura remota nel formato appropriato. 
+il formato da utilizzare per i messaggi. Essa viene definita in un file proto, che a prima vista può sembrare un file di testo ordinario, ma in realtà i metodi con i parametri di input e i valori di ritorno.
+Tutti i metodi specificati nella definizione di questa interfaccia possono essere invocati dal client da remoto.
+Una volta definita, si può generare il codice lato server (server skeleton) e il codice lato client (client stub) nel linguaggio desiderato usando il compilatore Protobuf \textit{protoc}\cite{librogrpc}.
+\\Quando il client gRPC invoca un servizio gRPC, il lato client utilizza i protocol buffer per serializzare la chiamata di procedura remota nel formato appropriato. 
 Successivamente, la richiesta viene mandata tramite HTTP/2. Sul lato server, viene deserializzata e viene invocata la relativa procedura usando i protocol buffers.
-La risposta segue il flusso inverso da server a client.
+La risposta segue il flusso inverso da server a client\cite{librogrpc}.
 \\Il framework gRPC sottostante gestisce tutta le complessità che normalmente sono associate all'imposizione di vincoli di servizio, serializzazione dati, comunicazioni di rete, autentificazione e molto altro.
 gRPC è progettato per trasportare messaggi peer-to-peer in modo distribuito e non durevole, consentendo a più servizi di scambiarsi informazioni attraverso un bus condiviso.
 Grazie all'uso di HTTP/2 e alla codifica orientata ai byte, gRPC riesce a introdurre bassa latenza, rendendolo adatto a sistemi altamente distribuiti e scalabili. 
-Un'altra caratteristica importante è la sicurezza. Supporta nativamente il protocollo TLS (Transport Layer Security), garantendo che le comunicazioni tra i servizi siano cifrate e sicure.
+Un'altra caratteristica importante è la sicurezza. Infatti supporta nativamente il protocollo TLS (Transport Layer Security), garantendo che le comunicazioni tra i servizi siano cifrate e sicure.
 
 
 \section{P4}
@@ -229,7 +243,7 @@ aggiungere e rimuovere switch, router, host, controller e link, tutti eseguiti s
 Mininet utilizza infatti dei container di virtualizzazione leggera per creare nodi di rete, ognuno con la propria pila di rete in modo tale che possano comunicare con gli 
 altri nodi nella rete virtuale come farebbero in una rete fisica. 
 Ciò consente di testare nuove applicazioni, protocolli e algoritmi in un ambiente controllato e modificabile prima di implementarli su reti reali.
-\\Mininet mette a disposizione tre livelli differenti di API:
+\\Mininet mette a disposizione tre livelli differenti di API\cite{introMin}:
 \begin{itemize}
 \item \textbf{Low-level}: consiste nelle classi dei nodi e dei link istanziati individualmente e usati per creare una rete.
 \item \textbf{Mid-level}: aggiunge un containter per nodi e link, l'oggetto Mininet, e fornisce metodi per la configurazione di rete.
@@ -251,7 +265,7 @@ Consente anche di connettere un controller SDN remoto, quindi esterno alla rete,
 
 \subsection{Alcuni comandi fondamentali}
 \textbf{Linea di comando}
-\\Inanzitutto è fondamentale creare una topologia di rete con il seguente comando:
+\\Inanzitutto è fondamentale creare una topologia di rete con il seguente comando\cite{walkmin}:
 \\\textit{\$ sudo mn}
 \\Di default viene inizializzata la topologia minimale (--topo=minimal) che consiste in uno switch connesso a due host e un controller OpenFlow.
 All'interno di Mininet si possono trovare altre topologie disponibili e visualizzabili con il comando \\\textit{\$sudo mn -h} \\che si possono specificare tramite l'opzione $--topo$.

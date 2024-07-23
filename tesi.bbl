@@ -4,11 +4,33 @@
 Open networking foundation.
 \newblock \url{https://opennetworking.org/}.
 
+\bibitem{tesiSDN:2017}
+Nicholas Brasini.
+\newblock {\em Analisi e sviluppo di un’interfaccia web per gestire
+  controller SDN}.
+\newblock PhD thesis, Alma mater studiorum - universita’ di Bologna, 2017.
+
+\bibitem{tesiSDN:2020}
+Daniel Barattini.
+\newblock Supporto a micro-servizi per controller ad alta scalabilità e
+  affidabilità.
+\newblock Master's thesis, Alma mater studiorum - universita’ di Bologna,
+  2020.
+
 \bibitem{ibn}
 B.~Martini, M.~Gharbaoui, and P.~Castoldi.
 \newblock Intent-based zero-touch service chaining layer for software-defined
   edge cloud networks.
 \newblock {\em Computer Networks}, 212:109034, 2022.
+
+\bibitem{mec}
+{\em MEC}.
+\newblock url:
+  \url{https://www.etsi.org/technologies/multi-access-edge-computing}.
+
+\bibitem{nfv}
+Nfv.
+\newblock \url{https://www.etsi.org/technologies/nfv}.
 
 \bibitem{ietf}
 Ietf.
@@ -32,6 +54,20 @@ Osgi.
 Apache karaf.
 \newblock \url{https://kafka.apache.org/}.
 
+\bibitem{artONOS}
+Ashwin Rajaratnam, Ruturaj Kadikar, Shanthi Prince, and M.~Valarmathi.
+\newblock Software defined networks: Comparative analysis of topologies with
+  onos.
+\newblock In {\em 2017 International Conference on Wireless Communications,
+  Signal Processing and Networking (WiSPNET)}, pages 1377--1381, 2017.
+
+\bibitem{ONOSart}
+Putri Monika, Ridha Negara, and Danu Sanjoyo.
+\newblock Performance analysis of software defined network using intent monitor
+  and reroute method on onos controller.
+\newblock {\em Bulletin of Electrical Engineering and Informatics},
+  9(5):2065--2073, 2020.
+
 \bibitem{ODL}
 Opendaylight.
 \newblock \url{https://www.opendaylight.org/}.
@@ -49,6 +85,11 @@ Modulo nic di odl.
 Teraflow.
 \newblock \url{https://www.teraflow-h2020.eu/%}.
 
+\bibitem{5GPPP}
+{TeraFlow}.
+\newblock {\em 5GPPP}, 2021.
+\newblock url: \url{https://5g-ppp.eu/teraflow/}.
+
 \bibitem{Horizon}
 Progetto horizon 2020.
 \newblock
@@ -58,18 +99,70 @@ Progetto horizon 2020.
 Etsi.
 \newblock \url{https://www.etsi.org/}.
 
+\bibitem{D53}
+D5.3 final demonstrators and evaluation report.
+\newblock {\em teraflow-h2020.eu}, 2023.
+
+\bibitem{D14}
+D1.4: Final project periodic report.
+\newblock {\em teraflow-h2020.eu}, 2023.
+
+\bibitem{D31}
+D3.1: Preliminary evaluation of life-cycle automation and high performance sdn
+  components.
+\newblock {\em teraflow-h2020.eu}, 2022.
+
+\bibitem{D22}
+D2.2 - preliminary requirements, architecture design, techno-economic studies
+  and data models.
+\newblock {\em teraflow-h2020.eu}, 2023.
+
 \bibitem{ProtoBuf}
 Protocol buffer delle componenti in teraflow.
 \newblock
   \url{https://gitlab.com/teraflow-h2020/controller/-/tree/develop/proto}.
 
+\bibitem{Component}
+Componenti principali di teraflow.
+\newblock \url{https://www.teraflow-h2020.eu/blog/teraflowsdn-core-components}.
+
 \bibitem{grafana}
 Grafana.
 \newblock \url{https://grafana.com/}.
 
+\bibitem{librogrpc}
+K.~Indrasiri and D.~Kuruppu.
+\newblock {\em gRPC: Up and Running: Building Cloud Native Applications with Go
+  and Java for Docker and Kubernetes}.
+\newblock O'Reilly Media, 2020.
+
+\bibitem{grpcArt2}
+Jong-Kun Lee.
+\newblock A group management system analysis of grpc protocol for distributed
+  network management systems.
+\newblock In {\em SMC'98 Conference Proceedings. 1998 IEEE International
+  Conference on Systems, Man, and Cybernetics (Cat. No.98CH36218)}, volume~3,
+  pages 2507--2512 vol.3, 1998.
+
 \bibitem{grpc}
 grpc.
 \newblock \url{https://grpc.io/}.
+
+\bibitem{grpcArt3}
+F.~Paolucci, A.~Sgambelluri, M.~Dallaglio, F.~Cugini, and P.~Castoldi.
+\newblock Demonstration of grpc telemetry for soft failure detection in elastic
+  optical networks.
+\newblock In {\em 2017 European Conference on Optical Communication (ECOC)},
+  pages 1--3, 2017.
+
+\bibitem{grpcArt1}
+Ricard Vilalta, Noboru Yoshikane, Ramon Casellas, Ricardo Martínez, Shohei
+  Beppu, Daiki Soma, Seiya Sumita, Takehiro Tsuritani, Itsuro Morita, and Raul
+  Muñoz.
+\newblock Grpc-based sdn control and telemetry for soft-failure detection of
+  spectral/spacial superchannels.
+\newblock In {\em 45th European Conference on Optical Communication (ECOC
+  2019)}, pages 1--4, 2019.
 
 \bibitem{p4}
 P4.
@@ -84,11 +177,16 @@ Ya~Gao and Zhenling Wang.
 Mininet.
 \newblock \url{https://mininet.org/}.
 
-\bibitem{tesiSDN:2017}
-Nicholas Brasini.
-\newblock {\em Analisi e sviluppo di un’interfaccia web per gestire
-  controller SDN}.
-\newblock PhD thesis, Alma mater studiorum - universita’ di Bologna, 2017.
+\bibitem{introMin}
+Nikhil~Handigol Bob~Lantz and Vimal~Jeyakumar Brandon~Heller.
+\newblock {\em Introduction to Mininet}.
+\newblock url:
+  \url{https://github.com/mininet/mininet/wiki/Introduction-to-Mininet}.
+
+\bibitem{walkmin}
+{Mininet.org}.
+\newblock {\em Mininet Walkthrough}.
+\newblock url: \url{https://mininet.org/walkthrough/}.
 
 \bibitem{demo}
 Panagiotis Famelis, Georgios~P. Katsikas, Vasilios Katopodis, Carlos Natalino,
@@ -98,12 +196,11 @@ Panagiotis Famelis, Georgios~P. Katsikas, Vasilios Katopodis, Carlos Natalino,
 \newblock In {\em 2023 IEEE 24th International Conference on High Performance
   Switching and Routing (HPSR)}, pages 1--3, 2023.
 
-\bibitem{tesiSDN:2020}
-Daniel Barattini.
-\newblock Supporto a micro-servizi per controller ad alta scalabilità e
-  affidabilità.
-\newblock Master's thesis, Alma mater studiorum - universita’ di Bologna,
-  2020.
+\bibitem{bmv2}
+{P4 Language}.
+\newblock {\em Behavioural model (bmv2) reference P4 software switch}, March
+  2023.
+\newblock Available: \url{https://github.com/p4lang/behavioral-model}.
 
 \bibitem{InstallODL}
 Installazione opendaylight.

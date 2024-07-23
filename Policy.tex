@@ -38,7 +38,7 @@ Altri esempi di vincoli possono essere rappresentati dalla posizione di un dispo
 %dire che non sono implementati
 %run-time-->loss+latenza
 \\\textbf{Politica}
-\\Una parte fondamentale nei sistemi moderni è la gestione a run-time del servizio stabilito.
+\\Una parte fondamentale nei sistemi moderni è la gestione a run-time del servizio stabilito\cite{demo}.
 A tale scopo, si sfrutta la componente di Monitoring, che permette di associare il monitoraggio delle metriche nel proprio database,
 con condizioni che devono essere rispettate.
 Quando queste condizioni non vengono soddisfatte, la componente di Monitoring solleva un allarme che fa scattare l'azione prestabilita.
@@ -54,7 +54,7 @@ In questo caso l'azione consiste nel ricalcolo del percorso.
 \end{figure}
 \\\textbf{Verifica}
 \\Per verificare il comportamento del controller e assicurarsi che le condizioni di latenza e di loss vengano rispettate, 
-non avendo a disposizione una rete reale, abbiamo utilizzato una topologia di rete su Mininet di switch P4 basati su bmv2.
+non avendo a disposizione una rete reale, abbiamo utilizzato una topologia di rete su Mininet di switch P4 basati su bmv2\cite{bmv2}.
 La topologia iniziale era composta da 4 switch ed è stata poi ampliata a 8 per renderla più complessa con l'aggiunta di più percorsi possibili tra i due end-points.
 I dispositivi della topologia sono stati connessi alla componente SBI, come per i dispositivi reali, in modo tale che potessero comunicare con il controller.
 Successivamente per dimostrare la politica basata sul servizio e il ricalcolo del percorso, abbiamo aggiunto artificialmente delle condizioni di ritardo e packet loss all’interno di uno switch presente nel percorso. 
@@ -77,7 +77,4 @@ seguita da un'altra lista di comandi per la cancellazione del vecchio. Questi co
 tramite il P4Runtime.
 \\In tutte e tre le tipologie di alterazione della rete, si è riscontrato un cambiamento del percorso per rispettare le condizioni desiderate. 
 %Inoltre, si è notato che una volta rimosso il ritardo, la perdita di pacchetti, o riattivato un link, il controller percepisce questo cambiamento e modifica automaticamente il percorso precedente, poiché è memorizzato nel database della Path Comp come percorso preferito per le sue caratteristiche.
-\cite{p4Article}, \cite{tesiSDN:2017}
-\cite{demo}, 
-\cite{ibn},
-\cite{tesiSDN:2020}
+

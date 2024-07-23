@@ -1,20 +1,23 @@
 \chapter{Contesto}
 \label{cap:contesto}
+In questo capitolo verranno presentate le principali tecnologie alla base di questo lavoro, ovvero il Software Defined Networking (SDN) e l'Intent-Based Networking (IBN). 
+\\Verranno inoltre descritti due dei controller SDN più rilevanti, ONOS e OpenDaylight (ODL). 
+\\Questa panoramica fornirà il contesto necessario per comprendere meglio i successivi sviluppi trattati nel documento.
 \section{Software Defined Networking}
 \label{ch:SDN}
 
 L'architettura tradizionale di rete si basa su dispositivi fisici di interconnessione situati al livello rete dello stack TCP/IP, switch e router, che collegano più host a livello locale e permettono di scambiarsi informazioni.
-Questi dispositivi implementano al loro interno diverse funzioni. 
-Le funzioni del piano dati (data plane) si occupano della ricezione, del processamento e dell'inoltro dei pacchetti, ossia ciò che serve per l'instradamento. La decisione dell'inoltro del dato 
+Questi dispositivi, nell'architettura tradizionale con un controller decentralizzato, implementano al loro interno diverse funzioni del piano data e del piano controllo. 
+\\Le funzioni del piano dati (data plane) si occupano della ricezione, del processamento e dell'inoltro dei pacchetti, ossia ciò che serve per l'instradamento. La decisione dell'inoltro del dato 
 viene presa in base alla tabella di routing, nel caso dei router, o alla MAC address table nel caso degli switch. 
 \\Le tabelle vengono inizializzate e modificate grazie al piano di controllo (control plane) che si occupa di decidere i percorsi 
 per l'instradamento sulla base della destinazione e comunicarli al data plane aggiornando le tabelle di inoltro dei dispositivi. 
-Nei protocolli di rete tradizionali questi due piani all'interno dei dispositivi sono separati tra loro e svolgono i loro compiti indipendentemente.
-Per decidere i percorsi il control plane può scegliere tra due tipi di algoritmi di instradamento con caratteristiche differenti: 
+\\Nei protocolli di rete tradizionali questi due piani all'interno dei dispositivi sono separati tra loro e svolgono i loro compiti indipendentemente.
+\\Per decidere i percorsi il control plane può scegliere tra due tipi di algoritmi di instradamento con caratteristiche differenti: 
 \begin{itemize}
 \item decentralizzati: nessun nodo conosce la topologia di tutta la rete ma ha informazioni solo dai nodi vicini. 
-\item globali: si basano sulla conoscenza della topologia di tutta la rete. Questa soluzione
-porta allo scambio di molti messaggi di broadcast e non è efficiente in quanto ogni
+\item globali: basati sulla conoscenza della topologia di tutta la rete. Questa soluzione
+porta allo scambio di molti messaggi di broadcast, inoltre ogni
 nodo si occupa di calcolare soltanto la propria tabella.
 \end{itemize}
 Entrambi gli approcci necessitano di un algoritmo di routing in esecuzione su ciascun router che, attraverso un apposito protocollo, 
@@ -25,6 +28,8 @@ Ciò introduce ritardi che non sono necessari non rendendo così la rete adatta 
 %Una limitazione dei controller centralizzati infatti è la configurazione statica tra gli switch e il controller.
 \\Il Software Defined Networking (SDN) è un'architettura di rete proposta negli ultimi anni dalla Open Networking Foundation (ONF) \cite{ONF} per rimediare ai problemi di scalabilità e affidabilità dei controller decentralizzati.
 SDN rappresenta un nuovo paradigma dinamico, gestibile e facilmente adattabile grazie alla separazione del piano di controllo dal piano dati, che risulta direttamente programmabile. 
+Il piano di controllo diventa centralizzato e gestito da un unico controller SDN che prende le decisioni di instradamento e controllo di tutta la rete. 
+Il piano di dati è invece distribuito sui dispositivi di rete che eseguono le istruzioni ricevute dal controller.
 Di conseguenza è possibile un disaccoppiamento tra hardware e software per la gestione di device con API diverse.
 \\Per poter funzionare, i dispositivi devono essere in grado di comunicare con il controller centrale e riconoscere cambiamenti significativi degni di notifica per una gestione della rete adattabile ai cambiamenti in tempo reale. 
 Questo è possibile tramite l'installazione al loro interno di componenti software con le caratteristiche necessarie
@@ -45,15 +50,15 @@ Partendo dal livello più basso troviamo l'infrastruttura di rete il cui unico c
 i paccchetti sulla base delle configurazioni imposte da quest'ultimo. 
 Questa divisione consente di evitare algoritmi
 di routing per il forwarding dei pacchetti all'interno dei dispositivi di rete visto che sarà
-gestito direttamente dai livelli sovrastanti. 
+gestito direttamente dai livelli sovrastanti \cite{tesiSDN:2017}. 
 \\Nel control layer si trova il controller SDN che, tramite API northbound (NBI) e southbound (SBI), permette di comunicare con
 gli altri due livelli. Le API NBI consentono al controller di interfacciarsi con le applicazioni e i servizi situati nel livello superiore,
 mentre le API SBI, tipicamente implementate tramite OpenFLow, permettono al controller di comunicare con i dispositivi di rete nel livello inferiore.
 \\Questo livello consente il monitoraggio e l'implementazione del piano
 dati. E' in grado di configurare e di gestire rapidamente le risorse di rete tramite programmi dinamici e automatizzati. Consente infatti di imporre regole di
 inoltro ai dispositivi sottostanti tramite la manipolazione delle tabelle di routing mediante le API SBI dopo aver calcolato, o aggiornato sulla base di eventi, il percorso migliore.
-Il controller inoltre è logicamente centralizzato, anche se fisicamente può essere distribuito su più dispositivi. In questo modo il piano di gestione (management plane) situato sopra di esso interagisce con un
-unico punto di accesso.
+\\Il controller inoltre è logicamente centralizzato, anche se fisicamente può essere distribuito su più dispositivi. In questo modo il piano di gestione (management plane) situato sopra di esso interagisce con un
+unico punto di accesso \cite{tesiSDN:2020}.
 \\L'application layer comprende le applicazioni e i servizi che sfruttano le capacità della
 rete SDN per la realizzazione del piano di gestione. Grazie a questo livello si possono
 definire politiche o intenti da implementare all'interno della rete. Queste regole sono comunicate al
@@ -72,20 +77,20 @@ Negli ultimi anni, grazie a nuove tecnologie come il 5G o l'Internet of Things (
 \\In questo contesto, le implementazioni cloud si sono esteste ed è diventato essenziale aumentare le capacità di elaborazione, eseguire servizi distribuiti e garantire il 
 comportamento interattivo che queste nuove applicazioni richiedono.
 Sono state concepite diverse tecnologie emergenti, tra cui l'IBN, per far fronte a queste necessità. Ognuna ha differenti obiettivi e spesso si integrano tra loro \cite{ibn}.
-\\Il Multi-Access Edge Computing (MEC) fornisce funzionalità cloud alla rete per migliorare la qualità dei servizi offerti in tempo reale portando della capacità di calcolo fino ai punti di accesso.
-\\Il Network Function Virtualization (NFV) permette di distribuire le funzioni di rete (firewall, NAT, DPI) come apparecchi virtuali. Questi vengono forniti in modo flessibile al cloud, consentendo 
+\\Il Multi-Access Edge Computing\cite{mec} (MEC) fornisce funzionalità cloud alla rete per migliorare la qualità dei servizi offerti in tempo reale portando della capacità di calcolo ai punti di accesso.
+\\Il Network Function Virtualization\cite{nfv} (NFV) permette di distribuire le funzioni di rete (firewall, NAT, DPI) come apparecchi virtuali. Questi vengono forniti in modo flessibile al cloud, consentendo 
 così modelli innovativi di fornitura di servizi che migliorano la flessibilità e l'agilità della rete.
 \\Il Software Defined Networking (SDN) consente di semplificare la gestione di rete e utilizzare al meglio le risorse facilitando la virtualizzazione all'interno. In particolare riesce a 
 fornire servizi più efficienti per la definizione di percorsi dei dati.
 \\Nonostante queste innovazioni, rimane un divario semantico tra le esigenze delle aziende e gli obiettivi dei service provider che devono continuamente adattare e proteggere la rete in un panorama orientato ai servizi.
-L'IBN nasce come un approccio nuovo, concepito dall'IETF \cite{ietf}. Si occupa della gestione della rete per astrarne la complessità permettendo agli utenti finali di concentrarsi sugli obiettivi di performance senza preoccuparsi dei dettagli tecnici.
+\\L'IBN nasce come un approccio nuovo, concepito dall'IETF \cite{ietf}. Si occupa della gestione della rete per astrarne la complessità permettendo agli utenti finali di concentrarsi sugli obiettivi di performance senza preoccuparsi dei dettagli tecnici.
 Gli utenti possono esprimere i propri obiettivi, a livello di applicazione o di servizio, attraverso direttive di alto livello, gli intenti.
 \\Gli intenti sono espressi in un linguaggio naturale che descrive i risultati desiderati, lasciando al sistema IBN il compito di tradurli.
 Un intento di rete si riferisce infatti a un livello di astrazione in cui la logica dell'applicazione è espressa in termini di cosa deve essere fatto, utilizzando regole di semantica, piuttosto che di come deve essere implementato.
 \\Esistono due tipi di intenti, prescrittivi e descrittivi.
 Un intento descrittivo utilizza istruzioni di alto livello, come "consentire il traffico tra X e Y", invece un intento prescrittivo contiene un'informazione 
 più specifica, come "da X:10.0.0.2 a Y:10.0.0.1 set rule=allow"\cite{ibn2}.
-L'idea centrale dell'IBN è che non sono specificati i dettagli di implementazione della rete; piuttosto, è la rete stessa che deve eseguire le azioni necessarie per soddisfare gli intenti espressi.
+L'idea centrale dell'IBN è di non specificare i dettagli di implementazione della rete; piuttosto, è la rete stessa che deve eseguire le azioni necessarie per soddisfare gli intenti espressi.
 In questo modo le applicazioni non devono gestire le direttive di rete di basso livello specifiche della tecnologia. Infatti i livelli applicativi possono interagire con l'Intent Layer evitando di apprendere il linguaggio tecnico-specifico del sistema sottostante.
 L'approccio IBN è reso possibile grazie la mediazione di un Intent Orchestration Layer, che gestisce e regola il ciclo di vita delle richieste di intenti provenienti dalle applicazioni attraverso operazioni 
 di adempimento e garanzia in un flusso di lavoro a ciclo chiuso.
@@ -102,6 +107,10 @@ e la gestione delle reti a un livello di astrazione più elevato e verificare co
 
 
 \section{Controller allo stato dell'arte}
+Prima di analizzare nel dettaglio TeraFlow verranno introdotti due controller che hanno già raggiunto lo stato dell'arte: ONOS e OpenDayLight.
+Questi controller rappresentano soluzioni già consolidate nel campo del Software Defined Networking e sono ampiamente utilizzati e studiati sia in ambito accademico che industriale.
+La loro descrizione ci consentirà di mettere in evidenza le differenti caratteristiche per poter analizzare meglio le innovazioni introdotte da TeraFlow.
+
 \subsection{ONOS}
 \begin{figure}[h]
     \centering
@@ -113,12 +122,13 @@ Open Newtwork Operating System (ONOS) \cite{ONOS} è uno dei controller SDN più
 E' un progetto nato dalla Open Networking Foundation (ONF) \cite{ONF} al fine di soddisfare le esigenze degli operatori per poter costruire reali soluzioni SDN/NFV.
 I principali obiettivi sono quelli di introdurre modularità del codice, configurabilità, separazione di interessi e agnosticismo dei protocolli.
 \\Per adattarsi alle esigenze degli utenti è necessario poter sviluppare una piattaforma applicativa modulare ed estendibile.
-Per questo motivo la base dell'architettura di ONOS è costituita da una piattaforma di applicazioni distributite collocata sopra OSGi \cite{osgi} e Apache Karaf \cite{Apache}. 
+Per questo motivo la base dell'architettura di ONOS è costituita da una piattaforma di applicazioni distributite, che utilizzano Java come linguaggio di programmazione,
+collocata sopra OSGi \cite{osgi} e Apache Karaf \cite{Apache} così da permettere l'installazione e l'esecuzione dinamicamente. 
 Queste applicazioni offrono delle funzionalità di base e sostegno al livello superiore il quale fornisce una serie di controlli di rete e astrazioni di configurazione necessarie per il corretto funzionamento del controller.
 \\Per estendere le funzionalità a seconda delle esigenze sono invece necessarie delle applicazioni ONOS aggiuntive che si comportano come una estenzione di quelle già presenti. 
 Ognuna di esse è gestita da un singolo sottosistema che all'interno del controller è rappresentato da un modulo.
-I moduli attualmente installabili che si possono incorporare a quelli inizialmente offerti dal sistema sono più di 100.
-Tutti i servizi principali sono scritti in Java come bundles all'interno del Karaf OSGi container così da permettere l'installazione e l'esecuzione dinamicamente.
+I moduli attualmente installabili, che si possono incorporare a quelli inizialmente offerti dal sistema, sono più di 100.
+%Tutti i servizi principali sono scritti in Java come bundles all'interno del Karaf OSGi container così da permettere l'installazione e l'esecuzione dinamicamente.
 \\ONOS supporta diverse API northbound tra cui:
 \begin{itemize}
 \item \textbf{GUI}: offre un'interfaccia grafica per interagire con l'utente
@@ -126,6 +136,15 @@ Tutti i servizi principali sono scritti in Java come bundles all'interno del Kar
 \item \textbf{gRPC}: per un'interazione ad alte prestazioni tra applicazioni e altre entità o protocolli della piattaforma
 \end{itemize}
 Per quanto riguarda le API southbound supportante fornisce diversi adattatori che rendono il sistema indipendente dai vari protocolli.
+\\Abilitando il Transport Layer Security (TLS) per l'interfaccia SBI e l'Hypertext Transfer Protocol Secure (HTTPS) per l'interfaccia NBI, 
+ONOS garantisce una buona sicurezza monitorando e bloccando l’accesso non autorizzato alle risorse in fase di esecuzione \cite{artONOS}.
+\\Per quando riguarda gli intenti ONOS mette a disposizione il framework IMR (Intent Monitor and Reroute).
+IMR può migliorare la qualità della rete e massimizzare l'uso dei collegamenti su di essa.
+Il servizio consente una migliore gestione del traffico nel reindirizzamento della rete utilizzando scopi e obiettivi specifici.
+L'intento viene visto come un sottoinsieme di traffico con valori specifici per un pacchetto ed è collegato a una serie di azioni.
+Gli utenti possono inoltre richiedere che il percorso risultante passi attraverso un determinato numero di nodi o abbia una certa quantità di banda.
+Questo permette agli utenti di monitorare e spostare facilmente i percorsi in modo flessibile \cite{ONOSart}
+\\
 \\ONOS è sviluppato come un sistema simmetrico distribuito in cui ogni entità, dal punto di vista software, è indentica alle altre. 
 In caso di guasto di una componente le altre sono in grado di sostenere mantenere la continuità del servizio, assicurando la disponibilità del sistema. Inoltre, per far fronte ai cambiamenti del carico di lavoro o dell'ambiente, ONOS è dinamicamente scalabile, 
 consentendo una replica virtualmente illimitata della capacità del piano di controllo.
@@ -148,7 +167,7 @@ reattività.
     \label{fig:ArchODL}
 \end{figure}
 OpenDaylight\cite{ODL} è un progetto open source che utilizza protocolli aperti al fine di fornire controlli centralizzati e gestire il monitoring della rete.
-Fa parte della fondazione LF Networking \cite{LFN} che si occupa di stanziare e coordinare il supporto a progetti open source coinvolti nello spostamento o nella comunicazione di dati su una rete.
+\\Fa parte della fondazione LF Networking \cite{LFN} che si occupa di stanziare e coordinare il supporto a progetti open source coinvolti nello spostamento o nella comunicazione di dati su una rete.
 Ciò semplifica il coinvolgimento dei membri e aumenta la collaborazione tra i progetti e gli organismi di standardizzazione.
 %Lo scopo principale è far crescere l'ecosistema di ODL per facilitare la collaborazione tra sviluppatori, utenti finali e aziende associate a LFV per produrre tecnologie più pertinenti e affidabili.
 \\ODL è un framework scritto in Java che consente di soddisfare esigenze specifiche dell'utente al fine di fornire alta flessibilità. Agisce come un software che può essere eseguito su un qualsiasi sistema operativo che supporti java, come una JVM.
@@ -159,17 +178,17 @@ occupa di gestire il flusso di traffico andando a modificare le tabelle di inolt
 All'interno di questo livello il collegamento dei moduli tra il controller e i dispositivi avviene dinamicamente al fine di soddisfare il servizio richiesto indipendentemente dal protocollo utilizzato.
 \\Una caratteristica molto impostante è l'architettura costituita da microservizi che un utente può decidere se abilitare o meno. 
 Di default sono tutti disabilitati così da permettere una totale personalizzazione.
-Questi microservizi sono rappresentati da moduli, contenuti all'interno del controller, collegabili tra loro, che si occupano dell'esecuzione delle varie attività di rete.
+\\Questi microservizi sono rappresentati da moduli, contenuti all'interno del controller, collegabili tra loro, che si occupano dell'esecuzione delle varie attività di rete.
 I moduli sono collegati al SAL dinamicamente.
-Per la gestione dei moduli a runtime e l'installazione di funzionalità Karaf da implementare nel software di ODL viene utilizzato Apache Karaf \cite{Apache}.
+\\Per la gestione dei moduli a runtime e l'installazione di funzionalità Karaf da implementare nel software di ODL viene utilizzato Apache Karaf \cite{Apache}.
 Attraverso il framework MD-SAL (Model-Driven Service Abstraction Layer) gli sviluppatori sono in grado di creare nuove features sotto forma di servizi e protocolli collegati tra loro.
 Il controller espone delle API NBI di supporto alle applicazioni. Alcune delle API supportate sono il framework OSGi \cite{osgi}, per le applicazioni in eseguzione all'interno del controller,
 e REST per comunicare con le applicazioni esterne al controller.
  %.OSGi is a modular system and service platform for the Java programming language that implements a completely dynamic component model, something that does not exist in standalone JVM environments
 \\Per far fronte ai problemi di scalabilità, disponibilità e persistenza dei dati si possono avere più instanze di ODL distribuite su macchine differenti che cooperano tra loro attraverso il meccanismo dei cluster.
 \\
-\\ODL per gestire gli intenti aveva messo a disposizione una NorthBound Interface che successivamente è stata abbandonata nelle release successive a Boron.
-\\Network Intent Composition (NIC) \cite{nic} è l'interfaccia che permette all'utente di esprimere uno stato desiderato in una forma neutrale rispetto all'implementazione, detto intento. Quest'ultimo verrà applicato tramite la modifica delle risorse disponibili 
+\\ODL per gestire gli intenti aveva messo a disposizione una NorthBound Interface che è stata abbandonata nelle release successive a Boron.
+\\Network Intent Composition (NIC) \cite{nic} è l'interfaccia che permette all'utente di esprimere uno stato desiderato in una forma neutrale rispetto all'implementazione, detto intento. Quest'ultimo viene applicato tramite la modifica delle risorse disponibili 
 grazie alla gestione dei servizi da parte del controller sulla base delle specifiche.
 Gli intenti sono descritti al controller tramite l'interfaccia NBI che mette a disposizione la semantica necessaria per la generalizzazione e l'astrazione delle policy, invece di specificare i comandi di configurazione dei dispositivi come il resto delle interfacce NBI.
 E' responsabilità dell'implementazione della NIC trasformare l'intento nelle regole di configurazione delle risorse.
