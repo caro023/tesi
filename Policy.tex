@@ -1,6 +1,6 @@
 \chapter{Studio e sperimentazione della gestione di policy in Teraflow}
 \label{cap:policy}
-Lo scopo della tesi è quello di stabilire una connessione tra due end points nella rete che rispetti determinate caratteristiche utilizzando il controller SDN Teraflow.
+Lo scopo della tesi è quello di stabilire una connessione tra due end points nella rete che rispetti determinate caratteristiche a tempo di esecuzione utilizzando il controller SDN Teraflow.
 Inizialmente, attraverso il Service Level, è stato introdotto un servizio nella rete sotto forma di intento per stabilire la connessione e il percorso. 
 Successivamente, tramite il Management Level, è stata inserita una politica basata sugli eventi. Questa politica permette agli operatori 
 di associare a un servizio scelto un service level agreement (SLA) con specifiche condizioni che devono essere rispettate durante l'esecuzione.
@@ -12,11 +12,18 @@ di associare a un servizio scelto un service level agreement (SLA) con specifich
 Inizialmente, il codice p4 compilato, ossia i vari artefatti, viene copiato nel pod SBI per poter inserire le giuste configurazioni nelle tabelle dei dispositivi.
 Il passo successivo è registrare i dispositivi e i link al controller SDN per permettere una corretta comunicazione tra di essi.
 A questo punto, siamo in grado di richiedere una connessione tra due end points specificando solamente i dispositivi finali tramite un servizio.
-La componente di Service, ricevuta la richiesta, si rivolge alla PathComp per calcolare un percorso.
-Per eseguire questa operazione la PathComp utilizza delle informazioni della rete che persistono nel database logicamente centralizzato della componente di Context.
-\\Una volta ricevuto il percorso, la componente di Service configura i dispositivi lungo il percorso tramite l'SBI.
-Per mantenere questo processo agnostico rispetto ai dettagli della tecnologia, la componente di Service 
-sfrutta una definizione minima permettendo agli utenti di esprimete cosa vogliono connettere, lasciando che sia il sistema sottostante a decidere come realizzare la connessione reale.
+\\La creazione del servizio è realizzata in due passi. 
+Inizialmente, tramite la funzione \textit{CreateService}, si crea una servizio di connettività vuoto nel quale viene specificato solo il tipo associato per poi ritornare l'identificativo a cui è stato correlato.
+Successivamente viene aggiornato il servizio popolando i campi richiesti come endpoints, vincoli e configurazioni di servizio. Di questo si occupa la funzione \textit{UpdateService} \cite{D32}.
+La componente di Service a questo punto si rivolge prima alla componente di Context per recuperare la versione più aggiornata del servizio e settare lo stato a Planned (pianificato), poi alla PathComp per calcolare un percorso.
+\\Per eseguire questa operazione la PathComp utilizza delle informazioni della rete che risiedono nel database logicamente centralizzato della componente di Context.
+La PathComp è in grado di soddisfare anche richieste di servizio che attraversano più livelli, in questo caso, la risposta includerà uno o più sottoservizi con le relative sottoconnessioni che li supportano.
+\\Una volta ricevute le connessioni ed eventuali sottoservizi la componente Service istanzia un \textit{Task Scheduler} con le relative funzioni, %che li correla e li schedula.
+quest'ultimo è responsabile dell'esecuzione delle attività di installazione e smantellamento dei servizi e collegamenti nell'ordine appropriato.
+Infine viene eseguito il metodo \textit{Execute} del \textit{Task Scheduler} per realizzare tutte le operazioni di configurazione richieste per i dispositivi lungo il percorso tramite l'SBI; inoltre viene modificato lo stato del servizio.
+Al termine del processo, la componente Context viene aggiornata con le nuove informazioni e l’identificatore del servizio viene restituito all’entità chiamante.
+\\Per mantenere questo processo agnostico rispetto ai dettagli della tecnologia, la componente di Service 
+sfrutta una definizione minima permettendo agli utenti di esprimere cosa vogliono connettere, lasciando che sia il sistema sottostante a decidere come realizzare la connessione reale.
 La componente traduce automaticamente questa definizione minimale del servizio in modelli di configurazioni astratte dei dispositivi. 
 Queste vengono a loro volta tradotte in regole P4 dal driver del dispositivo P4 della SBI.
 \\\textbf{Vincoli e configurazioni di servizio}
@@ -24,7 +31,7 @@ Queste vengono a loro volta tradotte in regole P4 dal driver del dispositivo P4 
 %In questo modo il componente Policy offre SLA basati sugli eventi per servizi di connettività end-to-end tramite pipeline P4
 Queste vengono specificate inizialmente alla creazione di un servizio e devono essere rispettate finchè quest'ultimo non verrà eliminato. 
 Ciò semplifica la gestione dei servizi, in quanto la dichiarazione di queste informazioni aggiuntive può sostituire l'associazione di una politica.
-\\Nella demo presa in considerazione i vincoli non erano specificati ma sono stati aggiunti per quanto riguarda la latenza e la capacità del percorso.
+\\Nella demo presa in considerazione i vincoli non erano specificati ma sono stati aggiunti per quanto riguarda la latenza e la capacità del percorso \ref{fig:constraints}.
 Questa aggiunta non ha prodotto cambiamenti nella definizione del percorso poiché le funzioni relative all'effettivo funzionamento di queste funzionalità non 
 sono ancora state implementate nel controller ma sono solo pianificate per release future.
 Altri esempi di vincoli possono essere rappresentati dalla posizione di un dispositivo, che può essere sia terminale che non, dal tempo o dal numero di passi massimo di un determinato percorso.
@@ -39,16 +46,16 @@ Altri esempi di vincoli possono essere rappresentati dalla posizione di un dispo
 %run-time-->loss+latenza
 \\\textbf{Politica}
 \\Una parte fondamentale nei sistemi moderni è la gestione a run-time del servizio stabilito\cite{demo}.
-A tale scopo, si sfrutta la componente di Monitoring, che permette di associare il monitoraggio delle metriche nel proprio database,
+A tale scopo si sfrutta la componente di Monitoring che permette di associare il monitoraggio delle metriche nel proprio database
 con condizioni che devono essere rispettate.
-Quando queste condizioni non vengono soddisfatte, la componente di Monitoring solleva un allarme che fa scattare l'azione prestabilita.
-\\Nella sperimentazione abbiamo introdotto una politica per il servizio stabilito con due condizioni: una per la latenza (che non deve superare i 100ms) e una per la loss (che non deve superare il 20\%).
-Queste due condizioni sono legate tra loro tramite un "OR", quindi appena una delle due non è più rispettata, viene invocata l'azione.
+Quando questi requisiti non vengono soddisfatti, la componente di Monitoring solleva un allarme che fa scattare l'azione prestabilita.
+\\Nella sperimentazione abbiamo introdotto una politica per il servizio stabilito con due condizioni: una per la latenza (che non deve superare i 100ms) e una per la loss (che non deve superare il 5\%) \ref{fig:policy}.
+Queste due condizioni sono legate tra loro tramite un "OR", quindi appena una delle due non è più rispettata viene invocata l'azione.
 In questo caso l'azione consiste nel ricalcolo del percorso.
 %MODIFICA O LA FOTO O LA DESCRIZIONE
 \begin{figure}[h]
     \centering
-   \includegraphics[width=1\textwidth]{policy 100 20.png}
+   \includegraphics[width=1\textwidth]{policy 5 100.png}
     \caption{Politica creata in fase di sperimentazione}
     \label{fig:policy}
 \end{figure}
@@ -57,11 +64,11 @@ In questo caso l'azione consiste nel ricalcolo del percorso.
 non avendo a disposizione una rete reale, abbiamo utilizzato una topologia di rete su Mininet di switch P4 basati su bmv2\cite{bmv2}.
 La topologia iniziale era composta da 4 switch ed è stata poi ampliata a 8 per renderla più complessa con l'aggiunta di più percorsi possibili tra i due end-points.
 I dispositivi della topologia sono stati connessi alla componente SBI, come per i dispositivi reali, in modo tale che potessero comunicare con il controller.
-Successivamente per dimostrare la politica basata sul servizio e il ricalcolo del percorso, abbiamo aggiunto artificialmente delle condizioni di ritardo e packet loss all’interno di uno switch presente nel percorso. 
-Ad esempio, abbiamo utilizzato il comando \textit{switch2 tc qdisc add dev switch2-eth2 root netem delay 200ms} per aggiungere un ritardo di 200ms oppure il comando \textit{switch2 tc qdisc add dev switch2-eth2 root netem loss 50\%}
- per simulare una perdita di pacchetti del 50\%. Inoltre, abbiamo disattivato un link tra due switch con il comando \textit{link switch6 switch7 down}.
+Successivamente per dimostrare la politica basata sul servizio e il ricalcolo delle configurazioni, abbiamo aggiunto artificialmente delle condizioni di ritardo e packet loss all’interno di uno switch presente nel percorso. 
+Ad esempio, abbiamo utilizzato il comando \textit{switch2 tc qdisc add dev switch2-eth2 root netem delay 200ms} per aggiungere un ritardo di 200ms oppure il comando \textit{switch2 tc qdisc add dev switch2-eth2 root netem loss 10\%}
+ per simulare una perdita di pacchetti del 10\%. Inoltre, abbiamo disattivato un link tra due switch con il comando \textit{link switch6 switch7 down}.
 \\Questi cambiamenti sono stati monitorati grazie a un probe in Python, una funzionalità che rileva lo stato di integrità delle istanze dell'applicazione.
-Inizialmente, si avvia l'agent che, ascoltando gli eventi della componente di context, crea due KPI Id differenti per loss e latenza ogni volta che si viene creato un servizio \ref{fig:agent}.
+Inizialmente, si avvia l'agent che, ascoltando gli eventi della componente di Context, crea due Kpi Id differenti per loss e latenza ogni volta che si viene creato un servizio \ref{fig:agent}.
 \begin{figure}[h]
     \centering
    \includegraphics[width=0.5\textwidth]{create new event ag.png}
@@ -69,12 +76,12 @@ Inizialmente, si avvia l'agent che, ascoltando gli eventi della componente di co
     \label{fig:agent}
 \end{figure}
 Successivamente si attiva un secondo script che riesce a monitorare le due differenti metriche attraverso il comando ping del terminale e le invia tramite una socket all'agent.
-L'agent, ottenuti i relativi valori, li inoltra alla componente di monitoring tramite una KPI composta dal valore, il kpi id corretto e un timestamp.
-\\La componente, ricevute le metriche, riconosce che è avvenuto un cambiamento nella rete e solleva un allarme per una potenziale violazione della politica che sarà poi validata dalla componente di policy.
+\\L'agent, ottenuti i relativi valori, li inoltra alla componente di monitoring tramite una KPI composta dal valore, il kpi id corretto e un timestamp.
+\\La componente, ricevute le metriche, riconosce che è avvenuto un cambiamento nella rete e solleva un allarme per una potenziale violazione della politica che sarà poi validata dalla componente di Policy.
 Questo evento causa l'esecuzione dell'azione predefinita nella politica, ovvero l'aggiornamento del percorso.
-Quando il nuovo percorso è calcolato dalla Path Comp, la componente di Service compila una lista di configurazioni di dispositivi per stabilire un nuovo percorso
-seguita da un'altra lista di comandi per la cancellazione del vecchio. Questi comandi sono tradotti in regole P4 dalla componente SBI prima di essere imposti al piano dati 
+Quando il nuovo tragittto è calcolato dalla Path Comp, la componente di Service compila una lista di configurazioni di dispositivi per validare gli aggiornamenti 
+seguita da un'altra lista per la cancellazione delle vecchie configurazioni. Queste istruzioni sono tradotte in regole P4 dalla componente SBI prima di essere imposte al piano dati 
 tramite il P4Runtime.
-\\In tutte e tre le tipologie di alterazione della rete, si è riscontrato un cambiamento del percorso per rispettare le condizioni desiderate. 
+\\In tutte e tre le tipologie di alterazione della rete, si è riscontrato un cambiamento del percorso volto a rispettare le condizioni desiderate. 
 %Inoltre, si è notato che una volta rimosso il ritardo, la perdita di pacchetti, o riattivato un link, il controller percepisce questo cambiamento e modifica automaticamente il percorso precedente, poiché è memorizzato nel database della Path Comp come percorso preferito per le sue caratteristiche.
 

@@ -85,19 +85,26 @@ Modulo nic di odl.
 Teraflow.
 \newblock \url{https://www.teraflow-h2020.eu/%}.
 
-\bibitem{5GPPP}
-{TeraFlow}.
-\newblock {\em 5GPPP}, 2021.
-\newblock url: \url{https://5g-ppp.eu/teraflow/}.
-
 \bibitem{Horizon}
 Progetto horizon 2020.
 \newblock
   \url{https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-2020_en}.
 
+\bibitem{5GPPP}
+{TeraFlow}.
+\newblock {\em 5GPPP}, 2021.
+\newblock url: \url{https://5g-ppp.eu/teraflow/}.
+
 \bibitem{etsi}
 Etsi.
 \newblock \url{https://www.etsi.org/}.
+
+\bibitem{arttfs}
+Daniel Adanza, Lluis Gifre, Pol Alemany, Juan-Pedro Fernández-Palacios,
+  Oscar~González de~Dios, Raul Muñoz, and Ricard Vilalta.
+\newblock Enabling traffic forecasting with cloud-native sdn controller in
+  transport networks.
+\newblock {\em Computer Networks}, 250:110565, 2024.
 
 \bibitem{D53}
 D5.3 final demonstrators and evaluation report.
@@ -117,14 +124,14 @@ D2.2 - preliminary requirements, architecture design, techno-economic studies
   and data models.
 \newblock {\em teraflow-h2020.eu}, 2023.
 
+\bibitem{Component}
+Componenti principali di teraflow.
+\newblock \url{https://www.teraflow-h2020.eu/blog/teraflowsdn-core-components}.
+
 \bibitem{ProtoBuf}
 Protocol buffer delle componenti in teraflow.
 \newblock
   \url{https://gitlab.com/teraflow-h2020/controller/-/tree/develop/proto}.
-
-\bibitem{Component}
-Componenti principali di teraflow.
-\newblock \url{https://www.teraflow-h2020.eu/blog/teraflowsdn-core-components}.
 
 \bibitem{grafana}
 Grafana.
@@ -187,6 +194,11 @@ Nikhil~Handigol Bob~Lantz and Vimal~Jeyakumar Brandon~Heller.
 {Mininet.org}.
 \newblock {\em Mininet Walkthrough}.
 \newblock url: \url{https://mininet.org/walkthrough/}.
+
+\bibitem{D32}
+D3.2: Final evaluation of life-cycle automation and high performance sdn
+  components.
+\newblock {\em teraflow-h2020.eu}, 2023.
 
 \bibitem{demo}
 Panagiotis Famelis, Georgios~P. Katsikas, Vasilios Katopodis, Carlos Natalino,

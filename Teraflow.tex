@@ -1,6 +1,5 @@
 \chapter{Teraflow}
 \label{cap:teraflow}
-
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{architetturatf.png}
@@ -8,7 +7,7 @@
     \label{fig:tfs}
 \end{figure}
 Il controller SDN su cui ci focalizzeremo è TeraFlow \cite{TeraFlow}. 
-\\TeraFlow è stato finanziato dall'unione europea per il programma di ricerca e innovazione 5G PPP \cite{5GPPP}, ed ha preso il nome di Horizon 2020 \cite{Horizon}. 
+\\TeraFlow è stato finanziato dall'unione europea nell'ambito del programma di ricerca e innovazione Horizon 2020\cite{Horizon} e supportato dal 5G PPP\cite{5GPPP}, un'iniziativa congiunta tra la Commissione Europea e l'industria europea delle telecomunicazioni.
 %Nonostante la quantità di controller SDN i fondatori di TeraFlow hanno riscontrato che molte delle soluzioni attuali sono costituite da un software monolitoco
 %in grado di sincronizzarsi con altri controller SDN distribuiti tramite protocolli specifici.
 %Il problema principale dei controller SDN `e il basso numero di contribuzioni che negli ul-timi anni o mesi si stanno sempre di pi`u diradando
@@ -22,14 +21,17 @@ da parte degli utenti. A tal fine TeraFlow è un progetto OpenSource
 al quale tutti i membri della comunità ETSI (European Telecommunications Standard Institute) \cite{etsi} possono contribuire. 
 \\Un ulteriore proposito è di riuscire a diminuire il gap tra ciò che le industrie richiedono e ciò che si può ricavare dagli standard SDN.
 Questo controller, che è ancora in fase di sviluppo, sarà in grado di integrarsi con gli attuali framework NFV e MEC e fornire l'integrazione delle 
-apparecchiature di rete ottica e a microonde. E' inoltre in grado di interfacciarsi con altri controller come ONOS, ma anche altre istanze di TeraFlow che gestiscono diversi domini di rete, per poter sfruttare alcune funzionalità.
-\\Segue un'architettura nativa cloud, basata su container (tecniche di virtualizzazione leggera) sviluppati sopra un ambiente basato su Kubernetes presso la sede del CTTC a Barcellona. Kubernetes presenta
-diverse funzionalità che garantiscono al controller dinamicità, autoriparazione, integrità e bilanciamento del carico \cite{D53} \cite{D14}.
-Ogni container o componente ha delle responsabilità specifiche e definisce un microservizio che interagisce con gli altri attraverso la connessione di rete rendendo il controller disaggregato.
+apparecchiature di rete ottica e a microonde. E' inoltre in grado di interfacciarsi con altri controller come ONOS, ma anche altre istanze di TeraFlow che gestiscono diversi domini, per poter sfruttare funzionalità non ancora implementate e comunicare con le altre reti.
+\\A differenza dei controller presentati precedentemente con un'architettura monolitica, TeraFlow ha un'architettura nativa cloud basata su container, tecniche di virtualizzazione leggera che consentono di isolare le componenti utilizzando una minore quantità di risorse ripetto alle VM (Virtual Machine).
+L'ambiente creato da un contenitore integra sia il codice di esecuzione del microservizio che le sue dipendenze. 
+Questi container sono sviluppati sopra Kubernetes, un orchestratore responsabile dell'allocazione delle risorse in termini di capacità di calcolo, memoria e archiviazione\cite{arttfs}.
+Kubernetes presenta diverse funzionalità che garantiscono al controller dinamicità, autoriparazione, integrità e bilanciamento del carico \cite{D53} \cite{D14}.
+L'ambiente è sviluppato presso la sede del CTTC a Barcellona. 
+\\Ogni container, o componente, ha delle responsabilità specifiche e definisce un microservizio che interagisce con gli altri attraverso la connessione di rete rendendo il controller disaggregato.
 Le componenti principali sono implementate in Java (solo quelle di Automation e Policy) e Python.
-Per ottimizzare l'accesso concorrente e gestire la configurazione di rete, TeraFlow utilizza una componente chiamata Context. Questa componente memorizza la configurazione di rete, inclusi topologie, dispositivi, 
-collegamenti e servizi, in un database No-SQL\cite{D31}. La componente ottimizza l'accesso concorrente e garantisce la coerenza dei dati gestiti dai vari componenti del controller SDN.
-La componente di Monitoring invece gestisce le diverse metriche configurate per le apparecchiature e i servizi di rete, memorizzando i dati di monitoraggio relativi alle Key Performance Indicators (KPI) selezionate.
+\\Per ottimizzare l'accesso concorrente e gestire la configurazione di rete, TeraFlow utilizza una componente chiamata Context. Questa componente memorizza la configurazione di rete, inclusi topologie, dispositivi, 
+collegamenti e servizi, in un database No-SQL\cite{D31}. La componente garantisce la coerenza dei dati gestiti dai vari componenti del controller SDN.
+\\La componente di Monitoring gestisce invece le diverse metriche configurate per le apparecchiature e i servizi di rete memorizzando i dati di monitoraggio relativi alle Key Performance Indicators (KPI) selezionate.
 I servizi sono semplici e dettagliati rendendo possibile l'uso di protocolli leggeri.
 Dal punto di vista della sicurezza utilizza un sistema di Machine Learning per la prevenzione e la mitigazione di attacchi.
 \\Altri elementi fondamentali del controller sono rappresentati da\cite{D22}:
@@ -39,12 +41,13 @@ Dal punto di vista della sicurezza utilizza un sistema di Machine Learning per l
     \item \textbf{affidabilità}: garantita attraverso robusti meccanismi di monitoraggio che supervisionano lo stato dei miscroservizi e dei flussi attivando automaticamente dei processi di ripristino se necessari.
 \end{itemize}
 TeraFlow si propone di affrontare le sfide delle reti moderne attraverso un'architettura innovativa e la collaborazione attiva della comunità. 
-Il suo focus è sviluppare un controller SDN Carrier Grade (reti o infrastrutture ben testate con livelli estremamente elevati di affidabilità, ridondanza e sicurezza) per le reti B5G.
-
-
+Il suo focus è sviluppare un controller SDN Carrier Grade (reti o infrastrutture ben testate con livelli estremamente elevati di affidabilità, ridondanza e sicurezza) per le reti B5G che automatizzi la gestione della rete e sia in grado di scalare per gestire miliardi di dispositivi.
+\\Inoltre, TeraFlow mira a ottimizzare l'uso delle risorse di rete per migliorare l'efficienza energetica e ridurre i costi operativi.
+\\Questo progetto riveste un ruolo chiave nel panorama delle tecnologie 5G, contribuendo a unire diverse università e istituti di ricerca per sviluppare soluzioni all'avanguardia
+lavorando con organismi di standardizzazione per garantire l'adozione su scala globale.
 %L'architettura è basata su microservizi interconnessi da un bus grpc.
 \section{Componenti}
-Le componenti TeraFlow sono classificate in due categorie; le componenti principali del sistema operativo e le netapp sovrapposte. 
+Le componenti TeraFlow sono classificate in due categorie; le componenti principali del sistema operativo e le netapp sovrapposte \cite{Component}. 
 Implementano tutte delle interfacce di comunicazione all'avanguardia indipendenti dal linguaggio di programmazione 
 per formare un potente sistema operativo di rete (Network Operating Sistem 'NOS') che fornisce servizi di connettività sulle infrastrutture di rete programmabili più avanzate tra cui P4, OpenConfig, TAPI...
 \\TeraFlow utilizza un bus gRPC (Google Remote Procedure Call) come protocollo interno per la 
@@ -77,10 +80,10 @@ Il controller provvederà a inserire le giuste entry nelle tabelle degli switch 
 %OpenFlowOpenConfig-based routers
 \\Un'altra componente che fa parte di questo livello è quella di monitoring il cui compito è offrire supporto al Management-level.
 E' essenziale per l'automazione dei servizi e per prendere le decisioni in tempo reale sulla base di eventi.
-Questa componente interagisce con i dispositivi per catturare lo stato della rete attraverso delle KPI (Key Performance Indicators) persistendo le informazioni all'interno di database. %necessari per l'esposizione e l'utilizzo da parte delle altre componenti.
-Quando un valore KPI registrato supera determinate soglie predefinite, la componente di Monitoring utilizza il canale API degli eventi del controller per notificare i componenti interessati.
+Questa componente interagisce con i dispositivi per catturare lo stato della rete attraverso delle KPI (Key Performance Indicators) persistendo le informazioni all'interno di un database. %necessari per l'esposizione e l'utilizzo da parte delle altre componenti.
+Quando un valore KPI registrato supera determinate soglie predefinite, la componente di Monitoring utilizza il canale API degli eventi del controller per notificare le componenti interessate.
 Ogni evento è composto da una KPI che identifica la regola a cui si riferisce, un timestamp e un KPIValue, che rappresenta il valore della metrica monitorata in tempo reale richiesta dalla KPI al momento specificato dal timestamp.
-Per il corretto funzionamento la componente di Monitoring deve essere in grado di recuperare le metriche da tutti i diversi dispositivi monitorati.
+\\Per il corretto funzionamento la componente di Monitoring deve essere in grado di recuperare le metriche da tutti i diversi dispositivi monitorati.
 Questi implementano spesso protocolli diversi per notificare le KPI, per questo motivo sono stati inclusi una serie di sottomoduli che si connettono 
 agli elementi monitorati utilizzando i protocolli SBI necessari. I dati estratti vengono memorizzati nel Metrics Database così da poter fornire dati dimensionali 
 con serie temporali visualizzabili su Grafana \cite{grafana}.
@@ -91,7 +94,7 @@ Il Service Level è responsabile della creazione e dell'aggiornamento dei serviz
 Questo livello di astrazione permette agli utenti di definire intenti specifici per la connessione tra gli end-points attraverso la componente di Service.
 %Un utente può selezionare un path scelto o chiedere al controller di determinarne uno che rispetti determinati requisiti. 
 La componente di Service supporta diversi tipi di servizi ed è in grado di utilizzare vari protocolli per configurare i dispositivi di rete.
-Inoltre implementa una Service Handler API che consente agli operatori di rete di definire i comportamenti necessari per ciascun tipo di servizio.
+Implementa inoltre una Service Handler API che consente agli operatori di rete di definire i comportamenti necessari per ciascun tipo di servizio.
 \begin{itemize}
     \item \textbf{L2-VPN}: servizio per dispositivi OpenConfig
     \item \textbf{L3-VPN}: servizio per dispositivi emulati o OpenConfig con supporto per ACLs
@@ -153,11 +156,11 @@ RPC (Remote Procedure Call) era un popolare protocollo inter-processo\cite{libro
 Esso utilizza uno scambio di messaggi con le caratteristiche di basso sovraccarico, semplicità e trasparenza.
 Per questi motivi è stato ampiamente usato per diverso tempo in sistemi applicativi distribuiti.
 Con RPC un client può invocare da remoto una funzione di un metodo.
-Un utente di RPC non può distinguere dove viene eseguita la procedura chiamata, infatti viente chiamata come una procedura locale \cite{grpcArt2}.
-Tuttavia la maggior parte delle convenzionali implementazioni sono complesse, dato che sono costruite sopra protocolli di comunicazione come TCP, che ostacolano l'interoperabilità e richiedono specifiche eccessive.
+Un utente di RPC non può distinguere dove viene eseguita la procedura chiamata, infatti viene chiamata come una procedura locale \cite{grpcArt2}.
+Tuttavia, la maggior parte delle convenzionali implementazioni sono complesse dato che sono costruite sopra protocolli di comunicazione come TCP che ostacolano l'interoperabilità e richiedono specifiche eccessive.
 \\Google Remote Procedure Calls (gRPC\cite{grpc}) è un framework OpenSource sviluppato da Google per facilitare la comunicazione tra applicazioni distribuite. Permette di
 connettere, invocare, operare e fare debug di programmi eterogenei in modo semplice.
-\\gRPC è basato sul protocollo di trasporto HTTP/2, che supporta la comunicazione bidirezionale. 
+\\gRPC è basato sul protocollo di trasporto HTTP/2 che supporta la comunicazione bidirezionale. 
 Include supporto per il bilanciamento del carico, il tracciamento, il controllo dello stato e l'autentificazione\cite{grpcArt3} \cite{grpcArt1}.
 Inoltre, ha la capacità di supportare alte performance di streaming in modalità push da parte del server, consentendo l'indipendenza basata sul set di dati e definizioni, grazie ai metodi YANG,
 e la compressione di dati binari.
@@ -165,16 +168,16 @@ e la compressione di dati binari.
 \\I file proto sono un meccanismo indipendente dal linguaggio e dalla piattaforma per la serializzazione delle strutture dati. Questo sistema di serializzazione è più efficiente rispetto a formati come JSON o XML
 in termini sia di dimensione dei messaggi che di velocità di serializzazione e deserializzazione.
 \\Per sviluppare un'applicazione gRPC è necessario definire un'interfaccia dei servizi. Questa contiene informazioni su come il servizio deve essere usato e quali sono i metodi, i parametri e 
-il formato da utilizzare per i messaggi. Essa viene definita in un file proto, che a prima vista può sembrare un file di testo ordinario, ma in realtà i metodi con i parametri di input e i valori di ritorno.
-Tutti i metodi specificati nella definizione di questa interfaccia possono essere invocati dal client da remoto.
-Una volta definita, si può generare il codice lato server (server skeleton) e il codice lato client (client stub) nel linguaggio desiderato usando il compilatore Protobuf \textit{protoc}\cite{librogrpc}.
-\\Quando il client gRPC invoca un servizio gRPC, il lato client utilizza i protocol buffer per serializzare la chiamata di procedura remota nel formato appropriato. 
+il formato da utilizzare per i messaggi. Essa viene definita in un file proto, che a prima vista può sembrare un file di testo ordinario, ma in realtà specifica i metodi con i parametri di input e i valori di ritorno.
+Tutti i metodi nella definizione di questa interfaccia possono essere invocati dal client da remoto.
+Una volta definita si può generare il codice lato server (server skeleton) e il codice lato client (client stub) nel linguaggio desiderato usando il compilatore Protobuf \textit{protoc}\cite{librogrpc}.
+\\Quando il client invoca un servizio gRPC, il lato client utilizza i protocol buffer per serializzare la chiamata di procedura remota nel formato appropriato. 
 Successivamente, la richiesta viene mandata tramite HTTP/2. Sul lato server, viene deserializzata e viene invocata la relativa procedura usando i protocol buffers.
 La risposta segue il flusso inverso da server a client\cite{librogrpc}.
 \\Il framework gRPC sottostante gestisce tutta le complessità che normalmente sono associate all'imposizione di vincoli di servizio, serializzazione dati, comunicazioni di rete, autentificazione e molto altro.
 gRPC è progettato per trasportare messaggi peer-to-peer in modo distribuito e non durevole, consentendo a più servizi di scambiarsi informazioni attraverso un bus condiviso.
 Grazie all'uso di HTTP/2 e alla codifica orientata ai byte, gRPC riesce a introdurre bassa latenza, rendendolo adatto a sistemi altamente distribuiti e scalabili. 
-Un'altra caratteristica importante è la sicurezza. Infatti supporta nativamente il protocollo TLS (Transport Layer Security), garantendo che le comunicazioni tra i servizi siano cifrate e sicure.
+Un'altra caratteristica importante è la sicurezza, infatti supporta nativamente il protocollo TLS (Transport Layer Security), garantendo che le comunicazioni tra i servizi siano cifrate e sicure.
 
 
 \section{P4}
@@ -188,7 +191,7 @@ P4 \cite{p4}, che sta per "Programming Protocol-indipendent Packet Processor",  
 Il linguaggio permette di personalizzare il modo in cui i dispositivi di rete elaborano i pacchetti, senza essere vincolati a un set predefinito di protocolli.
 \\P4 è stato introdotto per l'esigenza di superare le limitazioni con cui si stava interfacciando OpenFlow.
 Per quest'ultimo protocollo l'hardware e il software non erano più sincronizzati. In alcuni casi 
-gli switch non riuscivano a supportare tutte le funzionalità che OpenFlow poteva offrire a causa delle limitazioni hardware, in quanto progettati per supportare un insieme fisso di protocolli e funzionalità. 
+gli switch non riuscivano a supportare tutte le funzionalità che OpenFlow poteva offrire a causa delle limitazioni hardware in quanto progettati per supportare un insieme fisso di protocolli e funzionalità. 
 Per introdurre un cambiamento dell'hardware sono richiesti vari sforzi per lo sviluppo e il finanziamento, inoltre richiederebbe mesi se non anni per essere portato a termine.
 \\P4 è nato quindi con l'obiettivo di definire nuove astrazioni per programmare il piano dati senza dover andare incontro alle limitazioni riscontrate.
 Offre un linguaggio di programmazione che permette di definire regole per cui i pacchetti vengono processati direttamente nei dispositivi di rete.
@@ -196,10 +199,10 @@ Di seguito vengono indicati i vari passi che si eseguono durante un flusso di la
 %Permette di definire la tabella, le azioni e the counters per poi essere applicate a elementi hardware o software switch allo stesso modo.
 %P4 ha un interfaccia per analizzare pacchetti e match campi nell'header. In questo modo abbiamo un accoppiamento tra hardware e software.
 \\Un programma P4 è costituito da diverse sezioni \cite{p4Article}, ognuna delle quali descrive un aspetto specifico del trattamento dei pacchetti.
-La dichiarazione degli header permette di dichiarare gli header dei protocolli che si vogliono analizzare e riconoscere o inventare nuovi headers per scopi di ricerca o esperimenti.
+La dichiarazione degli header permette di specificare i protocolli che si vogliono analizzare e riconoscere o inventarne di nuovi per scopi di ricerca o esperimenti.
 Questo include campi come indirizzi IP, numeri di porta e tutti i dati di protocollo.
-Il Parser specifica come estrarre e interpretare i vari header dai pacchetti. Esso definisce uno stato macchina che determina, attraverso gli header in arrivo, come passare da uno stato all'altro. 
-La Pipeline di Elaborazione comprende tabelle e azioni che definiscono come i pacchetti vengono processati dopo aver effettuato il parsing.
+Il Parser specifica come estrarre e interpretare i vari header dai pacchetti. Esso definisce uno stato macchina che determina, attraverso le informazioni in arrivo, come passare da uno stato all'altro. 
+\\La Pipeline di Elaborazione comprende tabelle e azioni che definiscono come i pacchetti vengono processati dopo aver effettuato il parsing.
 %guarda se mettere separato tabelle e azioni
 I Controlli del flusso coordinano il parser, le tabelle di elaborazione e le azioni. Definiscono quindi i controlli necessari per il flusso corretto di un pacchetto.
 \\Dopo aver definito il programma esso viene mandato al compilatore P4 che genera due tipi di output. 
@@ -218,11 +221,11 @@ Essi hanno una pipeline di elaborazione dei pacchetti la cui struttura è specif
 I principali obiettivi quindi includono:
 \begin{itemize}
     \item \textbf{Protocollo-indipendenza}: P4 non è vincolato a nessun protocollo specifico consentendo addirittura di definire nuovi protocolli o modificare quelli esistenti
-    \item \textbf{Target-indipendenza}: Il codice può essere compilato per una varità di target sia hardware che software
+    \item \textbf{Target-indipendenza}: Il codice può essere compilato per una varietà di target sia hardware che software
     \item \textbf{Riprogrammabilità}: permette di aggiornare e modificare il comportamento del dataplane in tempo reale rispondendo ai cambiamenti nei requisiti di rete.
 \end{itemize}
 P4 rappresenta un passo significativo verso reti più flessibili e programmabili, consentendo agli sviluppatori di adattare e innovare rapidamente in risposta ai cambiamenti nei requisiti di rete.
-Si propone come una soluzione innovativa e versatile per superare le limitazioni degli attuali protocolli e dispositivi di rete offrendo un linguaggio dinamico e indipendente dall'hardware
+Si propone come una soluzione innovativa e versatile per superare le limitazioni degli attuali protocolli e dispositivi di rete offrendo un linguaggio dinamico e indipendente dall'hardware.
 
 \section{Mininet}
 \label{ch:Mininet}
@@ -232,31 +235,30 @@ Si propone come una soluzione innovativa e versatile per superare le limitazioni
     \caption{Rete mininet}
     \label{fig:mininet}
 \end{figure}
-Mininet \cite{mininet} è un sistema open source di orchestrazione per l'emulazione di reti su un unico ambiente Linux, permettendo di simulare l'intera rete su un singolo computer.
+Mininet \cite{mininet} è un sistema open source di orchestrazione per l'emulazione di reti su un unico ambiente Linux che permette di simulare un'intera rete su un singolo computer.
 E' ampiamente utilizzato per la creazione, il test e la sperimentazione di reti virtuali realistiche.
-Rispetto ad altri emulatori presenti in circolazione, che emulano ogni dispositivo su una macchina virtuale, Mininet offre una serie di vantaggi. 
+Rispetto ad altri emulatori presenti in circolazione che emulano ogni dispositivo su una macchina virtuale, Mininet offre una serie di vantaggi. 
 Inanzitutto, permette l'avviamento rapido di una rete, la capacità di eseguire test e programmi con tipologie ampie e personalizzate. 
-Inoltre, consente di personalizzare l'inoltro dei pacchetti per testare diverse funzionalità con la possibilità di condividere e replicare il codice.
+Inoltre consente di personalizzare l'inoltro dei pacchetti per testare diverse funzionalità con la possibilità di condividere e replicare il codice.
 A tal proposito Mininet presenta delle API e un interprete Python che consentono di definire e gestire facilmente delle topologie di rete.
 Ciò è possibile anche tramite interfaccia a riga di comando (CLI). In entambi i casi possono essere sia predefinite che personalizzate con la possibilità di 
 aggiungere e rimuovere switch, router, host, controller e link, tutti eseguiti su un unico computer.
-Mininet utilizza infatti dei container di virtualizzazione leggera per creare nodi di rete, ognuno con la propria pila di rete in modo tale che possano comunicare con gli 
-altri nodi nella rete virtuale come farebbero in una rete fisica. 
+Mininet utilizza infatti dei container di virtualizzazione leggera per creare nodi di rete ognuno con la propria pila di rete in modo tale che possano comunicare con gli 
+altri nodi come farebbero in una rete fisica. 
 Ciò consente di testare nuove applicazioni, protocolli e algoritmi in un ambiente controllato e modificabile prima di implementarli su reti reali.
-\\Mininet mette a disposizione tre livelli differenti di API\cite{introMin}:
+\\Mininet mette a disposizione tre livelli differenti di API \cite{introMin}:
 \begin{itemize}
 \item \textbf{Low-level}: consiste nelle classi dei nodi e dei link istanziati individualmente e usati per creare una rete.
 \item \textbf{Mid-level}: aggiunge un containter per nodi e link, l'oggetto Mininet, e fornisce metodi per la configurazione di rete.
 \item \textbf{High-level}: aggiunge l'astrazione della topologia di rete, la classe Topo. Offre la possibilità di creare modelli di topologia riusabili passandoli al comando mn da linea di comando.
 \end{itemize}
-
-Per rendere la rete più realistica e adatta a esperimenti di test si possono configurare i link come up o down e inserire metriche specifiche 
-come possono essere quelle di banda, ritardo, perdita o massima lunghezza della coda di recezione.
-Gli host su Mininet condividono il filesystem root del server sottostante. 
+Si possono configurare i link come up o down e inserire metriche specifiche 
+come quelle di banda, ritardo, perdita o massima lunghezza della coda di recezione per rendere la rete più realistica e adatta a esperimenti di test.
+\\Gli host su Mininet condividono il filesystem root del server sottostante. 
 Ciò significa che non è necessario trasferire file tra gli host virtuali perché tutti accedono agli stessi file direttamente.
 Tuttavia, questa condivisione del filesystem può creare problemi se un programma ha bisogno di file di configurazione specifici per ogni host. 
 In tal caso, è necessario creare un file di configurazione separato per ogni host e specificare quale file utilizzare quando si avvia il programma.
-Un'altra limitazione riguarda la condivisione delle risorse del sistema su cui è in esecuzione che dovranno essere bilanciate tra gli host della rete.
+Un'altra limitazione riguarda la condivisione delle risorse del sistema su cui è in esecuzione che dovranno essere bilanciate tra tutti gli host della rete.
 %Inoltre ci possono essere collisioni tra file se si prova a creare lo stesso file nella stessa directory di più hosts.
 %Mininet mette a disposizione una GUI (miniedit) utile per visualizzare lo stato della rete durante gli esperimenti svolti.
 \\Mininet è stato progettato per essere facilmente integrabile con altri software e sistemi di rete.
@@ -282,7 +284,6 @@ del predefinito offerto da Mininet.
     \item \textit{ dump}: per visualizzare tutte le informazioni di dump dei nodi.
     \item \textit{h1 ifconfig}: per visualizzare le interfacce del nodo h1.
 \end{itemize}
-
 Alcuni comandi per interagire con la rete e fare dei test minimali sono:
 \begin{itemize}
     \item \textit{ h1 ping -c 1 h2 }: verifica il corretto funzionamento del percorso tra h1 e h2.
@@ -291,7 +292,6 @@ Alcuni comandi per interagire con la rete e fare dei test minimali sono:
     \item \textit{xterm h1}: permette di avviare il terminale relativo al nodo h1.
     \item \textit{exit}: esce dalla rete.
 \end{itemize}
-
 Per manipolare le metriche relative ai link invece vengono messi a disposizione i seguenti comandi:
 \begin{itemize}
     \item \textit{ link s1 h1 down}: disabilita un link, in questo caso quello tra lo switch s1 e l'host h1.
@@ -301,7 +301,6 @@ Per manipolare le metriche relative ai link invece vengono messi a disposizione 
     \item \textit{s2 tc qdisc del dev s2-eth2 root netem loss 50\% }: elimina una packet loss del 50\% sulla porta eth2 dello switch s2.
     \item \textit{s2 tc qdisc del dev s2-eth2 root netem delay 200ms}: elimina un ritardo di 200ms sulla porta eth2 dello switch s2.
 \end{itemize} 
-
 \textbf{API Python}
 \\Le API Python di Mininet permettono di creare e gestire topologie di rete in modo più flessibile e programmabile. 
 Di seguito esponiamo alcune classi e comandi della Mid-level API:
@@ -315,7 +314,6 @@ Di seguito esponiamo alcune classi e comandi della Mid-level API:
     \item \textit{pingall}: esegue il ping tra tutti gli host connessi alla rete
     \item \textit{h1.cmd('comando da eseguire')}: esegue un comando su h1 da CLI e prende l'output
 \end{itemize}
-
 Con le API in Python si può anche estendere il comando \textit{mn} usando l'opzione \textit{--custom} per invocare la topologia ricreata nello script.
 \\\textit{sudo mn --your\_script.py --topo your\_topo}
 

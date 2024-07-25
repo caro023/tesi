@@ -1,1 +1,23 @@
 \chapter{Conclusioni}
+All'interno di questo elaborato sono state inizialmente descritte le motivazioni che stanno spingendo la ricerca di 
+nuove tecnologie per superare le limitazioni dell'infrastruttura di rete tradizionale.
+Abbiamo presentato il paradigma SDN come uno dei più promettenti per conseguire tale obiettivo e 
+sono state discusse le implementazioni più popolari per i controller SDN. 
+Ci siamo concentrati sull'architettura e sulle funzionalità di TeraFlow, un controller SDN emergente progettato per le reti B5G, e abbiamo analizzato i suoi meccanismi di creazione e gestione dei servizi di rete.
+La sperimentazione si è focalizzata sulla creazione di servizi di connettività tra due end points, 
+l'introduzione di politiche di rete specifiche, e la verifica della risposta del sistema a condizioni introdotte artificialmente.
+I test sono stati resi possibili dall'emulatore di rete Mininet.
+La valutazione è stata fatta su prove di raggiungibilità e di performance che, pur
+essendo abbastanza semplici, rappresentano un punto di partenza per analisi più complesse ed
+esegubili su reti più ampie. 
+\\In una rete reale, tuttavia, andrebbero svolti ulteriori accertamenti per garantire le stesse performance.
+\\Durante la sperimentazione si sono riscontrate delle problematiche dovute alla mancanza di implementazione
+di alcune funzioni che hanno limitato lo sviluppo completo delle funzionalità desiderate.
+\\Nonostante queste limitazioni, l'approccio sperimentale adottato ha permesso di ottenere risultati significativi, 
+evidenziando la capacità del sistema di rispondere a condizioni di rete variabili e di applicare politiche di gestione del traffico in modo efficace.
+\\Per lavori futuri si potrebbe pensare di implementare il servizio tramite interfaccia Web.
+Attualmente la creazione dei servizi tramite WebUI non supporta il tipo L2MV utilizzato in questa sperimetazione.
+\\Si potrebbe inoltre sperimentare con topologie più grandi e politiche più complesse per approfondire ulteriormente le capacità e i limiti del sistema. 
+Infine, si potrebbero verificare le stesse prove  con altri protocolli e tipi di switch differenti da P4,
+ampliando così le possibilità di applicazione e la robustezza delle soluzioni proposte.
+%futuri lavori: tramite interfaccia web (ancora non implementato), aggiongere kpisample
