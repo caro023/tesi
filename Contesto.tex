@@ -1,37 +1,35 @@
-\chapter{Contesto}
+\chapter{Background}
 \label{cap:contesto}
 In questo capitolo verranno presentate le principali tecnologie alla base di questo lavoro, ovvero il Software Defined Networking (SDN) e l'Intent-Based Networking (IBN). 
-\\Verranno inoltre descritti due dei controller SDN più rilevanti, ONOS e OpenDaylight (ODL). 
+\\Verranno inoltre descritti due dei controller SDN più rilevanti allo stato dell'arte, ONOS \cite{ONOS} e OpenDaylight (ODL) \cite{ODL}. 
 \\Questa panoramica fornirà il contesto necessario per comprendere meglio i successivi sviluppi trattati nel documento.
 \section{Software Defined Networking}
 \label{ch:SDN}
-
-L'architettura tradizionale di rete si basa su dispositivi fisici di interconnessione situati al livello rete dello stack TCP/IP, switch e router, che collegano più host a livello locale e permettono di scambiarsi informazioni.
-Questi dispositivi, nell'architettura tradizionale con un controller decentralizzato, implementano al loro interno diverse funzioni del piano data e del piano controllo. 
-\\Le funzioni del piano dati (data plane) si occupano della ricezione, del processamento e dell'inoltro dei pacchetti, ossia ciò che serve per l'instradamento. La decisione dell'inoltro del dato 
-viene presa in base alla tabella di routing, nel caso dei router, o alla MAC address table nel caso degli switch. 
-\\Le tabelle vengono inizializzate e modificate grazie al piano di controllo (control plane) che si occupa di decidere i percorsi 
-per l'instradamento sulla base della destinazione e comunicarli al data plane aggiornando le tabelle di inoltro dei dispositivi. 
+L'architettura tradizionale di rete si basa su dispositivi fisici di interconnessione situati al livello rete dello stack TCP/IP che collegano più host a livello locale e permettono di scambiarsi informazioni.
+Questi dispositivi, nell'architettura tradizionale con un controller decentralizzato, implementano al loro interno diverse funzioni sia del piano dati (data plane) che del piano di controllo (control plane). 
+\\Il piano dati si occupa della ricezione, del processamento e dell'inoltro dei pacchetti sulla base della tabella di routing che associa all'indirizzo MAC di un determinato dispositivo una data porta d'uscita \cite{tesiSDN:2020}. 
+\\Le tabelle vengono inizializzate e modificate grazie al piano di controllo che si occupa di calcolare i percorsi 
+per l'instradamento sulla base della destinazione e aggiornare le tabelle di inoltro dei dispositivi. 
 \\Nei protocolli di rete tradizionali questi due piani all'interno dei dispositivi sono separati tra loro e svolgono i loro compiti indipendentemente.
-\\Per decidere i percorsi il control plane può scegliere tra due tipi di algoritmi di instradamento con caratteristiche differenti: 
-\begin{itemize}
-\item decentralizzati: nessun nodo conosce la topologia di tutta la rete ma ha informazioni solo dai nodi vicini. 
-\item globali: basati sulla conoscenza della topologia di tutta la rete. Questa soluzione
-porta allo scambio di molti messaggi di broadcast, inoltre ogni
-nodo si occupa di calcolare soltanto la propria tabella.
-\end{itemize}
-Entrambi gli approcci necessitano di un algoritmo di routing in esecuzione su ciascun router che, attraverso un apposito protocollo, 
+\\Esistono diversi protocolli di instradamento che adottano un approccio decentralizzato per determinare i percorsi di rete.
+\\Un esempio è RIP (Routing Information Protocol), che utilizza un algoritmo di distance-vector in cui ogni nodo conosce solo le informazioni dai suoi vicini, quindi non globale, e aggiorna la propria tabella sulla base dei messaggi di routing scambiati con loro \cite{rip}.
+D'altra parte, protocolli come OSPF (Open Shortest Path First) adottano un approccio decentralizzato e globale.
+Ogni router all'interno dell'area conosce la topologia completa della rete e calcola i percorsi, indipendentemente dagli altri, utilizzando l'algoritmo di Dijkstra \cite{ospf}. 
+\\Questi approcci necessitano di un algoritmo di routing in esecuzione che, attraverso un apposito protocollo, 
 scambia messaggi con gli altri componenti della rete per prendere decisioni. 
 Ciò introduce ritardi che non sono necessari non rendendo così la rete adatta alle nuove esigenze delle applicazioni moderne che necessitano di alta dinamicità.
 %Questo tipo di reti utilizzano controller centralizzati
 %il livello rete interconnette reti eterogenee
 %Una limitazione dei controller centralizzati infatti è la configurazione statica tra gli switch e il controller.
-\\Il Software Defined Networking (SDN) è un'architettura di rete proposta negli ultimi anni dalla Open Networking Foundation (ONF) \cite{ONF} per rimediare ai problemi di scalabilità e affidabilità dei controller decentralizzati.
+\\Il Software Defined Networking (SDN) è un'architettura di rete proposta negli ultimi anni dalla Open Networking Foundation (ONF) \cite{ONF} per rimediare ai limiti delle attuali infrastrutture di rete \cite{sdnsurvey}.
 SDN rappresenta un nuovo paradigma dinamico, gestibile e facilmente adattabile grazie alla separazione del piano di controllo dal piano dati, che risulta direttamente programmabile. 
-Il piano di controllo diventa centralizzato e gestito da un unico controller SDN che prende le decisioni di instradamento e controllo di tutta la rete. 
-Il piano di dati è invece distribuito sui dispositivi di rete che eseguono le istruzioni ricevute dal controller.
-Di conseguenza è possibile un disaccoppiamento tra hardware e software per la gestione di device con API diverse.
-\\Per poter funzionare, i dispositivi devono essere in grado di comunicare con il controller centrale e riconoscere cambiamenti significativi degni di notifica per una gestione della rete adattabile ai cambiamenti in tempo reale. 
+%Il piano di controllo diventa centralizzato e gestito da un unico controller SDN che prende le decisioni di instradamento e controllo di tutta la rete. 
+%Il piano di dati è invece distribuito sui dispositivi di rete che eseguono le istruzioni ricevute dal controller.
+%Di conseguenza è possibile un disaccoppiamento tra hardware e software per la gestione di device con API diverse.
+Questo permette ai dispositivi di rete (come switch e router) di operare come semplici apparati di inoltro, mentre il controller centrale gestisce le decisioni più complesse rendendo possibile un disaccoppiamento tra hardware e software.
+Il modello centralizzato di SDN, tuttavia, non implica che il controller sia fisicamente centralizzato. 
+Al contrario, nelle implementazioni a livello di produzione, il piano di controllo è spesso distribuito per garantire scalabilità e affidabilità \cite{sdnlayers}.
+\\Per poter funzionare, i dispositivi devono essere in grado di comunicare con il controller e riconoscere cambiamenti significativi degni di notifica per una gestione della rete adattabile ai cambiamenti in tempo reale. 
 Questo è possibile tramite l'installazione al loro interno di componenti software con le caratteristiche necessarie
 detti Control Agents.
 \\La base di questo paradigma è quindi un controller remoto che, interagendo con i Control Agents
@@ -41,11 +39,11 @@ principale è quindi ridurre e semplificare il carico di amministrazione per i s
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{sdn.png}
-    \caption{struttura di una rete SDN}
+    \caption{struttura di una rete SDN \cite{fotosdn}}
     \label{fig:sdnF}
 \end{figure}
 %foto  https://community.fs.com/it/article/what-is-software-defined-networking-sdn.html
-\\Come si può notare dalla figura \ref{fig:sdnF} la rete viene suddivisa in tre livelli: Infrastructure layer, Control layer e Application layer.
+\\Come si può notare dalla figura \ref{fig:sdnF} la rete viene suddivisa in tre livelli: Infrastructure layer, Control layer e Application layer \cite{sdnlayers}.
 Partendo dal livello più basso troviamo l'infrastruttura di rete il cui unico compito è implementare il piano dati, ossia la parte che supporta un protocollo condiviso per comunicare con il controller e gestire
 i paccchetti sulla base delle configurazioni imposte da quest'ultimo. 
 Questa divisione consente di evitare algoritmi

@@ -1,14 +1,50 @@
 \begin{thebibliography}{10}
 
-\bibitem{ONF}
-Open networking foundation.
-\newblock \url{https://opennetworking.org/}.
+\bibitem{sdnart}
+B.~Martini, M.~Gharbaoui, and P.~Castoldi.
+\newblock Intent-based zero-touch service chaining layer for software-defined
+  edge cloud networks.
+\newblock {\em Computer Networks}, 212:109034, 2022.
 
-\bibitem{tesiSDN:2017}
-Nicholas Brasini.
-\newblock {\em Analisi e sviluppo di un’interfaccia web per gestire
-  controller SDN}.
-\newblock PhD thesis, Alma mater studiorum - universita’ di Bologna, 2017.
+\bibitem{datacent}
+Andrea Biancini, Mauro Campanella, Luca Prete, and Fabio Farina.
+\newblock Software defined networking esperienze openflow e l'interesse per
+  cloud.
+\newblock 04 2013.
+
+\bibitem{5g}
+Maede Zolanvari.
+\newblock Sdn for 5g.
+\newblock 2015.
+
+\bibitem{5gart}
+Le prospettive del 5g.
+\newblock {\em aeit}, 104(11/12):39--41, 2018.
+\newblock
+  \url{https://www.aeit.it/aeit/edicola/aeit/aeit2018/aeit2018_06_cisa/aeit2018_06_riv.pdf}.
+
+\bibitem{esempint}
+Laura Zanotti.
+\newblock Intent-based networking (ibn): significato e vantaggi del networking
+  basato sugli intenti.
+\newblock {\em ZeroUno}, 2019.
+
+\bibitem{qoe}
+Yiming Wei, Mugen Peng, and Yaqiong Liu.
+\newblock Intent-based networks for 6g: Insights and challenges.
+\newblock {\em Digital Communications and Networks}, 6(3):270--280, 2020.
+
+\bibitem{etsi}
+Etsi.
+\newblock \url{https://www.etsi.org/}.
+
+\bibitem{ONOS}
+Onos.
+\newblock \url{https://opennetworking.org/onos/}.
+
+\bibitem{ODL}
+Opendaylight.
+\newblock \url{https://www.opendaylight.org/}.
 
 \bibitem{tesiSDN:2020}
 Daniel Barattini.
@@ -16,6 +52,45 @@ Daniel Barattini.
   affidabilità.
 \newblock Master's thesis, Alma mater studiorum - universita’ di Bologna,
   2020.
+
+\bibitem{rip}
+Routing information protocol.
+\newblock {\em IBM}, 2023.
+\newblock
+  \url{https://www.ibm.com/docs/en/i/7.3?topic=routing-information-protocol}.
+
+\bibitem{ospf}
+Muhammad Fauzan Rafi~Sidiq Widjonarto.
+\newblock Application of dijkstra algorithm on ospf routing protocol and its
+  effect in modern networks, 2018.
+\newblock 13518147.
+
+\bibitem{ONF}
+Open networking foundation.
+\newblock \url{https://opennetworking.org/}.
+
+\bibitem{sdnsurvey}
+Diego Kreutz, Fernando Ramos, Paulo Veríssimo, Christian Esteve~Rothenberg,
+  Siamak Azodolmolky, and Steve Uhlig.
+\newblock Software-defined networking: A comprehensive survey.
+\newblock {\em ArXiv e-prints}, 103, 06 2014.
+
+\bibitem{sdnlayers}
+Yustus~Eko Oktian, SangGon Lee, HoonJae Lee, and JunHuy Lam.
+\newblock Distributed sdn controller system: A survey on design choice.
+\newblock {\em Computer Networks}, 121:100--111, 2017.
+
+\bibitem{fotosdn}
+Babak Darabinejad.
+\newblock An introduction to software-defined networking.
+\newblock {\em International Journal of Intelligent Information Systems}, 3:71,
+  11 2014.
+
+\bibitem{tesiSDN:2017}
+Nicholas Brasini.
+\newblock {\em Analisi e sviluppo di un’interfaccia web per gestire
+  controller SDN}.
+\newblock PhD thesis, Alma mater studiorum - universita’ di Bologna, 2017.
 
 \bibitem{ibn}
 B.~Martini, M.~Gharbaoui, and P.~Castoldi.
@@ -42,10 +117,6 @@ Nathan Sousa, Nazrul Islam, Danny Perez, and Christian Esteve~Rothenberg.
   loops.
 \newblock 07 2019.
 
-\bibitem{ONOS}
-Onos.
-\newblock \url{https://opennetworking.org/onos/}.
-
 \bibitem{osgi}
 Osgi.
 \newblock \url{https://www.osgi.org/}.
@@ -67,10 +138,6 @@ Putri Monika, Ridha Negara, and Danu Sanjoyo.
   and reroute method on onos controller.
 \newblock {\em Bulletin of Electrical Engineering and Informatics},
   9(5):2065--2073, 2020.
-
-\bibitem{ODL}
-Opendaylight.
-\newblock \url{https://www.opendaylight.org/}.
 
 \bibitem{LFN}
 Lfnetworking.
@@ -94,10 +161,6 @@ Progetto horizon 2020.
 {TeraFlow}.
 \newblock {\em 5GPPP}, 2021.
 \newblock url: \url{https://5g-ppp.eu/teraflow/}.
-
-\bibitem{etsi}
-Etsi.
-\newblock \url{https://www.etsi.org/}.
 
 \bibitem{arttfs}
 Daniel Adanza, Lluis Gifre, Pol Alemany, Juan-Pedro Fernández-Palacios,
@@ -213,6 +276,14 @@ Panagiotis Famelis, Georgios~P. Katsikas, Vasilios Katopodis, Carlos Natalino,
 \newblock {\em Behavioural model (bmv2) reference P4 software switch}, March
   2023.
 \newblock Available: \url{https://github.com/p4lang/behavioral-model}.
+
+\bibitem{abilene}
+{Wikipedia contributors}.
+\newblock Abilene network --- {Wikipedia}{,} the free encyclopedia.
+\newblock
+  \url{https://en.wikipedia.org/w/index.php?title=Abilene_Network&oldid=1220796057},
+  2024.
+\newblock [Online; accessed 17-August-2024].
 
 \bibitem{InstallODL}
 Installazione opendaylight.

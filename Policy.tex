@@ -49,9 +49,9 @@ Altri esempi di vincoli possono essere rappresentati dalla posizione di un dispo
 A tale scopo si sfrutta la componente di Monitoring che permette di associare il monitoraggio delle metriche nel proprio database
 con condizioni che devono essere rispettate.
 Quando questi requisiti non vengono soddisfatti, la componente di Monitoring solleva un allarme che fa scattare l'azione prestabilita.
-\\Nella sperimentazione abbiamo introdotto una politica per il servizio stabilito con due condizioni: una per la latenza (che non deve superare i 100ms) e una per la loss (che non deve superare il 5\%) \ref{fig:policy}.
-Queste due condizioni sono legate tra loro tramite un "OR", quindi appena una delle due non è più rispettata viene invocata l'azione.
-In questo caso l'azione consiste nel ricalcolo del percorso.
+\\Nella sperimentazione abbiamo introdotto una politica per il servizio stabilito con tre condizioni: una per la latenza (che non deve superare i 100ms), una per la loss (che non deve superare il 5\%) 
+e infine una per la capacità (\textbf{metrica})\ref{fig:policy}.
+Queste tre condizioni sono legate tra loro tramite un "OR", quindi appena una di esse non è più rispettata viene invocata l'azione che in questo caso consiste nel ricalcolo del percorso.
 %MODIFICA O LA FOTO O LA DESCRIZIONE
 \begin{figure}[h]
     \centering
@@ -60,22 +60,26 @@ In questo caso l'azione consiste nel ricalcolo del percorso.
     \label{fig:policy}
 \end{figure}
 \\\textbf{Verifica}
-\\Per verificare il comportamento del controller e assicurarsi che le condizioni di latenza e di loss vengano rispettate, 
+\\Per verificare il comportamento del controller e assicurarsi che le condizioni di latenza, di loss e di capacità vengano rispettate, 
 non avendo a disposizione una rete reale, abbiamo utilizzato una topologia di rete su Mininet di switch P4 basati su bmv2\cite{bmv2}.
-La topologia iniziale era composta da 4 switch ed è stata poi ampliata a 8 per renderla più complessa con l'aggiunta di più percorsi possibili tra i due end-points.
-I dispositivi della topologia sono stati connessi alla componente SBI, come per i dispositivi reali, in modo tale che potessero comunicare con il controller.
+La topologia iniziale era composta da 4 switch e due possibili percorsi ed è stata poi ampliata a 8 switch con 5 percorsi per renderla più complessa e poter fare una sperimentazione più realistica.
+L'ultima topologia utilizzata è stata Abilene \cite{abilene}; una rete di trasporto creata da Internet2.
+%mettere foto topologia abilene
+\\I dispositivi delle varie topologie sono stati connessi alla componente SBI, come per i dispositivi reali, in modo tale che potessero comunicare con il controller.
 Successivamente per dimostrare la politica basata sul servizio e il ricalcolo delle configurazioni, abbiamo aggiunto artificialmente delle condizioni di ritardo e packet loss all’interno di uno switch presente nel percorso. 
 Ad esempio, abbiamo utilizzato il comando \textit{switch2 tc qdisc add dev switch2-eth2 root netem delay 200ms} per aggiungere un ritardo di 200ms oppure il comando \textit{switch2 tc qdisc add dev switch2-eth2 root netem loss 10\%}
+%aggiungere il comando per la capacità
  per simulare una perdita di pacchetti del 10\%. Inoltre, abbiamo disattivato un link tra due switch con il comando \textit{link switch6 switch7 down}.
 \\Questi cambiamenti sono stati monitorati grazie a un probe in Python, una funzionalità che rileva lo stato di integrità delle istanze dell'applicazione.
-Inizialmente, si avvia l'agent che, ascoltando gli eventi della componente di Context, crea due Kpi Id differenti per loss e latenza ogni volta che si viene creato un servizio \ref{fig:agent}.
+Inizialmente, si avvia l'agent che, ascoltando gli eventi della componente di Context, crea tre Kpi Id differenti per loss, latenza e capacità ogni volta che viene creato un servizio \ref{fig:agent}.
 \begin{figure}[h]
     \centering
    \includegraphics[width=0.5\textwidth]{create new event ag.png}
     \caption{Creazione delle due KPI id}
     \label{fig:agent}
 \end{figure}
-Successivamente si attiva un secondo script che riesce a monitorare le due differenti metriche attraverso il comando ping del terminale e le invia tramite una socket all'agent.
+Successivamente si attiva un secondo script che riesce a monitorare le metriche di loss e latenza attraverso il comando ping del terminale e la capacità tramite iperf per poi inviarle attraverso una socket all'agent.
+Prima di avviare lo script è necessario attivare il server iperf sul dispositivo finale
 \\L'agent, ottenuti i relativi valori, li inoltra alla componente di monitoring tramite una KPI composta dal valore, il kpi id corretto e un timestamp.
 \\La componente, ricevute le metriche, riconosce che è avvenuto un cambiamento nella rete e solleva un allarme per una potenziale violazione della politica che sarà poi validata dalla componente di Policy.
 Questo evento causa l'esecuzione dell'azione predefinita nella politica, ovvero l'aggiornamento del percorso.

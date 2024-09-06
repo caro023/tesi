@@ -5,51 +5,55 @@ Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: unsrt.bst
 Reallocating 'name_of_file' (item size: 1) to 13 items.
 Database file #1: bibliografia.bib
+Warning--empty booktitle in datacent
+Warning--empty booktitle in 5g
+Warning--empty author in 5gart
+Warning--empty author in rip
 Warning--empty journal in ibn2
 Warning--empty author in D53
 Warning--empty author in D14
 Warning--empty author in D31
 Warning--empty author in D22
 Warning--empty author in D32
-You've used 42 entries,
+You've used 54 entries,
             1791 wiz_defined-function locations,
-            625 strings with 8617 characters,
-and the built_in function-call counts, 6556 in all, are:
-= -- 526
-> -- 230
+            686 strings with 10307 characters,
+and the built_in function-call counts, 8689 in all, are:
+= -- 698
+> -- 322
 < -- 6
-+ -- 101
-- -- 59
-* -- 282
-:= -- 884
-add.period$ -- 101
-call.type$ -- 42
-change.case$ -- 35
++ -- 138
+- -- 84
+* -- 410
+:= -- 1230
+add.period$ -- 138
+call.type$ -- 54
+change.case$ -- 47
 chr.to.int$ -- 0
-cite$ -- 48
-duplicate$ -- 333
-empty$ -- 820
-format.name$ -- 59
-if$ -- 1573
+cite$ -- 64
+duplicate$ -- 434
+empty$ -- 1053
+format.name$ -- 84
+if$ -- 2048
 int.to.chr$ -- 0
-int.to.str$ -- 42
-missing$ -- 17
-newline$ -- 188
-num.names$ -- 17
-pop$ -- 200
+int.to.str$ -- 54
+missing$ -- 27
+newline$ -- 249
+num.names$ -- 27
+pop$ -- 241
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 242
+skip$ -- 280
 stack$ -- 0
-substring$ -- 214
-swap$ -- 87
+substring$ -- 295
+swap$ -- 99
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 6
-while$ -- 32
-width$ -- 44
-write$ -- 361
-(There were 6 warnings)
+warning$ -- 10
+while$ -- 47
+width$ -- 56
+write$ -- 487
+(There were 10 warnings)
