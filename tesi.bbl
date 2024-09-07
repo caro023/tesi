@@ -65,9 +65,12 @@ Muhammad Fauzan Rafi~Sidiq Widjonarto.
   effect in modern networks, 2018.
 \newblock 13518147.
 
-\bibitem{ONF}
-Open networking foundation.
-\newblock \url{https://opennetworking.org/}.
+\bibitem{probtrad}
+William Stallings.
+\newblock {\em Foundations of Modern Networking: SDN, NFV, QoE, IoT, and
+  Cloud}.
+\newblock Pearson Education, 2015.
+\newblock Accessed: 6 September 2024.
 
 \bibitem{sdnsurvey}
 Diego Kreutz, Fernando Ramos, Paulo Veríssimo, Christian Esteve~Rothenberg,
@@ -75,10 +78,20 @@ Diego Kreutz, Fernando Ramos, Paulo Veríssimo, Christian Esteve~Rothenberg,
 \newblock Software-defined networking: A comprehensive survey.
 \newblock {\em ArXiv e-prints}, 103, 06 2014.
 
+\bibitem{ONF}
+Open networking foundation.
+\newblock \url{https://opennetworking.org/}.
+
 \bibitem{sdnlayers}
 Yustus~Eko Oktian, SangGon Lee, HoonJae Lee, and JunHuy Lam.
 \newblock Distributed sdn controller system: A survey on design choice.
 \newblock {\em Computer Networks}, 121:100--111, 2017.
+
+\bibitem{tesiSDN:2017}
+Nicholas Brasini.
+\newblock {\em Analisi e sviluppo di un’interfaccia web per gestire
+  controller SDN}.
+\newblock PhD thesis, Alma mater studiorum - universita’ di Bologna, 2017.
 
 \bibitem{fotosdn}
 Babak Darabinejad.
@@ -86,11 +99,11 @@ Babak Darabinejad.
 \newblock {\em International Journal of Intelligent Information Systems}, 3:71,
   11 2014.
 
-\bibitem{tesiSDN:2017}
-Nicholas Brasini.
-\newblock {\em Analisi e sviluppo di un’interfaccia web per gestire
-  controller SDN}.
-\newblock PhD thesis, Alma mater studiorum - universita’ di Bologna, 2017.
+\bibitem{appl}
+Diego Kreutz, Fernando M.~V. Ramos, Paulo~Esteves Veríssimo, Christian~Esteve
+  Rothenberg, Siamak Azodolmolky, and Steve Uhlig.
+\newblock Software-defined networking: A comprehensive survey.
+\newblock {\em Proceedings of the IEEE}, 103(1):14--76, 2015.
 
 \bibitem{ibn}
 B.~Martini, M.~Gharbaoui, and P.~Castoldi.
@@ -111,11 +124,29 @@ Nfv.
 Ietf.
 \newblock \url{https://www.ietf.org/}.
 
+\bibitem{motivibn}
+Hao Yu, Hamid Rahimi, Carl Janz, et~al.
+\newblock Building a comprehensive intent-based networking framework: A
+  practical approach from design concepts to implementation.
+\newblock {\em Journal of Network and Systems Management}, 32:47, 2024.
+
 \bibitem{ibn2}
 Nathan Sousa, Nazrul Islam, Danny Perez, and Christian Esteve~Rothenberg.
 \newblock Policy-driven network traffic rerouting through intent-based control
   loops.
 \newblock 07 2019.
+
+\bibitem{ibnrepo}
+B.~Martini, M.~Gharbaoui, and P.~Castoldi.
+\newblock Intent-based network slicing for sdn vertical services with
+  assurance: Context, design and preliminary experiments.
+\newblock {\em Future Generation Computer Systems}, 142:101--116, 2023.
+
+\bibitem{archonos}
+Bhargavi Goswami.
+\newblock Experimenting with onos scalability on software defined network.
+\newblock {\em Journal of Advanced Research in Dynamical and Control Systems},
+  10:1820--1830, 01 2019.
 
 \bibitem{osgi}
 Osgi.
@@ -139,6 +170,20 @@ Putri Monika, Ridha Negara, and Danu Sanjoyo.
 \newblock {\em Bulletin of Electrical Engineering and Informatics},
   9(5):2065--2073, 2020.
 
+\bibitem{onosint}
+Davide Sanvito, Daniele Moro, Mattia Gullì, Ilario Filippini, Antonio Capone,
+  and Andrea Campanella.
+\newblock Onos intent monitor and reroute service: enabling plug{\&}play
+  routing logic.
+\newblock {\em 2018 4th IEEE Conference on Network Softwarization and Workshops
+  (NetSoft)}, pages 272--276, 2018.
+
+\bibitem{archodl}
+Gonzalez Carlos~Javier.
+\newblock {\em Management of a heterogeneous distributed architecture with the
+  SDN}.
+\newblock PhD thesis, 12 2017.
+
 \bibitem{LFN}
 Lfnetworking.
 \newblock \url{https://lfnetworking.org/}.
@@ -147,6 +192,13 @@ Lfnetworking.
 Modulo nic di odl.
 \newblock
   \url{https://test-odl-docs.readthedocs.io/en/stable-boron/user-guide/network-intent-composition-(nic)-user-guide.html#}.
+
+\bibitem{archtfs}
+Alberto Mozo, Amit Karamchandani, Luis Cal, Sandra Gómez-Canaval, Antonio
+  Pastor, and Lluis Gifre.
+\newblock A machine-learning-based cyberattack detector for a cloud-based sdn
+  controller.
+\newblock {\em Applied Sciences}, 13:4914, 04 2023.
 
 \bibitem{TeraFlow}
 Teraflow.
@@ -234,14 +286,14 @@ Ricard Vilalta, Noboru Yoshikane, Ramon Casellas, Ricardo Martínez, Shohei
 \newblock In {\em 45th European Conference on Optical Communication (ECOC
   2019)}, pages 1--4, 2019.
 
-\bibitem{p4}
-P4.
-\newblock \url{https://p4.org/}.
-
 \bibitem{p4Article}
 Ya~Gao and Zhenling Wang.
 \newblock A review of p4 programmable data planes for network security.
 \newblock {\em Mobile Information Systems}, 2021(1):1257046, 2021.
+
+\bibitem{p4}
+P4.
+\newblock \url{https://p4.org/}.
 
 \bibitem{mininet}
 Mininet.

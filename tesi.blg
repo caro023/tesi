@@ -10,50 +10,51 @@ Warning--empty booktitle in 5g
 Warning--empty author in 5gart
 Warning--empty author in rip
 Warning--empty journal in ibn2
+Warning--empty school in archodl
 Warning--empty author in D53
 Warning--empty author in D14
 Warning--empty author in D31
 Warning--empty author in D22
 Warning--empty author in D32
-You've used 54 entries,
+You've used 62 entries,
             1791 wiz_defined-function locations,
-            686 strings with 10307 characters,
-and the built_in function-call counts, 8689 in all, are:
-= -- 698
-> -- 322
-< -- 6
-+ -- 138
-- -- 84
-* -- 410
-:= -- 1230
-add.period$ -- 138
-call.type$ -- 54
-change.case$ -- 47
+            728 strings with 11762 characters,
+and the built_in function-call counts, 10522 in all, are:
+= -- 850
+> -- 419
+< -- 7
++ -- 174
+- -- 112
+* -- 542
+:= -- 1535
+add.period$ -- 163
+call.type$ -- 62
+change.case$ -- 53
 chr.to.int$ -- 0
-cite$ -- 64
-duplicate$ -- 434
-empty$ -- 1053
-format.name$ -- 84
-if$ -- 2048
+cite$ -- 73
+duplicate$ -- 514
+empty$ -- 1220
+format.name$ -- 112
+if$ -- 2452
 int.to.chr$ -- 0
-int.to.str$ -- 54
-missing$ -- 27
-newline$ -- 249
-num.names$ -- 27
-pop$ -- 241
+int.to.str$ -- 62
+missing$ -- 35
+newline$ -- 290
+num.names$ -- 35
+pop$ -- 258
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 280
+skip$ -- 314
 stack$ -- 0
-substring$ -- 295
-swap$ -- 99
-text.length$ -- 6
+substring$ -- 404
+swap$ -- 116
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 10
-while$ -- 47
-width$ -- 56
-write$ -- 487
-(There were 10 warnings)
+warning$ -- 11
+while$ -- 62
+width$ -- 64
+write$ -- 575
+(There were 11 warnings)

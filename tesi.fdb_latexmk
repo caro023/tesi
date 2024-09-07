@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex tesi"] 1725652113.52114 "tesi.aux" "tesi.bbl" "tesi" 1725652120.93819 0
-  "./bibliografia.bib" 1725645417 23392 0b57a4df2ec2f3c85068d667a9d13db8 ""
+["bibtex tesi"] 1725720581.93007 "tesi.aux" "tesi.bbl" "tesi" 1725732221.36673 0
+  "./bibliografia.bib" 1725718161 30595 dd10873f0dc66e1bc5338c3f71b322f5 ""
   "C:/Users/ferra/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/unsrt.bst" 1291864736 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "tesi.aux" 1725652119 8938 ab86711ecc981f35ac476f74a30e5ffb "pdflatex"
+  "tesi.aux" 1725732219 9541 c1cc7c00d3e520a59f12b735062c230e "pdflatex"
   (generated)
   "tesi.bbl"
   "tesi.blg"
   (rewritten before read)
-["pdflatex"] 1725652114.26625 "c:/Users/ferra/OneDrive/Desktop/teraflow/tesi.tex" "tesi.pdf" "tesi" 1725652120.94026 0
+["pdflatex"] 1725732211.63702 "c:/Users/ferra/OneDrive/Desktop/teraflow/tesi.tex" "tesi.pdf" "tesi" 1725732221.36914 0
   "Appendice.tex" 1720466388 1489 9e2d1c145c5e168ee79950dcb81c8f7d ""
   "C:/Users/ferra/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1715245698 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/ferra/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs10.tfm" 1720594318 688 37338d6ab346c2f1466b29e195316aa4 ""
@@ -123,11 +123,11 @@
   "C:/Users/ferra/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/ferra/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "Conclusioni.tex" 1721896868 2368 3ac8822f9661fb912cbf2dfc8582f4e3 ""
-  "Contesto.tex" 1725647195 23970 e65a68a0a745b4fbb5eeb0144e3a8251 ""
-  "Introbuzione.tex" 1725633765 11768 0e4a8f42be19d0bfb07078f681b8371d ""
+  "Contesto.tex" 1725732207 28343 eb1edaf1d8acc9fb6808efd33867a639 ""
+  "Introbuzione.tex" 1725691976 11822 260cef6eccc382b255d7a2cc0c38b279 ""
   "ODL-Architecture.png" 1714839799 71040 139f9d3a5ebaf47a81e9f21824a60338 ""
-  "Policy.tex" 1725605187 10220 f0a07eb5dad4f313b564b1614462c38f ""
-  "Teraflow.tex" 1725639515 33768 47cc16a017a9ed2e9a616f6a38036bf5 ""
+  "Policy.tex" 1725717860 10221 1350b1bdca7cb885e0f6c5c80a930e1b ""
+  "Teraflow.tex" 1725653846 33887 40f0379430c7b53d56714caf731bbb41 ""
   "architetturatf.png" 1714662149 444143 6152f44210624c85714b7059496daf94 ""
   "archonos.png" 1715249915 377061 b56f18563f62828c1a5696c8f573af0e ""
   "c:/Users/ferra/OneDrive/Desktop/teraflow/tesi.tex" 1721747282 2601 33e591d75c52fd436afa654c03c95147 ""
@@ -141,11 +141,11 @@
   "policy 5 100.png" 1721854526 112119 85bff4bac8fa7b9d536d02f4711bba78 ""
   "sdn.png" 1714663580 236791 c195cb0819127de77de61307c403c4d5 ""
   "servizion constraints.png" 1721222708 123568 c4637f6c164cbb4f75c2f405615ba327 ""
-  "tesi.aux" 1725652119 8938 ab86711ecc981f35ac476f74a30e5ffb "pdflatex"
-  "tesi.bbl" 1725652114 9284 17a25c99c92749c1e70fdd124c2fa33e "bibtex tesi"
-  "tesi.out" 1725652119 2970 7f8067c6a572d5e32139ebc9d2e310de "pdflatex"
+  "tesi.aux" 1725732219 9541 c1cc7c00d3e520a59f12b735062c230e "pdflatex"
+  "tesi.bbl" 1725720582 11302 c3499a79ef8dd0a893f79397012d1fb6 "bibtex tesi"
+  "tesi.out" 1725732219 2970 7f8067c6a572d5e32139ebc9d2e310de "pdflatex"
   "tesi.tex" 1721747282 2601 33e591d75c52fd436afa654c03c95147 ""
-  "tesi.toc" 1725652119 1677 f3807b01f5e5e209ef9d989effcd4505 "pdflatex"
+  "tesi.toc" 1725732219 1677 346b87b8d5e35e89534bec753e038e9b "pdflatex"
   (generated)
   "tesi.aux"
   "tesi.log"

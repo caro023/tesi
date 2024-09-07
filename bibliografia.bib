@@ -430,7 +430,105 @@ keywords = {Distributed SDN controller, Survey, Design choice, Pros and cons},
 abstract = {Although within SDN community, the notion of logically centralized network control is well understood and agreed upon, many different approaches exist on how one should deliver such a logically centralized view to multiple distributed controller instances. In this paper, we survey and investigate those approaches. We discovered that we can classify the methods into several design choices that are trending among SDN adopters. Each design choice may influence several SDN issues such as scalability, robustness, consistency, and privacy. Thus, we further analyze the pros and cons of each model regarding these matters. We concluded that each design begets some characteristics. One may excel in resolving one issue but perform poorly in another. We also presented the design choices to build distributed controller that is scalable, robust, consistent and secure.}
 }
 
+@article{archtfs,
+author = {Mozo, Alberto and Karamchandani, Amit and Cal, Luis and Gómez-Canaval, Sandra and Pastor, Antonio and Gifre, Lluis},
+year = {2023},
+month = {04},
+pages = {4914},
+title = {A Machine-Learning-Based Cyberattack Detector for a Cloud-Based SDN Controller},
+volume = {13},
+journal = {Applied Sciences},
+doi = {10.3390/app13084914}
+}
 
+@phdthesis{archodl,
+author = {Carlos Javier, Gonzalez},
+year = {2017},
+month = {12},
+pages = {},
+title = {Management of a heterogeneous distributed architecture with the SDN}
+}
+
+@article{archonos,
+author = {Goswami, Bhargavi},
+year = {2019},
+month = {01},
+pages = {1820-1830},
+title = {Experimenting with ONOS Scalability on Software Defined Network},
+volume = {10},
+journal = {Journal of Advanced Research in Dynamical and Control Systems}
+}
+
+@book{probtrad,
+  author    = {William Stallings},
+  title     = {Foundations of Modern Networking: SDN, NFV, QoE, IoT, and Cloud},
+  year      = {2015},
+  publisher = {Pearson Education},
+  chapter   = {3},
+  url       = {https://www.informit.com/articles/article.aspx?p=2451956},
+  note      = {Accessed: 6 September 2024},
+}
+
+@ARTICLE{appl,
+  author={Kreutz, Diego and Ramos, Fernando M. V. and Veríssimo, Paulo Esteves and Rothenberg, Christian Esteve and Azodolmolky, Siamak and Uhlig, Steve},
+  journal={Proceedings of the IEEE}, 
+  title={Software-Defined Networking: A Comprehensive Survey}, 
+  year={2015},
+  volume={103},
+  number={1},
+  pages={14-76},
+  keywords={Control systems;IP networks;Virtualization;Software  defined networking;Computer networks;Communication networks;Carrier-grade networks;dependability;flow-based networking;network hypervisor;network operating systems (NOSs);network virtualization;OpenFlow;programmable networks;programming languages;scalability;software-defined environments;software-defined networking (SDN)},
+  doi={10.1109/JPROC.2014.2371999}}
+
+@article{motivibn,
+  author = {Hao Yu and Hamid Rahimi and Carl Janz and others},
+  title = {Building a Comprehensive Intent-Based Networking Framework: A Practical Approach from Design Concepts to Implementation},
+  journal = {Journal of Network and Systems Management},
+  volume = {32},
+  pages = {47},
+  year = {2024},
+  doi = {10.1007/s10922-024-09819-7},
+  url = {https://doi.org/10.1007/s10922-024-09819-7}
+}
+
+@article{ibnboh,
+title = {Intent-driven autonomous network and service management in future cellular networks: A structured literature review},
+journal = {Computer Networks},
+volume = {220},
+pages = {109477},
+year = {2023},
+issn = {1389-1286},
+doi = {https://doi.org/10.1016/j.comnet.2022.109477},
+url = {https://www.sciencedirect.com/science/article/pii/S1389128622005114},
+author = {Kashif Mehmood and Katina Kralevska and David Palma},
+keywords = {Intents, Intent-based networking, Service design, Autonomous networking, SLA, Context-aware},
+abstract = {Intent-driven networks are an essential stepping stone in the evolution of network and service management towards a truly autonomous paradigm. User centric intents provide an abstracted means of impacting the design, provisioning, deployment and assurance of network infrastructure and services with the help of service level agreements and minimum network capability exposure. The concept of Intent Based Networking (IBN) poses several challenges in terms of the contextual definition of intents, role of different stakeholders, and a generalized architecture. In this review, we provide a comprehensive analysis of the state-of-the-art in IBN including the intent description models, intent lifecycle management, significance of IBN and a generalized architectural framework along with challenges and prospects for IBN in future cellular networks. An analytical study is performed on the data collected from relevant studies primarily focusing on the inter-working of IBN with softwarized networking based on NFV/SDN infrastructures. Critical functions required in the IBN management and service model design are explored with different abstract modeling techniques and a converged architectural framework is proposed. The key findings include: (1) benefits and role of IBN in autonomous networking, (2) improvements needed to integrate intents as fundamental policies for service modeling and network management, (3) need for appropriate representation models for intents in domain agnostic abstract manner, and (4) need to include learning as a fundamental function in autonomous networks. These observations provide the basis for in-depth investigation and standardization efforts for IBN as a fundamental network management paradigm in beyond 5G cellular networks.}
+}
+
+@article{ibnrepo,
+title = {Intent-based network slicing for SDN vertical services with assurance: Context, design and preliminary experiments},
+journal = {Future Generation Computer Systems},
+volume = {142},
+pages = {101-116},
+year = {2023},
+issn = {0167-739X},
+doi = {https://doi.org/10.1016/j.future.2022.12.033},
+url = {https://www.sciencedirect.com/science/article/pii/S0167739X2200437X},
+author = {B. Martini and M. Gharbaoui and P. Castoldi},
+keywords = {SDN, NFV, Intent-based networking, Network slicing, MANagement and Orchestration, ETSI NFV MANO},
+abstract = {Network slicing is announced to be one of the key features for 5G infrastructures enabling network operators to provide network services with the flexibility and dynamicity necessary for the vertical services, while relying on Network Function Virtualization (NFV) and Software-defined Networking (SDN). On the other hand, vertical industries are attracted by flexibility and customization offered by operators through network slicing, especially if slices come with in-built SDN capabilities to programmatically connect their application components and if they are relieved of dealing with detailed technicalities of the underlying (virtual) infrastructure. In this paper, we present an Intent-based deployment of a NFV orchestration stack that allows for the setup of Qos-aware and SDN-enabled network slices toward effective service chaining in the vertical domain. The main aim of the work is to simplify and automate the deployment of tenant-managed SDN-enabled network slices through a declarative approach while abstracting the underlying implementation details and unburdening verticals to deal with technology-specific low-level networking directives. In our approach, the intent-based framework we propose is based on an ETSI NFV MANO platform and is assessed through a set of experimental results demonstrating its feasibility and effectiveness.}
+}
+
+@article{onosint,
+  author={Sanvito, Davide and Moro, Daniele and Gullì, Mattia and Filippini, Ilario and Capone, Antonio and Campanella, Andrea},
+  journal={2018 4th IEEE Conference on Network Softwarization and Workshops (NetSoft)}, 
+  title={ONOS Intent Monitor and Reroute service: enabling plug{\&}play routing logic}, 
+  year={2018},
+  volume={},
+  number={},
+  pages={272-276},
+  keywords={Monitoring;Routing;Network topology;Topology;Optimization;Conferences;Network operating systems},
+  doi={10.1109/NETSOFT.2018.8460064}}
 
 
 

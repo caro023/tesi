@@ -3,7 +3,7 @@ L’evoluzione delle reti moderne, accompagnata dall’incremento delle esigenze
 %\textit{Servizi altamente esigenti come il 5G/6G si sono insinuati in questo contesto.}
 \\In questo contesto, il Software Defined Networking (SDN) ha rivoluzionato la gestione delle reti attraverso un approccio logicamente centralizzato e programmabile, separando il piano di controllo dal piano dati.
 Questa separazione permette agli amministratori di rete di semplificare configurazioni complesse e di introdurre politiche di rete dinamiche e affidabili.
-Inoltre, SDN fornisce il supporto per interfacce nordbound che facilitano l'integrazione con varie applicazioni di terze parti, contribuendo a un ecosistema di rete più flessibile e reattivo \cite{sdnart}.
+Inoltre, SDN fornisce il supporto per interfacce nordbound e southbound che facilitano rispettivamente l'integrazione con varie applicazioni di terze parti e con i dispositivi nella rete, contribuendo a un ecosistema più flessibile e reattivo \cite{sdnart}.
 \\L’SDN è oggi largamente impiegato in diversi contesti. 
 Nei cloud data center, ad esempio, consente una gestione semplificata e ottimizzata dell’infrastruttura di rete, migliorando la distribuzione delle risorse e l'efficienza  delle attività amministrative riducendo allo stesso tempo i costi \cite{datacent}. 
 Nelle reti di trasporto, SDN viene utilizzato per gestire il traffico in modo più dinamico e flessibile, permettendo un'ottimizzazione della larghezza di banda su lunghe distanze. Allo stesso modo, 
@@ -56,7 +56,7 @@ In questo esempio specifico, è stato attivato il ricalcolo del percorso
 del traffico tra gli end-point allo scopo di trovare una nuova via di comunicazione che possa ristabilire i livelli di performance richiesti.
 \\Per monitorare continuamente e in tempo reale la qualità del servizio è stato implementato un "probe", uno strumento di monitoraggio che, utilizzando il protocollo ping e iperf,
 misura costantemente la latenza, la perdita di pacchetti e la capacità tra i due end-points, e invia i valori rilevati al controller. Queste informazioni vengono 
-analizzate per decidere se è necessario intervenire e ricalcolare il percorso.
+analizzate per decidere se è necessario intervenire per ricalcolare il percorso.
 In questo modo, il sistema è in grado di reagire dinamicamente ai problemi di rete in tempo reale riducendo al minimo l'impatto negativo sull'esperienza degli utenti.
 \\Il resto del documento sarà organizzato come segue.
 \\Nel Capitolo \ref{cap:contesto} verrà esposto il contesto. All'interno ci sarà un'analisi approfondita del Software Defined Networking (SDN)
