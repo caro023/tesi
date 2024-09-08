@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.23)  7 SEP 2024 20:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.23)  8 SEP 2024 11:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -496,14 +496,14 @@ l.146 \begin{itemize}
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 147.
  (C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [12]
-<ODL-Architecture.png, id=243, 853.1875pt x 479.7925pt>
+) [12] [13]
+<ODL-Architecture.png, id=249, 853.1875pt x 479.7925pt>
 File: ODL-Architecture.png Graphic file (type png)
 <use ODL-Architecture.png>
 Package pdftex.def Info: ODL-Architecture.png  used on input line 185.
 (pdftex.def)             Requested size: 429.3521pt x 241.45503pt.
- [13]
-Underfull \hbox (badness 10000) in paragraph at lines 189--225
+
+Underfull \hbox (badness 10000) in paragraph at lines 189--234
 
  []
 
@@ -511,10 +511,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 189--225
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.225 
+l.234 
        <./ODL-Architecture.png>] [15]) (Teraflow.tex [16]
 Capitolo 3.
-<architetturatf.png, id=274, 598.03426pt x 368.577pt>
+<architetturatf.png, id=280, 598.03426pt x 368.577pt>
 File: architetturatf.png Graphic file (type png)
 <use architetturatf.png>
 Package pdftex.def Info: architetturatf.png  used on input line 5.
@@ -527,7 +527,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) h
                                                   \__shipout_drop_firstpage_...
 l.38 \begin{itemize}
                      <./architetturatf.png>] [18] [19]
-<componenti.png, id=312, 464.937pt x 417.35925pt>
+<componenti.png, id=318, 464.937pt x 417.35925pt>
 File: componenti.png Graphic file (type png)
 <use componenti.png>
 Package pdftex.def Info: componenti.png  used on input line 62.
@@ -542,7 +542,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2}) h
                                                   \__shipout_drop_firstpage_...
 l.91 
       <./componenti.png>] [22] [23]
-<grpc.png, id=336, 483.60675pt x 213.79875pt>
+<grpc.png, id=341, 483.60675pt x 213.79875pt>
 File: grpc.png Graphic file (type png)
 <use grpc.png>
 Package pdftex.def Info: grpc.png  used on input line 151.
@@ -557,7 +557,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3.3}) h
                                                   \__shipout_drop_firstpage_...
 l.181 
        <./grpc.png>]
-<p4.png, id=361, 467.94826pt x 351.11176pt>
+<p4.png, id=366, 467.94826pt x 351.11176pt>
 File: p4.png Graphic file (type png)
 <use p4.png>
 Package pdftex.def Info: p4.png  used on input line 186.
@@ -572,7 +572,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3.4}) h
                                                   \__shipout_drop_firstpage_...
 l.219 
        <./p4.png>] [28]
-<mininet.png, id=382, 712.46175pt x 393.26926pt>
+<mininet.png, id=387, 712.46175pt x 393.26926pt>
 File: mininet.png Graphic file (type png)
 <use mininet.png>
 Package pdftex.def Info: mininet.png  used on input line 234.
@@ -584,17 +584,17 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3.5}) h
 l.251 \begin{itemize}
                       <./mininet.png>] [30] [31] [32]) (Policy.tex [33]
 Capitolo 4.
-<servizion constraints.png, id=415, 1362.59062pt x 582.67688pt>
+<servizion constraints.png, id=420, 1362.59062pt x 582.67688pt>
 File: servizion constraints.png Graphic file (type png)
 <use servizion constraints.png>
 Package pdftex.def Info: servizion constraints.png  used on input line 41.
 (pdftex.def)             Requested size: 429.3521pt x 183.59753pt.
-<policy 5 100.png, id=418, 1136.44576pt x 401.0985pt>
+<policy 5 100.png, id=423, 1136.44576pt x 401.0985pt>
 File: policy 5 100.png Graphic file (type png)
 <use policy 5 100.png>
 Package pdftex.def Info: policy 5 100.png  used on input line 59.
 (pdftex.def)             Requested size: 429.3521pt x 151.53157pt.
-<create new event ag.png, id=422, 298.716pt x 226.446pt>
+<create new event ag.png, id=427, 298.716pt x 226.446pt>
 File: create new event ag.png Graphic file (type png)
 <use create new event ag.png>
 Package pdftex.def Info: create new event ag.png  used on input line 78.
@@ -635,14 +635,14 @@ Capitolo 5.
 
 ]
 Capitolo 6.
-<odl/Potassium.png, id=460, 762.4485pt x 226.446pt>
+<odl/Potassium.png, id=465, 762.4485pt x 226.446pt>
 File: odl/Potassium.png Graphic file (type png)
 <use odl/Potassium.png>
 Package pdftex.def Info: odl/Potassium.png  used on input line 14.
 (pdftex.def)             Requested size: 429.3521pt x 127.51721pt.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 20.
-<odl/feature.png, id=461, 1088.26575pt x 237.88875pt>
+<odl/feature.png, id=466, 1088.26575pt x 237.88875pt>
 File: odl/feature.png Graphic file (type png)
 <use odl/feature.png>
 Package pdftex.def Info: odl/feature.png  used on input line 24.
@@ -674,53 +674,53 @@ Underfull \hbox (badness 10000) in paragraph at lines 115--118
 []\OT1/ptm/m/it/12 MEC\OT1/ptm/m/n/12 .  url: []$\OT1/cmtt/m/n/12 https : / / www . etsi . org / technologies /
  []
 
-[43]
-Underfull \hbox (badness 10000) in paragraph at lines 192--195
+[43] [44]
+Underfull \hbox (badness 10000) in paragraph at lines 203--206
 []\OT1/ptm/m/n/12 Modulo nic di odl.  []$\OT1/cmtt/m/n/12 https : / / test-[]odl-[]docs . readthedocs . io / en /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--195
+Underfull \hbox (badness 10000) in paragraph at lines 203--206
 \OT1/cmtt/m/n/12 stable-[]boron / user-[]guide / network-[]intent-[]composition-[](nic )
  []
 
-[44]
-Underfull \hbox (badness 10000) in paragraph at lines 208--211
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--226
 \OT1/cmtt/m/n/12 funding / funding-[]opportunities / funding-[]programmes-[]and-[]open-[]calls /
  []
 
 
-Underfull \hbox (badness 3354) in paragraph at lines 218--223
+Underfull \hbox (badness 3354) in paragraph at lines 233--238
 []\OT1/ptm/m/n/12 Daniel Adan-za, Lluis Gi-fre, Pol Ale-ma-ny, Juan-Pedro Fern[]andez-Palacios,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 247--250
+Underfull \hbox (badness 10000) in paragraph at lines 262--265
 []\OT1/ptm/m/n/12 Protocol buf-fer del-le com-po-nen-ti in te-ra-flow.  []$\OT1/cmtt/m/n/12 https : / / gitlab . com /
  []
 
 [45]
-Underfull \hbox (badness 1810) in paragraph at lines 303--307
+Underfull \hbox (badness 1810) in paragraph at lines 318--322
 []\OT1/ptm/m/n/12 Nikhil Han-di-gol Bob Lan-tz and Vi-mal Jeya-ku-mar Bran-don Hel-ler.  \OT1/ptm/m/it/12 In-tro-
  []
 
 
-Underfull \hbox (badness 2961) in paragraph at lines 303--307
+Underfull \hbox (badness 2961) in paragraph at lines 318--322
 \OT1/ptm/m/it/12 duc-tion to Mi-ni-net\OT1/ptm/m/n/12 .  url: []$\OT1/cmtt/m/n/12 https : / / github . com / mininet / mininet / wiki /
  []
 
-
-Underfull \hbox (badness 2088) in paragraph at lines 314--317
+[46]
+Underfull \hbox (badness 2088) in paragraph at lines 329--332
 []\OT1/ptm/m/n/12 D3.2: Fi-nal eva-lua-tion of life-cycle au-to-ma-tion and hi-gh per-for-man-ce sdn
  []
 
-[46]
-Underfull \hbox (badness 2080) in paragraph at lines 333--339
+
+Underfull \hbox (badness 2080) in paragraph at lines 348--354
 []\OT1/ptm/m/n/12 Wikipedia con-tri-bu-tors.  Abi-le-ne net-work --- Wi-ki-pe-dia, the free en-cy-clo-
  []
 
 
-Underfull \hbox (badness 2521) in paragraph at lines 341--343
+Underfull \hbox (badness 2521) in paragraph at lines 356--358
 []\OT1/ptm/m/n/12 Installazione open-day-light.  []$\OT1/cmtt/m/n/12 https : / / docs . opendaylight . org / en / latest /
  []
 
@@ -733,17 +733,17 @@ Package rerunfilecheck Info: File `tesi.out' has not changed.
 (rerunfilecheck)             Checksum: 7F8067C6A572D5E32139EBC9D2E310DE;2970.
  ) 
 Here is how much of TeX's memory you used:
- 15606 strings out of 474486
- 273361 string characters out of 5743755
+ 15612 strings out of 474486
+ 273434 string characters out of 5743755
  1951542 words of memory out of 5000000
- 37521 multiletter control sequences out of 15000+600000
+ 37524 multiletter control sequences out of 15000+600000
  580224 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  123i,19n,121p,788b,1177s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on tesi.pdf (48 pages, 1876433 bytes).
+Output written on tesi.pdf (48 pages, 1878690 bytes).
 PDF statistics:
- 611 PDF objects out of 1000 (max. 8388607)
- 151 named destinations out of 1000 (max. 500000)
+ 616 PDF objects out of 1000 (max. 8388607)
+ 154 named destinations out of 1000 (max. 500000)
  226 words of extra memory for PDF output out of 10000 (max. 10000000)
 

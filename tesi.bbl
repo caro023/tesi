@@ -188,10 +188,25 @@ Gonzalez Carlos~Javier.
 Lfnetworking.
 \newblock \url{https://lfnetworking.org/}.
 
+\bibitem{tesiodl}
+Giacomo Ondesca.
+\newblock {\em Monitoraggio di rete con tecnologie SDN (Software-Defined
+  Networking)}.
+\newblock PhD thesis, Politecnico di Torino, 2021.
+
+\bibitem{tesiodl2}
+Benedetta Contigiani.
+\newblock {\em Improving network management with Software-Defined Networking}.
+\newblock PhD thesis, Università degli studi di Camerino, 2016.
+
 \bibitem{nic}
 Modulo nic di odl.
 \newblock
   \url{https://test-odl-docs.readthedocs.io/en/stable-boron/user-guide/network-intent-composition-(nic)-user-guide.html#}.
+
+\bibitem{NICProposal}
+Confluence.
+\newblock Network intent composition proposal, 2021.
 
 \bibitem{archtfs}
 Alberto Mozo, Amit Karamchandani, Luis Cal, Sandra Gómez-Canaval, Antonio
