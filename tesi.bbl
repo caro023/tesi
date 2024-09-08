@@ -263,6 +263,11 @@ Protocol buffer delle componenti in teraflow.
 \newblock
   \url{https://gitlab.com/teraflow-h2020/controller/-/tree/develop/proto}.
 
+\bibitem{D32}
+D3.2: Final evaluation of life-cycle automation and high performance sdn
+  components.
+\newblock {\em teraflow-h2020.eu}, 2023.
+
 \bibitem{grafana}
 Grafana.
 \newblock \url{https://grafana.com/}.
@@ -324,11 +329,6 @@ Nikhil~Handigol Bob~Lantz and Vimal~Jeyakumar Brandon~Heller.
 {Mininet.org}.
 \newblock {\em Mininet Walkthrough}.
 \newblock url: \url{https://mininet.org/walkthrough/}.
-
-\bibitem{D32}
-D3.2: Final evaluation of life-cycle automation and high performance sdn
-  components.
-\newblock {\em teraflow-h2020.eu}, 2023.
 
 \bibitem{demo}
 Panagiotis Famelis, Georgios~P. Katsikas, Vasilios Katopodis, Carlos Natalino,

@@ -6,57 +6,69 @@
     \caption{Architettura di TeraFlow \cite{archtfs}}
     \label{fig:tfs}
 \end{figure}
-Il controller SDN su cui ci focalizzeremo è TeraFlow \cite{TeraFlow}. 
-\\TeraFlow è stato finanziato dall'unione europea nell'ambito del programma di ricerca e innovazione Horizon 2020\cite{Horizon} e supportato dal 5G PPP\cite{5GPPP}, un'iniziativa congiunta tra la Commissione Europea e l'industria europea delle telecomunicazioni.
+Il controller SDN su cui ci focalizzeremo è TeraFlow \cite{TeraFlow}, una piattaforma innovativa e recentemente proposta, sviluppata da un'ampia comunità open source nell'ambito di un progetto europeo. 
+\\Infatti è stato finanziato dall'unione europea per il programma di ricerca e innovazione Horizon 2020 \cite{Horizon} e supportato dal 5G PPP \cite{5GPPP}, un'iniziativa congiunta tra la Commissione Europea e l'industria europea delle telecomunicazioni.
 %Nonostante la quantità di controller SDN i fondatori di TeraFlow hanno riscontrato che molte delle soluzioni attuali sono costituite da un software monolitoco
 %in grado di sincronizzarsi con altri controller SDN distribuiti tramite protocolli specifici.
 %Il problema principale dei controller SDN `e il basso numero di contribuzioni che negli ul-timi anni o mesi si stanno sempre di pi`u diradando
-Nonostante la quantità di controller SDN i fondatori di TeraFlow hanno riscontrato come problema comune il declino delle contribuzioni negli ultimi anni. 
-Di conseguenza, i nuovi bisogni e requisiti delle reti moderne che si stanno sviluppando in questo momento non saranno più supportati.
+Nonostante la quantità di controller SDN i fondatori di TeraFlow hanno riscontrato come problema comune il calo delle contribuzioni ai progetti negli ultimi anni. 
+Questo declino mette a rischio il continuo sviluppo e supporto per i nuovi bisogni e requisiti delle reti moderne lasciando molte soluzioni esistenti inadeguate per affrontare le sfide emergenti.
 \\L'obiettivo di TeraFlow è implementare un controller che soddisfi i requisiti attuali ed eventualmente futuri, sia architetturali che infrastrutturali, per le reti.
-Il controller mira a migliorare le capacità di elaborazione dei flussi consentendo la gestione di oltre un Tera di servizi di connettività, questo rappresenta una capacità cruciale per supportare le esigenze delle reti B5G. 
-Per raggiungere questo scopo è necessaria una contribuzione attiva 
-%(active develop) 
-da parte degli utenti. A tal fine TeraFlow è un progetto OpenSource 
-al quale tutti i membri della comunità ETSI (European Telecommunications Standard Institute) \cite{etsi} possono contribuire. 
-\\Un ulteriore proposito è di riuscire a diminuire il gap tra ciò che le industrie richiedono e ciò che si può ricavare dagli standard SDN.
-Questo controller, che è ancora in fase di sviluppo, sarà in grado di integrarsi con gli attuali framework NFV e MEC e fornire l'integrazione delle 
-apparecchiature di rete ottica e a microonde. E' inoltre in grado di interfacciarsi con altri controller come ONOS, ma anche altre istanze di TeraFlow che gestiscono diversi domini, per poter sfruttare funzionalità non ancora implementate e comunicare con le altre reti.
-\\A differenza dei controller presentati precedentemente con un'architettura monolitica, TeraFlow ha un'architettura nativa cloud basata su container, tecniche di virtualizzazione leggera che consentono di isolare le componenti utilizzando una minore quantità di risorse ripetto alle VM (Virtual Machine).
-L'ambiente creato da un contenitore integra sia il codice di esecuzione del microservizio che le sue dipendenze. 
-Questi container sono sviluppati sopra Kubernetes, un orchestratore responsabile dell'allocazione delle risorse in termini di capacità di calcolo, memoria e archiviazione\cite{arttfs}.
-Kubernetes presenta diverse funzionalità che garantiscono al controller dinamicità, autoriparazione, integrità e bilanciamento del carico \cite{D53} \cite{D14}.
-L'ambiente è sviluppato presso la sede del CTTC a Barcellona. 
-\\Ogni container, o componente, ha delle responsabilità specifiche e definisce un microservizio che interagisce con gli altri attraverso la connessione di rete rendendo il controller disaggregato.
-Le componenti principali sono implementate in Java (solo quelle di Automation e Policy) e Python.
-\\Per ottimizzare l'accesso concorrente e gestire la configurazione di rete, TeraFlow utilizza una componente chiamata Context. Questa componente memorizza la configurazione di rete, inclusi topologie, dispositivi, 
-collegamenti e servizi, in un database No-SQL\cite{D31}. La componente garantisce la coerenza dei dati gestiti dai vari componenti del controller SDN.
-\\La componente di Monitoring gestisce invece le diverse metriche configurate per le apparecchiature e i servizi di rete memorizzando i dati di monitoraggio relativi alle Key Performance Indicators (KPI) selezionate.
-I servizi sono semplici e dettagliati rendendo possibile l'uso di protocolli leggeri.
-Dal punto di vista della sicurezza utilizza un sistema di Machine Learning per la prevenzione e la mitigazione di attacchi.
+Il controller mira a migliorare le capacità di elaborazione dei flussi permettendo di gestire un volume di traffico equivalente a un terabit al secondo. 
+Questa capacità è cruciale per supportare le elevate esigenze di connettività delle reti B5G.
+%TeraFlow è un progetto OpenSource 
+%al quale tutti i membri della comunità ETSI (European Telecommunications Standard Institute) \cite{etsi} possono contribuire. 
+\\Un ulteriore obiettivo è ridurre il divario tra le esigenze delle industrie e le capacità offerte dagli standard SDN.
+Questo controller, attualmente in fase di sviluppo, sarà progettato per integrarsi con gli attuali framework NFV e MEC.
+Inoltre, si prevede che supporti l'integrazione delle 
+apparecchiature di rete ottica e a microonde, e che sarà compatibile con altri controller come ONOS, ma anche con istanze multiple di TeraFlow che gestiscono diversi domini, al fine di sfruttare funzionalità avanzate e facilitare l'interoperabilità con altre reti.
+\\A differenza dei controller presentati precedentemente TeraFlow è stato progettato con un'architettura cloud-native, pensata per sfruttare appieno gli ambienti cloud.
+Questo approccio consente una maggiore flessibilità e scalabilità rispetto ai sistemi tradizionali, grazie alla suddivisione delle applicazioni in microservizi che possono essere gestiti, distribuiti e aggiornati in modo indipendente.
+Ciò differenzia TeraFlow dai controller modulari tradizionali, che non sono stati progettati con la stessa capacità di adattamento ai moderni requisiti delle reti.
+\\L'uso di container, una tecninca di virtualizzazione leggera, permette di isolare ogni microservizio utilizzando una minore quantità di risorse rispetto alle macchine virtuali (VM).
+Ciascun microservizio interagisce con gli altri attraverso la connessione di rete rendendo il controller disaggregato.
+L'ambiente creato da un container include sia il codice di esecuzione che le sue dipendenze. %codice del microservizio
+Questi container sono gestiti tramite Kubernetes, un orchestratore responsabile dell'allocazione delle risorse in termini di capacità di calcolo, memoria e archiviazione\cite{arttfs}.
+Kubernetes offre diverse funzionalità che garantiscono dinamicità, autoriparazione, integrità e bilanciamento del carico \cite{D53} \cite{D14}.
+%\\Ogni container, o componente, ha delle responsabilità specifiche e definisce un microservizio che 
+Le componenti principali del sistema sono implementate in Java (solo quelle di Automation e Policy) e Python e l'ambiente è sviluppato presso la sede del CTTC a Barcellona. 
+%\\TeraFlow si propone di affrontare le sfide delle reti moderne attraverso un'architettura innovativa e la collaborazione attiva della comunità. 
+L'obiettivo di TeraFlow è sviluppare un controller SDN Carrier Grade (reti o infrastrutture ben testate con livelli estremamente elevati di affidabilità, ridondanza e sicurezza) per le reti B5G che automatizzi la gestione della rete e sia in grado di scalare per gestire miliardi di dispositivi.
+\\Inoltre, TeraFlow mira a ottimizzare l'uso delle risorse di rete per migliorare l'efficienza energetica e ridurre i costi operativi.
+\\Per gestire la configurazione di rete, TeraFlow utilizza una componente chiamata Context che memorizza la configurazione di rete, inclusi topologie, dispositivi, 
+collegamenti e servizi, in un database No-SQL\cite{D31}. Questa componente garantisce la coerenza dei dati gestiti dai vari componenti del controller SDN.
+\\La componente di Monitoring gestisce le diverse metriche configurate per le apparecchiature e i servizi di rete memorizzando i dati di monitoraggio relativi alle Key Performance Indicators (KPI) selezionate.
+I servizi sono progettati per essere semplici e dettagliati, ciò è reso possibile grazie all'uso di protocolli leggeri.
+Dal punto di vista della sicurezza il sistema utilizza un approccio basato sul Machine Learning per la prevenzione e la mitigazione degli attacchi.
 \\Altri elementi fondamentali del controller sono rappresentati da\cite{D22}:
 \begin{itemize} 
-    \item \textbf{usabilità}: realizzata grazie l'interfaccia utente webui che consente la configurazione di servizi predefiniti e la possibilità di visualizzare le metriche in modo personalizzabile in base alle esigenze.
-    \item \textbf{scalabilità}: è intrinseca nel design del controller con la replicazione automatica di miscroservizi per gestire elevati volumi di richieste in ingresso.
-    \item \textbf{affidabilità}: garantita attraverso robusti meccanismi di monitoraggio che supervisionano lo stato dei miscroservizi e dei flussi attivando automaticamente dei processi di ripristino se necessari.
+    \item \textbf{usabilità}: realizzata grazie a un'interfaccia utente web (web UI) che consente la configurazione di servizi predefiniti e visualizzazione personalizzabile delle metriche.
+    \item \textbf{scalabilità}: è intrinseca nel design del controller con la replicazione automatica dei miscroservizi per gestire elevati volumi di richieste in ingresso.
+    \item \textbf{affidabilità}: garantita attraverso robusti meccanismi di monitoraggio che supervisionano lo stato dei miscroservizi e dei flussi, attivando automaticamente dei processi di ripristino se necessari.
 \end{itemize}
-TeraFlow si propone di affrontare le sfide delle reti moderne attraverso un'architettura innovativa e la collaborazione attiva della comunità. 
-Il suo focus è sviluppare un controller SDN Carrier Grade (reti o infrastrutture ben testate con livelli estremamente elevati di affidabilità, ridondanza e sicurezza) per le reti B5G che automatizzi la gestione della rete e sia in grado di scalare per gestire miliardi di dispositivi.
-\\Inoltre, TeraFlow mira a ottimizzare l'uso delle risorse di rete per migliorare l'efficienza energetica e ridurre i costi operativi.
-\\Questo progetto riveste un ruolo chiave nel panorama delle tecnologie 5G, contribuendo a unire diverse università e istituti di ricerca per sviluppare soluzioni all'avanguardia
+Questo progetto riveste un ruolo chiave nel panorama delle tecnologie 5G, contribuendo a unire diverse università e istituti di ricerca per sviluppare soluzioni all'avanguardia
 lavorando con organismi di standardizzazione per garantire l'adozione su scala globale.
 %L'architettura è basata su microservizi interconnessi da un bus grpc.
 \section{Componenti}
-Le componenti TeraFlow sono classificate in due categorie; le componenti principali del sistema operativo e le netapp sovrapposte \cite{Component}. 
-Implementano tutte delle interfacce di comunicazione all'avanguardia indipendenti dal linguaggio di programmazione 
-per formare un potente sistema operativo di rete (Network Operating Sistem 'NOS') che fornisce servizi di connettività sulle infrastrutture di rete programmabili più avanzate tra cui P4, OpenConfig, TAPI...
-\\TeraFlow utilizza un bus gRPC (Google Remote Procedure Call) come protocollo interno per la 
-comunicazione tra di esse. Questo protocollo è stato preferito a REST per la sua capacità più concreta di descrivere le interazioni tra entità in modo efficiente e preciso.
-gRPC sfrutta i Protocol Buffers per definire in modo preciso gli schemi dei messaggi condivisi e scambiati tra le componenti,  consentendo ai vari servizi di implementare le adeguate funzioni di comunicazione indipendentemente dalla piattaforma e dal linguaggio.
-Ogni componente di TeraFlow implementa i propri Protocol Buffers. Questi si possono trovare nella pagina dedicata del sito \cite{ProtoBuf}.
-\\TeraFlow fornisce, inoltre, funzionalità di automazione SDN avanzate basate su policy e parti interessate. Nello specifico, TeraFlow Automation sfrutta 
-importanti eventi di sistema per realizzare la (ri)configurazione di servizi e dispositivi in modo zero-touch, contribuendo così notevolmente alla riduzione delle spese operative per gli operatori di rete\cite{Component}.
-
+Le componenti di TeraFlow sono classificate in due categorie; le componenti principali del sistema operativo e le netapp sovrapposte \cite{Component}. 
+Le componenti del sistema operativo di rete (Network Operating System - NOS) formano la base dell'infrastruttura di TeraFlow, offrendo servizi di connettività per infrastrutture di rete programmabili avanzate. %sistema operativo si riferisce al controller e le sue componenti principali-> gestisce e coordina le funzioni di rete
+Queste infrastrutture sono basate su tecnologie come P4 (Programming Protocol-independent Packet Processors), OpenConfig e TAPI (Transport API), che forniscono modalità flessibili e programmabili per gestire il traffico di rete e le configurazioni.
+\\Le netapp sovrapposte sono applicazioni che operano sopra il livello del NOS, sfruttando le interfacce di comunicazione, indipendentemente dal linguaggio di programmazione, per interagire con le infrastrutture di rete.
+Queste applicazioni possono includere strumenti per il monitoraggio, la gestione della qualità del servizio, e altre funzionalità.
+\\Per garantire l'interoperabilità tra le diverse componenti, TeraFlow utilizza un bus gRPC (Google Remote Procedure Call) come protocollo interno, 
+un framework che consente la comunicazione tra servizi in modo efficiente e preciso. 
+%Questo protocollo è stato preferito a REST per la sua capacità più concreta di descrivere le interazioni tra entità in modo efficiente e preciso.
+gRPC sfrutta i Protocol Buffers per definire in modo preciso gli schemi dei messaggi condivisi e scambiati tra le componenti. %,consentendo ai vari servizi di implementare le adeguate funzioni di comunicazione indipendentemente dalla piattaforma e dal linguaggio.
+I Protocol Buffers utilizzati sono dettagliati nella pagina dedicata del sito \cite{ProtoBuf}.
+\\Inoltre, TeraFlow fornisce funzionalità di automazione SDN avanzate basate su policy e parti interessate. Nello specifico, TeraFlow Automation sfrutta 
+importanti eventi di sistema per realizzare la (ri)configurazione di servizi e dispositivi in modo zero-touch, ossia minimizzando l'intervento umano attraverso l'automazione completa della configurazione e della gestione dei servizi e dei dispositivi.
+Questo approccio contribuisce significativamente alla riduzione delle spese operative, poiché riduce la necessità di interventi manuali e accelera i processi di configurazione e manutenzione.\cite{Component}.
+\\Le componenti di TeraFlow sono suddivise in diversi livelli di astrazione per facilitare la gestione della rete:
+\begin{itemize}
+\item Device Level Abstraction: fornisce un'astrazione dei dispositivi fisici presenti, consentendo al controller di interagire con diverse tipologie di hardware.
+\item Service Level Abstraction: focalizzato sulla gestione e configurazione dei servizi, questo livello gestisce le interazioni con l'SBI (Southbound Interface) per fornire un'interfaccia unificata.
+\item Management Level Abstraction: realizza la gestione complessiva della rete, che include il monitoraggio, il controllo e la manutenzione dei servizi e dei dispositivi gestiti tramite SBI, garantendo un controllo centralizzato dell'infrastruttura.
+\end{itemize}
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{componenti.png}
@@ -71,19 +83,28 @@ Il Device Level Abstraction permette l'interazione con i dispositivi presenti al
 Una componente fondamentale per questo livello di astrazione è la componente SBI.
 Per far comunicare più tipi di device possibili con il controller la componente presenta eterogeneità offrendo supporto a differenti protocolli.
 Il suo compito principale è stabilire una connessione con i dispositivi per integrarli nell'ecosistema del controller
-e essere in grado di configurarli dinamicamente a tempo di esecuzione. 
+e essere in grado di configurarli dinamicamente a tempo di esecuzione \cite{D32}. 
 Dopo aver stabilito la connessione con un determinato dispositivo e aver verificato la disponibilità,
-la componente offre una API che permette di mandare in input le configurazioni scelte dal controller TeraFlow tramite un file JSON. 
-Il controller provvederà a inserire le giuste entry nelle tabelle degli switch o router pertinenti.
+la componente offre una API che consente di inviare le configurazioni scelte dal controller al dispositivo sotto forma di file JSON.
+In questo modo, il dispositivo riceve istruzioni per configurare i suoi parametri operativi in linea con le politiche definite a livello di rete. 
+%Il controller provvederà a inserire le giuste entry nelle tabelle degli switch o router pertinenti.
 %Per questo viene introdotta la componente di monitoring che servirà da supporto per il Management-level Abstraction.
 %che interagisce con la il network equipment attraverso pluggable drivers.
 %OpenFlowOpenConfig-based routers
 \\Un'altra componente che fa parte di questo livello è quella di monitoring il cui compito è offrire supporto al Management-level.
 E' essenziale per l'automazione dei servizi e per prendere le decisioni in tempo reale sulla base di eventi.
 Questa componente interagisce con i dispositivi per catturare lo stato della rete attraverso delle KPI (Key Performance Indicators) persistendo le informazioni all'interno di un database. %necessari per l'esposizione e l'utilizzo da parte delle altre componenti.
-Quando un valore KPI registrato supera determinate soglie predefinite, la componente di Monitoring utilizza il canale API degli eventi del controller per notificare le componenti interessate.
+Quando un valore KPI registrato supera determinate soglie predefinite, la componente di Monitoring utilizza il sistema di gestione degli eventi del controller, un'API dedicata alla gestione e distribuzione di notifiche riguardanti eventi di rete.
+Questa API permette al controller di notificare in tempo reale le altre componenti del sistema (ad esempio, quelle di gestione o sicurezza) sugli eventi critici, consentendo interventi tempestivi e automatizzati.
 Ogni evento è composto da una KPI che identifica la regola a cui si riferisce, un timestamp e un KPIValue, che rappresenta il valore della metrica monitorata in tempo reale richiesta dalla KPI al momento specificato dal timestamp.
-\\Per il corretto funzionamento la componente di Monitoring deve essere in grado di recuperare le metriche da tutti i diversi dispositivi monitorati.
+Supponendo che la componente di Monitoring stia monitorando la latenza di un collegamento di rete tramite una KPI denominata "Latency" e che la latenza massima accettabile sia 100ms,
+se la latenza supera questa soglia, ad esempio 120ms, viene generato un evento così composto: 
+\begin{itemize}
+    \item KPI: "Latency"
+    \item Timestamp: "06-09-2024 14:35:20" (la data e l'ora a cui si è verificato l'evento)
+    \item KPIValue: 120 ms
+\end{itemize}
+Per il corretto funzionamento la componente di Monitoring deve essere in grado di recuperare le metriche da tutti i diversi dispositivi monitorati.
 Questi implementano spesso protocolli diversi per notificare le KPI, per questo motivo sono stati inclusi una serie di sottomoduli che si connettono 
 agli elementi monitorati utilizzando i protocolli SBI necessari. I dati estratti vengono memorizzati nel Metrics Database così da poter fornire dati dimensionali 
 con serie temporali visualizzabili su Grafana \cite{grafana}.
@@ -92,9 +113,15 @@ Tuttavia quanto si tratta di gestire topologie più complesse che coinvolgono mo
 \subsection{Service Level Abstraction}
 Il Service Level è responsabile della creazione e dell'aggiornamento dei servizi di rete.
 Questo livello di astrazione permette agli utenti di definire intenti specifici per la connessione tra gli end-points attraverso la componente di Service.
+Per svolgere questo compito, la componente si avvale di diverse funzionalità offerte dalle altre parti del sistema.
+In particolare, per il calcolo dei percorsi di rete, si affida alla componente PathComp (Path Computation).
+Ad esempio, se un intento richiede la creazione di una connessione con una latenza minima tra due nodi specifici, 
+la componente invia una richiesta a PathComp, che calcola il percorso ottimale basato su parametri come la larghezza di banda o la latenza.
+Una volta ricevuta la risposta, la componente di Service utilizza uno scheduler per configurare i dispositivi di rete lungo il percorso selezionato, utilizzando le connessioni restituite dalla PathComp \cite{D32}.
+Queste regole vengono poi propagate all'interfaccia Southbound (SBI) attraverso dei file JSON, consentendo una configurazione automatizzata della rete e permettendo di astrarre la complessità del livello sottostante all'utente.
 %Un utente può selezionare un path scelto o chiedere al controller di determinarne uno che rispetti determinati requisiti. 
-La componente di Service supporta diversi tipi di servizi ed è in grado di utilizzare vari protocolli per configurare i dispositivi di rete.
-Implementa inoltre una Service Handler API che consente agli operatori di rete di definire i comportamenti necessari per ciascun tipo di servizio.
+\\La componente di Service supporta diversi tipi di servizi ed è in grado di utilizzare vari protocolli per configurare i dispositivi di rete.
+Implementa inoltre una Service Handler API che consente agli operatori di rete di definire i comportamenti necessari per ciascun tipo di servizio \cite{D32}.
 \begin{itemize}
     \item \textbf{L2-VPN}: servizio per dispositivi OpenConfig
     \item \textbf{L3-VPN}: servizio per dispositivi emulati o OpenConfig con supporto per ACLs
@@ -102,19 +129,22 @@ Implementa inoltre una Service Handler API che consente agli operatori di rete d
     \item \textbf{L2 service Handler}: servizio per dispositivi P4
     \item \textbf{Microwave service Handler}
 \end{itemize}
-La componente ha al suo interno un blocco gRPC che espone una NBI al resto delle componenti del controller. 
-Gestisce i vari servizi inviando richieste di calcolo del percorso alla PathComp e successivamente, grazie a uno scheduler, si occupa di
-configurare i dispositivi in base alle connessioni restituite. Questo permette di astrarre la complessità del livello sottostante all'utente
-in quanto la componente è in grado di tradurre l'intento in un insieme di regole che vengono propagate all'SBI attraverso dei file JSON.
-\\La componente PathComp (path computation) si occupa di gestire la selezione del percorso tra gli end-points per i servizi di connettività di rete. 
+%La componente descritta ha al suo interno un blocco gRPC che espone una NBI per consentire l'interazione con le altre componenti del controller.  
+%Gestisce i vari servizi inviando richieste di calcolo del percorso alla PathComp e successivamente, grazie a uno scheduler, si occupa di
+%configurare i dispositivi in base alle connessioni restituite. Questo permette di astrarre la complessità del livello sottostante all'utente
+%in quanto la componente è in grado di tradurre l'intento in un insieme di regole che vengono propagate all'SBI attraverso dei file JSON.
+Un'altra componente che fa parte di questo livello è la PathComp. Questa si occupa di gestire la selezione del percorso tra gli end-points per i servizi di connettività di rete. 
 Riceve richieste dalla componente di Service e, interagendo con la componente di Context, recupera le informazioni sulle topologie sottostanti al fine di creare
 percorsi che soddisfino i requisiti del servizio di rete richiesto.
 La PathComp rappresenta un'entità singola e specializzata dove possono essere ospitati diversi algoritmi. Questo permette che qualsiasi nuovo algoritmo utilizzato non impatti su altre componenti del controller.
-Per confrontare i percorsi viene utilizzato inizialmente un algoritmo regolare K-SP dove i k percorsi sono ordinati per numero di passi (hop), ritardo end-to-end e larghezza di banda disponibile sul link più congestionato. 
+Per confrontare i percorsi viene utilizzato inizialmente un algoritmo K-SP dove i k percorsi sono ordinati per numero di passi (hop), ritardo end-to-end e larghezza di banda disponibile sul link più congestionato \cite{D53}. 
+%La specifica "regolare" sottolinea che l'algoritmo non tiene conto di ottimizzazioni aggiuntive, come ad esempio la minimizzazione del consumo energetico lungo il percorso, che invece sarebbe un obiettivo nell'approccio comparativo descritto nel documento citato.
 %Una volta scelto il percorso viene calcolato il risultato della power path con l'approccio EAR.
-Per automatizzare e rendere reattivo questo processo agli eventi che si verificano nello stato della rete, è essenziale introdurre un ulteriore livello di astrazione.
 %Per astrarre la complessità del livello sottostante all'utente la componente di service è in grado di tradurre l'intento in un insieme di regole che propaga all'SBI (sempre attraverso file JSON)
 %cosicchè venga configurato ogni device all'interno del percorso per stabilire la connessione.
+\\Il service layer permette al controller di tradurre gli intenti in regole concrete che vengono poi propagate al livello sottostante tramite l'SBI.
+Tuttavia, da solo non ha la capacità di rispondere dinamicamente agli eventi che si verificano nella rete in tempo reale, come il cambiamento dello stato di un collegamento o di una risorsa di rete. %congestionamento o guasto
+Per essere in grado di creare, aggiornare o cancellare i servizi di rete in base a tali eventi è necessario introdurre un ulteriore livello di astrazione che automatizzi queste operazioni: il Management Level Abstraction.
 
 \subsection{Management Level Abstraction}
 Questo livello di astrazione è stato introdotto per consentire l'interazione dinamica con la componente di Service per la creazione, l'aggiornamento o l'eliminazione di un servizio in risposta agli eventi notificati.
@@ -135,6 +165,12 @@ Una regola di politica può avere vari stati:
     \item \textbf{actively enforced} (attivamente applicata)
     \item \textbf{failed} (fallita)
 \end{itemize}
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{diagramma policy.png}
+    \caption{Macchina a stati interna alla componente di policy \cite{D32}}
+    \label{fig:diagramma}
+\end{figure}
 %La componente di policy utilizza inoltre il paradigma publish-subscribe per associare dinamicamente condizioni di politica agli eventi rilevati
 %che richiedono azioni immediate.
 L'integrazione della componente di Policy con quella di Monitoring ha reso quindi possibile l'associazione delle condizioni di politica con gli allarmi del sistema di Monitoring.
