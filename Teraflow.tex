@@ -147,16 +147,28 @@ Tuttavia, da solo non ha la capacità di rispondere dinamicamente agli eventi ch
 Per essere in grado di creare, aggiornare o cancellare i servizi di rete in base a tali eventi è necessario introdurre un ulteriore livello di astrazione che automatizzi queste operazioni: il Management Level Abstraction.
 
 \subsection{Management Level Abstraction}
-Questo livello di astrazione è stato introdotto per consentire l'interazione dinamica con la componente di Service per la creazione, l'aggiornamento o l'eliminazione di un servizio in risposta agli eventi notificati.
-Una delle componenti fondamentali che ne fanno parte è la componente di Policy.
-Si occupa di definire condizioni di politica che possono essere aplicate sia a livello di singoli dispositivi che a livello di dominio della rete.
-Le politiche possono includere più regole collegate tra loro tramite condizioni AND/OR.
-\\Ogni regola è composta da una KPI che la identifica, un operatore numerico di paragone e un KPIValue, che rappresenta, insieme all'operatore numerico, l'insieme dei valori accettabili o non per quella determinata metrica.
-Quando le condizioni definite dalla politica sono verificate (ad esempio, il KPIValue identificato per la latenza supera il valore massimo indicato), la componente di Monitoring
-genera degli allarmi. Questi allarmi vengono inviati al componente di origine per poi eseguire l'azione predefinita specificata nella politica (ad esempio ricalcolo del percorso).
-Questo meccanismo consente al controller di reagire agli eventi e di ripristinare un set di dispositivi ad uno stato desiderato.
-\\Quando nella policy è specificato l'id del servizio, la componente interroga il database di contesto per recuperare l'insieme di dispositivi attraverso i quali transita il servizio.
-In caso contrario la componente itera su una lista di dispositivi per identificare quali devono rispettare la politica di input.
+Questo livello di astrazione è stato introdotto per consentire l'interazione dinamica con la componente di Service permettendo la creazione, l'aggiornamento o l'eliminazione automatica di un servizio in risposta agli eventi provenienti dalla rete.
+In altre parole, il sistema non si limita a configurare i dispositivi solo su input manuali o su richiesta esplicita, ma è in grado di adattarsi dinamicamente ai cambiamenti dello stato della rete in tempo reale. 
+Questo livello consente dunque al controller di reagire rapidamente a eventi come congestioni, guasti o modifiche nella topologia, garantendo che la rete mantenga un alto livello di efficienza e affidabilità.
+\\Una delle componenti principali è la componente di Monitoring. Essa ha il compito di raccogliere metriche da diverse componenti
+monitorate attraverso moduli che si interfacciano con i relativi protocolli.
+I dati estratti vengono memorizzati in un Metrics Database che supporta meccanismi di aggregazione per analizzare le informazioni e consente di monitorare l'evoluzione dei dati nel tempo.
+Quando una KPI supera una soglia definita precedentemente, il sistema genera un allarme.
+Questo allarme viene inviato alla componente responsabile della gestione di quel servizio specifico, ossia alla componente che ha originariamente richiesto il monitoraggio della specifica metrica all'interno del controller.
+\\Un'altra componente fondamentale è quella di Policy, che interagisce strettamente con la componente Monitoring.
+\\Si occupa di definire condizioni di politica che possono essere aplicate sia a livello di singoli dispositivi che a livello di dominio della rete.
+Le politiche possono includere più regole collegate tra loro tramite condizioni logiche di AND/OR \cite{D32}, ognuna delle quali genera una KPI specifica da far monitorare alla componente di Monitoring.
+\\Ogni regola è composta da una KPI che la identifica, un operatore numerico di confronto, e un KPIValue.
+Quest'ultimo, in combinazione con l'operatore numerico, definisce l'intervallo di valori accettabili o non accettabili per quella specifica metrica.
+\\Se le regole definite nella politica vengono soddisfatte la componente di Monitoring genera un allarme che viene inviato, in questo caso, alla componente di Policy, che reagisce attivando le azioni predefinite.
+Ad esempio, se si verifica un eccesso di latenza, la componente di Policy può attivare il ricalcolo del percorso tramite la componente di Service o altre azioni correttive.
+%Tutte queste regole vengono archiviate nel Metrics Database che fornisce anche l'evoluzione dei dati nel tempo.
+%Un'ulteriore componente di questo livello è quella di Monitoring che quando rileva che una condizione impostata in una politica viene soddisfatta (ad esempio, un valore di latenza supera una soglia prestabilita), essa genera un allarme.
+%Questo allarme viene inviato alla componente responsabile della gestione di quel servizio o flusso specifico all'interno del controller, che è in grado di eseguire l'azione predefinita specificata nella politica.
+%Ad esempio, nel caso di un eccesso di latenza, l'allarme viene inviato alla componente di Service, la quale può poi attivare il ricalcolo del percorso o altre azioni correttive.
+\\Questo meccanismo consente al controller di reagire in modo efficace agli eventi e di ripristinare uno stato desiderato per i dispositivi.
+La componente Policy utilizza il Context Database per identificare quali dispositivi o servizi sono coinvolti nella politica.
+Se viene fornito l'ID del servizio, la componente recupera i dispositivi associati a quel servizio, in caso contrario la componente scansiona una lista di dispositivi per individuare quelli che devono rispettare le regole impostate. 
 Una regola di politica può avere vari stati:
 \begin{itemize}
     \item \textbf{inserted} (inserita)
@@ -173,7 +185,10 @@ Una regola di politica può avere vari stati:
 \end{figure}
 %La componente di policy utilizza inoltre il paradigma publish-subscribe per associare dinamicamente condizioni di politica agli eventi rilevati
 %che richiedono azioni immediate.
-L'integrazione della componente di Policy con quella di Monitoring ha reso quindi possibile l'associazione delle condizioni di politica con gli allarmi del sistema di Monitoring.
+L'integrazione della componente di Policy con quella di Monitoring ha reso possibile l'associazione delle condizioni di politica con gli allarmi del sistema di Monitoring.
+Ad esempio, una politica potrebbe stabilire che, se la latenza di rete supera i 50 ms per più di 10 minuti, il sistema deve ricalcolare il percorso per ridurre la congestione. 
+In questo caso, la componente Monitoring rileva l’aumento della latenza, genera un allarme e lo invia alla componente Policy. Quest'ultima, verificando che le condizioni della regola 
+siano soddisfatte, attiva la componente Service per ricalcolare automaticamente il percorso e riconfigurare i dispositivi coinvolti.
 
 %Si occupa di creare un service level agreement (SLA) per uno specifico servizio identificato tramite un id.
 %A questo punto verrà creato un evento e si eseguiranno delle azioni prestabilite dal controller fino ai dispositivi per gestire i problemi o cambiare il servizio. 
