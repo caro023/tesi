@@ -1,13 +1,35 @@
 \chapter{Studio e sperimentazione della gestione di policy in Teraflow}
 \label{cap:policy}
-Lo scopo della tesi è quello di stabilire una connessione tra due end points nella rete che rispetti determinate caratteristiche
-a tempo di esecuzione utilizzando il controller SDN Teraflow.
-Inizialmente, attraverso il Service Level, è stato introdotto un servizio nella rete sotto forma di intento per stabilire la connessione e il percorso. 
-Successivamente, tramite il Management Level, è stata inserita una politica basata sugli eventi. Questa politica permette agli operatori 
-di associare a un servizio scelto un service level agreement (SLA) con specifiche condizioni che devono essere rispettate durante l'esecuzione.
+%Lo scopo della tesi è quello di stabilire una connessione tra due end points nella rete che rispetti determinate caratteristiche
+%a tempo di esecuzione utilizzando il controller SDN Teraflow.
+In questo Capitolo verranno esposti i vari esperimenti eseguiti utilizzando il controller SDN TeraFlow per quanto riguarda la gestione degli intenti.
+Nella fase iniziale si è seguito l'Hackfest 3 \cite{hackfest} dove è stato fornito un ambiente pre-configurato per testare TeraFlow SDN. 
+Il lavoro è iniziato con l'installazione della macchina virtuale \cite{VM} creata appositamente per il congresso.
+%Gli esperimenti sono stati svolti all'interno di un'infrastruttura virtualizzata configurata per eseguire sia TeraFlow che Mininet, permettendo di simulare e analizzare vari scenari di rete.
+%La macchina virtuale (VM) utilizzata inizialmente per gli esperimenti è stata quella utilizzata durante l'Hackfest 3 \cite{hackfest}, dove è stato fornito un ambiente pre-configurato per testare TeraFlow SDN. 
+Di seguito vengono riportate le specifiche della VM utilizzata:
+\begin{itemize}
+    \item IP Address: 10.0.2.X/24 (DHCP)
+    \item Gateway: 10.0.2.1
+    \item DNS: 8.8.8.8, 8.8.4.4
+    \item Creata con VirtualBox 6.1 ma compatibile con versioni successive
+    \item Requisiti minimi: 4 vCPU, 6 GB di RAM, 50 GB di storage, Virtual Disk Image (VDI)
+    \item Connessione di rete: NAT Network con porte 22 per SSH e 80 per HTTP esposte
+    \item Sistema operativo senza interfaccia grafica per ridurre il consumo di risorse.
+\end{itemize}
+La VM ha al suo interno preinstallati MicroK8s con le componenti richieste e Mininet in formato docker.
+La versione di TeraFlow utilizzata è la 2.1 con adattamenti specifici per l'Hackfest.
+Successivamente è stata installata la VM con la versione aggiornata di TeraFlow (3.0) a causa di un'incompleta implementazione della componente di Policy che non era in grado di gestire e riconoscere le KPI.
+Le caratteristiche richieste sono sostanzialmente simili, con un aumento di memoria RAM a 8 GB e dello spazio su disco a 60 GB.
+Il sistema operativo utilizzato è Ubuntu Server 22.04.4 LTS, compatibile anche con la versione successiva 22.04.6 LTS. 
+Inoltre è richiesta l'installazione di MicroK8 v1.24.17 cone le componenti necessarie, Docker e la versione 3.9.18 di Python.
+\\I vari esperimenti si sono svolti seguendo il seguente schema:
+attraverso il Service Level è stato introdotto un servizio nella rete sotto forma di intento per stabilire la connessione e il percorso. 
+Successivamente, tramite il Management Level, è stata inserita una politica basata sugli eventi che consente di associare un Service Level Agreement (SLA) a un servizio specifico.
+Questo SLA include condizioni che devono essere monitorate e rispettate durante l'esecuzione del servizio.
 %end-to-end
 %tutte queste info sono persistite in un database logicamente centralizzato, fisicamente distribuito e scalabile, dato dalla componente di Context
-\\Per iniziare il lavoro si è partiti da una demo già esitente per poi apportare delle modifiche successivamente.
+\\Per iniziare il lavoro si è partiti da una demo già preesistente, apportando in seguito le modifiche necessarie.
 \\\textbf{Servizio end-to-end}
 \\Come già detto in precedenza il Device Level sfrutta una South-Bound Interface (SBI) per interagire con i device tramite l'API P4Runtime. 
 Inizialmente, il codice p4 compilato, ossia i vari artefatti, viene copiato nel pod SBI per poter inserire le giuste configurazioni nelle tabelle dei dispositivi.
@@ -51,7 +73,7 @@ A tale scopo si sfrutta la componente di Monitoring che permette di associare il
 con condizioni che devono essere rispettate.
 Quando questi requisiti non vengono soddisfatti, la componente di Monitoring solleva un allarme che fa scattare l'azione prestabilita.
 \\Nella sperimentazione abbiamo introdotto una politica per il servizio stabilito con tre condizioni: una per la latenza (che non deve superare i 100ms), una per la loss (che non deve superare il 5\%) 
-e infine una per la capacità (\textbf{metrica})\ref{fig:policy}.
+e infine una per la capacità\ref{fig:policy}.
 Queste tre condizioni sono legate tra loro tramite un "OR", quindi appena una di esse non è più rispettata viene invocata l'azione che in questo caso consiste nel ricalcolo del percorso.
 %MODIFICA O LA FOTO O LA DESCRIZIONE
 \begin{figure}[h]
@@ -80,7 +102,7 @@ Inizialmente, si avvia l'agent che, ascoltando gli eventi della componente di Co
     \label{fig:agent}
 \end{figure}
 Successivamente si attiva un secondo script che riesce a monitorare le metriche di loss e latenza attraverso il comando ping del terminale e la capacità tramite iperf per poi inviarle attraverso una socket all'agent.
-Prima di avviare lo script è necessario attivare il server iperf sul dispositivo finale
+Prima di avviare lo script è necessario attivare il server iperf sul dispositivo finale del servizio.
 \\L'agent, ottenuti i relativi valori, li inoltra alla componente di monitoring tramite una KPI composta dal valore, il kpi id corretto e un timestamp.
 \\La componente, ricevute le metriche, riconosce che è avvenuto un cambiamento nella rete e solleva un allarme per una potenziale violazione della politica che sarà poi validata dalla componente di Policy.
 Questo evento causa l'esecuzione dell'azione predefinita nella politica, ovvero l'aggiornamento del percorso.

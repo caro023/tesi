@@ -255,8 +255,9 @@ D2.2 - preliminary requirements, architecture design, techno-economic studies
 \newblock {\em teraflow-h2020.eu}, 2023.
 
 \bibitem{Component}
-Componenti principali di teraflow.
-\newblock \url{https://www.teraflow-h2020.eu/blog/teraflowsdn-core-components}.
+Teraflowsdn core components.
+\newblock \url{https://www.teraflow-h2020.eu/blog/teraflowsdn-core-components},
+  2021.
 
 \bibitem{ProtoBuf}
 Protocol buffer delle componenti in teraflow.
@@ -306,6 +307,14 @@ Ricard Vilalta, Noboru Yoshikane, Ramon Casellas, Ricardo Martínez, Shohei
 \newblock In {\em 45th European Conference on Optical Communication (ECOC
   2019)}, pages 1--4, 2019.
 
+\bibitem{espgrpc}
+Hari Krishna and Rinki Sharma.
+\newblock Comparative study of orchestration using grpc api and rest api in
+  server creation time: An openstack case.
+\newblock {\em International Journal of Computer Networks {\&} Communications
+  (IJCNC)}, 16(1), jan 2024.
+\newblock Available at SSRN: \url{https://ssrn.com/abstract=4710302}.
+
 \bibitem{p4Article}
 Ya~Gao and Zhenling Wang.
 \newblock A review of p4 programmable data planes for network security.
@@ -319,6 +328,16 @@ P4.
 Mininet.
 \newblock \url{https://mininet.org/}.
 
+\bibitem{tesiMininet}
+Francesco Cristiano.
+\newblock {\em Emulazione distribuita di reti di telecomunicazioni su
+  piattaforma Mininte}.
+\newblock PhD thesis, Alma Mater Studiorum- Università di Bologna, 2013.
+
+\bibitem{MininetOv}
+Mininet overview.
+\newblock \url{https://mininet.org/overview/}.
+
 \bibitem{introMin}
 Nikhil~Handigol Bob~Lantz and Vimal~Jeyakumar Brandon~Heller.
 \newblock {\em Introduction to Mininet}.
@@ -329,6 +348,15 @@ Nikhil~Handigol Bob~Lantz and Vimal~Jeyakumar Brandon~Heller.
 {Mininet.org}.
 \newblock {\em Mininet Walkthrough}.
 \newblock url: \url{https://mininet.org/walkthrough/}.
+
+\bibitem{hackfest}
+Hackfest 3.
+\newblock \url{https://labs.etsi.org/rep/groups/tfs/-/wikis/TFS-HACKFEST-3}.
+
+\bibitem{VM}
+Link alla macchina virtuale per l'hackfest 3.
+\newblock
+  \url{https://drive.google.com/file/d/1OaukXmAC1uaeIAChkEpvBB9mSkUHimsR/view}.
 
 \bibitem{demo}
 Panagiotis Famelis, Georgios~P. Katsikas, Vasilios Katopodis, Carlos Natalino,
