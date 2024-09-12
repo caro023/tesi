@@ -17,54 +17,56 @@ In particolare, con l'avvento del 5G, l'SDN assume un ruolo fondamentale nel reg
 %In particular, SDN provides more efficient and agile procedures for the establishment of data delivery paths connecting specified sequences of virtual service or network components, i.e., dynamic service chaining
 %SDN also brings additional benefits to the EC architecture in terms of service-centric networking 
 %and support of a northbound interface for third-party network applications to support EC services in highly dynamic ecosystem of users, devices, and data communication requirements  https://www.sciencedirect.com/science/article/pii/S1389128622001876?fr=RR-1&ref=cra_js_challenge
-\\Tuttavia, nonostante l’SDN astragga il controllo di gestione dai dispositivi, le sue funzioni rimangono principalmente focalizzate sulla configurazione dei singoli componenti della rete. Le attuali interfacce SDN, infatti, si concentrano sulla definizione dettagliata dei percorsi per la trasmissione dei dati 
+\\Tuttavia, nonostante l'SDN astragga il controllo di gestione dai dispositivi, le sue funzioni rimangono principalmente focalizzate sulla configurazione dei singoli componenti della rete. Le attuali interfacce SDN, infatti, si concentrano sulla definizione dettagliata dei percorsi per la trasmissione dei dati 
 piuttosto che su un modello più astratto che permetta agli amministratori di esprimere in modo semplice cosa desiderano ottenere dalla rete \cite{sdnart}. 
 Questo approccio, benché efficace nella gestione delle risorse di rete, limita parzialmente la flessibilità e l'automazione in contesti fortemente dinamici, come quelli caratterizzati da architetture di Edge Computing o reti altamente virtualizzate.
 %Sebbene questo approccio semplifichi la gestione dei dispositivi, non affronta completamente la complessità della gestione delle reti su larga scala.
-\\D'altra parte, l’Intent-Based Networking (IBN), o Networking basato su intenti, è un paradigma che mira a separare ulteriormente la complessità di implementazione dal livello di gestione. 
+\\Per questo motivo viene introdotto l'Intent-Based Networking (IBN), o Networking basato su intenti, un paradigma che mira a separare ulteriormente la complessità di implementazione dal livello di gestione. 
 %Questa metodologia permette di affrontare le nuove sfide per la gestione delle reti.
 %L'idea fondamentale dell'IBN è di poter esprimere i propri obiettivi per il comportamento della rete specificando intenti ad alto livello.
 IBN affronta le sfide emergenti fornendo un'astrazione di alto livello che consente di esprimere gli obiettivi di rete in modo chiaro e intuitivo.  
 Ad esempio, un intento potrebbe essere: \textit{"consentire alle applicazioni contabili di accedere al server XYZ, ma non consentire l’accesso alle applicazioni di produzione"} oppure
 \textit{"mantenere sempre un'elevata qualità del servizio e un'elevata larghezza di banda per gli utenti di un certo livello"} \cite{esempint}.
-\\Il framework IBN si occupa di tradurre questi intenti
-in configurazioni di rete specifiche e di adattare dinamicamente la rete per rispettarli. % (gestendo automaticamente le complessità sottostanti.)
-Grazie al paradigma SDN, IBN non richiede l'inserimento diretto dei comandi di policy, invece, dopo aver ricevuto le richieste di servizio, le converte in Key Performance Indicators (KPIs) per poter misurare le metriche interessate.
-Questo processo permette di verificare continuamente che lo stato reale della rete rispetti le richieste tramite il monitoraggio in tempo reale delle KPIs, garantendo così un'adeguata qualità dell'esperienza (QoE) \cite{qoe}.
+\\Il framework IBN si occupa di tradurre gli intenti
+in configurazioni di rete specifiche adattando dinamicamente la rete per rispettarli. % (gestendo automaticamente le complessità sottostanti.)
+Grazie al paradigma SDN, IBN non richiede l'inserimento manuale dei comandi di policy: una volta ricevute le richieste di servizio, le converte in Key Performance Indicators (KPI), che rappresentano le metriche rilevanti da monitorare. 
+Questo permette una verifica continua dello stato della rete, assicurandosi che soddisfi le richieste attraverso un monitoraggio in tempo reale delle KPI, garantendo così un'elevata qualità dell'esperienza (QoE) \cite{qoe}.
 %Il framework IBN si occuperà di elaborare questi intenti e apportare le modifiche necessarie nella configurazione dei dispositivi di rete affichè essi vengano rispettati. 
-Questo approccio consente quindi alla rete di adattarsi dinamicamente ai cambiamenti in tempo reale, gestendo automaticamente le complessità sottostanti, migliorando l'efficienza e la reattività della rete.
+Questo approccio consente quindi alla rete di adattarsi dinamicamente ai cambiamenti, gestendo automaticamente le complessità sottostanti, migliorando l'efficienza e la reattività.
 %IBNs do not need to directly input policy commands, but can capture the demands (intent) of ever-changing services and applications, transform these demands (intent) into measurable Key Performance Indicators (KPIs), and complete dynamic network orchestration.
 %Meanwhile, the autonomous IBNs  can also continuously verify the matching between the actual network state and the expected network state through real-time monitoring of network KPIs and big data training, so as to adjust the network parameters to continuously provide superior QoE. 
 \\Alcuni controller SDN implementano già il concetto di Intent-Based Networking. 
 \\ONOS, ad esempio, integra un componente chiamato Intent Framework, che consente alle applicazioni di esprimere le loro esigenze di rete tramite direttive basate su policy. 
-In modo diverso, OpenDayLight ha sviluppato l'Intent Northbound Interface (NBI), un progetto attivo fino alla release "Oxygen" del 2018, ma successivamente abbandonato per favorire approcci più pratici e scalabili. 
+In modo diverso, OpenDayLight ha sviluppato l'Intent Northbound Interface (NBI), un progetto attivo fino alla release "Oxygen" del 2018 ma successivamente abbandonato per favorire approcci più pratici e scalabili. 
 Cisco, con il suo DNA Center, ha introdotto soluzioni IBN che automatizzano la configurazione e l'implementazione della rete grazie all'intelligenza artificiale e all'apprendimento automatico concentrandosi principalmente sulla sicurezza. 
 Ad esempio, quando un nuovo dispositivo viene aggiunto alla rete, 
 il sistema assegna automaticamente policy basate sulla sua identità, proponendosi di risolvere i problemi di funzionamento della rete \cite{qoe}.
-Recentemente nell'ambito del progetto europeo TeraFlow H2020, è stato sviluppato in controller SDN omonimo. 
+\\Recentemente nell'ambito del progetto europeo TeraFlow H2020, è stato sviluppato in controller SDN omonimo. 
 L'obiettivo di questa tesi è lo studio del controller open source Teraflow, sviluppato da ETSI \cite{etsi} a partire dal 2020.
 In particolare il lavoro si è concentrato su come in TeraFlow vengano modellati e gestiti gli "intenti" attraverso le componenti di policy e service.
-Nella prima fase, è stato necessario comprendere l'architettura del controller, incluse le sue componenti, per analizzare come queste interagiscano con l'ambiente e supportino la gestione dei servizi e delle politiche.
-Per capire meglio il funzionamento del software, oltre all'analisi della documentazione e del codice disponibile, sono stati eseguiti dei casi di test forniti dagli amministratori per simulare e valutare il comportamento del sistema in contesti applicativi specifici.
+Nella prima fase, è stato necessario comprendere l'architettura del controller per capire come le diverse componenti interagiscano tra loro e come queste supportino la gestione dei servizi e delle politiche di rete.
+L'analisi teorica è stata accompagnata dallo studio del codice e da test basati su scenari forniti dagli sviluppatori del progetto. 
+Questi test sono stati cruciali per comprendere il comportamento del sistema in condizioni applicative specifiche vista la scarsità della documentazione aggiornata.
 Successivamente, si è passati alla fase di sperimentazione.
 \\Non avendo a disposizione una rete reale, è stato utilizzato l'emulatore di reti Mininet come ambiente di test.
-\\Partendo da file preesistenti, è stato configurato un servizio tra due end-point, dopo aver creato l'ambiente necessario per la comunicazione tra di essi. Per garantire l'elevata qualità del servizio (QoS), è stata associata una politica di 
-gestione della rete focalizzata su tre parametri principali: il rapporto di perdita dei pacchetti (loss ratio), la latenza e la capacità. 
-Questi parametri devono rimanere entro soglie predefinite per assicurare prestazioni ottimali.
-\\Nel caso in cui i valori delle metriche superino i limiti stabiliti, la politica prevede un'azione automatica che consente di reagire dinamicamente. 
-In questo esempio specifico, è stato attivato il ricalcolo del percorso 
-del traffico tra gli end-point allo scopo di trovare una nuova via di comunicazione che possa ristabilire i livelli di performance richiesti.
-\\Per monitorare continuamente e in tempo reale la qualità del servizio è stato implementato un "probe", uno strumento di monitoraggio che, utilizzando il protocollo ping e iperf,
-misura costantemente la latenza, la perdita di pacchetti e la capacità tra i due end-points, e invia i valori rilevati al controller. Queste informazioni vengono 
-analizzate per decidere se è necessario intervenire per ricalcolare il percorso.
-In questo modo, il sistema è in grado di reagire dinamicamente ai problemi di rete in tempo reale riducendo al minimo l'impatto negativo sull'esperienza degli utenti.
+\\Partendo da file preesistenti, è stato configurato un servizio tra due end-points, permettendo la comunicazione tra di essi. 
+Per garantire l'elevata qualità del servizio (QoS), è stata implementata una politica di 
+gestione della rete basata su tre KPI principali: il rapporto di perdita dei pacchetti (loss ratio), la latenza e la capacità. 
+Questi parametri dovevano rispettare soglie predefinite per assicurare prestazioni di alto livello.
+Un elemento chiave dell'esperimento è stato il meccanismo di reazione automatica implementato tramite il controller quando una delle metriche superava i limiti stabiliti.
+In questo esempio specifico, il sistema interveniva automaticamente attivando il ricalcolo del percorso del traffico tra gli end-points per ristabilire i livelli di performance richiesti. 
+\\Per garantire un monitoraggio continuo della qualità del servizio, è stato implementato un probe, un programma di utilità che cattura informazioni che, 
+utilizzando protocolli come ping e iperf, misurava costantemente le metriche critiche (latenza, perdita di pacchetti, capacità). 
+Queste informazioni venivano inviate al controller che le utilizzava per prendere le decisioni in tempo reale riducendo al minimo l'impatto negativo sull'esperienza degli utenti. 
+%L’intero processo ha mostrato come, nonostante le limitazioni della documentazione, la fase di sperimentazione pratica sia stata indispensabile per comprendere e valutare le capacità del controller TeraFlow nella gestione dinamica degli intenti. La capacità di adattamento in tempo reale del sistema rappresenta un valore aggiunto nella gestione moderna delle reti, dimostrando l’efficacia dell’approccio SDN in contesti dinamici e complessi.
 \\Il resto del documento sarà organizzato come segue.
-\\Nel Capitolo \ref{cap:contesto} verrà esposto il contesto. All'interno ci sarà un'analisi approfondita del Software Defined Networking (SDN)
-e verranno illustrati alcuni dei principali controller SDN presenti sul mercato. Alla fine del capitolo verrà, introdotto anche l'Intent-Based Networking (IBN).
+\\Nel Capitolo \ref{cap:contesto} verrà esposto il contesto. All'interno ci sarà un'analisi approfondita del Software Defined Networking (SDN) e dell'Intent-Based Networking (IBN)
+e verranno illustrati alcuni dei principali controller SDN presenti sul mercato che implementano soluzioni differenti per l'IBN. Alla fine del capitolo saranno introdotti Kubernetes e i microservizi.
 \\Nel Capitolo \ref{cap:teraflow} verrà descritto in modo approfondito il controller Teraflow su cui si incentra la tesi.
 Verrà delineata l'architettura e l'interazione necessaria tra le componenti con attenzione particolare alle componenti coinvolte nella gestione dei servizi e delle policy.
-Saranno inoltre introdotti gli strumenti utilizzati nella sperimentazione, tra cui P4, gRPC e Mininet, spiegando il loro scopo.
+Sarà inoltre introdotto gRPC, un framework grazie al quale le componenti comunicano tra di loro.
+%Saranno inoltre introdotti gli strumenti utilizzati nella sperimentazione, tra cui P4, gRPC e Mininet, spiegando il loro scopo.
 Nel Capitolo \ref{cap:policy} vengono presentati gli esperimenti svolti che costituiscono la parte pratica del lavoro.
-Dopo aver introdotto la teoria necessaria, viene definita la configurazione di un servizio di rete tra due end-point. Gli esperimenti includono la gestione
+Dopo aver introdotto la teoria e gli strumenti necessari, viene definita la configurazione di un servizio di rete tra due end-point. Gli esperimenti includono la gestione
 automatica delle politiche di rete e il monitoraggio dei parametri con l'adozione di misure correttive nel caso essi non siano più rispettati.
-Infine, nell'ultimo Capitolo, verranno presentate le conclusioni.
+Infine, nell'ultimo Capitolo, saranno presentate le conclusioni.

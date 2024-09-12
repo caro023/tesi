@@ -7,19 +7,19 @@ Nella fase iniziale si è seguito l'Hackfest 3 \cite{hackfest} dove è stato for
 Il lavoro è iniziato con l'installazione della macchina virtuale \cite{VM} creata appositamente per il congresso.
 %Gli esperimenti sono stati svolti all'interno di un'infrastruttura virtualizzata configurata per eseguire sia TeraFlow che Mininet, permettendo di simulare e analizzare vari scenari di rete.
 %La macchina virtuale (VM) utilizzata inizialmente per gli esperimenti è stata quella utilizzata durante l'Hackfest 3 \cite{hackfest}, dove è stato fornito un ambiente pre-configurato per testare TeraFlow SDN. 
-Di seguito vengono riportate le specifiche della VM utilizzata:
+\\Di seguito vengono riportate le specifiche della VM utilizzata:
 \begin{itemize}
     \item IP Address: 10.0.2.X/24 (DHCP)
     \item Gateway: 10.0.2.1
     \item DNS: 8.8.8.8, 8.8.4.4
     \item Creata con VirtualBox 6.1 ma compatibile con versioni successive
-    \item Requisiti minimi: 4 vCPU, 6 GB di RAM, 50 GB di storage, Virtual Disk Image (VDI)
+    \item Requisiti minimi: 4 vCPU, 6 GB di RAM, 50 GB di spazio sul disco, Virtual Disk Image (VDI)
     \item Connessione di rete: NAT Network con porte 22 per SSH e 80 per HTTP esposte
     \item Sistema operativo senza interfaccia grafica per ridurre il consumo di risorse.
 \end{itemize}
 La VM ha al suo interno preinstallati MicroK8s con le componenti richieste e Mininet in formato docker.
 La versione di TeraFlow utilizzata è la 2.1 con adattamenti specifici per l'Hackfest.
-Successivamente è stata installata la VM con la versione aggiornata di TeraFlow (3.0) a causa di un'incompleta implementazione della componente di Policy che non era in grado di gestire e riconoscere le KPI.
+\\Successivamente è stata installata la VM con la versione aggiornata di TeraFlow (3.0) a causa di un'incompleta implementazione della componente di Policy che non era in grado di gestire e riconoscere le KPI.
 Le caratteristiche richieste sono sostanzialmente simili, con un aumento di memoria RAM a 8 GB e dello spazio su disco a 60 GB.
 Il sistema operativo utilizzato è Ubuntu Server 22.04.4 LTS, compatibile anche con la versione successiva 22.04.6 LTS. 
 Inoltre è richiesta l'installazione di MicroK8 v1.24.17 cone le componenti necessarie, Docker e la versione 3.9.18 di Python.
@@ -27,10 +27,163 @@ Inoltre è richiesta l'installazione di MicroK8 v1.24.17 cone le componenti nece
 attraverso il Service Level è stato introdotto un servizio nella rete sotto forma di intento per stabilire la connessione e il percorso. 
 Successivamente, tramite il Management Level, è stata inserita una politica basata sugli eventi che consente di associare un Service Level Agreement (SLA) a un servizio specifico.
 Questo SLA include condizioni che devono essere monitorate e rispettate durante l'esecuzione del servizio.
+%modifica file (NodePort..)
+%modifica per abilitare più porte 
 %end-to-end
 %tutte queste info sono persistite in un database logicamente centralizzato, fisicamente distribuito e scalabile, dato dalla componente di Context
 \\Per iniziare il lavoro si è partiti da una demo già preesistente, apportando in seguito le modifiche necessarie.
-\\\textbf{Servizio end-to-end}
+\section{Strumenti per la sperimentazione}
+INTRO
+\\li descrivo perche verranno usati switch p4 emulati in mininet
+\subsection{Mininet}
+\label{ch:Mininet}
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{mininet.png}
+    \caption{Rete mininet}
+    %https://telcomaglobal.com/p/what-is-mininet  fonte foto mininet
+    \label{fig:mininet}
+\end{figure}
+Mininet \cite{mininet} è un sistema open source di orchestrazione per l'emulazione di reti su un unico ambiente Linux che permette di emulare un'intera rete su un singolo computer.
+E' ampiamente utilizzato in ambiti di ricerca e sviluppo per creare e testare reti virtuali in modo realistico.
+A differenza di altri emulatori che utilizzano macchine virtuali per ogni dispositivo, si distingue per la sua capacità di avviare rapidamente reti virtuali complesse e di eseguire test su scenari vari e personalizzati.
+Consente anche di configurare l'inoltro dei pacchetti per testare diverse funzionalità, facilitando la condivisione e la replica del codice.
+%Rispetto ad altri emulatori presenti in circolazione che emulano ogni dispositivo su una macchina virtuale, Mininet offre una serie di vantaggi. 
+%Inanzitutto, permette l'avviamento rapido di una rete, la capacità di eseguire test e programmi con tipologie ampie e personalizzate. 
+%Inoltre consente di personalizzare l'inoltro dei pacchetti per testare diverse funzionalità con la possibilità di condividere e replicare il codice.
+\\Mininet offre delle API e un interprete Python che consentono di definire e gestire facilmente delle topologie di rete.
+%Ciò è possibile anche tramite interfaccia a riga di comando (CLI). In entambi i casi possono essere sia predefinite che personalizzate con la possibilità di 
+%aggiungere e rimuovere switch, router, host, controller e link, tutti eseguiti su un unico computer.
+%Mininet utilizza infatti una virtualizzazione leggera per creare nodi di rete ognuno con la propria pila di rete in modo tale che possano comunicare con gli 
+%altri nodi come farebbero in una rete fisica. 
+È inoltre possibile utilizzare un'interfaccia a riga di comando (CLI) per la stessa funzione.
+In entrambi i casi, si possono configurare topologie predefinite o personalizzate, aggiungendo e rimuovendo switch, router, host, controller e link, tutti eseguiti su un unico computer.
+\\Mininet è in grado di gestire un insieme di terminali di rete (host), 
+%switch, router e collegamenti all'interno di un singolo ambiente Linux,
+utilizzando la virtualizzazione leggera attraverso tecnologie implementate nel kernel Linux, come i network namespaces.
+Questi permettono di creare istanze separate di interfacce di rete, tabelle di routing e tabelle ARP, che operano in modo indipendente \cite{tesiMininet}. 
+Questo approccio consente di avviare numerosi host e switch (fino a 4096) su un singolo kernel del sistema operativo, simulando una rete completa su un'unica macchina \cite{MininetOv}.
+Ciò consente di testare nuove applicazioni, protocolli e algoritmi in un ambiente controllato e modificabile prima di implementarli su reti reali.
+\\Mininet mette a disposizione tre livelli differenti di API \cite{introMin}:
+\begin{itemize}
+\item \textbf{Low-level}: consiste nelle classi dei nodi e dei link istanziati individualmente e usati per creare una rete.
+\item \textbf{Mid-level}: aggiunge un containter per nodi e link, l'oggetto Mininet, e fornisce metodi per la configurazione di rete.
+\item \textbf{High-level}: aggiunge l'astrazione della topologia di rete, la classe Topo. Offre la possibilità di creare modelli di topologia riusabili passandoli al comando mn da linea di comando.
+\end{itemize}
+Si possono configurare i link come up o down e inserire metriche specifiche 
+come quelle di banda, ritardo, perdita o massima lunghezza della coda di recezione per rendere la rete più realistica e adatta a esperimenti di test.
+\\Gli host su Mininet condividono il filesystem root del server sottostante. 
+Ciò significa che non è necessario trasferire file tra gli host virtuali perché tutti accedono agli stessi file direttamente.
+Tuttavia, questa condivisione del filesystem può creare problemi se un programma ha bisogno di file di configurazione specifici per ogni host. 
+In tal caso, è necessario creare un file di configurazione separato per ogni host e specificare quale file utilizzare quando si avvia il programma.
+Un'altra limitazione riguarda la condivisione delle risorse del sistema su cui è in esecuzione che dovranno essere bilanciate tra tutti gli host della rete.
+%Inoltre ci possono essere collisioni tra file se si prova a creare lo stesso file nella stessa directory di più hosts.
+%Mininet mette a disposizione una GUI (miniedit) utile per visualizzare lo stato della rete durante gli esperimenti svolti.
+\\Mininet è stato progettato per essere facilmente integrabile con altri software e sistemi di rete.
+Consente anche di connettere un controller SDN remoto, quindi esterno alla rete, agli switch, indipendentemente dal PC su cui è installato, in modo da fornire un ambiente adatto allo sviluppo e al test.
+
+
+\subsubsection{Alcuni comandi fondamentali}
+\textbf{Linea di comando}
+\\Inanzitutto è fondamentale creare una topologia di rete con il seguente comando\cite{walkmin}:
+\\\textit{\$ sudo mn}
+\\Di default viene inizializzata la topologia minimale (--topo=minimal) che consiste in uno switch connesso a due host e un controller OpenFlow.
+All'interno di Mininet si possono trovare altre topologie disponibili e visualizzabili con il comando \\\textit{\$sudo mn -h} \\che si possono specificare tramite l'opzione $--topo$.
+%scrivi le varie topologie
+%--topo single, 3 uno switch con 3 host
+\\Per avviare la topologia esistono diverse opzioni da poter applicare.Ad esempio, l'opzione $--controller$ seguito dall'indirizzo IP specifica il controller al quale gli switch dovranno collegarsi al posto 
+del predefinito offerto da Mininet.
+%riguarda
+\\Una volta creata la topologia per avere informazioni su di essa esistono diversi comandi:
+%mettere output/immagini
+\begin{itemize}
+    \item \textit{ nodes}: per visualizzare i nodi presenti.
+    \item \textit{ net}: per visualizzare i nodi e i link presenti.
+    \item \textit{ dump}: per visualizzare tutte le informazioni di dump dei nodi.
+    \item \textit{h1 ifconfig}: per visualizzare le interfacce del nodo h1.
+\end{itemize}
+Alcuni comandi per interagire con la rete e fare dei test minimali sono:
+\begin{itemize}
+    \item \textit{ h1 ping -c 1 h2 }: verifica il corretto funzionamento del percorso tra h1 e h2.
+    \item \textit{ pingall}: esegue il ping tra tutti gli host connessi alla rete.
+    \item \textit{ iperf}: esegue un test di banda tra 2 degli host della rete.
+    \item \textit{xterm h1}: permette di avviare il terminale relativo al nodo h1.
+    \item \textit{exit}: esce dalla rete.
+\end{itemize}
+Per manipolare le metriche relative ai link invece vengono messi a disposizione i seguenti comandi:
+\begin{itemize}
+    \item \textit{ link s1 h1 down}: disabilita un link, in questo caso quello tra lo switch s1 e l'host h1.
+    \item \textit{ link s1 h1 up}: attiva un link, in questo caso quello tra lo switch s1 e l'host h1.
+    \item \textit{s2 tc qdisc add dev s2-eth2 root netem loss 50\% }: aggiunge una packet loss del 50\% sulla porta eth2 dello switch s2.
+    \item \textit{s2 tc qdisc add dev s2-eth2 root netem delay 200ms}: aggiunge un ritardo di 200ms sulla porta eth2 dello switch s2.
+    \item \textit{s2 tc qdisc del dev s2-eth2 root netem loss 50\% }: elimina una packet loss del 50\% sulla porta eth2 dello switch s2.
+    \item \textit{s2 tc qdisc del dev s2-eth2 root netem delay 200ms}: elimina un ritardo di 200ms sulla porta eth2 dello switch s2.
+\end{itemize} 
+\textbf{API Python}
+\\Le API Python di Mininet permettono di creare e gestire topologie di rete in modo più flessibile e programmabile. 
+Di seguito esponiamo alcune classi e comandi della Mid-level API:
+\begin{itemize}
+    \item \textit{Mininet}: classe per creare e gestire la rete. Il costruttore prende in input diversi parametri la topologia, gli host, gli switch,i controller, i link e ritorna un oggetto di rete.
+    \item \textit{addSwitch()}: aggiunge uno switch alla topologia.
+    \item \textit{addHost()}: aggiunge un host alla topologia.
+    \item \textit{addLink()}: aggiunge un link alla topologia. Si possono specificare paramentri come la banda espressa in Mbit (bw=10 ), il ritardo (delay='5ms'), massima dimensione della coda espressa in numero di pacchetti (max\_queue\_size=1000), la loss espressa in percentuale (loss=10)
+    \item \textit{start}: avvia la rete
+    \item \textit{stop}: esce dalla rete
+    \item \textit{pingall}: esegue il ping tra tutti gli host connessi alla rete
+    \item \textit{h1.cmd('comando da eseguire')}: esegue un comando su h1 da CLI e prende l'output
+\end{itemize}
+Con le API in Python si può anche estendere il comando \textit{mn} usando l'opzione \textit{--custom} per invocare la topologia ricreata nello script.
+\\\textit{sudo mn --your\_script.py --topo your\_topo}
+
+\subsection{P4}
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{p4.png}
+    \caption{Workflow di P4 sul piano dati \cite{p4Article}}
+    \label{fig:p4}
+\end{figure}
+P4 \cite{p4}, che sta per "Programming Protocol-indipendent Packet Processor",  è un linguaggio di programmazione ad alto livello che consente di descrivere il comportamento di un elemento di rete e del piano dati in modo flessibile.
+Il linguaggio permette di personalizzare il modo in cui i dispositivi di rete elaborano i pacchetti, senza essere vincolati a un set predefinito di protocolli.
+\\P4 è stato introdotto per l'esigenza di superare le limitazioni con cui si stava interfacciando OpenFlow.
+Per quest'ultimo protocollo l'hardware e il software non erano più sincronizzati. In alcuni casi 
+gli switch non riuscivano a supportare tutte le funzionalità che OpenFlow poteva offrire a causa delle limitazioni hardware in quanto progettati per supportare un insieme fisso di protocolli e funzionalità. 
+Per introdurre un cambiamento dell'hardware sono richiesti vari sforzi per lo sviluppo e il finanziamento, inoltre richiederebbe mesi se non anni per essere portato a termine.
+\\P4 è nato quindi con l'obiettivo di definire nuove astrazioni per programmare il piano dati senza dover andare incontro alle limitazioni riscontrate.
+Offre un linguaggio di programmazione che permette di definire regole per cui i pacchetti vengono processati direttamente nei dispositivi di rete.
+Di seguito vengono indicati i vari passi che si eseguono durante un flusso di lavoro di un programma P4 che si possono ritrovare anche nell'immagine \ref{fig:p4}.
+%Permette di definire la tabella, le azioni e the counters per poi essere applicate a elementi hardware o software switch allo stesso modo.
+%P4 ha un interfaccia per analizzare pacchetti e match campi nell'header. In questo modo abbiamo un accoppiamento tra hardware e software.
+\\Un programma P4 è costituito da diverse sezioni \cite{p4Article}, ognuna delle quali descrive un aspetto specifico del trattamento dei pacchetti.
+La dichiarazione degli header permette di specificare i protocolli che si vogliono analizzare e riconoscere o inventarne di nuovi per scopi di ricerca o esperimenti.
+Questo include campi come indirizzi IP, numeri di porta e tutti i dati di protocollo.
+Il Parser specifica come estrarre e interpretare i vari header dai pacchetti. Esso definisce uno stato macchina che determina, attraverso le informazioni in arrivo, come passare da uno stato all'altro. 
+\\La Pipeline di Elaborazione comprende tabelle e azioni che definiscono come i pacchetti vengono processati dopo aver effettuato il parsing.
+%guarda se mettere separato tabelle e azioni
+I Controlli del flusso coordinano il parser, le tabelle di elaborazione e le azioni. Definiscono quindi i controlli necessari per il flusso corretto di un pacchetto.
+\\Dopo aver definito il programma esso viene mandato al compilatore P4 che genera due tipi di output. 
+Il primo è un file binario P4 ed è ciò che viene installato all'interno del dispositivo target.
+Questo file binario è specifico per un target e quindi per uno specifico hardware (ad esempio Asics, fpga..).
+Il secondo output è indipendente dal target ed è diretto verso la parte NorthBound del controller. Questo è chiamato P4 info e genera i metadati necessari per consentire al piano di controllo e al piano
+dati di comunicare attraverso P4 Runtime.
+\\P4Runtime è un API messa a disposizione da P4 che permette al controller di connettersi ai dispositivi, vedere cosa c'è attualmente nel pipeline 
+e poter mandare le configurazioni rilevanti nella relativa tabella. Permette inoltre di definire il piano dati in modo dinamico collegandolo al piano di controllo. 
+Per il piano di controllo, P4Runtime protegge i dettagli hardware del piano dati ed è indipendente dalle funzionalità e dal protocollo supportati.
+P4Runtime riesce quindi a raggiunge l'indipendenza dal target, dal pipeline e dal protocollo.
+\\I nodi programmabili che possono essere ottenuti tramite software o hardware sono definiti P4 target.
+Essi hanno una pipeline di elaborazione dei pacchetti la cui struttura è specifica per il target ed è descritta da un determinato modello di architettura.
+
+%E' lo schema del pipeline descritto al controller in modo da nascondere il tipo di dispositivi presenti nella rete.
+I principali obiettivi quindi includono:
+\begin{itemize}
+    \item \textbf{Protocollo-indipendenza}: P4 non è vincolato a nessun protocollo specifico consentendo addirittura di definire nuovi protocolli o modificare quelli esistenti
+    \item \textbf{Target-indipendenza}: Il codice può essere compilato per una varietà di target sia hardware che software
+    \item \textbf{Riprogrammabilità}: permette di aggiornare e modificare il comportamento del dataplane in tempo reale rispondendo ai cambiamenti nei requisiti di rete.
+\end{itemize}
+P4 rappresenta un passo significativo verso reti più flessibili e programmabili, consentendo agli sviluppatori di adattare e innovare rapidamente in risposta ai cambiamenti nei requisiti di rete.
+Si propone come una soluzione innovativa e versatile per superare le limitazioni degli attuali protocolli e dispositivi di rete offrendo un linguaggio dinamico e indipendente dall'hardware.
+
+
+\textbf{Servizio end-to-end}
 \\Come già detto in precedenza il Device Level sfrutta una South-Bound Interface (SBI) per interagire con i device tramite l'API P4Runtime. 
 Inizialmente, il codice p4 compilato, ossia i vari artefatti, viene copiato nel pod SBI per poter inserire le giuste configurazioni nelle tabelle dei dispositivi.
 Il passo successivo è registrare i dispositivi e i link al controller SDN per permettere una corretta comunicazione tra di essi.
@@ -82,8 +235,9 @@ Queste tre condizioni sono legate tra loro tramite un "OR", quindi appena una di
     \caption{Politica creata in fase di sperimentazione}
     \label{fig:policy}
 \end{figure}
-\\\textbf{Verifica}
-\\Per verificare il comportamento del controller e assicurarsi che le condizioni di latenza, di loss e di capacità vengano rispettate, 
+
+\section{Demo}
+Per verificare il comportamento del controller e assicurarsi che le condizioni di latenza, di loss e di capacità vengano rispettate, 
 non avendo a disposizione una rete reale, abbiamo utilizzato una topologia di rete su Mininet di switch P4 basati su bmv2\cite{bmv2}.
 La topologia iniziale era composta da 4 switch e due possibili percorsi ed è stata poi ampliata a 8 switch con 5 percorsi per renderla più complessa e poter fare una sperimentazione più realistica.
 L'ultima topologia utilizzata è stata Abilene \cite{abilene}; una rete di trasporto creata da Internet2.
@@ -111,4 +265,10 @@ seguita da un'altra lista per la cancellazione delle vecchie configurazioni. Que
 tramite il P4Runtime.
 \\In tutte e tre le tipologie di alterazione della rete, si è riscontrato un cambiamento del percorso volto a rispettare le condizioni desiderate. 
 %Inoltre, si è notato che una volta rimosso il ritardo, la perdita di pacchetti, o riattivato un link, il controller percepisce questo cambiamento e modifica automaticamente il percorso precedente, poiché è memorizzato nel database della Path Comp come percorso preferito per le sue caratteristiche.
+\section{Esperimento 2}
+8 sw, latenza pkt loss
+cambio tolopogia, aggiunta link, esteso probe, aggiunta porte per mininet
+\section{Esperimento 3}
+cambio topologia, nuovo script mininet (preso da internet con cambio bw), aggiunte porte,
+aggiunto iperf, aggiunta capacità 
 

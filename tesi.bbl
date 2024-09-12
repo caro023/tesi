@@ -178,15 +178,15 @@ Davide Sanvito, Daniele Moro, Mattia Gullì, Ilario Filippini, Antonio Capone,
 \newblock {\em 2018 4th IEEE Conference on Network Softwarization and Workshops
   (NetSoft)}, pages 272--276, 2018.
 
+\bibitem{LFN}
+Lfnetworking.
+\newblock \url{https://lfnetworking.org/}.
+
 \bibitem{archodl}
 Gonzalez Carlos~Javier.
 \newblock {\em Management of a heterogeneous distributed architecture with the
   SDN}.
 \newblock PhD thesis, 12 2017.
-
-\bibitem{LFN}
-Lfnetworking.
-\newblock \url{https://lfnetworking.org/}.
 
 \bibitem{tesiodl}
 Giacomo Ondesca.
@@ -207,6 +207,41 @@ Modulo nic di odl.
 \bibitem{NICProposal}
 Confluence.
 \newblock Network intent composition proposal, 2021.
+
+\bibitem{kubernetes}
+Kubernetes.
+\newblock \url{hhttps://kubernetes.io/}.
+
+\bibitem{cncf}
+{\em CNCF}.
+\newblock url: \url{https://www.cncf.io/}.
+
+\bibitem{kubeart}
+T~Kubernetes.
+\newblock Kubernetes.
+\newblock {\em Kubernetes. Retrieved May}, 24:2019, 2019.
+
+\bibitem{bookub}
+Brendan Burns, Joe Beda, Kelsey Hightower, and Lachlan Evenson.
+\newblock {\em Kubernetes: up and running}.
+\newblock " O'Reilly Media, Inc.", 2022.
+
+\bibitem{stat}
+{\em Indagine statistica sull'uso dei microservizi}.
+\newblock url:
+  \url{https://www.statista.com/statistics/1233937/microservices-adoption-level-organization/}.
+
+\bibitem{microse}
+Xabier Larrucea, Izaskun Santamaria, Ricardo Colomo-Palacios, and Christof
+  Ebert.
+\newblock Microservices.
+\newblock {\em IEEE Software}, 35(3):96--100, 2018.
+
+\bibitem{artkub}
+Zhijun Ding, Song Wang, and Changjun Jiang.
+\newblock Kubernetes-oriented microservice placement with dynamic resource
+  allocation.
+\newblock {\em IEEE Transactions on Cloud Computing}, 11(2):1777--1793, 2023.
 
 \bibitem{archtfs}
 Alberto Mozo, Amit Karamchandani, Luis Cal, Sandra Gómez-Canaval, Antonio
@@ -315,14 +350,14 @@ Hari Krishna and Rinki Sharma.
   (IJCNC)}, 16(1), jan 2024.
 \newblock Available at SSRN: \url{https://ssrn.com/abstract=4710302}.
 
-\bibitem{p4Article}
-Ya~Gao and Zhenling Wang.
-\newblock A review of p4 programmable data planes for network security.
-\newblock {\em Mobile Information Systems}, 2021(1):1257046, 2021.
+\bibitem{hackfest}
+Hackfest 3.
+\newblock \url{https://labs.etsi.org/rep/groups/tfs/-/wikis/TFS-HACKFEST-3}.
 
-\bibitem{p4}
-P4.
-\newblock \url{https://p4.org/}.
+\bibitem{VM}
+Link alla macchina virtuale per l'hackfest 3.
+\newblock
+  \url{https://drive.google.com/file/d/1OaukXmAC1uaeIAChkEpvBB9mSkUHimsR/view}.
 
 \bibitem{mininet}
 Mininet.
@@ -349,14 +384,14 @@ Nikhil~Handigol Bob~Lantz and Vimal~Jeyakumar Brandon~Heller.
 \newblock {\em Mininet Walkthrough}.
 \newblock url: \url{https://mininet.org/walkthrough/}.
 
-\bibitem{hackfest}
-Hackfest 3.
-\newblock \url{https://labs.etsi.org/rep/groups/tfs/-/wikis/TFS-HACKFEST-3}.
+\bibitem{p4Article}
+Ya~Gao and Zhenling Wang.
+\newblock A review of p4 programmable data planes for network security.
+\newblock {\em Mobile Information Systems}, 2021(1):1257046, 2021.
 
-\bibitem{VM}
-Link alla macchina virtuale per l'hackfest 3.
-\newblock
-  \url{https://drive.google.com/file/d/1OaukXmAC1uaeIAChkEpvBB9mSkUHimsR/view}.
+\bibitem{p4}
+P4.
+\newblock \url{https://p4.org/}.
 
 \bibitem{demo}
 Panagiotis Famelis, Georgios~P. Katsikas, Vasilios Katopodis, Carlos Natalino,

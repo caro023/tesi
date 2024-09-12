@@ -260,6 +260,13 @@ INPUT .\ODL-Architecture.png
 INPUT .\ODL-Architecture.png
 INPUT .\ODL-Architecture.png
 INPUT .\ODL-Architecture.png
+INPUT .\kubernetes.png
+INPUT .\kubernetes.png
+INPUT .\kubernetes.png
+INPUT .\kubernetes.png
+INPUT .\kubernetes.png
+INPUT .\kubernetes.png
+INPUT .\kubernetes.png
 INPUT .\Teraflow.tex
 INPUT .\Teraflow.tex
 INPUT Teraflow.tex
@@ -298,13 +305,9 @@ INPUT .\file proto.png
 INPUT .\file proto.png
 INPUT .\file proto.png
 INPUT .\file proto.png
-INPUT .\p4.png
-INPUT .\p4.png
-INPUT .\p4.png
-INPUT .\p4.png
-INPUT .\p4.png
-INPUT .\p4.png
-INPUT .\p4.png
+INPUT .\Policy.tex
+INPUT .\Policy.tex
+INPUT Policy.tex
 INPUT .\mininet.png
 INPUT .\mininet.png
 INPUT .\mininet.png
@@ -321,9 +324,13 @@ INPUT C:\Users\ferra\AppData\Local\MiKTeX\fonts\tfm\public\rsfs\rsfs10.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7m.vf
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\psyro.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi10.tfm
-INPUT .\Policy.tex
-INPUT .\Policy.tex
-INPUT Policy.tex
+INPUT .\p4.png
+INPUT .\p4.png
+INPUT .\p4.png
+INPUT .\p4.png
+INPUT .\p4.png
+INPUT .\p4.png
+INPUT .\p4.png
 INPUT .\servizion constraints.png
 INPUT .\servizion constraints.png
 INPUT .\servizion constraints.png
