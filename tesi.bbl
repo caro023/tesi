@@ -82,11 +82,6 @@ Diego Kreutz, Fernando Ramos, Paulo Veríssimo, Christian Esteve~Rothenberg,
 Open networking foundation.
 \newblock \url{https://opennetworking.org/}.
 
-\bibitem{sdnlayers}
-Yustus~Eko Oktian, SangGon Lee, HoonJae Lee, and JunHuy Lam.
-\newblock Distributed sdn controller system: A survey on design choice.
-\newblock {\em Computer Networks}, 121:100--111, 2017.
-
 \bibitem{tesiSDN:2017}
 Nicholas Brasini.
 \newblock {\em Analisi e sviluppo di un’interfaccia web per gestire
@@ -98,6 +93,11 @@ Babak Darabinejad.
 \newblock An introduction to software-defined networking.
 \newblock {\em International Journal of Intelligent Information Systems}, 3:71,
   11 2014.
+
+\bibitem{sdnlayers}
+Yustus~Eko Oktian, SangGon Lee, HoonJae Lee, and JunHuy Lam.
+\newblock Distributed sdn controller system: A survey on design choice.
+\newblock {\em Computer Networks}, 121:100--111, 2017.
 
 \bibitem{appl}
 Diego Kreutz, Fernando M.~V. Ramos, Paulo~Esteves Veríssimo, Christian~Esteve
@@ -163,13 +163,6 @@ Ashwin Rajaratnam, Ruturaj Kadikar, Shanthi Prince, and M.~Valarmathi.
 \newblock In {\em 2017 International Conference on Wireless Communications,
   Signal Processing and Networking (WiSPNET)}, pages 1377--1381, 2017.
 
-\bibitem{ONOSart}
-Putri Monika, Ridha Negara, and Danu Sanjoyo.
-\newblock Performance analysis of software defined network using intent monitor
-  and reroute method on onos controller.
-\newblock {\em Bulletin of Electrical Engineering and Informatics},
-  9(5):2065--2073, 2020.
-
 \bibitem{onosint}
 Davide Sanvito, Daniele Moro, Mattia Gullì, Ilario Filippini, Antonio Capone,
   and Andrea Campanella.
@@ -177,6 +170,13 @@ Davide Sanvito, Daniele Moro, Mattia Gullì, Ilario Filippini, Antonio Capone,
   routing logic.
 \newblock {\em 2018 4th IEEE Conference on Network Softwarization and Workshops
   (NetSoft)}, pages 272--276, 2018.
+
+\bibitem{ONOSart}
+Putri Monika, Ridha Negara, and Danu Sanjoyo.
+\newblock Performance analysis of software defined network using intent monitor
+  and reroute method on onos controller.
+\newblock {\em Bulletin of Electrical Engineering and Informatics},
+  9(5):2065--2073, 2020.
 
 \bibitem{LFN}
 Lfnetworking.
@@ -384,14 +384,21 @@ Nikhil~Handigol Bob~Lantz and Vimal~Jeyakumar Brandon~Heller.
 \newblock {\em Mininet Walkthrough}.
 \newblock url: \url{https://mininet.org/walkthrough/}.
 
+\bibitem{p4}
+P4.
+\newblock \url{https://p4.org/}.
+
+\bibitem{p4art}
+Pat Bosshart, Dan Daly, Glen Gibb, Martin Izzard, Nick McKeown, Jennifer
+  Rexford, Cole Schlesinger, Dan Talayco, Amin Vahdat, George Varghese, and
+  David Walker.
+\newblock P4: programming protocol-independent packet processors.
+\newblock {\em SIGCOMM Comput. Commun. Rev.}, 44(3):87–95, jul 2014.
+
 \bibitem{p4Article}
 Ya~Gao and Zhenling Wang.
 \newblock A review of p4 programmable data planes for network security.
 \newblock {\em Mobile Information Systems}, 2021(1):1257046, 2021.
-
-\bibitem{p4}
-P4.
-\newblock \url{https://p4.org/}.
 
 \bibitem{demo}
 Panagiotis Famelis, Georgios~P. Katsikas, Vasilios Katopodis, Carlos Natalino,
@@ -403,7 +410,7 @@ Panagiotis Famelis, Georgios~P. Katsikas, Vasilios Katopodis, Carlos Natalino,
 
 \bibitem{bmv2}
 {P4 Language}.
-\newblock {\em Behavioural model (bmv2) reference P4 software switch}, March
+\newblock {\em Behavioural model (bmv2) reference P4 software switch}, mar
   2023.
 \newblock Available: \url{https://github.com/p4lang/behavioral-model}.
 

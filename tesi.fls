@@ -208,7 +208,6 @@ INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
-OUTPUT tesi.toc
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmro7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
@@ -218,6 +217,7 @@ INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.v
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+OUTPUT tesi.toc
 INPUT .\Introbuzione.tex
 INPUT .\Introbuzione.tex
 INPUT Introbuzione.tex
@@ -277,13 +277,6 @@ INPUT .\architetturatf.png
 INPUT .\architetturatf.png
 INPUT .\architetturatf.png
 INPUT .\architetturatf.png
-INPUT .\componenti.png
-INPUT .\componenti.png
-INPUT .\componenti.png
-INPUT .\componenti.png
-INPUT .\componenti.png
-INPUT .\componenti.png
-INPUT .\componenti.png
 INPUT .\diagramma policy.png
 INPUT .\diagramma policy.png
 INPUT .\diagramma policy.png
@@ -331,20 +324,27 @@ INPUT .\p4.png
 INPUT .\p4.png
 INPUT .\p4.png
 INPUT .\p4.png
-INPUT .\servizion constraints.png
-INPUT .\servizion constraints.png
-INPUT .\servizion constraints.png
-INPUT .\servizion constraints.png
-INPUT .\servizion constraints.png
-INPUT .\servizion constraints.png
-INPUT .\servizion constraints.png
-INPUT .\policy 5 100.png
-INPUT .\policy 5 100.png
-INPUT .\policy 5 100.png
-INPUT .\policy 5 100.png
-INPUT .\policy 5 100.png
-INPUT .\policy 5 100.png
-INPUT .\policy 5 100.png
+INPUT .\componenti.png
+INPUT .\componenti.png
+INPUT .\componenti.png
+INPUT .\componenti.png
+INPUT .\componenti.png
+INPUT .\componenti.png
+INPUT .\componenti.png
+INPUT .\policy sw2.png
+INPUT .\policy sw2.png
+INPUT .\policy sw2.png
+INPUT .\policy sw2.png
+INPUT .\policy sw2.png
+INPUT .\policy sw2.png
+INPUT .\policy sw2.png
+INPUT .\policy con sw3.png
+INPUT .\policy con sw3.png
+INPUT .\policy con sw3.png
+INPUT .\policy con sw3.png
+INPUT .\policy con sw3.png
+INPUT .\policy con sw3.png
+INPUT .\policy con sw3.png
 INPUT .\create new event ag.png
 INPUT .\create new event ag.png
 INPUT .\create new event ag.png
@@ -352,6 +352,55 @@ INPUT .\create new event ag.png
 INPUT .\create new event ag.png
 INPUT .\create new event ag.png
 INPUT .\create new event ag.png
+INPUT .\service sw8.png
+INPUT .\service sw8.png
+INPUT .\service sw8.png
+INPUT .\service sw8.png
+INPUT .\service sw8.png
+INPUT .\service sw8.png
+INPUT .\service sw8.png
+INPUT .\policy 5 100.png
+INPUT .\policy 5 100.png
+INPUT .\policy 5 100.png
+INPUT .\policy 5 100.png
+INPUT .\policy 5 100.png
+INPUT .\policy 5 100.png
+INPUT .\policy 5 100.png
+INPUT .\servizion constraints.png
+INPUT .\servizion constraints.png
+INPUT .\servizion constraints.png
+INPUT .\servizion constraints.png
+INPUT .\servizion constraints.png
+INPUT .\servizion constraints.png
+INPUT .\servizion constraints.png
+INPUT .\service abilene (10).png
+INPUT .\service abilene (10).png
+INPUT .\service abilene (10).png
+INPUT .\service abilene (10).png
+INPUT .\service abilene (10).png
+INPUT .\service abilene (10).png
+INPUT .\service abilene (10).png
+INPUT .\policy cap.png
+INPUT .\policy cap.png
+INPUT .\policy cap.png
+INPUT .\policy cap.png
+INPUT .\policy cap.png
+INPUT .\policy cap.png
+INPUT .\policy cap.png
+INPUT .\service abilene (11).png
+INPUT .\service abilene (11).png
+INPUT .\service abilene (11).png
+INPUT .\service abilene (11).png
+INPUT .\service abilene (11).png
+INPUT .\service abilene (11).png
+INPUT .\service abilene (11).png
+INPUT .\service 3 10 11.png
+INPUT .\service 3 10 11.png
+INPUT .\service 3 10 11.png
+INPUT .\service 3 10 11.png
+INPUT .\service 3 10 11.png
+INPUT .\service 3 10 11.png
+INPUT .\service 3 10 11.png
 INPUT .\Conclusioni.tex
 INPUT .\Conclusioni.tex
 INPUT Conclusioni.tex

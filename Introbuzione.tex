@@ -1,7 +1,7 @@
 \chapter{Introduzione}
 L’evoluzione delle reti moderne, accompagnata dall’incremento delle esigenze di prestazioni, affidabilità e dall'aumento della quantità del traffico, ha portato alla necessità di sviluppare nuovi paradigmi di gestione e controllo delle reti. 
 %\textit{Servizi altamente esigenti come il 5G/6G si sono insinuati in questo contesto.}
-\\In questo contesto, il Software Defined Networking (SDN) ha rivoluzionato la gestione delle reti attraverso un approccio logicamente centralizzato e programmabile, separando il piano di controllo dal piano dati.
+\\In questo contesto, il Software Defined Networking (SDN) ha rivoluzionato la gestione delle reti attraverso un approccio logicamente centralizzato e programmabile separando il piano di controllo dal piano dati.
 Questa separazione permette agli amministratori di rete di semplificare configurazioni complesse e di introdurre politiche di rete dinamiche e affidabili.
 Inoltre, SDN fornisce il supporto per interfacce nordbound e southbound che facilitano rispettivamente l'integrazione con varie applicazioni di terze parti e con i dispositivi nella rete, contribuendo a un ecosistema più flessibile e reattivo \cite{sdnart}.
 \\L’SDN è oggi largamente impiegato in diversi contesti. 
@@ -36,10 +36,10 @@ Questo approccio consente quindi alla rete di adattarsi dinamicamente ai cambiam
 %IBNs do not need to directly input policy commands, but can capture the demands (intent) of ever-changing services and applications, transform these demands (intent) into measurable Key Performance Indicators (KPIs), and complete dynamic network orchestration.
 %Meanwhile, the autonomous IBNs  can also continuously verify the matching between the actual network state and the expected network state through real-time monitoring of network KPIs and big data training, so as to adjust the network parameters to continuously provide superior QoE. 
 \\Alcuni controller SDN implementano già il concetto di Intent-Based Networking. 
-\\ONOS, ad esempio, integra un componente chiamato Intent Framework, che consente alle applicazioni di esprimere le loro esigenze di rete tramite direttive basate su policy. 
+\\ONOS, ad esempio, integra un componente chiamato Intent Framework, che consente alle applicazioni di esprimere le loro esigenze tramite direttive basate su policy. 
 In modo diverso, OpenDayLight ha sviluppato l'Intent Northbound Interface (NBI), un progetto attivo fino alla release "Oxygen" del 2018 ma successivamente abbandonato per favorire approcci più pratici e scalabili. 
 Cisco, con il suo DNA Center, ha introdotto soluzioni IBN che automatizzano la configurazione e l'implementazione della rete grazie all'intelligenza artificiale e all'apprendimento automatico concentrandosi principalmente sulla sicurezza. 
-Ad esempio, quando un nuovo dispositivo viene aggiunto alla rete, 
+Ad esempio, quando un nuovo dispositivo viene aggiunto all'infrastruttura, 
 il sistema assegna automaticamente policy basate sulla sua identità, proponendosi di risolvere i problemi di funzionamento della rete \cite{qoe}.
 \\Recentemente nell'ambito del progetto europeo TeraFlow H2020, è stato sviluppato in controller SDN omonimo. 
 L'obiettivo di questa tesi è lo studio del controller open source Teraflow, sviluppato da ETSI \cite{etsi} a partire dal 2020.
@@ -49,19 +49,19 @@ L'analisi teorica è stata accompagnata dallo studio del codice e da test basati
 Questi test sono stati cruciali per comprendere il comportamento del sistema in condizioni applicative specifiche vista la scarsità della documentazione aggiornata.
 Successivamente, si è passati alla fase di sperimentazione.
 \\Non avendo a disposizione una rete reale, è stato utilizzato l'emulatore di reti Mininet come ambiente di test.
-\\Partendo da file preesistenti, è stato configurato un servizio tra due end-points, permettendo la comunicazione tra di essi. 
-Per garantire l'elevata qualità del servizio (QoS), è stata implementata una politica di 
-gestione della rete basata su tre KPI principali: il rapporto di perdita dei pacchetti (loss ratio), la latenza e la capacità. 
+\\Partendo da file preesistenti, sono stati configurati dei servizi tra due end-points utilizzando differenti topologie, permettendo la comunicazione tra di essi. 
+Per garantire l'elevata qualità del servizio (QoS), sono state implementate delle politiche di 
+gestione della rete, una per ogni servizio, basate su tre KPI principali: il rapporto di perdita dei pacchetti (loss ratio), la latenza e la capacità. 
 Questi parametri dovevano rispettare soglie predefinite per assicurare prestazioni di alto livello.
 Un elemento chiave dell'esperimento è stato il meccanismo di reazione automatica implementato tramite il controller quando una delle metriche superava i limiti stabiliti.
 In questo esempio specifico, il sistema interveniva automaticamente attivando il ricalcolo del percorso del traffico tra gli end-points per ristabilire i livelli di performance richiesti. 
-\\Per garantire un monitoraggio continuo della qualità del servizio, è stato implementato un probe, un programma di utilità che cattura informazioni che, 
-utilizzando protocolli come ping e iperf, misurava costantemente le metriche critiche (latenza, perdita di pacchetti, capacità). 
+\\Per garantire un monitoraggio continuo delle metriche, è stato implementato un probe, un programma di utilità che cattura informazioni e, in questo caso 
+utilizzando protocolli come ping e iperf, misura costantemente le metriche critiche (latenza, perdita di pacchetti, capacità). 
 Queste informazioni venivano inviate al controller che le utilizzava per prendere le decisioni in tempo reale riducendo al minimo l'impatto negativo sull'esperienza degli utenti. 
 %L’intero processo ha mostrato come, nonostante le limitazioni della documentazione, la fase di sperimentazione pratica sia stata indispensabile per comprendere e valutare le capacità del controller TeraFlow nella gestione dinamica degli intenti. La capacità di adattamento in tempo reale del sistema rappresenta un valore aggiunto nella gestione moderna delle reti, dimostrando l’efficacia dell’approccio SDN in contesti dinamici e complessi.
 \\Il resto del documento sarà organizzato come segue.
-\\Nel Capitolo \ref{cap:contesto} verrà esposto il contesto. All'interno ci sarà un'analisi approfondita del Software Defined Networking (SDN) e dell'Intent-Based Networking (IBN)
-e verranno illustrati alcuni dei principali controller SDN presenti sul mercato che implementano soluzioni differenti per l'IBN. Alla fine del capitolo saranno introdotti Kubernetes e i microservizi.
+\\Nel Capitolo \ref{cap:contesto} verrà esposto il contesto. All'interno ci sarà un'analisi approfondita del Software Defined Networking (SDN), dell'Intent-Based Networking (IBN)
+e verranno illustrati alcuni dei principali controller SDN presenti sul mercato che implementano soluzioni differenti per l'IBN. Alla fine del capitolo saranno introdotti Kubernetes e i microservizi che stanno alla base del design di TeraFlow.
 \\Nel Capitolo \ref{cap:teraflow} verrà descritto in modo approfondito il controller Teraflow su cui si incentra la tesi.
 Verrà delineata l'architettura e l'interazione necessaria tra le componenti con attenzione particolare alle componenti coinvolte nella gestione dei servizi e delle policy.
 Sarà inoltre introdotto gRPC, un framework grazie al quale le componenti comunicano tra di loro.

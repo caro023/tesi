@@ -136,53 +136,61 @@ Con le API in Python si può anche estendere il comando \textit{mn} usando l'opz
 \\\textit{sudo mn --your\_script.py --topo your\_topo}
 
 \subsection{P4}
+Programming Protocol-indipendent Packet Processor (P4 \cite{p4}), è un linguaggio di programmazione flessibile
+che permette di descrivere il comportamento degli elementi di rete, consentendo di personalizzare come i dispositivi elaborano i pacchetti.
+%\\P4 è nato quindi con l'obiettivo di definire nuove astrazioni per programmare il piano dati e gestire l'inoltro senza dover andare incontro alle limitazioni riscontrate in precedenza.
+\\I principali obiettivi sono:
+\begin{itemize}
+    \item \textbf{Indipendenza dal protocollo}: P4 non è vincolato a nessun protocollo specifico consentendo di definire nuovi protocolli o modificare quelli esistenti
+    \item \textbf{Indipendenza dal target}: Il codice può essere compilato per funzionare su diversi dispositivi, sia hardware che software, rendendolo versatile
+    \item \textbf{Riprogrammabilità}: Il comportamento del piano dati può essere aggiornato dinamicamente, consentendo di rispondere rapidamente ai cambiamenti delle esigenze di rete.
+\end{itemize}
+P4 è stato introdotto per superare le limitazioni di OpenFlow per poter fornire una soluzione più flessibile.
+OpenFlow, pur separando il piando di controllo e il piano dati, si basa su un insieme fisso di funzionalità, definendo regole di elaborazione dei pacchetti attraverso l'astrazione di tabelle che mappano i campi degli header (indirizzi IP, MAC, porte...). 
+Negli anni le specifiche dei pacchetti sono diventate sempre più complesse e dipendenti dalle singole aziende, che hanno iniziato a sviluppare l'hardware indipendentemente, rendendo necessari continui aggiornamenti per supportare nuove funzionalità\cite{p4art}.
+D'altra parte, gli switch non aggiornati, o prodotti da aziende diverse, non riescono a supportare tutte le nuove caratteristiche.
+Inoltre, OpenFLow non fornisce delle interfacce operative o amministrative standard, quindi rende complicato aggiungere supporto per nuovi protocolli.
+Tutte queste problematiche hanno portato all'introduzione di dispositivi programmabili che utilizzano P4.
+\\P4 consente di definire intestazioni e tabelle personalizzate e programmare esplicitamente il flusso di controllo dello switch, permettendo di adattarsi rapidamente ai cambiamenti e alle innovazioni.
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{p4.png}
     \caption{Workflow di P4 sul piano dati \cite{p4Article}}
     \label{fig:p4}
 \end{figure}
-P4 \cite{p4}, che sta per "Programming Protocol-indipendent Packet Processor",  è un linguaggio di programmazione ad alto livello che consente di descrivere il comportamento di un elemento di rete e del piano dati in modo flessibile.
-Il linguaggio permette di personalizzare il modo in cui i dispositivi di rete elaborano i pacchetti, senza essere vincolati a un set predefinito di protocolli.
-\\P4 è stato introdotto per l'esigenza di superare le limitazioni con cui si stava interfacciando OpenFlow.
-Per quest'ultimo protocollo l'hardware e il software non erano più sincronizzati. In alcuni casi 
-gli switch non riuscivano a supportare tutte le funzionalità che OpenFlow poteva offrire a causa delle limitazioni hardware in quanto progettati per supportare un insieme fisso di protocolli e funzionalità. 
-Per introdurre un cambiamento dell'hardware sono richiesti vari sforzi per lo sviluppo e il finanziamento, inoltre richiederebbe mesi se non anni per essere portato a termine.
-\\P4 è nato quindi con l'obiettivo di definire nuove astrazioni per programmare il piano dati senza dover andare incontro alle limitazioni riscontrate.
-Offre un linguaggio di programmazione che permette di definire regole per cui i pacchetti vengono processati direttamente nei dispositivi di rete.
-Di seguito vengono indicati i vari passi che si eseguono durante un flusso di lavoro di un programma P4 che si possono ritrovare anche nell'immagine \ref{fig:p4}.
 %Permette di definire la tabella, le azioni e the counters per poi essere applicate a elementi hardware o software switch allo stesso modo.
 %P4 ha un interfaccia per analizzare pacchetti e match campi nell'header. In questo modo abbiamo un accoppiamento tra hardware e software.
-\\Un programma P4 è costituito da diverse sezioni \cite{p4Article}, ognuna delle quali descrive un aspetto specifico del trattamento dei pacchetti.
-La dichiarazione degli header permette di specificare i protocolli che si vogliono analizzare e riconoscere o inventarne di nuovi per scopi di ricerca o esperimenti.
-Questo include campi come indirizzi IP, numeri di porta e tutti i dati di protocollo.
-Il Parser specifica come estrarre e interpretare i vari header dai pacchetti. Esso definisce uno stato macchina che determina, attraverso le informazioni in arrivo, come passare da uno stato all'altro. 
-\\La Pipeline di Elaborazione comprende tabelle e azioni che definiscono come i pacchetti vengono processati dopo aver effettuato il parsing.
+\\Nella Figura \ref{fig:p4} è illustrato il Workflow del modello di P4.
+\\Un programma P4 (P4 Program) definisce il comportamento del piano dati desiderato ed è suddiviso in varie sezioni \cite{p4Article}, ognuna delle quali descrive un aspetto specifico del trattamento dei pacchetti.
+Il processo inizia con la dichiarazione degli header, dove vengono specificati i protocolli da analizzare o si possono definire nuovi protocolli per scopi di ricerca o sperimentazione.
+Questi header contengono campi come indirizzi IP, numeri di porta e tutti i vari dati di protocollo.
+\\Successivamente, il programma viene inviato al compilatore P4 (P4 Compiler) che genera due tipi di output. 
+Il primo è un file eseguibile che specifica i formati degli header e le relative operazioni da implementare all'interno del dispositivo target (hardware come ASICs, FPGA..).
+Il secondo è un file indipendente dal target che 
+contiene le informazioni necessarie per far comunicare il piano di controllo e il piano dati tramite l'API P4Runtime.
+\\P4Runtime permette al controller di connettersi ai dispositivi e interagire con la pipeline 
+per poter inviare le configurazioni rilevanti nella relativa tabella. 
+%Permette inoltre di definire il piano dati in modo dinamico collegandolo al piano di controllo. 
+%Per il piano di controllo, P4Runtime protegge i dettagli hardware del piano dati ed è indipendente dalle funzionalità e dal protocollo supportati.
+\\I dispositivi programmabili, ottenibili tramite software o hardware, sono definiti P4 target.
+Essi hanno una pipeline per l'elaborazione dei pacchetti la cui struttura è specifica per il target ed è descritta da un determinato modello di architettura.
+Il Parser all'interno dei dispositivi specifica come estrarre e interpretare i vari header dai pacchetti seguendo uno schema prestabilito.
+\\La Pipeline di Elaborazione (Match-Action Pipeline) include tabelle e azioni che determinano come i pacchetti vengono processati
+mentre
 %guarda se mettere separato tabelle e azioni
-I Controlli del flusso coordinano il parser, le tabelle di elaborazione e le azioni. Definiscono quindi i controlli necessari per il flusso corretto di un pacchetto.
-\\Dopo aver definito il programma esso viene mandato al compilatore P4 che genera due tipi di output. 
-Il primo è un file binario P4 ed è ciò che viene installato all'interno del dispositivo target.
-Questo file binario è specifico per un target e quindi per uno specifico hardware (ad esempio Asics, fpga..).
-Il secondo output è indipendente dal target ed è diretto verso la parte NorthBound del controller. Questo è chiamato P4 info e genera i metadati necessari per consentire al piano di controllo e al piano
-dati di comunicare attraverso P4 Runtime.
-\\P4Runtime è un API messa a disposizione da P4 che permette al controller di connettersi ai dispositivi, vedere cosa c'è attualmente nel pipeline 
-e poter mandare le configurazioni rilevanti nella relativa tabella. Permette inoltre di definire il piano dati in modo dinamico collegandolo al piano di controllo. 
-Per il piano di controllo, P4Runtime protegge i dettagli hardware del piano dati ed è indipendente dalle funzionalità e dal protocollo supportati.
-P4Runtime riesce quindi a raggiunge l'indipendenza dal target, dal pipeline e dal protocollo.
-\\I nodi programmabili che possono essere ottenuti tramite software o hardware sono definiti P4 target.
-Essi hanno una pipeline di elaborazione dei pacchetti la cui struttura è specifica per il target ed è descritta da un determinato modello di architettura.
-
+i Controlli del flusso coordinano parser e pipeline per garantire il corretto funzionamento dell'intero processo.
+Il Deparser ricompone i pacchetti con le eventuali modifiche agli header e successivamente li invia.
 %E' lo schema del pipeline descritto al controller in modo da nascondere il tipo di dispositivi presenti nella rete.
-I principali obiettivi quindi includono:
-\begin{itemize}
-    \item \textbf{Protocollo-indipendenza}: P4 non è vincolato a nessun protocollo specifico consentendo addirittura di definire nuovi protocolli o modificare quelli esistenti
-    \item \textbf{Target-indipendenza}: Il codice può essere compilato per una varietà di target sia hardware che software
-    \item \textbf{Riprogrammabilità}: permette di aggiornare e modificare il comportamento del dataplane in tempo reale rispondendo ai cambiamenti nei requisiti di rete.
-\end{itemize}
-P4 rappresenta un passo significativo verso reti più flessibili e programmabili, consentendo agli sviluppatori di adattare e innovare rapidamente in risposta ai cambiamenti nei requisiti di rete.
-Si propone come una soluzione innovativa e versatile per superare le limitazioni degli attuali protocolli e dispositivi di rete offrendo un linguaggio dinamico e indipendente dall'hardware.
+P4 rappresenta un passo significativo verso reti più flessibili e programmabili, consentendo agli sviluppatori di adattarsi rapidamente ai cambiamenti dei requisiti di rete.
+Si propone come una soluzione innovativa e versatile per superare le limitazioni degli attuali protocolli e dispositivi di rete fornendo un linguaggio dinamico e indipendente dall'hardware.
 
-
+\section{Sperimentazione}
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{componenti.png}
+    \caption{Interazione tra alcune componenti in TeraFlow}
+    \label{fig:componenti}
+\end{figure}
 \textbf{Servizio end-to-end}
 \\Come già detto in precedenza il Device Level sfrutta una South-Bound Interface (SBI) per interagire con i device tramite l'API P4Runtime. 
 Inizialmente, il codice p4 compilato, ossia i vari artefatti, viene copiato nel pod SBI per poter inserire le giuste configurazioni nelle tabelle dei dispositivi.
@@ -211,16 +219,11 @@ Ciò semplifica la gestione dei servizi, in quanto la dichiarazione di queste in
 Questa aggiunta non ha prodotto cambiamenti nella definizione del percorso poiché le funzioni relative all'effettivo funzionamento di queste funzionalità non 
 sono ancora state implementate nel controller ma sono solo pianificate per release future.
 Altri esempi di vincoli possono essere rappresentati dalla posizione di un dispositivo, che può essere sia terminale che non, dal tempo o dal numero di passi massimo di un determinato percorso.
-\begin{figure}[h]
-    \centering
-   \includegraphics[width=1\textwidth]{servizion constraints.png}
-    \caption{Servizio creato in fase di sperimentazione}
-    \label{fig:constraints}
-\end{figure}
+
 %spiegare cosa sono i constraits, guarda i deliverable
 %dire che non sono implementati
 %run-time-->loss+latenza
-\\\textbf{Politica}
+\textbf{Politica}
 \\Una parte fondamentale nei sistemi moderni è la gestione a run-time del servizio stabilito\cite{demo}.
 A tale scopo si sfrutta la componente di Monitoring che permette di associare il monitoraggio delle metriche nel proprio database
 con condizioni che devono essere rispettate.
@@ -229,14 +232,26 @@ Quando questi requisiti non vengono soddisfatti, la componente di Monitoring sol
 e infine una per la capacità\ref{fig:policy}.
 Queste tre condizioni sono legate tra loro tramite un "OR", quindi appena una di esse non è più rispettata viene invocata l'azione che in questo caso consiste nel ricalcolo del percorso.
 %MODIFICA O LA FOTO O LA DESCRIZIONE
-\begin{figure}[h]
-    \centering
-   \includegraphics[width=1\textwidth]{policy 5 100.png}
-    \caption{Politica creata in fase di sperimentazione}
-    \label{fig:policy}
-\end{figure}
 
 \section{Demo}
+RISCRIVERE DESCRIVENDO SOLO LA DEMO DELL'HACKFEST3 (descrivi modifica al file per eseguire la componente di policy)
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{policy sw2.png}
+    \caption{Servizio 4 sw iniziale}
+    \label{fig:sw4}
+\end{figure}
+
+\textit{FIGURA POLICY SOLO LATENZA}
+\\descrivi il comando mininet usato per modificare la latenza
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{policy con sw3.png}
+    \caption{Servizio 4 sw cambio percorso}
+    \label{fig:sw4 dopo}
+\end{figure}
+
+
 Per verificare il comportamento del controller e assicurarsi che le condizioni di latenza, di loss e di capacità vengano rispettate, 
 non avendo a disposizione una rete reale, abbiamo utilizzato una topologia di rete su Mininet di switch P4 basati su bmv2\cite{bmv2}.
 La topologia iniziale era composta da 4 switch e due possibili percorsi ed è stata poi ampliata a 8 switch con 5 percorsi per renderla più complessa e poter fare una sperimentazione più realistica.
@@ -266,9 +281,63 @@ tramite il P4Runtime.
 \\In tutte e tre le tipologie di alterazione della rete, si è riscontrato un cambiamento del percorso volto a rispettare le condizioni desiderate. 
 %Inoltre, si è notato che una volta rimosso il ritardo, la perdita di pacchetti, o riattivato un link, il controller percepisce questo cambiamento e modifica automaticamente il percorso precedente, poiché è memorizzato nel database della Path Comp come percorso preferito per le sue caratteristiche.
 \section{Esperimento 2}
-8 sw, latenza pkt loss
-cambio tolopogia, aggiunta link, esteso probe, aggiunta porte per mininet
+8 sw script presi da ofc22
+\\politica con latenza e pkt loss
+\\descrizione comando mininet per modificare pkt loss
+\\cambio tolopogia, aggiunta link, esteso probe, aggiunta porte per mininet
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{service sw8.png}
+    \caption{Servizio 8 sw iniziale}
+    \label{fig:sw8}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{policy 5 100.png}
+    \caption{Politica latenza e pkt loss}
+    \label{fig:policy}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{servizion constraints.png}
+    \caption{Servizio 8 sw cambio percorso}
+    \label{fig:sw8 dopo}
+\end{figure}
+
 \section{Esperimento 3}
-cambio topologia, nuovo script mininet (preso da internet con cambio bw), aggiunte porte,
-aggiunto iperf, aggiunta capacità 
+Cambio topologia, nuovo script mininet (preso da internet con cambio bw)
+\\ aggiunte porte,
+\\aggiunta metrica di capacità alla politica
+\\descrizione comando mininet per modificare capacità
+\\aggiunto iperf al probe
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{service abilene (10).png}
+    \caption{abilene iniziale}
+    \label{fig:abilene}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{policy cap.png}
+    \caption{Servizio 8 sw cambio percorso}
+    \label{fig:policy cap}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{service abilene (11).png}
+    \caption{Servizio 8 sw cambio percorso}
+    \label{fig:abilene dopo}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{service 3 10 11.png}
+    \caption{abilene cambio }
+    \label{fig:abilene post}
+\end{figure}
+
 
