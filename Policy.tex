@@ -14,7 +14,7 @@ Il lavoro è iniziato con l'installazione della macchina virtuale \cite{VM} crea
     \item DNS: 8.8.8.8, 8.8.4.4
     \item Creata con VirtualBox 6.1 ma compatibile con versioni successive
     \item Requisiti minimi: 4 vCPU, 6 GB di RAM, 50 GB di spazio sul disco, Virtual Disk Image (VDI)
-    \item Connessione di rete: NAT Network con porte 22 per SSH e 80 per HTTP esposte
+    \item Connessione di rete: NAT Network con porte esposte 22 per SSH e 80 per HTTP
     \item Sistema operativo senza interfaccia grafica per ridurre il consumo di risorse.
 \end{itemize}
 La VM ha al suo interno preinstallati MicroK8s con le componenti richieste e Mininet in formato docker.
@@ -22,7 +22,7 @@ La versione di TeraFlow utilizzata è la 2.1 con adattamenti specifici per l'Hac
 \\Successivamente è stata installata la VM con la versione aggiornata di TeraFlow (3.0) a causa di un'incompleta implementazione della componente di Policy che non era in grado di gestire e riconoscere le KPI.
 Le caratteristiche richieste sono sostanzialmente simili, con un aumento di memoria RAM a 8 GB e dello spazio su disco a 60 GB.
 Il sistema operativo utilizzato è Ubuntu Server 22.04.4 LTS, compatibile anche con la versione successiva 22.04.6 LTS. 
-Inoltre è richiesta l'installazione di MicroK8 v1.24.17 cone le componenti necessarie, Docker e la versione 3.9.18 di Python.
+Inoltre è richiesta l'installazione di MicroK8 v1.24.17 con le componenti necessarie, Docker e la versione 3.9.18 di Python.
 \\I vari esperimenti si sono svolti seguendo il seguente schema:
 attraverso il Service Level è stato introdotto un servizio nella rete sotto forma di intento per stabilire la connessione e il percorso. 
 Successivamente, tramite il Management Level, è stata inserita una politica basata sugli eventi che consente di associare un Service Level Agreement (SLA) a un servizio specifico.
@@ -33,10 +33,14 @@ Questo SLA include condizioni che devono essere monitorate e rispettate durante 
 %tutte queste info sono persistite in un database logicamente centralizzato, fisicamente distribuito e scalabile, dato dalla componente di Context
 \\Per iniziare il lavoro si è partiti da una demo già preesistente, apportando in seguito le modifiche necessarie.
 \section{Strumenti per la sperimentazione}
-INTRO
-\\li descrivo perche verranno usati switch p4 emulati in mininet
+Prima di passare alla sperimentazione in seguito verranno descritti due strumenti che sono stati fondamentali per questa fase.
+L'uso di Mininet è stato necessario per la mancanza di una rete reale e, i dispositivi emulati sono 
+stati degli switch P4.
+Questi hanno permesso, attraverso la loro programmazione, di portare a termine i vari esperimenti sui 
+servizi e sulle politiche.
 \subsection{Mininet}
 \label{ch:Mininet}
+Mininet \cite{mininet} è un sistema open source di orchestrazione per l'emulazione di reti su un unico ambiente Linux che permette di emulare un'intera rete su un singolo computer come rappresentato in Figura \ref{fig:mininet}.
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{mininet.png}
@@ -44,26 +48,20 @@ INTRO
     %https://telcomaglobal.com/p/what-is-mininet  fonte foto mininet
     \label{fig:mininet}
 \end{figure}
-Mininet \cite{mininet} è un sistema open source di orchestrazione per l'emulazione di reti su un unico ambiente Linux che permette di emulare un'intera rete su un singolo computer.
-E' ampiamente utilizzato in ambiti di ricerca e sviluppo per creare e testare reti virtuali in modo realistico.
-A differenza di altri emulatori che utilizzano macchine virtuali per ogni dispositivo, si distingue per la sua capacità di avviare rapidamente reti virtuali complesse e di eseguire test su scenari vari e personalizzati.
-Consente anche di configurare l'inoltro dei pacchetti per testare diverse funzionalità, facilitando la condivisione e la replica del codice.
+E' ampiamente utilizzato in ambiti di ricerca e sviluppo per creare reti virtuali in modo realistico e testare nuove applicazioni o protocolli in un ambiente controllato prima di implementarli su reti reali.
+\\Mininet è in grado di gestire un insieme di terminali di rete (host)
+utilizzando la virtualizzazione leggera a differenza di altri emulatori che utilizzano macchine virtuali per ogni dispositivo.
+Questo è reso possibile da tecnologie implementate nel kernel Linux, come i network namespaces
+che permettono di creare istanze separate di interfacce di rete, tabelle di routing e tabelle ARP, che operano in modo indipendente \cite{tesiMininet}. 
+Questo approccio consente di avviare numerosi host e switch (fino a 4096) su un singolo kernel del sistema operativo, simulando una rete completa su un'unica macchina \cite{MininetOv}.
 %Rispetto ad altri emulatori presenti in circolazione che emulano ogni dispositivo su una macchina virtuale, Mininet offre una serie di vantaggi. 
 %Inanzitutto, permette l'avviamento rapido di una rete, la capacità di eseguire test e programmi con tipologie ampie e personalizzate. 
 %Inoltre consente di personalizzare l'inoltro dei pacchetti per testare diverse funzionalità con la possibilità di condividere e replicare il codice.
 \\Mininet offre delle API e un interprete Python che consentono di definire e gestire facilmente delle topologie di rete.
-%Ciò è possibile anche tramite interfaccia a riga di comando (CLI). In entambi i casi possono essere sia predefinite che personalizzate con la possibilità di 
-%aggiungere e rimuovere switch, router, host, controller e link, tutti eseguiti su un unico computer.
-%Mininet utilizza infatti una virtualizzazione leggera per creare nodi di rete ognuno con la propria pila di rete in modo tale che possano comunicare con gli 
-%altri nodi come farebbero in una rete fisica. 
 È inoltre possibile utilizzare un'interfaccia a riga di comando (CLI) per la stessa funzione.
 In entrambi i casi, si possono configurare topologie predefinite o personalizzate, aggiungendo e rimuovendo switch, router, host, controller e link, tutti eseguiti su un unico computer.
-\\Mininet è in grado di gestire un insieme di terminali di rete (host), 
+Consente anche di configurare regole per l'inoltro dei pacchetti per testare diverse funzionalità, come NAT (Network Address Translation) o ECMP (Equal-Cost Multi-Path), facilitando la condivisione e la replica degli scenari di test in ambienti con caratteristiche differenti.
 %switch, router e collegamenti all'interno di un singolo ambiente Linux,
-utilizzando la virtualizzazione leggera attraverso tecnologie implementate nel kernel Linux, come i network namespaces.
-Questi permettono di creare istanze separate di interfacce di rete, tabelle di routing e tabelle ARP, che operano in modo indipendente \cite{tesiMininet}. 
-Questo approccio consente di avviare numerosi host e switch (fino a 4096) su un singolo kernel del sistema operativo, simulando una rete completa su un'unica macchina \cite{MininetOv}.
-Ciò consente di testare nuove applicazioni, protocolli e algoritmi in un ambiente controllato e modificabile prima di implementarli su reti reali.
 \\Mininet mette a disposizione tre livelli differenti di API \cite{introMin}:
 \begin{itemize}
 \item \textbf{Low-level}: consiste nelle classi dei nodi e dei link istanziati individualmente e usati per creare una rete.
@@ -72,16 +70,16 @@ Ciò consente di testare nuove applicazioni, protocolli e algoritmi in un ambien
 \end{itemize}
 Si possono configurare i link come up o down e inserire metriche specifiche 
 come quelle di banda, ritardo, perdita o massima lunghezza della coda di recezione per rendere la rete più realistica e adatta a esperimenti di test.
-\\Gli host su Mininet condividono il filesystem root del server sottostante. 
-Ciò significa che non è necessario trasferire file tra gli host virtuali perché tutti accedono agli stessi file direttamente.
-Tuttavia, questa condivisione del filesystem può creare problemi se un programma ha bisogno di file di configurazione specifici per ogni host. 
-In tal caso, è necessario creare un file di configurazione separato per ogni host e specificare quale file utilizzare quando si avvia il programma.
-Un'altra limitazione riguarda la condivisione delle risorse del sistema su cui è in esecuzione che dovranno essere bilanciate tra tutti gli host della rete.
+%\\Gli host su Mininet condividono il filesystem root del server sottostante. 
+%Ciò significa che non è necessario trasferire file tra gli host virtuali perché tutti accedono agli stessi file direttamente.
+\\Tuttavia la condivisione delle risorse del sistema può creare problemi.
+Inanzitutto queste dovranno essere bilanciate tra tutti gli host della rete.
+Inoltre, se un programma ha bisogno di file di configurazione specifici per ogni host è necessario crearne uno separato per ogni host e specificare quale file utilizzare quando si avvia il programma.
 %Inoltre ci possono essere collisioni tra file se si prova a creare lo stesso file nella stessa directory di più hosts.
 %Mininet mette a disposizione una GUI (miniedit) utile per visualizzare lo stato della rete durante gli esperimenti svolti.
 \\Mininet è stato progettato per essere facilmente integrabile con altri software e sistemi di rete.
-Consente anche di connettere un controller SDN remoto, quindi esterno alla rete, agli switch, indipendentemente dal PC su cui è installato, in modo da fornire un ambiente adatto allo sviluppo e al test.
-
+Anche se è fornito un controller di default, consente di connettere un controller SDN remoto agli switch, indipendentemente dal PC su cui è installato, 
+in modo da fornire un ambiente adatto allo sviluppo.
 
 \subsubsection{Alcuni comandi fondamentali}
 \textbf{Linea di comando}
@@ -141,17 +139,17 @@ che permette di descrivere il comportamento degli elementi di rete, consentendo 
 %\\P4 è nato quindi con l'obiettivo di definire nuove astrazioni per programmare il piano dati e gestire l'inoltro senza dover andare incontro alle limitazioni riscontrate in precedenza.
 \\I principali obiettivi sono:
 \begin{itemize}
-    \item \textbf{Indipendenza dal protocollo}: P4 non è vincolato a nessun protocollo specifico consentendo di definire nuovi protocolli o modificare quelli esistenti
+    \item \textbf{Indipendenza dal protocollo}: P4 non è vincolato a nessun protocollo specifico consentendo anche di definirne di nuovi o modificare quelli esistenti
     \item \textbf{Indipendenza dal target}: Il codice può essere compilato per funzionare su diversi dispositivi, sia hardware che software, rendendolo versatile
-    \item \textbf{Riprogrammabilità}: Il comportamento del piano dati può essere aggiornato dinamicamente, consentendo di rispondere rapidamente ai cambiamenti delle esigenze di rete.
+    \item \textbf{Riprogrammabilità}: Il comportamento del piano dati può essere aggiornato dinamicamente consentendo di rispondere rapidamente ai cambiamenti delle esigenze di rete.
 \end{itemize}
-P4 è stato introdotto per superare le limitazioni di OpenFlow per poter fornire una soluzione più flessibile.
-OpenFlow, pur separando il piando di controllo e il piano dati, si basa su un insieme fisso di funzionalità, definendo regole di elaborazione dei pacchetti attraverso l'astrazione di tabelle che mappano i campi degli header (indirizzi IP, MAC, porte...). 
-Negli anni le specifiche dei pacchetti sono diventate sempre più complesse e dipendenti dalle singole aziende, che hanno iniziato a sviluppare l'hardware indipendentemente, rendendo necessari continui aggiornamenti per supportare nuove funzionalità\cite{p4art}.
-D'altra parte, gli switch non aggiornati, o prodotti da aziende diverse, non riescono a supportare tutte le nuove caratteristiche.
-Inoltre, OpenFLow non fornisce delle interfacce operative o amministrative standard, quindi rende complicato aggiungere supporto per nuovi protocolli.
+P4 è stato introdotto per superare le limitazioni di OpenFlow al fine di fornire una soluzione più flessibile.
+\\OpenFlow, pur separando il piano di controllo e il piano dati, si basa su regole di elaborazione dei pacchetti attraverso tabelle che mappano i campi degli header (indirizzi IP, MAC, porte...) in un insieme fisso di funzionalità.
+\\Negli anni le specifiche dei pacchetti sono diventate sempre più complesse, nonchè dipendenti dalle singole aziende che hanno iniziato a sviluppare l'hardware indipendentemente, rendendo necessari continui aggiornamenti per supportare le varie esigenze\cite{p4art}.
+D'altra parte, gli switch non aggiornati, o prodotti da aziende diverse, non riescono a supportare tutte le nuove caratteristiche a causa delle limitazioni hardware.
+\\Inoltre, OpenFLow non fornisce delle interfacce operative o amministrative standard, quindi rende complicato aggiungere supporto per nuovi protocolli.
 Tutte queste problematiche hanno portato all'introduzione di dispositivi programmabili che utilizzano P4.
-\\P4 consente di definire intestazioni e tabelle personalizzate e programmare esplicitamente il flusso di controllo dello switch, permettendo di adattarsi rapidamente ai cambiamenti e alle innovazioni.
+\\P4 consente di definire intestazioni e tabelle personalizzate, e programmare esplicitamente il flusso di controllo dello switch, permettendo di adattarsi rapidamente ai cambiamenti e alle innovazioni.
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{p4.png}
@@ -161,89 +159,157 @@ Tutte queste problematiche hanno portato all'introduzione di dispositivi program
 %Permette di definire la tabella, le azioni e the counters per poi essere applicate a elementi hardware o software switch allo stesso modo.
 %P4 ha un interfaccia per analizzare pacchetti e match campi nell'header. In questo modo abbiamo un accoppiamento tra hardware e software.
 \\Nella Figura \ref{fig:p4} è illustrato il Workflow del modello di P4.
-\\Un programma P4 (P4 Program) definisce il comportamento del piano dati desiderato ed è suddiviso in varie sezioni \cite{p4Article}, ognuna delle quali descrive un aspetto specifico del trattamento dei pacchetti.
-Il processo inizia con la dichiarazione degli header, dove vengono specificati i protocolli da analizzare o si possono definire nuovi protocolli per scopi di ricerca o sperimentazione.
-Questi header contengono campi come indirizzi IP, numeri di porta e tutti i vari dati di protocollo.
-\\Successivamente, il programma viene inviato al compilatore P4 (P4 Compiler) che genera due tipi di output. 
-Il primo è un file eseguibile che specifica i formati degli header e le relative operazioni da implementare all'interno del dispositivo target (hardware come ASICs, FPGA..).
-Il secondo è un file indipendente dal target che 
+\\Un programma P4 (P4 Program) definisce il comportamento del piano dati desiderato ed è suddiviso in varie sezioni, ognuna delle quali descrive un aspetto specifico del trattamento dei pacchetti.
+Il processo inizia con la dichiarazione degli header del pacchetto da analizzare, successivamente si
+definisce il comportamento del parser, le tabelle, le azioni e il flusso di controllo.
+%Questi header contengono campi come indirizzi IP, numeri di porta .
+\\Il programma viene poi inviato al compilatore P4 (P4 Compiler) che genera due tipi di output. 
+Il primo è un file eseguibile che descrive le varie operazioni da implementare all'interno del dispositivo target.
+I target P4 sono dispositivi programmabili ottenibili tramite hardware, come ASICs o FPGA, o software, che realizzano il comportamento desiderato mettendo in atto le specifiche descritte nel programma grazie al file eseguibile.
+%Permette inoltre di definire il piano dati in modo dinamico collegandolo al piano di controllo. 
+Il parser all'interno dei dispositivi specifica come estrarre e interpretare i vari header dei pacchetti seguendo uno schema prestabilito.
+\\La pipeline di elaborazione (Match-Action Pipeline) include tabelle e azioni che determinano come processare i pacchetti. %guarda se mettere separato tabelle e azioni
+La struttura della pipeline è distinta per ciascun dispositivo ed è descritta da un determinato modello di architettura.
+Il flusso di controllo invece coordona parser e pipeline per garantire il corretto funzionamento dell'intero processo.
+Infine, il deparser ricompone i pacchetti con le eventuali modifiche degli header e successivamente li reintroduce nella rete.
+\\Il secondo file generato dal compilatore è indipendente dal target e 
 contiene le informazioni necessarie per far comunicare il piano di controllo e il piano dati tramite l'API P4Runtime.
 \\P4Runtime permette al controller di connettersi ai dispositivi e interagire con la pipeline 
-per poter inviare le configurazioni rilevanti nella relativa tabella. 
-%Permette inoltre di definire il piano dati in modo dinamico collegandolo al piano di controllo. 
-%Per il piano di controllo, P4Runtime protegge i dettagli hardware del piano dati ed è indipendente dalle funzionalità e dal protocollo supportati.
-\\I dispositivi programmabili, ottenibili tramite software o hardware, sono definiti P4 target.
-Essi hanno una pipeline per l'elaborazione dei pacchetti la cui struttura è specifica per il target ed è descritta da un determinato modello di architettura.
-Il Parser all'interno dei dispositivi specifica come estrarre e interpretare i vari header dai pacchetti seguendo uno schema prestabilito.
-\\La Pipeline di Elaborazione (Match-Action Pipeline) include tabelle e azioni che determinano come i pacchetti vengono processati
-mentre
-%guarda se mettere separato tabelle e azioni
-i Controlli del flusso coordinano parser e pipeline per garantire il corretto funzionamento dell'intero processo.
-Il Deparser ricompone i pacchetti con le eventuali modifiche agli header e successivamente li invia.
+per poter inviare le configurazioni nella relativa tabella \cite{p4Article}. 
+I dettagli hardware del piano dati sono nascosti al piano di controllo rendendolo indipendente dalle funzionalità e dai protocolli supportati.
 %E' lo schema del pipeline descritto al controller in modo da nascondere il tipo di dispositivi presenti nella rete.
 P4 rappresenta un passo significativo verso reti più flessibili e programmabili, consentendo agli sviluppatori di adattarsi rapidamente ai cambiamenti dei requisiti di rete.
 Si propone come una soluzione innovativa e versatile per superare le limitazioni degli attuali protocolli e dispositivi di rete fornendo un linguaggio dinamico e indipendente dall'hardware.
 
-\section{Sperimentazione}
+\section{Descrizione Workflow}
+Nei paragrafi successivi verrà descritto il Workflow della sperimentazione illustrato in Figura \ref{fig:componenti}, in seguito verranno 
+forniti i dettagli più pratici relativi a un'analisi approfondita delle funzioni del controller utilizzate.
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{componenti.png}
     \caption{Interazione tra alcune componenti in TeraFlow}
     \label{fig:componenti}
 \end{figure}
-\textbf{Servizio end-to-end}
+\\\textbf{Servizio end-to-end}
 \\Come già detto in precedenza il Device Level sfrutta una South-Bound Interface (SBI) per interagire con i device tramite l'API P4Runtime. 
-Inizialmente, il codice p4 compilato, ossia i vari artefatti, viene copiato nel pod SBI per poter inserire le giuste configurazioni nelle tabelle dei dispositivi.
-Il passo successivo è registrare i dispositivi e i link al controller SDN per permettere una corretta comunicazione tra di essi.
-A questo punto, siamo in grado di richiedere una connessione tra due end points specificando solamente i dispositivi finali tramite un servizio.
-\\La creazione del servizio è realizzata in due passi. 
-Inizialmente, tramite la funzione \textit{CreateService}, si crea una servizio di connettività vuoto nel quale viene specificato solo il tipo associato per poi ritornare l'identificativo a cui è stato correlato.
-Successivamente viene aggiornato il servizio popolando i campi richiesti come endpoints, vincoli e configurazioni di servizio. Di questo si occupa la funzione \textit{UpdateService} \cite{D32}.
+Inizialmente, il codice P4 compilato viene copiato nel pod SBI per poter inserire le giuste configurazioni nelle tabelle dei dispositivi.
+Il passo successivo consiste nel registrare i dispositivi e i link al controller SDN, in particolare alla componente di Context, per permettere una corretta comunicazione tra di essi.
+A questo punto, siamo in grado di richiedere una connessione tra due end points alla componente di Service specificando solamente i dispositivi finali tramite un servizio.
+\\La creazione del servizio è realizzata grazie alle funzioni messe a disposizione dalla componente di Service all'interno del controller la cui implementazione si può trovare nel file \cite{servserv}. 
+\\Inizialmente, tramite la funzione \textit{CreateService}, si crea una servizio di connettività vuoto nel quale viene specificato solo il tipo associato per poi memorizzare l'identificativo  
+a cui è stato correlato nel Context database e ritornarlo.
+Nella Figura \ref{fig:componenti} il servizio è stato richiesto dalla componente Web UI, mentre nella nostra sperimentazione si è usato uno script interno al controller.
+Successivamente, passando il servizio con i relativi parametri, viene aggiornato popolando i campi richiesti come endpoints, vincoli e configurazioni di servizio. 
+Di questo si occupa la funzione \textit{UpdateService} \cite{D32}.
 La componente di Service a questo punto si rivolge prima alla componente di Context per recuperare la versione più aggiornata del servizio e settare lo stato a Planned (pianificato), poi alla PathComp per calcolare un percorso.
-\\Per eseguire questa operazione la PathComp utilizza delle informazioni della rete che risiedono nel database logicamente centralizzato della componente di Context.
+\\Per eseguire questa operazione la PathComp utilizza delle informazioni della rete che risiedono nel Context database.
 La PathComp è in grado di soddisfare anche richieste di servizio che attraversano più livelli, in questo caso, la risposta includerà uno o più sottoservizi con le relative sottoconnessioni che li supportano.
-\\Una volta ricevute le connessioni ed eventuali sottoservizi la componente Service istanzia un \textit{Task Scheduler} con le relative funzioni, %che li correla e li schedula.
-quest'ultimo è responsabile dell'esecuzione delle attività di installazione e smantellamento dei servizi e collegamenti nell'ordine appropriato.
-Infine viene eseguito il metodo \textit{Execute} del \textit{Task Scheduler} per realizzare tutte le operazioni di configurazione richieste per i dispositivi lungo il percorso tramite l'SBI; inoltre viene modificato lo stato del servizio.
-Al termine del processo, la componente Context viene aggiornata con le nuove informazioni e l’identificatore del servizio viene restituito all’entità chiamante.
+\\Una volta ricevute le connessioni ed eventuali sottoservizi la componente Service istanzia un \textit{Task Scheduler}. %che li correla e li schedula.
+Quest'ultimo è responsabile dell'esecuzione delle attività di installazione e smantellamento dei servizi e collegamenti nell'ordine appropriato.
+Come ultima operazione viene eseguito il metodo \textit{Execute} del \textit{Task Scheduler} per realizzare tutte le operazioni di configurazione richieste per i dispositivi lungo il percorso tramite l'SBI; inoltre viene modificato lo stato del servizio in Active (attivo).
+Al termine del processo, il database della componente Context viene aggiornato con le nuove informazioni e l'identificatore del servizio viene nuovamente restituito all'entità chiamante.
 \\Per mantenere questo processo agnostico rispetto ai dettagli della tecnologia, la componente di Service 
-sfrutta una definizione minima permettendo agli utenti di esprimere cosa vogliono connettere, lasciando che sia il sistema sottostante a decidere come realizzare la connessione reale.
-La componente traduce automaticamente questa definizione minimale del servizio in modelli di configurazioni astratte dei dispositivi. 
+sfrutta una definizione minima permettendo agli utenti di specificare solo quali dispositivi vogliono connettere.
+La componente traduce automaticamente questa definizione del servizio in modelli di configurazioni astratte dei dispositivi. 
 Queste vengono a loro volta tradotte in regole P4 dal driver del dispositivo P4 della SBI.
 \\\textbf{Vincoli e configurazioni di servizio}
 \\È possibile richiedere azioni supplementari, come l'aggiunta di vincoli o configurazioni di servizio specifiche. 
 %In questo modo il componente Policy offre SLA basati sugli eventi per servizi di connettività end-to-end tramite pipeline P4
 Queste vengono specificate inizialmente alla creazione di un servizio e devono essere rispettate finchè quest'ultimo non verrà eliminato. 
 Ciò semplifica la gestione dei servizi, in quanto la dichiarazione di queste informazioni aggiuntive può sostituire l'associazione di una politica.
-\\Nella demo presa in considerazione i vincoli non erano specificati ma sono stati aggiunti per quanto riguarda la latenza e la capacità del percorso \ref{fig:constraints}.
-Questa aggiunta non ha prodotto cambiamenti nella definizione del percorso poiché le funzioni relative all'effettivo funzionamento di queste funzionalità non 
+\\Nella demo presa in considerazione i vincoli non erano specificati ma sono stati aggiunti per quanto riguarda la latenza e la capacità del percorso, 
+come si può vedere nella Figura \ref{fig:abilene}.
+Questa aggiunta non ha prodotto cambiamenti nella manutenzione del servizio poiché le funzioni relative all'effettivo funzionamento di queste funzionalità non 
 sono ancora state implementate nel controller ma sono solo pianificate per release future.
-Altri esempi di vincoli possono essere rappresentati dalla posizione di un dispositivo, che può essere sia terminale che non, dal tempo o dal numero di passi massimo di un determinato percorso.
-
-%spiegare cosa sono i constraits, guarda i deliverable
-%dire che non sono implementati
-%run-time-->loss+latenza
-\textbf{Politica}
+Anche se nella documentazione ufficiale non sono menzionati i vari tipi di vincoli supportati 
+si possono ritrovare nel file \cite{vincoli}.
+\\\textbf{Politica}
 \\Una parte fondamentale nei sistemi moderni è la gestione a run-time del servizio stabilito\cite{demo}.
-A tale scopo si sfrutta la componente di Monitoring che permette di associare il monitoraggio delle metriche nel proprio database
-con condizioni che devono essere rispettate.
-Quando questi requisiti non vengono soddisfatti, la componente di Monitoring solleva un allarme che fa scattare l'azione prestabilita.
-\\Nella sperimentazione abbiamo introdotto una politica per il servizio stabilito con tre condizioni: una per la latenza (che non deve superare i 100ms), una per la loss (che non deve superare il 5\%) 
-e infine una per la capacità\ref{fig:policy}.
-Queste tre condizioni sono legate tra loro tramite un "OR", quindi appena una di esse non è più rispettata viene invocata l'azione che in questo caso consiste nel ricalcolo del percorso.
+Per garantire questa richiesta è necessario associare una politica al servizio per richiedere un Service Level Agreement (SLA).
+\\Inizialmente, alla creazione del servizio, si associano le differenti Kpi tramite i KpiDescriptor.
+In ogni KpiDescriptor  si devono specificare i valori numerici da rispettare insieme al tipo di Kpi (KpiSampleType), che può essere predefinito (illustrati nel File \cite{kpi}),
+oppure, utilizzando il tipo UNKNOWN, si può personalizzare tramite una descrizione.
+Successivamente si richiama la funzione della componente di Monitoring \textit{SetKpi} per ogni regola, passando il KpiDescriptor come parametro, così da
+associare il monitoraggio delle metriche richieste a una kpi nel Monitoring database e restituire il relativo identificatore.
+Se a uno stesso servizio si associano più KPI ognuna deve avere associato un KpiSampleType diverso altrimenti, anche con una descrizione differente,
+verrà associato lo stesso identificativo per monitorare metriche diverse, quindi solo una condizione per servizio può essere personalizzata.
+Infine al servizio viene associata una politica specificando le diverse regole collegate tra loro da operatori booleani come AND/OR tramite file JSON.
+Per definire una politica va specificato l'id del contesto a cui si vuole associare e l'id del relativo servizio, successivamente si specificano le regole.
+Ogni regola è composta dall'identificatore della Kpi, l'operatore numerico (maggiore, minore o uguale \cite{op}) insieme al valore limite 
+per definire l'intervallo di valori non ammessi e infine l'azione da eseguire (le possibili azioni sono riportare nel file \cite{az}).
+Quando i requisiti non vengono soddisfatti, la componente di Monitoring solleva un allarme che fa scattare l'azione prestabilita.
+%\\Nella sperimentazione abbiamo introdotto una politica per il servizio stabilito tramite un file JSON
+%con tre condizioni: una per la latenza (che non deve superare i 100ms), una per la loss (che non deve superare il 5\%) 
+%e infine una per la capacità\ref{fig:policy}.
+%Queste tre condizioni sono legate tra loro tramite un "OR", quindi appena una di esse non è più rispettata viene invocata l'azione che in questo caso consiste nel ricalcolo del percorso.
 %MODIFICA O LA FOTO O LA DESCRIZIONE
 
-\section{Demo}
-RISCRIVERE DESCRIVENDO SOLO LA DEMO DELL'HACKFEST3 (descrivi modifica al file per eseguire la componente di policy)
+\section{Sperimentazione}
+In questa sezione verranno descritti gli esperimenti svolti esponendo i codici, le topologie e i comandi usati 
+in modo tale da permetterne la riproduzione. In alcuni casi è stata necessaria la modifica dei codici originali; tutti i file sono riportati in Appendice.
+\\Per verificare il comportamento del controller, non avendo a disposizione una rete reale, sono state utilizzate delle topologie
+di rete riprodotte tramite Mininet basate su bmv2\cite{bmv2}, la seconda versione dello switch software di riferimento P4.
+\subsection{Demo}
+Inizialmente si è riprodotta la demo dell'Hackfest 3. 
+I comandi e la spiegazione completa dell'esperimento si possono ritrovare nella pagina del sito \cite{hackfest}.
+\\Dopo aver verificato che le componenti del controller siano in stato di running (\textit{Kubectl get pods -n=tfs}),
+si istanzia la topologia \cite{topo4}, illustrata in Figura \ref{fig:sw4}, sul container di Mininet collegato al controller.
+Dalla cartella \textit{ngsdn-tutorial} si invoca \textit{make start} e \textit{make mn-cli} per l'avvio.
+\\Nel file Objects.py sono descritti gli switch che fanno parte della topologia con i relativi
+dispositivi, collegamenti e servizi che verranno usati dai vari script per reperire le informazioni necessarie.
+\\Il primo comando da eseguire sul terminale relativo al controller (\textit{./src/tests/hackfest3/setup.sh}) configura il pod Kubernetes dell'SBI
+inserendo le configurazioni di P4 necessarie al server per comunicare con gli switch.
+\\Successivamente tramite il comando \textit{./src/tests/hackfest3/run\_test\_01\_bootstrap.sh} viene registrata la topologia collegata a Mininet al controller
+inserendo i dispositivi e i collegamenti nel Context database, così da poter proseguire con l'installazione del servizio.
+\\Cercando nel browser http://localhost:8080/webui si può accedere all'interfaccia grafica e, selezionando il contesto \textit{Context:(admin):Topology(admin)},
+si può visualizzare la topologia di rete e le configurazioni dei device.
+\\Prima di continuare con la creazione del servizio, in un altro terminale, dalla cartella
+\textit{probe-tfs}, si copia ricorsivamente la cartella target nella directory corrente (\textit{cp -r \textasciitilde /controller /src/tests/p4/probe/probe-tfs/target . })
+necessaria per eseguire i comandi successivi,
+ci si collega al container di Mininet (\textit{./connect-to-mininet.sh}) e
+si attiva lo script \textit{tfsagent} (\textit{./tfsagent.sh}) che permette di ascoltare gli eventi dalla componente di Context e, 
+quando un servizio viene registrato, crea la KpiDescriptor relativa alla latenza e la registra nel Monitoring database.
+In questo script il KpiSampleType specificato è UNKNOWN e il relativo commento è "\textit{Latency value for service \{\}}"
+Successivamente si mette in attesa dei dati dal tfsping per ricevere le metriche relative alla latenza del collegamento e crea delle kpi per mandarle alla componente di Monitoring.
+\\A questo punto si può creare il servizio tra i due endpoints (\textit{./src/tests/hackfest3/run\_test\_02\_ create\_service.sh}) e visualizzarlo sull'interfaccia web, come si può vedere nelle Figure \ref{fig:ser} \ref{fig:sw4}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{service active.png}
+    \caption{Servizio}
+    \label{fig:ser}
+\end{figure}
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\textwidth]{policy sw2.png}
     \caption{Servizio 4 sw iniziale}
     \label{fig:sw4}
 \end{figure}
-
-\textit{FIGURA POLICY SOLO LATENZA}
-\\descrivi il comando mininet usato per modificare la latenza
+Gli endpoints relativi a questa demo sono “SW1-port3” e “SW4-port3”, 
+gli switch della topologia collegati rispettivamente al client e al server instanziati su Mininet.
+A questo punto si modifica il file \textit{manifests/policyservice.yaml}, come rappresentato in Figura \ref{fig:pol}, aprendolo dal terminale con il comando \textit{kubectl edit svc policyservice -n=tfs}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{modificafile.png}
+    \caption{File policyservice modificato}
+    \label{fig:pol}
+\end{figure}
+Adesso, da un ulteriore terminale, dalla cartella \textit{grpc}, si può installare la regola di politica tramite un file JSON (\textit{policyAddService.json}) eseguendo \textit{./addPolicy.sh}.
+Dalla Web UI si può visualizzare la politica rappresentata nella Figura \ref{fig:lat}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{politica lat.png}
+    \caption{Politica con regola di latenza}
+    \label{fig:lat}
+\end{figure}
+Infine, per verificare che la politica inserita sia efficace, tramite il primo terminale aperto su Mininet si 
+aggiunge un ritardo su un'interfaccia di uno switch interno al percorso prestabilito tramite il comando
+\textit{switch2 tc qdisc add dev switch2-eth2 root netem delay 2000ms}, in questo caso è lo switch2 sull'interfaccia eth2.
+A questo punto, si esegue \textit{client ./tfsping} per mandare le metriche al \textit{tfsagent} e attendere un cambiamento del percorso.
+In questa fase, finchè il percorso non è cambiato e la latenza continua a essere superiore a quella richiesta,
+lo stato della politica passa a ACTIVE a PROVISIONED o UPDATED, mentre il servizio a ENFORCED.
+Nella Figura \ref{fig:sw4 dopo} si può vedere il nuovo percorso. 
+\\Si è fatta anche un'ulteriore prova, invece di aumentare la latenza si è direttamente disattivato un link tra due switch, in questo caso switch2 e switch4,
+tramite \textit{link switch2 switch4 down} e si è potuto constatare che anche in questo modo viene attivata l'azione della politica.
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\textwidth]{policy con sw3.png}
@@ -251,54 +317,54 @@ RISCRIVERE DESCRIVENDO SOLO LA DEMO DELL'HACKFEST3 (descrivi modifica al file pe
     \label{fig:sw4 dopo}
 \end{figure}
 
-
-Per verificare il comportamento del controller e assicurarsi che le condizioni di latenza, di loss e di capacità vengano rispettate, 
-non avendo a disposizione una rete reale, abbiamo utilizzato una topologia di rete su Mininet di switch P4 basati su bmv2\cite{bmv2}.
-La topologia iniziale era composta da 4 switch e due possibili percorsi ed è stata poi ampliata a 8 switch con 5 percorsi per renderla più complessa e poter fare una sperimentazione più realistica.
-L'ultima topologia utilizzata è stata Abilene \cite{abilene}; una rete di trasporto creata da Internet2.
-%mettere foto topologia abilene
-\\I dispositivi delle varie topologie sono stati connessi alla componente SBI, come per i dispositivi reali, in modo tale che potessero comunicare con il controller.
-Successivamente per dimostrare la politica basata sul servizio e il ricalcolo delle configurazioni, abbiamo aggiunto artificialmente delle condizioni di ritardo e packet loss all’interno di uno switch presente nel percorso. 
-Ad esempio, abbiamo utilizzato il comando \textit{switch2 tc qdisc add dev switch2-eth2 root netem delay 200ms} per aggiungere un ritardo di 200ms oppure il comando \textit{switch2 tc qdisc add dev switch2-eth2 root netem loss 10\%}
-%aggiungere il comando per la capacità
- per simulare una perdita di pacchetti del 10\%. Inoltre, abbiamo disattivato un link tra due switch con il comando \textit{link switch6 switch7 down}.
-\\Questi cambiamenti sono stati monitorati grazie a un probe in Python, una funzionalità che rileva lo stato di integrità delle istanze dell'applicazione.
-Inizialmente, si avvia l'agent che, ascoltando gli eventi della componente di Context, crea tre Kpi Id differenti per loss, latenza e capacità ogni volta che viene creato un servizio \ref{fig:agent}.
-\begin{figure}[h]
-    \centering
-   \includegraphics[width=0.5\textwidth]{create new event ag.png}
-    \caption{Creazione delle due KPI id}
-    \label{fig:agent}
-\end{figure}
-Successivamente si attiva un secondo script che riesce a monitorare le metriche di loss e latenza attraverso il comando ping del terminale e la capacità tramite iperf per poi inviarle attraverso una socket all'agent.
-Prima di avviare lo script è necessario attivare il server iperf sul dispositivo finale del servizio.
-\\L'agent, ottenuti i relativi valori, li inoltra alla componente di monitoring tramite una KPI composta dal valore, il kpi id corretto e un timestamp.
-\\La componente, ricevute le metriche, riconosce che è avvenuto un cambiamento nella rete e solleva un allarme per una potenziale violazione della politica che sarà poi validata dalla componente di Policy.
-Questo evento causa l'esecuzione dell'azione predefinita nella politica, ovvero l'aggiornamento del percorso.
-Quando il nuovo tragittto è calcolato dalla Path Comp, la componente di Service compila una lista di configurazioni di dispositivi per validare gli aggiornamenti 
-seguita da un'altra lista per la cancellazione delle vecchie configurazioni. Queste istruzioni sono tradotte in regole P4 dalla componente SBI prima di essere imposte al piano dati 
-tramite il P4Runtime.
-\\In tutte e tre le tipologie di alterazione della rete, si è riscontrato un cambiamento del percorso volto a rispettare le condizioni desiderate. 
 %Inoltre, si è notato che una volta rimosso il ritardo, la perdita di pacchetti, o riattivato un link, il controller percepisce questo cambiamento e modifica automaticamente il percorso precedente, poiché è memorizzato nel database della Path Comp come percorso preferito per le sue caratteristiche.
-\section{Esperimento 2}
-8 sw script presi da ofc22
-\\politica con latenza e pkt loss
-\\descrizione comando mininet per modificare pkt loss
-\\cambio tolopogia, aggiunta link, esteso probe, aggiunta porte per mininet
+\subsection{Esperimento 2}
+In questo esperimento la topologia di base da cui ha avuto inizio è stata quella descritta nel file \textit{controller/src/tests/p4/mininet/8switch3path.py},
+ma successivamente sono stati aggiunti dei link per creare 5 possibili percorsi al posto di 3; la topologia finale è illustiata nella Figura \ref{img:top8}. 
+Prima di inizializzare la topologia è stato necessario modificare il file \textit{ngsdn-tutorial/mininet/docker-compose.yaml}
+per abilitare ulteriori porte Mininet di collegamento al controller (50005,50006,50007,50008).
+Per quanto riguarda il terminale Mininet l'unico comando che cambia è \textit{make start-8} per inizializzare questa nuova topologia.
+\\Gli script necessari si possono trovare nella cartella P4 del controller \cite{ofc} dove è stata necessaria l'aggiunta dei nuovi collegamenti al file \textit{Objects.py} per una corretta sincronizzazione con il container Mininet.
+\\Per quanto riguarda la parte iniziale i comandi sono gli stessi, ovviamente cambiando la cartella dei file, quindi \textit{./src/tests/p4/setup.sh} e \textit{./src/tests/p4/run\_test\_01\_bootstrap.sh}.
+\\In seguito, per il probe, quindi l'agent e il ping, si è continuata la demo dell'Hackfest 3 con la parte dell'Interactive Hacking Session \#1.
+In questa parte il probe si trova nella cartella \textit{controller/src/tests/hackfest3/new-probe/solution} e sono due script scritti in Python con il medesimo funzionamento dei precedenti.
+\\I file sono stati poi modificati successivamente per aggiungere la Kpi relativa alla packet loss.
+\\In un terminale relativo alla cartella si eseguono i seguenti comandi: \textit{source \~/tfs-ctrl/tfs\_runtime\_env\_vars.sh} per inserire le variabili di TeraFlow
+necessarie, se l'ambiente Python è disattivato \textit{pyenv activate 3.9.18/envs/tfs} e infine \textit{python agent.py}.
+Quando si eseguirà il comando relativo alla creazione del servizio (\textit{./src/tests/p4/run\_test\_02\_create\_service.sh}) 
+sul terminale in cui è in esecuzione l'agent si vedrà l'output in Figura \ref{fig:ag}.
+\\Il servizio richiesto ha come endpoints "SW1-port4” e “SW8-port4”, come si può vedere in Figura \ref{fig:sw8}.
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{service sw8.png}
     \caption{Servizio 8 sw iniziale}
     \label{fig:sw8}
 \end{figure}
-
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=0.5\textwidth]{create new event ag.png}
+    \caption{Creazione kpi}
+    \label{fig:ag}
+\end{figure}
+\\Per creare la politica si riutilizzano gli script precedenti assicurandosi di cambiare nel file \textit{policyAddService.json}
+gli id relativi al contesto e al servizio e di aggiungere alle regole quella relativa alla packet loss.
+La politica risultante è illustrata in Figura \ref{fig:policy}.
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{policy 5 100.png}
     \caption{Politica latenza e pkt loss}
     \label{fig:policy}
 \end{figure}
-
+Sul terminale Mininet, oltre alle prove fatte aggiungendo dei ritardi e disattivando dei link si è provato a simulare una packet loss tramite il comando
+\textit{switch4 tc qdisc add dev switch6-eth2 root netem loss 7\%}.
+Per verificare il cambio del percorso si è dovuto modificare anche il file \textit{ping2.py} per riuscire a mandare tramite la socket
+entrambe le metriche, calcolate grazie all'esecuzione del comando ping di Mininet. 
+Per un problema di comunicazione si è modificato il percorso della socket, infatti inizialmente era \textit{/home/teraflow/ngsdn-tutorial/tmp/sock} ed
+è stato cambiato in \textit{/tmp/tfsping}.
+A questo punto si è attivato il ping.
+I comandi eseguiti partendo dalla cartella solution sono i seguenti: \textit{./copy.sh};
+\textit{cd \~/ngsdn-tutorial}; \textit{make mn-cli}; \textit{client python ping2.py 10.0.0.2}.
+Anche in questo caso si è riscontato un cambiamento nel persorso come mostrato in Figura \ref{fig:sw8 dopo}
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{servizion constraints.png}
@@ -306,7 +372,10 @@ tramite il P4Runtime.
     \label{fig:sw8 dopo}
 \end{figure}
 
-\section{Esperimento 3}
+\subsection{Esperimento 3}
+L'ultima topologia utilizzata e stata Abilene \cite{abilene}; una rete di trasporto creata da Internet2.
+La topologia Mininet \cite{topab} con i paramentri modificati per la bw
+
 Cambio topologia, nuovo script mininet (preso da internet con cambio bw)
 \\ aggiunte porte,
 \\aggiunta metrica di capacità alla politica

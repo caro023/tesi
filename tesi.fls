@@ -173,7 +173,25 @@ INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\epstopdf-pkg\epstop
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
+INPUT .\cherubino_pant541.png
+INPUT .\cherubino_pant541.png
+INPUT .\cherubino_pant541.png
+INPUT .\cherubino_pant541.png
+INPUT .\cherubino_pant541.png
+INPUT .\cherubino_pant541.png
+INPUT .\cherubino_pant541.png
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\ferra\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\base\8r.enc
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
 INPUT .\tesi.toc
 INPUT .\tesi.toc
@@ -208,25 +226,26 @@ INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmro7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
-INPUT C:\Users\ferra\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\base\8r.enc
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
 OUTPUT tesi.toc
+INPUT .\tesi.lof
+INPUT .\tesi.lof
+INPUT tesi.lof
+OUTPUT tesi.lof
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmro7t.tfm
 INPUT .\Introbuzione.tex
 INPUT .\Introbuzione.tex
 INPUT Introbuzione.tex
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmri7t.vf
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
 INPUT .\Contesto.tex
 INPUT .\Contesto.tex
 INPUT Contesto.tex
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmri7t.vf
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
 INPUT .\sdn.png
 INPUT .\sdn.png
@@ -237,8 +256,6 @@ INPUT .\sdn.png
 INPUT .\sdn.png
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
 INPUT .\archonos.png
 INPUT .\archonos.png
 INPUT .\archonos.png
@@ -246,8 +263,6 @@ INPUT .\archonos.png
 INPUT .\archonos.png
 INPUT .\archonos.png
 INPUT .\archonos.png
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1ptm.fd
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1ptm.fd
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1ptm.fd
@@ -331,6 +346,16 @@ INPUT .\componenti.png
 INPUT .\componenti.png
 INPUT .\componenti.png
 INPUT .\componenti.png
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omsptm.fd
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omsptm.fd
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omsptm.fd
+INPUT .\service active.png
+INPUT .\service active.png
+INPUT .\service active.png
+INPUT .\service active.png
+INPUT .\service active.png
+INPUT .\service active.png
+INPUT .\service active.png
 INPUT .\policy sw2.png
 INPUT .\policy sw2.png
 INPUT .\policy sw2.png
@@ -338,6 +363,20 @@ INPUT .\policy sw2.png
 INPUT .\policy sw2.png
 INPUT .\policy sw2.png
 INPUT .\policy sw2.png
+INPUT .\modificafile.png
+INPUT .\modificafile.png
+INPUT .\modificafile.png
+INPUT .\modificafile.png
+INPUT .\modificafile.png
+INPUT .\modificafile.png
+INPUT .\modificafile.png
+INPUT .\politica lat.png
+INPUT .\politica lat.png
+INPUT .\politica lat.png
+INPUT .\politica lat.png
+INPUT .\politica lat.png
+INPUT .\politica lat.png
+INPUT .\politica lat.png
 INPUT .\policy con sw3.png
 INPUT .\policy con sw3.png
 INPUT .\policy con sw3.png
@@ -345,13 +384,6 @@ INPUT .\policy con sw3.png
 INPUT .\policy con sw3.png
 INPUT .\policy con sw3.png
 INPUT .\policy con sw3.png
-INPUT .\create new event ag.png
-INPUT .\create new event ag.png
-INPUT .\create new event ag.png
-INPUT .\create new event ag.png
-INPUT .\create new event ag.png
-INPUT .\create new event ag.png
-INPUT .\create new event ag.png
 INPUT .\service sw8.png
 INPUT .\service sw8.png
 INPUT .\service sw8.png
@@ -359,6 +391,13 @@ INPUT .\service sw8.png
 INPUT .\service sw8.png
 INPUT .\service sw8.png
 INPUT .\service sw8.png
+INPUT .\create new event ag.png
+INPUT .\create new event ag.png
+INPUT .\create new event ag.png
+INPUT .\create new event ag.png
+INPUT .\create new event ag.png
+INPUT .\create new event ag.png
+INPUT .\create new event ag.png
 INPUT .\policy 5 100.png
 INPUT .\policy 5 100.png
 INPUT .\policy 5 100.png

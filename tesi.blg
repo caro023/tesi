@@ -5,56 +5,56 @@ Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: unsrt.bst
 Reallocating 'name_of_file' (item size: 1) to 13 items.
 Database file #1: bibliografia.bib
+Warning--empty school in archodl
+Warning--empty author in D32
 Warning--empty booktitle in datacent
 Warning--empty booktitle in 5g
 Warning--empty author in 5gart
 Warning--empty author in rip
 Warning--empty journal in ibn2
-Warning--empty school in archodl
-Warning--empty author in D53
 Warning--empty author in D14
-Warning--empty author in D31
 Warning--empty author in D22
-Warning--empty author in D32
-You've used 78 entries,
+Warning--empty author in D31
+Warning--empty author in D53
+You've used 86 entries,
             1791 wiz_defined-function locations,
-            799 strings with 13825 characters,
-and the built_in function-call counts, 12972 in all, are:
-= -- 1048
-> -- 527
-< -- 7
-+ -- 219
-- -- 141
-* -- 675
-:= -- 1919
-add.period$ -- 205
-call.type$ -- 78
-change.case$ -- 63
+            823 strings with 15060 characters,
+and the built_in function-call counts, 13843 in all, are:
+= -- 1122
+> -- 544
+< -- 8
++ -- 230
+- -- 144
+* -- 692
+:= -- 2008
+add.period$ -- 221
+call.type$ -- 86
+change.case$ -- 65
 chr.to.int$ -- 0
-cite$ -- 89
-duplicate$ -- 626
-empty$ -- 1498
-format.name$ -- 141
-if$ -- 3006
+cite$ -- 97
+duplicate$ -- 681
+empty$ -- 1624
+format.name$ -- 144
+if$ -- 3229
 int.to.chr$ -- 0
-int.to.str$ -- 78
+int.to.str$ -- 86
 missing$ -- 42
-newline$ -- 364
+newline$ -- 396
 num.names$ -- 45
-pop$ -- 313
+pop$ -- 345
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 373
+skip$ -- 421
 stack$ -- 0
-substring$ -- 482
-swap$ -- 132
-text.length$ -- 7
+substring$ -- 496
+swap$ -- 149
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 11
-while$ -- 76
-width$ -- 80
-write$ -- 726
+while$ -- 78
+width$ -- 88
+write$ -- 782
 (There were 11 warnings)

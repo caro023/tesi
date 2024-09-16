@@ -1,0 +1,34 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Struttura di una rete SDN \cite {fotosdn}}}{7}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Architettura di ONOS \cite {archonos}}}{12}{figure.2.2}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Architettura del controller OpenDayLight \cite {archodl}}}{14}{figure.2.3}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Architettura di Kubernetes \cite {kubeart}}}{17}{figure.2.4}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architettura di TeraFlow \cite {archtfs}}}{24}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Macchina a stati interna alla componente di policy \cite {D32}}}{30}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Funzionamento del protocollo gRPC \cite {librogrpc}}}{31}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Esempio di Protocol Buffer file in TeraFlow \cite {ProtoBuf}}}{32}{figure.3.4}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Rete mininet}}{36}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Workflow di P4 sul piano dati \cite {p4Article}}}{41}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Interazione tra alcune componenti in TeraFlow}}{43}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Servizio}}{47}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Servizio 4 sw iniziale}}{47}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces File policyservice modificato}}{48}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Politica con regola di latenza}}{48}{figure.4.7}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Servizio 4 sw cambio percorso}}{49}{figure.4.8}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Servizio 8 sw iniziale}}{50}{figure.4.9}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Creazione kpi}}{51}{figure.4.10}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Politica latenza e pkt loss}}{51}{figure.4.11}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Servizio 8 sw cambio percorso}}{52}{figure.4.12}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces abilene iniziale}}{53}{figure.4.13}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Servizio 8 sw cambio percorso}}{53}{figure.4.14}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Servizio 8 sw cambio percorso}}{54}{figure.4.15}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces abilene cambio }}{54}{figure.4.16}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Installazione ODL}}{56}{figure.6.1}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Alcune features disponibili}}{57}{figure.6.2}%

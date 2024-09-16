@@ -44,7 +44,7 @@ principale è quindi ridurre e semplificare il carico di amministrazione per i s
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{sdn.png}
-    \caption{struttura di una rete SDN \cite{fotosdn}}
+    \caption{Struttura di una rete SDN \cite{fotosdn}}
     \label{fig:sdnF}
 \end{figure}
 %foto  https://community.fs.com/it/article/what-is-software-defined-networking-sdn.html
@@ -134,20 +134,20 @@ I principali obiettivi sono quelli di introdurre modularità del codice, configu
     \caption{Architettura di ONOS \cite{archonos}}
     \label{fig:img3}
 \end{figure}
-Per questo motivo la base dell'architettura di ONOS, come si può vedere dalla Figura \ref{fig:img3}, è costituita da una piattaforma di applicazioni distributite, che utilizzano Java come linguaggio di programmazione.
-Quest'ultima è collocata sopra OSGi \cite{osgi} e Apache Karaf \cite{Apache} così da permettere l'installazione e l'esecuzione dinamicamente. 
-Queste applicazioni offrono delle funzionalità di base e sostegno al livello superiore il quale fornisce una serie di controlli di rete e astrazioni di configurazione necessarie per il corretto funzionamento del controller.
+\\La base dell'architettura di ONOS, come si può vedere dalla Figura \ref{fig:img3}, è costituita da una piattaforma di applicazioni distributite
+collocata sopra OSGi \cite{osgi} e Apache Karaf \cite{Apache} così da permettere l'installazione e l'esecuzione dinamicamente. 
+Queste applicazioni utilizzano Java come linguaggio di programmazione e offrono delle funzionalità di base e sostegno al livello superiore il quale fornisce una serie di controlli di rete e astrazioni di configurazione necessarie per il corretto funzionamento del controller.
 \\Per estendere le funzionalità, a seconda delle esigenze, sono invece necessarie delle applicazioni ONOS aggiuntive che si comportano come una estenzione di quelle già presenti. 
 Ognuna di esse è gestita da un singolo sottosistema che, all'interno del controller, è rappresentato da un modulo.
 I moduli attualmente installabili che si possono incorporare a quelli inizialmente offerti dal sistema, sono più di 100.
 \\ONOS è stato progettato come un sistema distribuito in cui tutti i nodi del cluster sono equivalenti in termini di funzionalità e capacità software.
 Ogni nodo può quindi svolgere le stesse operazioni e contribuire in maniera simmetrica al funzionamento del sistema.
-In caso di guasto di una componente le altre sono quindi in grado di sostenere e mantenere la continuità del servizio, assicurando la disponibilità del sistema. Inoltre, per far fronte ai cambiamenti del carico di lavoro o dell'ambiente, ONOS è dinamicamente scalabile, 
-consentendo una replica virtualmente illimitata della capacità del piano di controllo.
-\\Pur essendo fisicamente disaggregato offre una visione logicamente centralizzata al fine di fornire l'accesso di ogni informazione alle applicazioni in maniera uniforme.
-\\ONOS supporta un'architettura modulare che permette agli operatori di configurare e adattare facilmente la rete alle loro esigenze specifiche,
-inoltre offre il supporto per API che facilitano l'integrazione con altri sistemi di gestione e orchestrazione.
-Questo garantisce flessibilità e reattività alle variazioni delle condizioni operative.
+In caso di guasto di una componente le altre sono quindi in grado di sostenere e mantenere la continuità del servizio, assicurando la disponibilità del sistema. 
+%Inoltre, per far fronte ai cambiamenti del carico di lavoro o dell'ambiente, ONOS è dinamicamente scalabile, consentendo una replica virtualmente illimitata della capacità del piano di controllo.
+\\Pur essendo fisicamente disaggregato offre comunque una visione logicamente centralizzata al fine di fornire l'accesso di ogni informazione alle applicazioni in maniera uniforme.
+\\ONOS supporta un'architettura modulare che permette agli operatori di configurare e adattare facilmente la rete alle loro esigenze specifiche
+%inoltre offre il supporto per API che facilitano l'integrazione con altri sistemi di gestione e orchestrazione.
+garantendo flessibilità e reattività alle variazioni delle condizioni operative.
 %Tutti i servizi principali sono scritti in Java come bundles all'interno del Karaf OSGi container così da permettere l'installazione e l'esecuzione dinamicamente.
 \\ONOS supporta diverse API northbound tra cui:
 \begin{itemize}
@@ -159,30 +159,30 @@ Per quanto riguarda le API southbound supportante fornisce diversi adattatori ch
 \\Abilitando il Transport Layer Security (TLS) per l'interfaccia SBI e l'Hypertext Transfer Protocol Secure (HTTPS) per l'interfaccia NBI, 
 ONOS garantisce una buona sicurezza monitorando e bloccando l'accesso non autorizzato alle risorse in fase di esecuzione \cite{artONOS}.
 \\
-\\Per quando riguarda gli intenti ONOS utilizza il framework Intent Monitor and Reroute (IMR) per offrire un sistema dinamico e ottimizzato di gestione del traffico.
+\\Per la gestione degli intenti ONOS utilizza il framework Intent Monitor and Reroute (IMR) al fine di offrire un sistema dinamico di gestione del traffico.
 Questo sistema permette di monitorare specifici intenti di rete e ottimizzare l'uso delle risorse in base agli obiettivi definiti dagli utenti.
 %Questo framework permette non solo di reindirizzare il traffico in base a necessità specifiche, ma anche di ottimizzare l'uso delle risorse di rete in base a obiettivi e scopi definiti dagli utenti.
 \\Un'intento è considerato un sottoinsieme del traffico a cui vengono assegnati valori specifici per ciascun pacchetto.
 Gli utenti possono quindi definire percorsi ottimali che soddisfino determinati requisiti, come la larghezza di banda o il passaggio attraverso nodi specifici.
-Un intento passa attraverso tre stati: Not Monitored (non monitorato), To Be Monitored (da monitorare) e Monitored (monitorato). 
+Per tracciare i percorsi e trovare le destinazioni IMR interagisce con l'Intent Manager e il Flow Rule Manager di ONOS \cite{onosint}. 
+\\Un intento passa attraverso tre stati: Not Monitored (non monitorato), To Be Monitored (da monitorare) e Monitored (monitorato). 
 Di default, l'intento è in stato Not Monitored. Quando un'applicazione o un utente richiede il monitoraggio, IMR aggiorna lo stato a To Be Monitored o, se l'intento è già attivo, a Monitored, avviando così la fase di tracciamento delle statistiche.
 Nel caso in cui l'intento non sia ancora installato, IMR lo inserisce in una lista di attesa fino a quando l'evento di tipo INSTALLED non viene ricevuto dall'Intent Manager, attivando il monitoraggio.
 In caso di eventi di tipo WITHDRAWN, l'intento viene disattivato \cite{onosint}.
-IMR interagisce con l'Intent Manager e il Flow Rule Manager di ONOS per tracciare i flussi e le destinazioni \cite{onosint}, garantendo una gestione efficiente delle risorse di rete. 
-\\Inoltre, IMR supporta due tipologie di obiettivi: Point-to-point, che stabiliscono una connessione diretta tra nodi, e 
+\\IMR supporta due tipologie di obiettivi: Point-to-point, che stabiliscono una connessione diretta tra nodi, e 
 link collection, che si riferiscono a un insieme di collegamenti monitorati per ottimizzare il traffico e la distribuzione delle risorse.
-\\Un'altra caratteristica chiave di IMR è la possibilità di raccogliere statistiche aggiornate per il flusso di rete e gli intenti monitorati 
-consentendo la riconfigurazione dinamica della rete, massimizzando l'uso di ciascun collegamento durante la trasmissione dei dati.
-Queste statistiche possono essere filtrate e rese accessibili agli utenti tramite API come CLI o REST, permettendo loro di monitorare la rete e le politiche richieste \cite{ONOSart}. 
+\\Una caratteristica chiave è la possibilità di raccogliere statistiche aggiornate per il flusso di rete e gli intenti monitorati 
+consentendo la riconfigurazione dinamica della rete massimizzando l'uso di ciascun collegamento durante la trasmissione dei dati.
+Queste statistiche possono essere filtrate e rese accessibili agli utenti, tramite API come CLI o REST, permettendo loro di monitorare la rete e le politiche richieste \cite{ONOSart}. 
 %Il servizio consente una migliore gestione del traffico nel reindirizzamento della rete utilizzando scopi e obiettivi specifici.
-Il sistema riduce così le interruzioni di servizio e migliora la gestione del traffico.
+%Il sistema riduce così le interruzioni di servizio e migliora la gestione del traffico.
 %tutti i messaggi is provided on top of one single messagin substrate cosicchè è più fscile da configurare
 %Semplice aggiungere o configurare device e servizi con model based dynamic configurarion.
 %Da controllo real-time per dataplane nativi SDN device con OpenFlow o P4 support
 
 \subsection{ODL}
-OpenDaylight\cite{ODL} è un progetto open source che utilizza protocolli aperti al fine di fornire controlli centralizzati e gestire il monitoring della rete.
-\\Fa parte della fondazione LF Networking \cite{LFN} che si occupa di coordinare il supporto a progetti open source volti a migliorare la comunicazione e la gestione dei dati su una rete.
+OpenDaylight\cite{ODL} è un progetto open source che utilizza protocolli aperti al fine di fornire controlli centralizzati e gestire il monitoraggio della rete.
+\\Fa parte della fondazione LF Networking \cite{LFN} che si occupa di fornitr supporto a progetti open source volti a migliorare la comunicazione e la gestione dei dati su una rete.
 %Ciò semplifica il coinvolgimento dei membri e aumenta la collaborazione tra i progetti e gli organismi di standardizzazione.
 %Lo scopo principale è far crescere l'ecosistema di ODL per facilitare la collaborazione tra sviluppatori, utenti finali e aziende associate a LFV per produrre tecnologie più pertinenti e affidabili.
 \\ODL è un framework scritto in Java progettato per soddisfare esigenze specifiche dell'utente e offrire alta flessibilità. 
@@ -196,16 +196,15 @@ OpenDaylight\cite{ODL} è un progetto open source che utilizza protocolli aperti
 \\L'architettura di OpenDayLight, come mostrato in Figura \ref{fig:ArchODL}, è su più livelli \cite{tesiodl}. 
 Il livello principale è costituito dal Controller Platform in quanto al suo interno risiede il controller stesso, il quale si 
 occupa di gestire il flusso di traffico andando a modificare le tabelle di inoltro dei dispositivi fisici o virtuali. 
-\\Il Service Abstraction Layer (SAL) è il livello inferiore che si occupa di offrire supporto ai vari protocolli SBI come OpenFlow o NETCONF. 
-All'interno di questo livello il collegamento dei moduli tra il controller e i dispositivi avviene dinamicamente al fine di soddisfare il servizio richiesto indipendentemente dal protocollo utilizzato.
-\\Un aspetto rilevante dell'architettura è la presenza di microservizi, che l'utente può attivare o disattivare in base alle proprie esigenze.
-Di default, questi microservizi sono disabilitati, offrendo un alto livello di personalizzazione.
+\\Un aspetto rilevante dell'architettura è la presenza di microservizi che l'utente può attivare o disattivare in base alle proprie esigenze.
+Di default sono tutti disabilitati offrendo un alto livello di personalizzazione.
 \\I microservizi sono implementati come moduli all'interno del controller, e possono essere collegati tra loro per eseguire diverse attività di rete. 
-Questi moduli si connettono dinamicamente al Service Abstraction Layer (SAL), che funziona come interfaccia tra il piano di controllo e il piano dati.
+\\Il Service Abstraction Layer (SAL) è il livello inferiore che si occupa di offrire supporto ai vari protocolli SBI come OpenFlow o NETCONF offrendo un'interfaccia tra il piano dati e il piano di controllo. 
+All'interno di questo livello il collegamento dei moduli tra il controller e i dispositivi avviene dinamicamente al fine di soddisfare il servizio richiesto indipendentemente dal protocollo utilizzato.
 \\Per la gestione dei moduli a runtime e l'installazione di nuove funzionalità da implementare nel software di ODL viene utilizzato Apache Karaf \cite{Apache}.
-Karaf fornisce un ambiente modulare in cui è possibile implementare e aggiornare le funzionalità senza interrompere il funzionamento del controller.
+\\Karaf fornisce un ambiente modulare in cui è possibile implementare e aggiornare le funzionalità senza interrompere il funzionamento del controller.
 Grazie al framework Model-Driven Service Abstraction Layer (MD-SAL), gli sviluppatori possono creare nuove funzionalità sotto forma di servizi e protocolli interconnessi.
-Il controller espone delle API NBI di supporto alle applicazioni. Alcune delle API supportate includono il framework OSGi \cite{osgi}, per gestire le applicazioni che girano all'interno del controller,
+Il controller espone delle API NBI di supporto alle applicazioni tra cui il framework OSGi \cite{osgi}, per gestire le applicazioni che girano all'interno del controller,
 e REST per la comunicazione con le applicazioni esterne \cite{tesiodl2}.
  %.OSGi is a modular system and service platform for the Java programming language that implements a completely dynamic component model, something that does not exist in standalone JVM environments
 \\Per risolvere i problemi legati alla scalabilità, disponibilità e persistenza dei dati, ODL può essere distribuito in più istanze su macchine diverse, le quali cooperano tra loro tramite un meccanismo di clustering.
@@ -214,19 +213,19 @@ e REST per la comunicazione con le applicazioni esterne \cite{tesiodl2}.
 \\Network Intent Composition (NIC) \cite{nic} è un'interfaccia progettata per consentire agli utenti di esprimere uno stato desiderato in modo indipendente dall'implementazione sottostante, detto intento. 
 %\\Un intento è una direttiva di alto livello che consente agli utenti di definire il comportamento richiesto della rete senza dover specificare i dettagli tecnici della configurazione delle risorse.
 %Attraverso l'interfaccia Northbound (NBI), gli intenti vengono espressi in forma astratta e gestiti dal controller.
-Ciò è possibile grazie all'Intent Compilation Engine che ha il compito di convertire e tradurre gli intenti in regole di configurazione concrete per il protocollo di controllo sottostante (come OpenFLow, SNMP, Netconf..), utilizzando le risorse di rete disponibili.
+Ciò è possibile grazie all'Intent Compilation Engine che ha il compito di convertire e tradurre gli intenti in regole di configurazione concrete per il protocollo di controllo sottostante (come OpenFLow, SNMP, NETCONF..), utilizzando le risorse di rete disponibili.
 Questo garantisce che le richieste siano trasformate in comandi eseguibili sui dispositivi di rete, sia fisici che virtuali.
 \\Una delle caratteristiche centrali di NIC è l'utilizzo di un linguaggio di programmazione degli intenti che permette di utilizzare una varietà di linguaggi di policy e di programmazione SDN
 per consentire di descrivere in modo flessibile il comportamento desiderato della rete offrendo un approccio descrittivo.
-\\Grazie alla funzione di composizione degli intenti, NIC consente di combinare più richieste di policy provenienti da varie applicazioni SDN in un insieme coerente di azioni
-, gestendo i conflitti tra politiche diverse e garantendo coerenza nelle operazioni di rete.
+\\Grazie alla funzione di composizione degli intenti, NIC consente di combinare più richieste di politiche provenienti da varie applicazioni SDN in un insieme coerente di azioni,
+gestendo i conflitti tra politiche diverse e garantendo coerenza nelle operazioni di rete.
 \\Per la gestione delle politiche NIC impiega diversi database logici di informazioni tra cui: il Network Service Intent DB per le politiche relative ai servizi di rete,
 l'End Point Intent DB per politiche sugli endpoint, il Network Security Intent DB per le politiche riguardandi la sicurezza della rete.
 Oltre a questi, altri database descritti in \cite{NICProposal}, supportano altre tipologie di politiche, garantendo una gestione completa delle esigenze.
 \\Dal punto di vista dell'interoperabilità, NIC è progettato per essere indipendente dal controller e dal protocollo di rete, 
-permettendo la portabilità degli intenti tra diverse implementazioni di controller e garantendo flessibilità nell'uso di protocolli di controllo diversi.
-Gli utenti potevano interagire con NIC attraverso l'interfaccia RESTful utilizzando operazioni standard RESTCONF oppure tramite la Karaf console CLI.
-\\Le operazioni REST supportate includevano \cite{nic}:
+permettendo la portabilità degli intenti tra diverse implementazioni di controller.
+Gli utenti possono interagire con NIC attraverso l'interfaccia RESTful utilizzando operazioni standard RESTCONF oppure tramite la Karaf console CLI.
+\\Le operazioni REST supportate includono \cite{nic}:
 \begin{itemize}
     \item POST: per creare un nuovo intento, specificandone l'ID come attributo.
     \item GET: per recuperare la lista degli intenti configurati o un intento specifico.
@@ -244,7 +243,7 @@ Senza una specifica interfaccia dedicata, gli intenti vengono espressi e gestiti
 \section{Kubernetes}
 Kubernetes \cite{kubernetes}, noto anche come K8s, è una piattaforma open-source per l'orchestrazione dei container.
 Creato originariamente da Google nel 2014, è stato poi donato alla Cloud Native Computing Foundation (CNCF \cite{cncf}).
-E' progettato per automatizzare la gestione, lo scaling e il deployment di applicazioni containerizzate.
+\\E' progettato per automatizzare la gestione, lo scaling e il deployment di applicazioni containerizzate.
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{kubernetes.png}
@@ -252,48 +251,76 @@ E' progettato per automatizzare la gestione, lo scaling e il deployment di appli
     \label{fig:kube}
 \end{figure}
 Quest'ultime vengono eseguite all'interno dei cluster Kubernetes costituiti da macchine fisiche o virtuali chiamate nodi. 
-Questi cluster comprendono due tipologie principali di macchine: il Master, che gestisce l'intera orchestrazione, e i Nodi, che eseguono i container all'interno di un pod.
-\\I pod rappresentano l'unità fondamentale in Kubernetes e contengono uno o più container che condividono risorse come CPU e memoria.
-\\Kubernetes segue un'architettura basata sul paradigma client-server (raffigurata in Figura \ref{fig:kube}), con i pod come unità di base, il Master che agisce da server centrale mentre i Nodi rappresentano i client. 
+I cluster comprendono due tipologie principali di macchine: il Master, che gestisce l'intera orchestrazione, e i Nodi, che eseguono i container all'interno di pod che condividono risorse come CPU e memoria.
+Le risorse dei cluster vengono specificate attraverso file di configurazione, tipicamente utilizzando YAML (Yet Another Markup Language), consentendo agli utenti di specificare deployment, servizi e configurazioni necessarie all'esecuzione delle applicazioni.
+\\Kubernetes segue un'architettura basata sul paradigma client-server (raffigurata in Figura \ref{fig:kube}), con i pod come unità di base, il Master che agisce da server centrale e i Nodi che rappresentano i client. 
 %più master possono essere presenti, con uno primario e gli altri in replica
 Ogni Nodo esegue due servizi principali: il kubelet, che riceve e gestisce i comandi per l'esecuzione dei container, 
-e il kube-proxy, che si occupa della configurazione delle regole di rete, garantendo che le connessioni siano correttamente instradate verso i pod.
-Il Master è responsabile del coordinamento del cluster, e ciò avviene tramite alcuni componenti essenziali, tra cui \cite{kubeart}:
+e il kube-proxy, che si occupa della configurazione delle regole di rete garantendo che le connessioni siano correttamente instradate verso i pod.
+Il Master è responsabile del coordinamento del cluster, e ciò avviene tramite alcuni componenti essenziali \cite{kubeart}:
 \begin{itemize}
     \item \textbf{etcd}: un database distribuito che memorizza lo stato del cluster.
     \item \textbf{kube-apiserver}: fornisce l'interfaccia di comunicazione tra i componenti interni al sistema e gli utenti esterni.
     \item \textbf{kube-controller-manager}: monitora lo stato delle risorse del cluster e applica le modifiche necessarie.
     \item \textbf{kube-scheduler}: decide su quali nodi eseguire i pod in base alle risorse disponibili.
 \end{itemize}
-In Kubernetes è possibile avere più di un Master per migliorare la disponibilità del sistema, con un Master principale e dei nodi replica che garantiscono la continuità del servizio.
-Le risorse dei cluster vengono specificate attraverso file di configurazione, tipicamente utilizzando YAML (Yet Another Markup Language), consentendo agli utenti di specificare deployment, servizi e configurazioni necessarie all'esecuzione delle applicazioni.
-Un aspetto fondamentale di Kubernetes è la caratteristica di self-healing: se un processo si arresta o un pod fallisce, Kubernetes è in grado di riavviarlo automaticamente. 
-Questo sistema permette alle applicazioni di rimanere sempre in uno stato ottimale garantendo la continuità del servizio.
-Inoltre, durante gli aggiornamenti delle applicazioni, Kubernetes utilizza il meccanismo di rolling update (aggiornamenti in sequenza): 
-i pod vengono aggiornati uno alla volta, senza provocare interruzioni del servizio. Questo garantisce che il numero richiesto di pod rimanga sempre attivo e in esecuzione \cite{kubeart}.
-Oltre alle funzionalità di base, Kubernetes offre concreti vantaggi operativi, soprattutto in termini di ottimizzazione delle risorse. 
+In Kubernetes è possibile avere più di un Master per migliorare la disponibilità del sistema utilizzando un Master principale e dei nodi replica che garantiscano la continuità del servizio in caso di guasto.
+\\Un aspetto fondamentale di Kubernetes è la caratteristica di self-healing; se un processo si arresta o un pod fallisce, Kubernetes è in grado di riavviarlo automaticamente. 
+Ciò permette alle applicazioni di rimanere sempre in uno stato ottimale.
+Inoltre, durante gli aggiornamenti, Kubernetes utilizza il meccanismo di rolling update (aggiornamenti in sequenza): 
+i pod vengono aggiornati uno alla volta, garantendo che il numero richiesto rimanga sempre attivo e in esecuzione, senza provocare interruzioni del servizio. 
+\\Oltre alle funzionalità di base, Kubernetes offre concreti vantaggi operativi, soprattutto in termini di ottimizzazione delle risorse. 
 Grazie alla capacità di distribuire le applicazioni containerizzate in modo efficiente su un numero limitato di macchine è possibile ridurre i costi legati all'infrastruttura. 
-Questo porta a un utilizzo più efficiente delle risorse hardware, limitando il tempo in cui le macchine restano inattive e riducendo il consumo energetico \cite{bookub}.
-Anche TeraFlow adotta Kubernetes per orchestrare i suoi componenti, sfruttando le capacità di scalabilità e automazione della piattaforma. 
-Questo permette a TeraFlow di gestire dinamicamente i suoi servizi e adattarsi rapidamente alle esigenze di rete, garantendo così una maggiore flessibilità e resilienza.
+Questo porta a un utilizzo più vantaggioso delle risorse hardware, limitando il tempo in cui le macchine restano inattive e riducendo il consumo energetico \cite{bookub}.
+Anche TeraFlow adotta Kubernetes per orchestrare le sue componenti. 
+Ciò permette a TeraFlow di gestire dinamicamente i suoi servizi e adattarsi rapidamente alle esigenze di rete, garantendo funzionalità come autoriparazione, integrità e bilanciamento del carico \cite{D14}
 
 \section{Miscroservizi}
-Alcune indagini statistiche hanno dimostrato che nel 2021 il 71\% delle aziende utilizzava almeno parzialmente i microservizi \cite{stat} e questo trend è in continua crescita.
-\\I microservizi rappresentano un nuovo paradigma di progettazione software che si basa sulla scomposizione di applicazioni in una serie di servizi autonomi, chiamati microservizi.
-Ognuno ha uno scopo definito ed è gestibile in modo indipendente ma con la possibilità di comunicare tra loro grazie a protocolli prestabiliti.
-Questa architettura consente una maggiore flessibilità nella manutenzione e nell'evoluzione del software, permettendo una trasformazione graduale di sistemi complessi senza dover ricorrere a una riscrittura completa.
-%esempio dall'articolo
-\\Un importante vantaggio dei microservizi è la loro capacità di semplificare la fase di realizzazione e testing: ogni servizio può essere sviluppato e testato separatamente, riducendo la complessità del progetto generale.
-Tuttavia, l'integrazione di diversi microservizi richiede una gestione attenta, per una maggiore complessità nella gestione della rete e per una possibile riduzione delle prestazioni a causa della distribuzione su più nodi.
-\\Sistemi monolitici complessi possono essere gradualmente trasformati in microservizi, riducendo il rischio di un rifacimento completo e consentendo l'incremento della manutenzione e dell'agilità del software.
-L'esempio classico è quello di Amazon che è passato da un database unico a un'architettura orientata ai microservizi, ma la modularità dei microservizi può facilitare anche la modernizzazione delle applicazioni legacy, 
-riducendo i rischi legati ai cambiamenti strutturali più radicali \cite{microse}. 
-Altri esempi di grandi aziende che hanno scelto di utilizzare questa architettura grazie alla capacità di raggiungere un time-to-market migliore sono Netflix, Uber e Linkedin.
-\\Nel contesto di applicazioni cloud-native, come TeraFlow, i microservizi hanno un ruolo fondamentale nel loro sviluppo insieme con Kubernetes.
-In un'applicazione basata su microservizi orchestrata da Kubernetes, %ciascun microservizio può avere più istanze.
-ogni microservizio è isolato in un cointainer e può avere più istanze, ognuna rappresentata da un pod, consentendo una gestione più efficiente delle risorse rispetto alle tradizionali macchine virtuali (VM),
-dove ogni istanza necessita di un sistema operativo completo.
-I container permettono un riavvio più rapido durante l'aggiornamento o il ripristino \cite{artkub}, un minor consumo di risorse
-e la possibilità di condividere librerie e risorse necessarie.
+I microservizi rappresentano un nuovo paradigma di progettazione software che si basa sulla scomposizione di applicazioni in una serie di servizi autonomi, chiamati microservizi.
+Ogni microservizio ha un obiettivo specifico e può essere gestito in modo indipendente dagli altri mantenendo comunque la capacità di comunicare tramite protocolli standardizzati.
+\\La loro introduzione è stata motivata dalle limitazioni delle architetture monolitiche, che sono diventate più evidenti con l'aumento della complessità delle applicazioni moderne. 
+Nelle architetture monolitiche, l'intera applicazione è costituita da un unico blocco di codice in cui tutte le funzionalità, indipendentemente dal loro grado di correlazione, sono strettamente interconnesse.
+Ciò rende complessa la gestione e l'evoluzione nel tempo. 
+Ad esempio, l'aggiunta di nuove funzionalità o la risoluzione di errori può richiedere modifiche di
+un'ampia porzione di codice, aumentando il rischio di introdurre nuovi errori in altre parti dell'applicazione.
+Inoltre, il lavoro degli sviluppatori è spesso vincolato a un unico repository  
+e a un linguaggio di programmazione scelto inizialmente, limitando il processo di svulippo e l'autonomia.
+Ciò introduce un rallentamento del ciclo di aggiornamento, poiché anche piccole modifiche richiedono spesso la ricompilazione dell'intero sistema.
+Dal punto di vista della scalabilità, le applicazioni monolitiche mostrano ulteriori limiti.
+Per gestire l'incremento delle richieste, l'intera applicazione deve essere replicata, anche quando l'aumento del carico riguarda solo componenti specifici.
+Ciò porta a un uso inefficiente delle risorse e a un incremento dei costi di gestione.
+\\L'architettura a microservizi risolve molti di questi problemi.
+Essa scompone il sistema in moduli più piccoli e indipendenti, facilitando la manutenibilità e permettendo una gestione più agile delle risorse.
+\\Gli aspetti chiave si possono riassumere in \cite{dragoni2017}:
+\begin{itemize}
+    \item \textbf{Flessibilità}: il sistema può evolvere in modo continuo, facilitando l'adozione di nuove funzionalità.
+    \item \textbf{Modularità}: il sistema è composto da servizi indipendenti, ognuno dei quali contribuisce al comportamento generale.
+    \item \textbf{Evoluzione}: l'introduzione di nuove funzionalità avviene in modo graduale, riducendo il rischio di errori e semplificando la manutenzione.
+\end{itemize}
+In particolare, i microservizi influenzano diversi attributi fondamentali per la qualità del software \cite{dragoni2017}:
+\begin{itemize}
+    \item \textbf{Disponibilità}: essendo ogni servizio autonomo, la disponibilità del sistema dipende da quella dei singoli servizi. E' tuttavia necessario mantenere un bilanciamento nella complessità di integrazione che può portare a una riduzione dell'affidabilità del sistema.
+    \item \textbf{Affidabilità}: l'affidabilità complessiva è strettamente collegata ai meccanismi di comunicazione tra i servizi che devono essere quindi progettatati con particolare attenzione introducendo interfacce semplici.
+    \item \textbf{Manutenibilità}: l'indipendenza dei servizi riduce i costi di modifica e facilità l'aggiunta di nuove funzionalità
+    \item \textbf{Prestazioni}: la comunicazione tra microservizi avviene tramite la rete, e questo può comportare un degrado delle prestazioni rispetto alle chiamate interne delle architetture monolitiche. Tuttavia, un sistema ben progettato con contesti definiti e una giusta interconnessione può minimizzare questo impatto.
+    \item \textbf{Sicurezza}: l'utilizzo di formati di scambio dati introduce la necessità di meccanismi di crittografia e autentificazione, specialmente quando si integrano servizi di terze parti
+    \item \textbf{Testabilità}: uno dei principali vantaggi dei microservizi è la possibilità di testare ogni componente in isolamento, facilitando la rilevazione degli errori. E' necessaria una particolare attenzione all'integrazione tra più microservizi che può risultare complessa e creare dei anomalie non presenti nei singoli componenti.
+\end{itemize}
+Nonostante alcune sfide, i microservizi offrono vantaggi significativi alle aziende e, pur essendo un paradigma relativamente nuovo,
+è già ampiamente diffuso. 
+Un'indagine del 2021 ha infatti rivelato che il 71\% delle imprese adottava almeno parzialmente i microservizi \cite{stat}.
+\\Inoltre, sistemi monolitici preesistenti possono essere gradualmente trasformati in un'architettura di microservizi.
+Un esempio noto è quello di Amazon, che ha abbandonato un database monolitico a favore una struttura basata sui microservizi.
+Altre aziende come Netflix, Uber e LinkedIn li hanno adottati riscontrando un miglioramento nei loro tempi di rilascio.
+%\\Uno dei principali vantaggi dei microservizi è la semplificazione dello sviluppo e del testing: ogni servizio può essere progettato e testato separatamente, riducendo la complessità del progetto generale.
+%Tuttavia, l'integrazione di più microservizi richiede una gestione accurata, in quanto introduce maggiore complessità a livello di rete e può comportare un calo delle prestazioni, dovuto alla distribuzione su più nodi.
+\\Nel contesto delle applicazioni cloud-native, i microservizi svolgono un ruolo centrale.
+In un'architettura basata su microservizi orchestrata da Kubernetes, come TeraFlow,  %ciascun microservizio può avere più istanze.
+ogni microservizio è isolato in un cointainer che può avere più istanze, ognuna rappresentata da un pod.
+Questo consente una gestione delle risorse più efficiente rispetto alle macchine virtuali (VM) tradizionali,
+dove ogni istanza necessita di un sistema operativo completo
+e facilita operazioni di aggiornamento o ripristino \cite{artkub}, 
+oltre a ridurre il consumo di risorse
+condividendo librerie e componenti.
 
 
