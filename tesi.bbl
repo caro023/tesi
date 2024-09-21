@@ -116,6 +116,12 @@ Muhammad Fauzan Rafi~Sidiq Widjonarto.
   effect in modern networks, 2018.
 \newblock 13518147.
 
+\bibitem{tesiSDN:2017}
+Nicholas Brasini.
+\newblock {\em Analisi e sviluppo di un’interfaccia web per gestire
+  controller SDN}.
+\newblock PhD thesis, Alma mater studiorum - universita’ di Bologna, 2017.
+
 \bibitem{probtrad}
 William Stallings.
 \newblock {\em Foundations of Modern Networking: SDN, NFV, QoE, IoT, and
@@ -132,12 +138,6 @@ Diego Kreutz, Fernando Ramos, Paulo Veríssimo, Christian Esteve~Rothenberg,
 \bibitem{ONF}
 Open networking foundation.
 \newblock \url{https://opennetworking.org/}.
-
-\bibitem{tesiSDN:2017}
-Nicholas Brasini.
-\newblock {\em Analisi e sviluppo di un’interfaccia web per gestire
-  controller SDN}.
-\newblock PhD thesis, Alma mater studiorum - universita’ di Bologna, 2017.
 
 \bibitem{sdnlayers}
 Yustus~Eko Oktian, SangGon Lee, HoonJae Lee, and JunHuy Lam.
@@ -245,6 +245,12 @@ Confluence.
 Kubernetes.
 \newblock \url{hhttps://kubernetes.io/}.
 
+\bibitem{cont}
+Madiha~H Syed, Eduardo~B Fernandez, et~al.
+\newblock The software container pattern.
+\newblock In {\em Proceedings of the 22nd Conference on Pattern Languages of
+  Programs}, pages 24--26, 2015.
+
 \bibitem{cncf}
 {\em CNCF}.
 \newblock url: \url{https://www.cncf.io/}.
@@ -295,6 +301,10 @@ D2.2 - preliminary requirements, architecture design, techno-economic studies
   and data models.
 \newblock {\em teraflow-h2020.eu}, 2023.
 
+\bibitem{D41}
+D4.1: Preliminary evaluation of teraflow security and b5g network integration.
+\newblock {\em teraflow-h2020.eu}, 2020.
+
 \bibitem{Component}
 Teraflowsdn core components.
 \newblock \url{https://www.teraflow-h2020.eu/blog/teraflowsdn-core-components},
@@ -323,14 +333,6 @@ D5.3 final demonstrators and evaluation report.
 \bibitem{grpc}
 grpc.
 \newblock \url{https://grpc.io/}.
-
-\bibitem{grpcArt2}
-Jong-Kun Lee.
-\newblock A group management system analysis of grpc protocol for distributed
-  network management systems.
-\newblock In {\em SMC'98 Conference Proceedings. 1998 IEEE International
-  Conference on Systems, Man, and Cybernetics (Cat. No.98CH36218)}, volume~3,
-  pages 2507--2512 vol.3, 1998.
 
 \bibitem{grpcArt3}
 F.~Paolucci, A.~Sgambelluri, M.~Dallaglio, F.~Cugini, and P.~Castoldi.
@@ -365,19 +367,23 @@ Link alla macchina virtuale per l'hackfest 3.
 \newblock
   \url{https://drive.google.com/file/d/1OaukXmAC1uaeIAChkEpvBB9mSkUHimsR/view}.
 
+\bibitem{ngsdn}
+{\em Cartella ngsdn-tutorial}.
+\newblock url: \url{https://github.com/opennetworkinglab/ngsdn-tutorial}.
+
 \bibitem{mininet}
 Mininet.
 \newblock \url{https://mininet.org/}.
+
+\bibitem{MininetOv}
+Mininet overview.
+\newblock \url{https://mininet.org/overview/}.
 
 \bibitem{tesiMininet}
 Francesco Cristiano.
 \newblock {\em Emulazione distribuita di reti di telecomunicazioni su
   piattaforma Mininte}.
 \newblock PhD thesis, Alma Mater Studiorum- Università di Bologna, 2013.
-
-\bibitem{MininetOv}
-Mininet overview.
-\newblock \url{https://mininet.org/overview/}.
 
 \bibitem{introMin}
 Nikhil~Handigol Bob~Lantz and Vimal~Jeyakumar Brandon~Heller.

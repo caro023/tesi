@@ -14,47 +14,48 @@ Warning--empty author in rip
 Warning--empty journal in ibn2
 Warning--empty author in D14
 Warning--empty author in D22
+Warning--empty author in D41
 Warning--empty author in D31
 Warning--empty author in D53
-You've used 86 entries,
+You've used 88 entries,
             1791 wiz_defined-function locations,
-            823 strings with 15060 characters,
-and the built_in function-call counts, 13843 in all, are:
-= -- 1122
-> -- 544
-< -- 8
-+ -- 230
-- -- 144
+            827 strings with 15131 characters,
+and the built_in function-call counts, 13938 in all, are:
+= -- 1125
+> -- 553
+< -- 7
++ -- 234
+- -- 146
 * -- 692
-:= -- 2008
-add.period$ -- 221
-call.type$ -- 86
-change.case$ -- 65
+:= -- 2025
+add.period$ -- 225
+call.type$ -- 88
+change.case$ -- 66
 chr.to.int$ -- 0
-cite$ -- 97
-duplicate$ -- 681
-empty$ -- 1624
-format.name$ -- 144
-if$ -- 3229
+cite$ -- 100
+duplicate$ -- 691
+empty$ -- 1640
+format.name$ -- 146
+if$ -- 3248
 int.to.chr$ -- 0
-int.to.str$ -- 86
-missing$ -- 42
-newline$ -- 396
+int.to.str$ -- 88
+missing$ -- 43
+newline$ -- 404
 num.names$ -- 45
-pop$ -- 345
+pop$ -- 353
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 421
+skip$ -- 422
 stack$ -- 0
-substring$ -- 496
-swap$ -- 149
-text.length$ -- 8
+substring$ -- 466
+swap$ -- 146
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 11
-while$ -- 78
-width$ -- 88
-write$ -- 782
-(There were 11 warnings)
+warning$ -- 12
+while$ -- 79
+width$ -- 90
+write$ -- 796
+(There were 12 warnings)

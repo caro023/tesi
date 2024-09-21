@@ -5,7 +5,7 @@ Nel seguente Capitolo verranno presentate le principali tecnologie alla base di 
 \\Questa panoramica fornirà il contesto necessario per comprendere meglio i successivi sviluppi trattati nel documento.
 \section{Software Defined Networking}
 L'architettura tradizionale di rete si basa su dispositivi fisici di interconnessione che facilitano la comunicazione tra più host a livello locale e consentono lo scambio di informazioni.
-Nell'architettura tradizionale, con un controller decentralizzato, ciascun dispositivo integra al suo interno sia le funzioni del piano dati (data plane) che del piano di controllo (control plane). 
+Nell'architettura tradizionale ciascun dispositivo integra al suo interno sia le funzioni del piano dati (data plane) che del piano di controllo (control plane). 
 \\Il piano dati è responsabile della ricezione, del processamento e dell'inoltro dei pacchetti in base alle tabelle di routing che associano un indirizzo a una data porta d'uscita \cite{tesiSDN:2020}. 
 Queste tabelle vengono gestite dal piano di controllo che calcola i percorsi 
 per l'instradamento in base alla destinazione dei paccchetti e aggiorna le tabelle dei dispositivi. 
@@ -14,10 +14,12 @@ Nei protocolli di rete tradizionali, questi due piani operano separatamente all'
 \\Per determinare i percorsi di rete esistono diversi protocolli di routing che adottano un approccio decentralizzato.
 \\RIP (Routing Information Protocol), ad esempio, utilizza un algoritmo di distance-vector in cui ogni nodo conosce solo le informazioni dai suoi vicini, quindi non la conformazione globale dell'infrastruttura, e aggiorna la propria tabella sulla base dei messaggi di routing scambiati \cite{rip}.
 Il protocollo OSPF (Open Shortest Path First) adotta invece un approccio globale.
-In questo caso, ogni router all'interno dell'area conosce la topologia completa della rete e calcola i percorsi in modo indipendente utilizzando l'algoritmo di Dijkstra \cite{ospf}. 
+In questo caso, ogni router invia e riceve dei messaggi \textit{"link state"}, attraverso i quali acquisisce informazioni sullo stato dei collegamenti
+all'interno dell'area, conoscendo così la topologia completa della rete.
+Infine i router calcolano i percorsi in modo indipendente utilizzando l'algoritmo di Dijkstra \cite{ospf}. 
 \\Questo approccio richiede in ogni caso l'esecuzione di un algoritmo di routing che, tramite un protocollo dedicato, 
 scambia messaggi con altri dispositivi per prendere decisioni.
-\\Tuttavia, ciò introduce ritardi non necessari, rendendo così la rete meno adatta alle nuove esigenze delle applicazioni moderne che necessitano di un'elevata dinamicità.
+\\Tuttavia, ciò introduce notevoli ritardi \cite{tesiSDN:2017}, rendendo così la rete meno adatta alle nuove esigenze delle applicazioni moderne che necessitano di un'elevata dinamicità.
 \\La complessità e la staticità dell'architettura di rete tradizionale, progettata intorno a una serie di protocolli indipendenti, ciascuno focalizzato su una parte specifica delle esigenze di rete, 
 aumentano le difficoltà nel rispondere alle nuove sfide poste da tecnologie emergenti come il cloud computing, i big data, lo streaming in tempo reale e l'Internet of Things (IoT).
 \\Aggiungere o spostare dispositivi nella rete diventa particolarmente complicato: ogni volta che avviene una modifica, gli operatori devono aggiornare manualmente le configurazioni di numerosi dispositivi introducendo un significativo problema di scalabilità.
@@ -26,12 +28,12 @@ Per far fronte a limitazioni di capacità e ai picchi di traffico imprevisti, in
 Questa dipendenza dai fornitori di apparecchiature con protocolli proprietari riduce la flessibilità e rallenta l'introduzione di nuove funzionalità \cite{probtrad}.
 \\Le reti tradizionali, con il loro approccio distribuito e decentralizzato al controllo e all'instradamento, si sono dimostrate inefficaci nel rispondere rapidamente a cambiamenti dinamici.
 %Una limitazione dei controller centralizzati infatti è la configurazione statica tra gli switch e il controller.
-\\Il Software Defined Networking (SDN) nasce per rimediare ai limiti delle attuali infrastrutture di rete \cite{sdnsurvey}.
+\\Il Software Defined Networking (SDN) nasce per rimediare ai suddetti limiti \cite{sdnsurvey}.
 Proposto negli ultimi anni dalla Open Networking Foundation (ONF) \cite{ONF}, SDN introduce un'architettura che separa il piano di controllo dal piano dati, rendendo quest'ultimo programmabile e semplificando la gestione della rete. 
 %Il piano di controllo diventa centralizzato e gestito da un unico controller SDN che prende le decisioni di instradamento e controllo di tutta la rete. 
 %Il piano di dati è invece distribuito sui dispositivi di rete che eseguono le istruzioni ricevute dal controller.
 %Di conseguenza è possibile un disaccoppiamento tra hardware e software per la gestione di device con API diverse.
-A differenza delle reti tradizionali, dove il controllo è distribuito su ogni dispositivo, SDN centralizza il controllo logico tramite un controller che gestisce e coordina le politiche di rete, la configurazione e l'instradamento.
+A differenza delle reti tradizionali, dove il controllo è distribuito su ogni dispositivo, SDN associa le funzioni di controllo a un dispositivo dedicato, chiamato controller, che gestisce e coordina le politiche di rete, la configurazione e l'instradamento.
 Questa separazione permette ai dispositivi di rete di operare come semplici apparati di inoltro, mentre il controller centrale gestisce le decisioni più complesse. % rendendo possibile un disaccoppiamento tra hardware e software.
 %Anche se la logica è centralizzata, il controller è spesso distribuito fisicamente, soprattutto nei processi di produzione, per garantire scalabilità e affidabilità \cite{sdnlayers}.
 \\Per poter funzionare, i dispositivi devono essere in grado di comunicare con il controller e riconoscere cambiamenti significativi degni di notifica per una gestione ottimizzata della rete. %ai cambiamenti in tempo reale. 
@@ -48,13 +50,13 @@ principale è quindi ridurre e semplificare il carico di amministrazione per i s
     \label{fig:sdnF}
 \end{figure}
 %foto  https://community.fs.com/it/article/what-is-software-defined-networking-sdn.html
-\\Come si può notare dalla Figura \ref{fig:sdnF} la rete viene suddivisa in tre livelli: Infrastructure layer, Control layer e Application layer \cite{sdnlayers}.
+\\Come si può notare dalla Figura \ref{fig:sdnF} la rete è stato suddivisa in tre livelli: Infrastructure layer, Control layer e Application layer \cite{sdnlayers}.
 \\Partendo dal livello più basso troviamo l'infrastruttura di rete il cui unico compito è implementare il piano dati, ossia la parte che supporta un protocollo condiviso per comunicare con il controller e installare le regole di inoltro
 per i paccchetti sulla base delle configurazioni imposte da quest'ultimo. 
 Questa divisione consente di evitare algoritmi
-di routing all'interno dei dispositivi di rete visto che l'inoltro sarà
+di routing all'interno dei dispositivi di rete visto che il routing sarà
 gestito direttamente dai livelli sovrastanti \cite{tesiSDN:2017}. 
-\\Nel control layer si trova il controller SDN che, tramite API northbound (NBI) e southbound (SBI), permette di comunicare con
+\\Nel control layer si trova il controller SDN che, tramite API northbound (NBI) e southbound (SBI), comunica con
 gli altri due livelli. Le API NBI consentono al controller di interfacciarsi con le applicazioni e i servizi situati nel livello superiore,
 mentre le API SBI, tipicamente implementate tramite OpenFLow, permettono al controller di comunicare con i dispositivi di rete nel livello inferiore.
 \\Il control layer consente l'implementazione del piano di controllo, che gestisce la configurazione e l'ottimizzazione delle risorse. 
@@ -84,14 +86,14 @@ Esso è nato per rispondere alla crescente ampiezza e dinamicità delle reti mod
 Negli ultimi anni, grazie a nuove tecnologie come il 5G o l'Internet of Things (IoT), applicazioni innovative stanno emergendo in differenti campi industriali.
 \\In questo contesto, le implementazioni cloud si sono estese ed è diventato essenziale aumentare le capacità di elaborazione, eseguire servizi distribuiti e garantire il 
 comportamento interattivo che queste nuove applicazioni richiedono.
-\\Sono state concepite diverse tecnologie emergenti, tra cui l'IBN, per far fronte a queste necessità. Ognuna ha differenti obiettivi e spesso si integrano tra loro \cite{ibn}.
+\\Sono state concepite diverse tecnologie emergenti, oltre all'IBN, per far fronte a queste necessità. Ognuna ha differenti obiettivi e spesso si integrano tra loro \cite{ibn}.
 \\Il Multi-Access Edge Computing\cite{mec} (MEC) fornisce funzionalità cloud alla rete per migliorare la qualità dei servizi offerti in tempo reale portando della capacità di calcolo ai punti di accesso.
 \\Il Network Function Virtualization\cite{nfv} (NFV) permette di distribuire le funzioni di rete (firewall, NAT, DPI) come apparecchi virtuali. Questi vengono forniti in modo flessibile al cloud, consentendo 
 così modelli innovativi di fornitura di servizi che migliorano la flessibilità e l'agilità della rete.
 %\\Il Software Defined Networking (SDN) consente di semplificare la gestione di rete e utilizzare al meglio le risorse facilitando la virtualizzazione all'interno. In particolare riesce a 
 %fornire servizi più efficienti per la definizione di percorsi dei dati.
-\\Nonostante queste innovazioni, rimane un divario semantico tra le esigenze delle aziende e gli obiettivi dei service provider che devono continuamente adattare e proteggere la rete in un panorama orientato ai servizi.
-\\L'IBN nasce come un approccio nuovo, concepito dall'IETF \cite{ietf}. Si occupa della gestione della rete per astrarne la complessità permettendo agli utenti finali di concentrarsi sugli obiettivi di performance senza preoccuparsi dei dettagli tecnici.
+%\\Nonostante queste innovazioni, rimane un divario semantico tra le esigenze delle aziende e gli obiettivi dei service provider che devono continuamente adattare e proteggere la rete in un panorama orientato ai servizi.
+\\L'IBN nasce come un approccio nuovo, concepito dall'IETF \cite{ietf} che si occupa della gestione della rete per astrarne la complessità permettendo agli utenti finali di concentrarsi sugli obiettivi di performance senza preoccuparsi dei dettagli tecnici.
 \\L'IBN può essere visto come un'evoluzione dell'SDN, poiché incorpora le sue principali caratteristiche superandone alcuni limiti.
 \\Mentre l'SDN fornisce delle northbound APIs che solitamente sono complesse e richiedono la conoscenza di dettagli tecninci di rete \cite{motivibn},
 IBN, invece, adotta un approccio più astratto in cui gli utenti possono esprimere le proprie esigenze definendo degli intenti, ovvero una serie di obiettivi di alto livello.
@@ -104,7 +106,7 @@ Un intento di rete si riferisce infatti a un livello di astrazione in cui la log
 %più specifica, come "da X:10.0.0.2 a Y:10.0.0.1 set rule=allow"\cite{ibn2}.
 L'idea centrale dell'IBN è di non specificare i dettagli di implementazione della rete; piuttosto, è la rete stessa che deve eseguire le azioni necessarie per soddisfare gli intenti espressi.
 In questo modo le applicazioni non devono gestire le direttive di rete di basso livello specifiche della tecnologia. Infatti i livelli applicativi possono interagire con l'Intent Layer evitando di apprendere il linguaggio tecnico-specifico del sistema sottostante.
-\\L'approccio IBN è reso possibile grazie la mediazione di un Intent Orchestration Layer, che gestisce e regola il ciclo di vita delle richieste di intenti provenienti dalle applicazioni attraverso operazioni 
+\\L'approccio IBN è reso possibile grazie alla mediazione di un Intent Orchestration Layer, che gestisce e regola il ciclo di vita delle richieste di intenti provenienti dalle applicazioni attraverso operazioni 
 di adempimento e garanzia in un flusso di lavoro a ciclo chiuso. \cite{ibn}.
 Queste operazioni, oltre a includere la traduzione e l'eventuale orchestrazione di configurazione per la realizzazione dei singoli intenti, mirano a garantire che la rete rispetti effettivamente l'intento desiderato 
 sulla base della raccolta, aggregazione e valutazione in tempo reale dei dati di monitoraggio.
@@ -119,15 +121,15 @@ e la gestione delle reti a un livello di astrazione più elevato e verificare co
 
 
 \section{Controller allo stato dell'arte}
-Prima di analizzare nel dettaglio TeraFlow si introducono due controller che hanno già raggiunto lo stato dell'arte: ONOS e OpenDayLight.
+Prima di analizzare nel dettaglio TeraFlow di seguito si introducono due controller allo stato dell'arte: ONOS e OpenDayLight.
 Questi controller rappresentano soluzioni già consolidate nel campo del Software Defined Networking e sono ampiamente utilizzati e studiati sia in ambito accademico che industriale.
 La loro descrizione ci consentirà di mettere in evidenza le differenti caratteristiche per poter analizzare meglio le innovazioni introdotte da TeraFlow.
 
 \subsection{ONOS}
 Open Network Operating System (ONOS) \cite{ONOS} è uno dei controller SDN più noti. 
 E' un progetto nato dalla Open Networking Foundation (ONF) \cite{ONF} al fine di soddisfare le esigenze degli operatori per poter costruire reali soluzioni SDN/NFV.
-I principali obiettivi sono quelli di introdurre modularità del codice, configurabilità, separazione di interessi e agnosticismo dei protocolli.
-\\Per adattarsi alle esigenze degli utenti è stato necessario poter sviluppare una piattaforma applicativa modulare ed estendibile.
+I principali obiettivi sono quelli di introdurre modularità del codice, configurabilità, separazione di interessi e indipendenza dai protocolli.
+%\\Per adattarsi alle esigenze degli utenti è stato necessario sviluppare una piattaforma applicativa modulare ed estendibile.
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{archonos.png}
@@ -135,19 +137,20 @@ I principali obiettivi sono quelli di introdurre modularità del codice, configu
     \label{fig:img3}
 \end{figure}
 \\La base dell'architettura di ONOS, come si può vedere dalla Figura \ref{fig:img3}, è costituita da una piattaforma di applicazioni distributite
-collocata sopra OSGi \cite{osgi} e Apache Karaf \cite{Apache} così da permettere l'installazione e l'esecuzione dinamicamente. 
-Queste applicazioni utilizzano Java come linguaggio di programmazione e offrono delle funzionalità di base e sostegno al livello superiore il quale fornisce una serie di controlli di rete e astrazioni di configurazione necessarie per il corretto funzionamento del controller.
-\\Per estendere le funzionalità, a seconda delle esigenze, sono invece necessarie delle applicazioni ONOS aggiuntive che si comportano come una estenzione di quelle già presenti. 
+collocata sopra OSGi \cite{osgi} e Apache Karaf \cite{Apache}. %così da permettere l'installazione e l'esecuzione dinamicamente. 
+Queste applicazioni utilizzano Java come linguaggio di programmazione e offrono delle funzionalità di base per il sostegno del livello superiore.
+Quest'ultimo fornisce i controlli di rete e le astrazioni di configurazione necessarie per il corretto funzionamento del controller.
+\\ONOS supporta quindi un'architettura modulare che permette agli operatori di adattare facilmente la rete alle loro esigenze 
+garantendo flessibilità e reattività alle variazioni delle condizioni operative in modo dinamico.
+\\Per estendere le funzionalità iniziali sono necessarie delle applicazioni ONOS aggiuntive che si integrano con quelle già presenti comportandosi come una loro estensione. 
 Ognuna di esse è gestita da un singolo sottosistema che, all'interno del controller, è rappresentato da un modulo.
-I moduli attualmente installabili che si possono incorporare a quelli inizialmente offerti dal sistema, sono più di 100.
+I moduli attualmente installabili sono più di 100.
 \\ONOS è stato progettato come un sistema distribuito in cui tutti i nodi del cluster sono equivalenti in termini di funzionalità e capacità software.
-Ogni nodo può quindi svolgere le stesse operazioni e contribuire in maniera simmetrica al funzionamento del sistema.
-In caso di guasto di una componente le altre sono quindi in grado di sostenere e mantenere la continuità del servizio, assicurando la disponibilità del sistema. 
+Ogni nodo può quindi svolgere le stesse operazioni e contribuire in maniera simmetrica al funzionamento del sistema, cosicchè
+in caso di guasto di una componente le altre sono in grado di sostituirla per permettere la continuità del servizio. 
 %Inoltre, per far fronte ai cambiamenti del carico di lavoro o dell'ambiente, ONOS è dinamicamente scalabile, consentendo una replica virtualmente illimitata della capacità del piano di controllo.
 \\Pur essendo fisicamente disaggregato offre comunque una visione logicamente centralizzata al fine di fornire l'accesso di ogni informazione alle applicazioni in maniera uniforme.
-\\ONOS supporta un'architettura modulare che permette agli operatori di configurare e adattare facilmente la rete alle loro esigenze specifiche
 %inoltre offre il supporto per API che facilitano l'integrazione con altri sistemi di gestione e orchestrazione.
-garantendo flessibilità e reattività alle variazioni delle condizioni operative.
 %Tutti i servizi principali sono scritti in Java come bundles all'interno del Karaf OSGi container così da permettere l'installazione e l'esecuzione dinamicamente.
 \\ONOS supporta diverse API northbound tra cui:
 \begin{itemize}
@@ -155,25 +158,30 @@ garantendo flessibilità e reattività alle variazioni delle condizioni operativ
 \item \textbf{REST API}: facilita l'integrazione con sistemi di orchestrazione e altri controller 
 \item \textbf{gRPC}: per un'interazione ad alte prestazioni tra applicazioni e altre entità o protocolli della piattaforma
 \end{itemize}
-Per quanto riguarda le API southbound supportante fornisce diversi adattatori che rendono il sistema indipendente dai vari protocolli.
+Per quanto riguarda le API southbound supportate fornisce diversi adattatori che rendono il sistema indipendente dai vari protocolli.
 \\Abilitando il Transport Layer Security (TLS) per l'interfaccia SBI e l'Hypertext Transfer Protocol Secure (HTTPS) per l'interfaccia NBI, 
 ONOS garantisce una buona sicurezza monitorando e bloccando l'accesso non autorizzato alle risorse in fase di esecuzione \cite{artONOS}.
 \\
-\\Per la gestione degli intenti ONOS utilizza il framework Intent Monitor and Reroute (IMR) al fine di offrire un sistema dinamico di gestione del traffico.
-Questo sistema permette di monitorare specifici intenti di rete e ottimizzare l'uso delle risorse in base agli obiettivi definiti dagli utenti.
+\\ONOS per la gestione degli intenti utilizza il framework Intent Monitor and Reroute (IMR) al fine di monitorarli e ottimizzare l'uso delle risorse in base agli obiettivi definiti dagli utenti.
+Ciò è reso possibile grazie all'interazione con l'Intent Manager, che si occupa di gestire il ciclo di vita degli intenti, e il Flow Rule Manager per installare le regole di flusso sui dispositivi di rete \cite{onosint}.
+%Per tracciare i percorsi e trovare le destinazioni IMR interagisce con   
 %Questo framework permette non solo di reindirizzare il traffico in base a necessità specifiche, ma anche di ottimizzare l'uso delle risorse di rete in base a obiettivi e scopi definiti dagli utenti.
-\\Un'intento è considerato un sottoinsieme del traffico a cui vengono assegnati valori specifici per ciascun pacchetto.
-Gli utenti possono quindi definire percorsi ottimali che soddisfino determinati requisiti, come la larghezza di banda o il passaggio attraverso nodi specifici.
-Per tracciare i percorsi e trovare le destinazioni IMR interagisce con l'Intent Manager e il Flow Rule Manager di ONOS \cite{onosint}. 
-\\Un intento passa attraverso tre stati: Not Monitored (non monitorato), To Be Monitored (da monitorare) e Monitored (monitorato). 
+%Gli utenti possono quindi definire percorsi ottimali che soddisfino determinati requisiti, come la larghezza di banda o il passaggio attraverso nodi specifici.
+\\Una caratteristica chiave è la possibilità di raccogliere statistiche aggiornate, per il flusso di rete e gli intenti monitorati, 
+consentendo la riconfigurazione dinamica dei dispositivi in caso di animalie e massimizzando l'uso di ciascun collegamento durante la trasmissione dei dati.
+Queste statistiche possono essere filtrate e rese accessibili agli utenti tramite API come CLI o REST, permettendo loro di monitorare la rete e le politiche richieste \cite{ONOSart}. 
+\\Un intento è considerato dal sistema un sottoinsieme del traffico con una specifica astratta dei requisiti che devono essere soddisfatti.
+Gli utenti possono quindi definire percorsi ottimali che soddisfino determinati requisiti, come la larghezza di banda o il passaggio attraverso nodi
+specifici.
+Un intento può trovare in tre differenti stati: Not Monitored (non monitorato), To Be Monitored (da monitorare) e Monitored (monitorato). 
 Di default, l'intento è in stato Not Monitored. Quando un'applicazione o un utente richiede il monitoraggio, IMR aggiorna lo stato a To Be Monitored o, se l'intento è già attivo, a Monitored, avviando così la fase di tracciamento delle statistiche.
 Nel caso in cui l'intento non sia ancora installato, IMR lo inserisce in una lista di attesa fino a quando l'evento di tipo INSTALLED non viene ricevuto dall'Intent Manager, attivando il monitoraggio.
-In caso di eventi di tipo WITHDRAWN, l'intento viene disattivato \cite{onosint}.
-\\IMR supporta due tipologie di obiettivi: Point-to-point, che stabiliscono una connessione diretta tra nodi, e 
-link collection, che si riferiscono a un insieme di collegamenti monitorati per ottimizzare il traffico e la distribuzione delle risorse.
-\\Una caratteristica chiave è la possibilità di raccogliere statistiche aggiornate per il flusso di rete e gli intenti monitorati 
-consentendo la riconfigurazione dinamica della rete massimizzando l'uso di ciascun collegamento durante la trasmissione dei dati.
-Queste statistiche possono essere filtrate e rese accessibili agli utenti, tramite API come CLI o REST, permettendo loro di monitorare la rete e le politiche richieste \cite{ONOSart}. 
+In caso di eventi di tipo WITHDRAWN, l'intento è stato disattivato \cite{onosint}.
+\\IMR supporta due tipologie di obiettivi: \textit{"Point-to-point"}, che stabiliscono una connessione diretta tra nodi, e 
+\textit{"link collection"}, che si riferiscono a un insieme di collegamenti monitorati per ottimizzare il traffico e la distribuzione delle risorse.
+Grazie alla combinazione di capacità di monitoraggio e allocazione dinamica delle risorse, l'IMR migliora la capacità di ONOS di ottimizzare il traffico di rete in tempo reale. Consente un controllo 
+granulare sul ciclo di vita degli intenti di rete e facilita la riconfigurazione dinamica in risposta a eventuali anomalie.
+Questo lo rende un componente chiave per ottenere l'adattabilità necessaria nelle moderne architetture basate su SDN.
 %Il servizio consente una migliore gestione del traffico nel reindirizzamento della rete utilizzando scopi e obiettivi specifici.
 %Il sistema riduce così le interruzioni di servizio e migliora la gestione del traffico.
 %tutti i messaggi is provided on top of one single messagin substrate cosicchè è più fscile da configurare
@@ -182,7 +190,7 @@ Queste statistiche possono essere filtrate e rese accessibili agli utenti, trami
 
 \subsection{ODL}
 OpenDaylight\cite{ODL} è un progetto open source che utilizza protocolli aperti al fine di fornire controlli centralizzati e gestire il monitoraggio della rete.
-\\Fa parte della fondazione LF Networking \cite{LFN} che si occupa di fornitr supporto a progetti open source volti a migliorare la comunicazione e la gestione dei dati su una rete.
+\\Fa parte della fondazione LF Networking \cite{LFN} che si occupa di fornire supporto a progetti open source volti a migliorare la comunicazione e la gestione dei dati su una rete.
 %Ciò semplifica il coinvolgimento dei membri e aumenta la collaborazione tra i progetti e gli organismi di standardizzazione.
 %Lo scopo principale è far crescere l'ecosistema di ODL per facilitare la collaborazione tra sviluppatori, utenti finali e aziende associate a LFV per produrre tecnologie più pertinenti e affidabili.
 \\ODL è un framework scritto in Java progettato per soddisfare esigenze specifiche dell'utente e offrire alta flessibilità. 
@@ -193,36 +201,38 @@ OpenDaylight\cite{ODL} è un progetto open source che utilizza protocolli aperti
     \caption{Architettura del controller OpenDayLight \cite{archodl}}
     \label{fig:ArchODL}
 \end{figure}
-\\L'architettura di OpenDayLight, come mostrato in Figura \ref{fig:ArchODL}, è su più livelli \cite{tesiodl}. 
-Il livello principale è costituito dal Controller Platform in quanto al suo interno risiede il controller stesso, il quale si 
-occupa di gestire il flusso di traffico andando a modificare le tabelle di inoltro dei dispositivi fisici o virtuali. 
-\\Un aspetto rilevante dell'architettura è la presenza di microservizi che l'utente può attivare o disattivare in base alle proprie esigenze.
+\newline L'architettura di OpenDayLight, come mostrato in Figura \ref{fig:ArchODL}, è su più livelli \cite{tesiodl}. 
+Il livello principale è costituito dal Controller Platform in quanto al suo interno risiede il controller stesso. Si 
+occupa di gestire il flusso andando a modificare le tabelle di inoltro dei dispositivi fisici o virtuali. 
+\\Un aspetto rilevante dell'architettura è la presenza di servizi che l'utente può attivare o disattivare in base alle proprie esigenze.
 Di default sono tutti disabilitati offrendo un alto livello di personalizzazione.
-\\I microservizi sono implementati come moduli all'interno del controller, e possono essere collegati tra loro per eseguire diverse attività di rete. 
-\\Il Service Abstraction Layer (SAL) è il livello inferiore che si occupa di offrire supporto ai vari protocolli SBI come OpenFlow o NETCONF offrendo un'interfaccia tra il piano dati e il piano di controllo. 
-All'interno di questo livello il collegamento dei moduli tra il controller e i dispositivi avviene dinamicamente al fine di soddisfare il servizio richiesto indipendentemente dal protocollo utilizzato.
-\\Per la gestione dei moduli a runtime e l'installazione di nuove funzionalità da implementare nel software di ODL viene utilizzato Apache Karaf \cite{Apache}.
-\\Karaf fornisce un ambiente modulare in cui è possibile implementare e aggiornare le funzionalità senza interrompere il funzionamento del controller.
-Grazie al framework Model-Driven Service Abstraction Layer (MD-SAL), gli sviluppatori possono creare nuove funzionalità sotto forma di servizi e protocolli interconnessi.
-Il controller espone delle API NBI di supporto alle applicazioni tra cui il framework OSGi \cite{osgi}, per gestire le applicazioni che girano all'interno del controller,
+%A microservices architecture, in which a “microservice” is a particular protocol or service that a user wants to enable within their installation of the OpenDaylight controller, for example:
+\\I servizi sono implementati come moduli all'interno del controller, e possono essere collegati tra loro per eseguire attività di rete complesse. 
+\\Il Service Abstraction Layer (SAL) è il livello inferiore che si occupa del supporto ai vari protocolli SBI, come OpenFlow o NETCONF, offrendo un'interfaccia tra il piano dati e il piano di controllo. 
+All'interno di questo livello, il collegamento dei moduli tra il controller e i dispositivi avviene dinamicamente al fine di soddisfare il servizio richiesto indipendentemente dal protocollo utilizzato.
+\\Per la gestione dei moduli a runtime e l'installazione di nuove funzionalità da implementare ODL utilizza Apache Karaf \cite{Apache}.
+\\Karaf fornisce un ambiente modulare in cui è possibile creare e aggiornare i moduli senza interrompere il funzionamento del controller.
+\\Grazie al framework Model-Driven Service Abstraction Layer (MD-SAL), gli sviluppatori possono implementare nuove funzionalità sotto forma di servizi e protocolli interconnessi.
+\\Il controller espone delle API NBI di supporto tra cui il framework OSGi \cite{osgi}, per gestire le applicazioni che girano all'interno del controller,
 e REST per la comunicazione con le applicazioni esterne \cite{tesiodl2}.
  %.OSGi is a modular system and service platform for the Java programming language that implements a completely dynamic component model, something that does not exist in standalone JVM environments
-\\Per risolvere i problemi legati alla scalabilità, disponibilità e persistenza dei dati, ODL può essere distribuito in più istanze su macchine diverse, le quali cooperano tra loro tramite un meccanismo di clustering.
+\\Per risolvere i problemi legati alla scalabilità, disponibilità e persistenza dei dati, ODL può essere distribuito in più istanze su macchine diverse, le quali cooperano tra loro tramite un meccanismo di clustering. 
+Questo approccio non solo garantisce una gestione efficiente della rete in ambienti complessi, ma offre anche flessibilità nel rispondere a richieste dinamiche di rete. 
 \\
 \\ODL per gestire gli intenti aveva messo a disposizione il Network Intent Composition (NIC), una NorthBound Interface che è stata abbandonata a partire dalle release successive a Oxygen nel 2018.
 \\Network Intent Composition (NIC) \cite{nic} è un'interfaccia progettata per consentire agli utenti di esprimere uno stato desiderato in modo indipendente dall'implementazione sottostante, detto intento. 
 %\\Un intento è una direttiva di alto livello che consente agli utenti di definire il comportamento richiesto della rete senza dover specificare i dettagli tecnici della configurazione delle risorse.
 %Attraverso l'interfaccia Northbound (NBI), gli intenti vengono espressi in forma astratta e gestiti dal controller.
-Ciò è possibile grazie all'Intent Compilation Engine che ha il compito di convertire e tradurre gli intenti in regole di configurazione concrete per il protocollo di controllo sottostante (come OpenFLow, SNMP, NETCONF..), utilizzando le risorse di rete disponibili.
-Questo garantisce che le richieste siano trasformate in comandi eseguibili sui dispositivi di rete, sia fisici che virtuali.
+Ciò è reso possibile grazie all'Intent Compilation Engine che ha il compito di convertire e tradurre gli intenti in regole di configurazione concrete per lo specifico protocollo di controllo, tra cui OpenFLow, SNMP e NETCONF,
+garantendo che le richieste siano trasformate in comandi eseguibili sui dispositivi di rete sia fisici che virtuali.
 \\Una delle caratteristiche centrali di NIC è l'utilizzo di un linguaggio di programmazione degli intenti che permette di utilizzare una varietà di linguaggi di policy e di programmazione SDN
-per consentire di descrivere in modo flessibile il comportamento desiderato della rete offrendo un approccio descrittivo.
+per consentire di descrivere in modo flessibile il comportamento desiderato della rete. %offrendo un approccio descrittivo.
 \\Grazie alla funzione di composizione degli intenti, NIC consente di combinare più richieste di politiche provenienti da varie applicazioni SDN in un insieme coerente di azioni,
 gestendo i conflitti tra politiche diverse e garantendo coerenza nelle operazioni di rete.
 \\Per la gestione delle politiche NIC impiega diversi database logici di informazioni tra cui: il Network Service Intent DB per le politiche relative ai servizi di rete,
 l'End Point Intent DB per politiche sugli endpoint, il Network Security Intent DB per le politiche riguardandi la sicurezza della rete.
-Oltre a questi, altri database descritti in \cite{NICProposal}, supportano altre tipologie di politiche, garantendo una gestione completa delle esigenze.
-\\Dal punto di vista dell'interoperabilità, NIC è progettato per essere indipendente dal controller e dal protocollo di rete, 
+Oltre a questi, altri database descritti in \cite{NICProposal}, supportano differenti tipologie di politiche, garantendo una gestione completa delle esigenze.
+\\Dal punto di vista dell'interoperabilità NIC è progettato per essere indipendente dal controller e dal protocollo di rete 
 permettendo la portabilità degli intenti tra diverse implementazioni di controller.
 Gli utenti possono interagire con NIC attraverso l'interfaccia RESTful utilizzando operazioni standard RESTCONF oppure tramite la Karaf console CLI.
 \\Le operazioni REST supportate includono \cite{nic}:
@@ -232,7 +242,7 @@ Gli utenti possono interagire con NIC attraverso l'interfaccia RESTful utilizzan
     \item DELETE: per rimuovere un intento configurato dalla rete.
 \end{itemize}
 Attualmente, ODL gestisce gli intenti utilizzando il framework MD-SAL e applicazioni di rete che interagiscono tramite API come REST o NETCONF.
-Senza una specifica interfaccia dedicata, gli intenti vengono espressi e gestiti attraverso una combinazione di applicazioni e protocolli che traducono i requisiti dell'utente in configurazioni di rete concrete.
+\\Senza una specifica interfaccia dedicata, gli intenti vengono espressi e gestiti attraverso una combinazione di applicazioni e protocolli che traducono i requisiti dell'utente in configurazioni di rete concrete.
 %A user can interact with the Network Intent Composition (NIC) either through the RESTful interface using standard RESTCONF operations and syntax or via the Karaf console CLI.
 %REST
 %Configuration
@@ -241,7 +251,8 @@ Senza una specifica interfaccia dedicata, gli intenti vengono espressi e gestiti
 %•	GET - fetches a list of all configured intents or a specific configured intent.
 %•	DELETE - removes a configured intent from the configuration store, which triggers the removal of the intent from the network.
 \section{Kubernetes}
-Kubernetes \cite{kubernetes}, noto anche come K8s, è una piattaforma open-source per l'orchestrazione dei container.
+Kubernetes \cite{kubernetes}, noto anche come K8s, è una piattaforma open-source per l'orchestrazione dei container,
+unità software eseguibili che contengono tutti gli elementi necessari per l'esecuzione in qualsiasi ambiente \cite{cont}.
 Creato originariamente da Google nel 2014, è stato poi donato alla Cloud Native Computing Foundation (CNCF \cite{cncf}).
 \\E' progettato per automatizzare la gestione, lo scaling e il deployment di applicazioni containerizzate.
 \begin{figure}[h]
@@ -277,48 +288,48 @@ Ciò permette a TeraFlow di gestire dinamicamente i suoi servizi e adattarsi rap
 
 \section{Miscroservizi}
 I microservizi rappresentano un nuovo paradigma di progettazione software che si basa sulla scomposizione di applicazioni in una serie di servizi autonomi, chiamati microservizi.
-Ogni microservizio ha un obiettivo specifico e può essere gestito in modo indipendente dagli altri mantenendo comunque la capacità di comunicare tramite protocolli standardizzati.
-\\La loro introduzione è stata motivata dalle limitazioni delle architetture monolitiche, che sono diventate più evidenti con l'aumento della complessità delle applicazioni moderne. 
+Ogni microservizio ha un obiettivo specifico e può essere gestito in modo indipendente dagli altri mantenendo comunque la capacità di interagire con gli altri tramite protocolli standardizzati.
+\\La loro introduzione è stata motivata dalle limitazioni delle architetture monolitiche che sono diventate più evidenti con l'aumento della complessità delle applicazioni. 
 Nelle architetture monolitiche, l'intera applicazione è costituita da un unico blocco di codice in cui tutte le funzionalità, indipendentemente dal loro grado di correlazione, sono strettamente interconnesse.
-Ciò rende complessa la gestione e l'evoluzione nel tempo. 
+Ciò rende complessa la gestione e l'evoluzione nel tempo \cite{dragoni2017}. 
 Ad esempio, l'aggiunta di nuove funzionalità o la risoluzione di errori può richiedere modifiche di
-un'ampia porzione di codice, aumentando il rischio di introdurre nuovi errori in altre parti dell'applicazione.
-Inoltre, il lavoro degli sviluppatori è spesso vincolato a un unico repository  
+un'ampia porzione di codice aumentando il rischio di introdurre nuovi errori in altre parti dell'applicazione.
+Un ulteriore svantaggio è dato dal fatto che il lavoro degli sviluppatori è spesso vincolato a un unico repository  
 e a un linguaggio di programmazione scelto inizialmente, limitando il processo di svulippo e l'autonomia.
-Ciò introduce un rallentamento del ciclo di aggiornamento, poiché anche piccole modifiche richiedono spesso la ricompilazione dell'intero sistema.
-Dal punto di vista della scalabilità, le applicazioni monolitiche mostrano ulteriori limiti.
-Per gestire l'incremento delle richieste, l'intera applicazione deve essere replicata, anche quando l'aumento del carico riguarda solo componenti specifici.
+Questo introduce un rallentamento del ciclo di aggiornamento, insieme con il fatto che anche piccole modifiche richiedono spesso la ricompilazione dell'intero sistema.
+\\Dal punto di vista della scalabilità, le applicazioni monolitiche mostrano ulteriori limiti.
+Per gestire l'incremento delle richieste l'intero sistema deve essere replicato anche quando l'aumento del carico riguarda solo componenti specifici.
 Ciò porta a un uso inefficiente delle risorse e a un incremento dei costi di gestione.
-\\L'architettura a microservizi risolve molti di questi problemi.
-Essa scompone il sistema in moduli più piccoli e indipendenti, facilitando la manutenibilità e permettendo una gestione più agile delle risorse.
+\\L'architettura a microservizi risolve molte di queste problematiche;
+il sistema è stato scomposto in moduli più piccoli e indipendenti, facilitando la manutenibilità e permettendo una gestione più agile delle risorse.
 \\Gli aspetti chiave si possono riassumere in \cite{dragoni2017}:
 \begin{itemize}
     \item \textbf{Flessibilità}: il sistema può evolvere in modo continuo, facilitando l'adozione di nuove funzionalità.
     \item \textbf{Modularità}: il sistema è composto da servizi indipendenti, ognuno dei quali contribuisce al comportamento generale.
     \item \textbf{Evoluzione}: l'introduzione di nuove funzionalità avviene in modo graduale, riducendo il rischio di errori e semplificando la manutenzione.
 \end{itemize}
-In particolare, i microservizi influenzano diversi attributi fondamentali per la qualità del software \cite{dragoni2017}:
+In particolare, i microservizi influenzano attributi fondamentali per la qualità del software \cite{dragoni2017}:
 \begin{itemize}
     \item \textbf{Disponibilità}: essendo ogni servizio autonomo, la disponibilità del sistema dipende da quella dei singoli servizi. E' tuttavia necessario mantenere un bilanciamento nella complessità di integrazione che può portare a una riduzione dell'affidabilità del sistema.
     \item \textbf{Affidabilità}: l'affidabilità complessiva è strettamente collegata ai meccanismi di comunicazione tra i servizi che devono essere quindi progettatati con particolare attenzione introducendo interfacce semplici.
-    \item \textbf{Manutenibilità}: l'indipendenza dei servizi riduce i costi di modifica e facilità l'aggiunta di nuove funzionalità
-    \item \textbf{Prestazioni}: la comunicazione tra microservizi avviene tramite la rete, e questo può comportare un degrado delle prestazioni rispetto alle chiamate interne delle architetture monolitiche. Tuttavia, un sistema ben progettato con contesti definiti e una giusta interconnessione può minimizzare questo impatto.
-    \item \textbf{Sicurezza}: l'utilizzo di formati di scambio dati introduce la necessità di meccanismi di crittografia e autentificazione, specialmente quando si integrano servizi di terze parti
+    \item \textbf{Manutenibilità}: l'indipendenza dei servizi riduce i costi di modifica e facilità l'aggiunta di nuove funzionalità.
+    \item \textbf{Prestazioni}: la comunicazione tra microservizi avviene tramite la rete e questo può comportare un degrado delle prestazioni rispetto alle chiamate interne delle architetture monolitiche. Tuttavia, un sistema ben progettato con contesti definiti e una giusta interconnessione può minimizzare questo impatto.
+    \item \textbf{Sicurezza}: l'utilizzo di formati di scambio dati introduce la necessità di meccanismi di crittografia e autentificazione, specialmente quando si integrano servizi di terze parti.
     \item \textbf{Testabilità}: uno dei principali vantaggi dei microservizi è la possibilità di testare ogni componente in isolamento, facilitando la rilevazione degli errori. E' necessaria una particolare attenzione all'integrazione tra più microservizi che può risultare complessa e creare dei anomalie non presenti nei singoli componenti.
 \end{itemize}
 Nonostante alcune sfide, i microservizi offrono vantaggi significativi alle aziende e, pur essendo un paradigma relativamente nuovo,
 è già ampiamente diffuso. 
 Un'indagine del 2021 ha infatti rivelato che il 71\% delle imprese adottava almeno parzialmente i microservizi \cite{stat}.
 \\Inoltre, sistemi monolitici preesistenti possono essere gradualmente trasformati in un'architettura di microservizi.
-Un esempio noto è quello di Amazon, che ha abbandonato un database monolitico a favore una struttura basata sui microservizi.
+Un esempio noto è quello di Amazon che ha abbandonato un database monolitico a favore una struttura basata sui microservizi.
 Altre aziende come Netflix, Uber e LinkedIn li hanno adottati riscontrando un miglioramento nei loro tempi di rilascio.
 %\\Uno dei principali vantaggi dei microservizi è la semplificazione dello sviluppo e del testing: ogni servizio può essere progettato e testato separatamente, riducendo la complessità del progetto generale.
 %Tuttavia, l'integrazione di più microservizi richiede una gestione accurata, in quanto introduce maggiore complessità a livello di rete e può comportare un calo delle prestazioni, dovuto alla distribuzione su più nodi.
-\\Nel contesto delle applicazioni cloud-native, i microservizi svolgono un ruolo centrale.
-In un'architettura basata su microservizi orchestrata da Kubernetes, come TeraFlow,  %ciascun microservizio può avere più istanze.
+\\Nel contesto delle applicazioni cloud-native, i microservizi svolgono un ruolo centrale, in particolare si possono orchestrare tramite Kubernetes.
+In un'architettura basata su microservizi e orchestrata da Kubernetes, come TeraFlow,  %ciascun microservizio può avere più istanze.
 ogni microservizio è isolato in un cointainer che può avere più istanze, ognuna rappresentata da un pod.
 Questo consente una gestione delle risorse più efficiente rispetto alle macchine virtuali (VM) tradizionali,
-dove ogni istanza necessita di un sistema operativo completo
+dove ogni istanza necessita di un sistema operativo completo,
 e facilita operazioni di aggiornamento o ripristino \cite{artkub}, 
 oltre a ridurre il consumo di risorse
 condividendo librerie e componenti.

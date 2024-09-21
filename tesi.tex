@@ -38,6 +38,31 @@
   sensitive=false,
 }
 
+\lstdefinelanguage{Python}{
+    morekeywords={def, return, if, elif, else, for, while, break, continue, try, except, finally, class, from, import, as, pass, lambda, with, assert, yield, raise, True, False, None},
+    sensitive=true,
+    morecomment=[l]{\#},   % Line comment style
+    morestring=[b]',       % Single quote string
+    morestring=[b]",       % Double quote string
+    keywordstyle=\color{blue}\bfseries,  % Style for keywords
+    commentstyle=\color{green},          % Style for comments
+    stringstyle=\color{red},             % Style for strings
+    basicstyle=\ttfamily\small,          % Style for basic text
+    backgroundcolor=\color{lightgray!10}, % Background color for the code
+    showstringspaces=false,              % Don't show space in strings
+}
+
+% Define JSON language settings
+\lstdefinelanguage{json}{
+    basicstyle=\ttfamily\small,          % Style for basic text
+    backgroundcolor=\color{lightgray!10},% Background color for the code
+    showstringspaces=false,              % Don't show space in strings
+    breaklines=true,                     % Break lines automatically
+    literate=
+      *{:}{{{\color{red}:}}}{1}
+      {,}{{{\color{red},}}}{1},
+}
+
 \lstset{
    language=CLI,
    breaklines=true,

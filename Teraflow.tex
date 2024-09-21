@@ -1,11 +1,11 @@
 \chapter{TeraFlow: architettura e gestione degli intenti}
 \label{cap:teraflow}
-Il controller SDN su cui ci focalizzeremo è TeraFlow \cite{TeraFlow}, una piattaforma innovativa e recentemente proposta, sviluppata da un'ampia comunità open source nell'ambito di un progetto europeo. 
+Il controller SDN su cui ci focalizzeremo è TeraFlow \cite{TeraFlow}, una piattaforma recentemente proposta, sviluppata da un'ampia comunità open source nell'ambito di un progetto europeo. 
 \\Infatti, è stato finanziato dall'unione europea per il programma di ricerca e innovazione Horizon 2020 \cite{Horizon} e supportato dal 5G PPP \cite{5GPPP}, un'iniziativa congiunta tra la Commissione Europea e l'industria europea delle telecomunicazioni.
 %Nonostante la quantità di controller SDN i fondatori di TeraFlow hanno riscontrato che molte delle soluzioni attuali sono costituite da un software monolitoco
 %in grado di sincronizzarsi con altri controller SDN distribuiti tramite protocolli specifici.
 %Il problema principale dei controller SDN `e il basso numero di contribuzioni che negli ul-timi anni o mesi si stanno sempre di pi`u diradando
-\\Nonostante la quantità di controller SDN i fondatori di TeraFlow hanno riscontrato come problema comune il calo delle contribuzioni negli ultimi anni ai progetti. 
+\\Nonostante la quantità di controller SDN i fondatori di TeraFlow hanno riscontrato come problema comune il calo delle contribuzioni ai progetti open source rilevanti negli ultimi anni.
 Questo declino mette a rischio il continuo sviluppo e il supporto per i nuovi bisogni delle reti moderne lasciando molte soluzioni esistenti inadeguate per affrontare le sfide emergenti.
 \\L'obiettivo di TeraFlow è implementare un controller SDN Carrier Grade (reti o infrastrutture ben testate con livelli estremamente elevati di affidabilità, ridondanza e sicurezza)
 che soddisfi i requisiti attuali ed eventualmente futuri per le reti, sia architetturali che infrastrutturali, e che sia in grado di gestire miliardi di dispositivi.
@@ -33,12 +33,12 @@ Le componenti principali del sistema sono implementate in Java (solo quelle di A
     \item \textbf{affidabilità}: garantita attraverso robusti meccanismi di monitoraggio che supervisionano lo stato dei miscroservizi e dei flussi, attivando automaticamente dei processi di ripristino se necessari.
 \end{itemize}
 %I servizi sono progettati per essere semplici e dettagliati, ciò è reso possibile grazie all'uso di protocolli leggeri.
-Dal punto di vista della sicurezza il sistema utilizza un approccio basato sul Machine Learning per la prevenzione e la mitigazione degli attacchi.
+Dal punto di vista della sicurezza il sistema utilizza un approccio basato sul Machine Learning per la prevenzione e la mitigazione degli attacchi \cite{D41}.
 \\Questo progetto riveste un ruolo chiave nel panorama delle tecnologie 5G, contribuendo a unire diverse università e istituti di ricerca per sviluppare soluzioni all'avanguardia
 lavorando con organismi di standardizzazione per garantire l'adozione su scala globale.
 %L'architettura è basata su microservizi interconnessi da un bus grpc.
 \section{Componenti architetturali}
-Le componenti di TeraFlow sono classificate in due categorie; le componenti principali del sistema operativo e le netapp sovrapposte \cite{Component}. 
+Le componenti di TeraFlow sono classificate in due categorie; le componenti principali del sistema operativo di rete e le netapp sovrapposte \cite{Component}. 
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{architetturatf.png}
@@ -51,7 +51,7 @@ Una delle componenti principali per questa gestione è quella di Context. Ha il 
 collegamenti e servizi in un database No-SQL\cite{D31}. 
 Questa componente garantisce la coerenza dei dati gestiti, controllando gli accessi concorrenti dei vari componenti del controller SDN \cite{arttfs},
 grazie a una Database API.
-\\Le netapp sovrapposte sono applicazioni che operano sopra il livello del NOS, sfruttando le interfacce di comunicazione, indipendentemente dal linguaggio di programmazione, per interagire con le infrastrutture di rete.
+\\Le netapp sono applicazioni che operano sopra il livello del NOS, sfruttando le interfacce di comunicazione, indipendentemente dal linguaggio di programmazione, per interagire con le infrastrutture di rete.
 Queste applicazioni possono includere strumenti per il monitoraggio, la gestione della qualità del servizio, e altre funzionalità.
 %c'era grpc
 \\TeraFlow fornisce, inoltre, soluzioni di automazione SDN e IBN basate su policy. Nello specifico, TeraFlow Automation sfrutta 
@@ -63,46 +63,51 @@ Riducendo la necessità di interventi manuali da parte degli operatori vengono r
 \item Service Level Abstraction: focalizzato sulla gestione e configurazione dei servizi, questo livello gestisce le interazioni con l'SBI (Southbound Interface) per fornire un'interfaccia unificata.
 \item Management Level Abstraction: realizza la gestione complessiva della rete, che include il monitoraggio, il controllo e la manutenzione dei servizi e dei dispositivi gestiti tramite SBI, garantendo un controllo centralizzato dell'infrastruttura.
 \end{itemize}
-Nelle sezioni successive saranno descritte le componenti rilevanti per la sperimentazione.
-La definizione delle rimanenti si può trovare nella documetazione ufficiale \cite{D32}. 
+Nelle sezioni successive saranno descritte le componenti maggiormente coinvolte nella gestione degli intenti.
+La definizione delle rimanenti si può trovare nella documentazione ufficiale \cite{D32}. 
 
+\section{Gestione degli intenti}
 \subsection{Device Level Abstraction}
-Il Device Level Abstraction permette l'interazione con i dispositivi presenti all'interno della rete e corrisponde all'Infrastructure layer descritto nell'architettura SDN.
-\\Una componente fondamentale per questo livello di astrazione è la componente SBI (Southbound Interface), che permette al controller di interagire con diversi tipi di dispositivi, garantendo eterogeneità attraverso il supporto a vari protocolli. 
-Il ruolo principale dell'SBI è stabilire e mantenere la connessione con i dispositivi, consentendo la loro integrazione nell'ecosistema del controller e la configurazione dinamica a tempo di esecuzione \cite{D32}. 
+Il Device Level Abstraction permette l'interazione con i dispositivi presenti all'interno della rete.
+\\Una componente fondamentale per questo livello di astrazione è la componente SBI (Southbound Interface), che permette al controller di gestire diversi tipi di dispositivi, garantendo eterogeneità attraverso il supporto a vari protocolli. 
+Il ruolo principale dell'SBI è stabilire e mantenere la connessione con i dispositivi, consentendo così la loro integrazione nell'ecosistema del controller \cite{D32}. 
 Dopo aver stabilito la connessione con un determinato dispositivo e aver verificato la disponibilità,
-la componente mette a disposizione una API che consente di inviare le configurazioni dal controller al dispositivo in formato JSON.
+la componente mette a disposizione una API che consente di inviare dinamicamente le configurazioni dal controller al dispositivo in formato JSON.
 Queste configurazioni permettono di aggiornare i parametri operativi del dispositivo in base alle politiche di rete definite.
 %Il controller provvederà a inserire le giuste entry nelle tabelle degli switch o router pertinenti.
 %Per questo viene introdotta la componente di monitoring che servirà da supporto per il Management-level Abstraction.
 %che interagisce con la il network equipment attraverso pluggable drivers.
 %OpenFlowOpenConfig-based routers
-\\Un'altra componente che fa parte di questo livello è quella di Monitoring il cui compito è offrire supporto al Management-level
-per l'automazione dei servizi e per prendere le decisioni in tempo reale sulla base di eventi.
-\\La componente di Monitoring gestisce le diverse metriche configurate, per i dispositivi e i servizi di rete, memorizzando i dati di monitoraggio relativi alle Key Performance Indicators (KPI) selezionate, persistendo le informazioni all'interno di un database (Metrics Database).
+\\Un'altra componente che fa parte di questo livello è quella di Monitoring il cui compito è %offrire supporto al Management-level
+%per l'automazione dei servizi. 
+%e per prendere le decisioni in tempo reale sulla base di eventi.
+gestire le diverse metriche configurate per i dispositivi e i servizi di rete.
+A tale scopo memorizza i dati relativi alle Key Performance Indicators (KPI) selezionate e persiste le informazioni all'interno di un database (Metrics Database).
 Questo permette di fornire dati dimensionali con serie temporali visualizzabili su Grafana \cite{grafana}.
-Per il corretto funzionamento la componente di Monitoring deve essere in grado di recuperare le metriche da tutti i diversi dispositivi monitorati.
-Questi implementano spesso protocolli diversi per notificare le KPI, per questo motivo sono stati inclusi una serie di sottomoduli che si connettono 
+Per il corretto funzionamento la componente deve essere in grado di recuperare le metriche da tutti i diversi dispositivi monitorati che,
+spesso, implementano protocolli diversi. Per questo motivo sono stati inclusi una serie di sottomoduli che si connettono 
 agli elementi monitorati utilizzando i protocolli SBI necessari. %I dati estratti vengono memorizzati nel Metrics Database
-Quando un valore KPI registrato supera determinate soglie predefinite, la componente di Monitoring invia una notifica dell'evento 
-alla componente responsabile della gestione di quel servizio specifico, ossia quella che ha
+\\Quando un valore KPI registrato supera determinate soglie predefinite, la componente di Monitoring invia una notifica dell'evento 
+alla componente che ha
 originariamente richiesto il monitoraggio della metrica all'interno del controller.
 %Questa API permette al controller di notificare in tempo reale le componenti del sistema (ad esempio, quelle di gestione o sicurezza) sugli eventi critici, consentendo interventi tempestivi e automatizzati \cite{D32}.
-\\Ogni evento è composto da una KPI che identifica la regola a cui si riferisce, un timestamp e un KPIValue, che rappresenta il valore della metrica monitorata in tempo reale richiesta dalla KPI al momento specificato dal timestamp.
+\\Ogni evento è composto da una KPI che identifica la regola a cui si riferisce, un timestamp e un KPIValue che rappresenta il valore della specifica metrica monitorata in tempo reale dalla KPI al momento indicato dal timestamp.
 Supponendo che la componente di Monitoring stia monitorando la latenza di un collegamento di rete tramite una KPI denominata "Latency" e che la latenza massima accettabile sia 100ms,
-se la latenza supera questa soglia, ad esempio 120ms, viene generato un evento così composto: 
+se la latenza supera questa soglia, ad esempio 120ms, si genera un evento così composto: 
 \begin{itemize}
     \item KPI: "Latency"
     \item Timestamp: "06-09-2024 14:35:20" (la data e l'ora a cui si è verificato l'evento)
     \item KPIValue: 120 ms
 \end{itemize}
+che sarà poi gestito dai livelli sovrastanti.
+Questa funzione, e quindi la componente stessa, è di supporto al Management-level per garantire l'automazione dei servizi.
 Quanto si tratta di gestire topologie più complesse che coinvolgono molti dispositivi è necessario un livello di astrazione superiore per specificare la connessione tra vari end-points
 senza la necessità di configurare singolarmente ogni dispositivo. 
-A tal fine si introduce il Service-level. 
+A tal fine si introduce il Service Level. 
 
 \subsection{Service Level Abstraction}
 Il Service Level è responsabile della creazione e dell'aggiornamento dei servizi di rete.
-Questo livello di astrazione permette agli utenti di definire intenti specifici per la connessione tra gli end-points attraverso la componente di Service.
+Questo livello di astrazione permette agli utenti di definire astrazioni specifiche per la connessione tra gli end-points attraverso la componente di Service.
 \\Per svolgere questo compito, la componente si avvale di diverse funzionalità offerte dalle altre parti del sistema.
 In particolare, per il calcolo dei percorsi di rete, si affida alla componente PathComp (Path Computation).
 Ad esempio, se un intento richiede la creazione di una connessione con una latenza minima tra due nodi specifici, 
@@ -119,46 +124,51 @@ Implementa a tale scopo una Service Handler API che consente agli operatori di r
     \item \textbf{L2 service Handler}: servizio per dispositivi P4
     \item \textbf{Microwave service Handler}
 \end{itemize}
+Per la sperimentazione è stato usato il servizio \textit{L2 Service Handler} sviluppato per topologie basate su P4.
+Questo utilizza lo stesso servizio di \textit{L2-VPN} ma usa il dispositivo per tradurre le richieste ci connessione in regole di forwarding per la pipeline.
+Questa interfaccia implementa solamente due funzioni; \textit{SetEndpoint} per creare o aggiornare un insieme di dispositivi utilizzati dal servizio,
+e \textit{DeleteEndpoint} per eliminare le regole di configurazione quando il servizio non è più attivo \cite{D32}. 
 %La componente descritta ha al suo interno un blocco gRPC che espone una NBI per consentire l'interazione con le altre componenti del controller.  
 %Gestisce i vari servizi inviando richieste di calcolo del percorso alla PathComp e successivamente, grazie a uno scheduler, si occupa di
 %configurare i dispositivi in base alle connessioni restituite. Questo permette di astrarre la complessità del livello sottostante all'utente
 %in quanto la componente è in grado di tradurre l'intento in un insieme di regole che vengono propagate all'SBI attraverso dei file JSON.
-Un'altra componente che fa parte di questo livello è la PathComp. Questa, come accennato in precedenza, si occupa di gestire la selezione del percorso tra gli end-points per i servizi di connettività di rete. 
+Un'altra componente, già introdotta precedentemente, che fa parte di questo livello è la PathComp. Si occupa di gestire la selezione del percorso tra gli end-points per i servizi di connettività di rete. 
 Riceve richieste dalla componente di Service e, interagendo con la componente di Context, recupera le informazioni sulle topologie sottostanti al fine di creare
 percorsi che soddisfino i requisiti richiesti.
 \\La PathComp rappresenta un'entità singola e specializzata dove possono essere ospitati diversi algoritmi. Questo permette che qualsiasi nuovo algoritmo utilizzato non impatti su altre componenti del controller.
-Per confrontare i percorsi viene utilizzato inizialmente un algoritmo K-SP dove i k percorsi sono ordinati per numero di passi (hop), ritardo end-to-end e larghezza di banda disponibile sul link più congestionato \cite{D53}. 
+Per confrontare i percorsi viene utilizzato un algoritmo K-SP dove i k percorsi sono ordinati per numero di passi (hop), ritardo end-to-end e larghezza di banda disponibile sul link più congestionato \cite{D53}. 
 %La specifica "regolare" sottolinea che l'algoritmo non tiene conto di ottimizzazioni aggiuntive, come ad esempio la minimizzazione del consumo energetico lungo il percorso, che invece sarebbe un obiettivo nell'approccio comparativo descritto nel documento citato.
 %Una volta scelto il percorso viene calcolato il risultato della power path con l'approccio EAR.
 %Per astrarre la complessità del livello sottostante all'utente la componente di service è in grado di tradurre l'intento in un insieme di regole che propaga all'SBI (sempre attraverso file JSON)
 %cosicchè venga configurato ogni device all'interno del percorso per stabilire la connessione.
-\\Il service layer permette al controller di tradurre gli intenti in regole concrete che vengono poi propagate al livello sottostante tramite l'SBI.
+\\Il service layer permette quindi al controller di tradurre gli intenti in regole concrete che vengono poi propagate al livello sottostante.
 Tuttavia, da solo non ha la capacità di rispondere dinamicamente agli eventi che si verificano nella rete in tempo reale, come il cambiamento dello stato di un collegamento o di una risorsa di rete. %congestionamento o guasto
 Per essere in grado di creare, aggiornare o cancellare i servizi di rete in base a tali eventi è necessario introdurre un ulteriore livello di astrazione che automatizzi queste operazioni: il Management Level Abstraction.
 
 \subsection{Management Level Abstraction}
-Questo livello di astrazione è stato introdotto per consentire l'interazione dinamica con la componente di Service permettendo l'automazione di un servizio in risposta agli eventi provenienti dalla rete.
-In altre parole, il sistema non si limita a configurare i dispositivi solo su input manuali o su richiesta esplicita, ma è in grado di adattarsi dinamicamente ai cambiamenti dello stato della rete in tempo reale. 
-Questo livello consente dunque al controller di reagire rapidamente a eventi come congestioni, guasti o modifiche nella topologia, garantendo che la rete mantenga un alto livello di efficienza e affidabilità.
+Il Management Level Abstraction è stato introdotto per consentire l'interazione dinamica con la componente di Service permettendo l'automazione di un servizio in risposta agli eventi provenienti dalla rete.
+In altre parole, il sistema non si limita a configurare i dispositivi solo su input manuali o su richiesta esplicita, ma è in grado di adattarsi dinamicamente ai cambiamenti in tempo reale. 
+Questo livello consente dunque al controller di reagire rapidamente a eventi come congestioni, guasti o modifiche nella topologia, garantendo che la rete mantenga un alto livello di efficienza e l'intento
+specificato come servizio continuo da essere realizzato nella rete. 
 %\\Una delle componenti principali è la componente di Monitoring. Essa ha il compito di raccogliere metriche da diverse componenti
 %monitorate attraverso moduli che si interfacciano con i relativi protocolli.
 %I dati estratti vengono memorizzati in un Metrics Database che supporta meccanismi di aggregazione per analizzare le informazioni e consente di monitorare l'evoluzione dei dati nel tempo.
 %Quando una KPI supera una soglia definita precedentemente, il sistema genera un allarme.
 %Questo allarme viene inviato alla componente responsabile della gestione di quel servizio specifico, ossia alla componente che ha originariamente richiesto il monitoraggio della specifica metrica all'interno del controller.
-\\Una delle componenti fondamentali è la componente di Policy, che interagisce strettamente con la componente Monitoring descritta precedentemente.
-\\Si occupa di definire condizioni di politica che possono essere applicate sia a livello di singoli dispositivi che a livello di dominio della rete.
-Le politiche possono includere più regole collegate tra loro tramite condizioni logiche di AND/OR \cite{D32}, ognuna delle quali genera una KPI specifica da far monitorare alla componente di Monitoring.
+\\Una componente fondamentale è la componente di Policy che interagisce strettamente con la componente di Monitoring descritta precedentemente.
+\\Si occupa di definire condizioni di politica, associate a un determinato servizio, che possono essere applicate sia a livello di singoli dispositivi che a livello di dominio di rete.
+Le politiche possono includere più regole collegate tra loro tramite condizioni logiche di AND/OR \cite{D32}, ognuna delle quali genera una KPI specifica da monitorare.
 \\Ogni regola è composta, oltre che dalla KPI che la identifica, da un operatore numerico di confronto (maggiore, minore o uguale), e da un KPIValue.
 Quest'ultimo, in combinazione con l'operatore numerico, definisce l'intervallo di valori accettabili o non accettabili per quella specifica metrica.
 \\Se le regole definite nella politica vengono soddisfatte la componente di Monitoring genera un allarme che viene inviato, in questo caso, alla componente di Policy, che reagisce attivando le azioni predefinite.
-Ad esempio, se si verifica un eccesso di latenza, la componente di Policy può attivare il ricalcolo del percorso tramite la componente di Service o altre azioni correttive,
+Ad esempio, se si verifica un eccesso di latenza, la componente di Policy può attivare il ricalcolo del percorso, o altre azioni correttive, tramite la componente di Service
 %Tutte queste regole vengono archiviate nel Metrics Database che fornisce anche l'evoluzione dei dati nel tempo.
 %Un'ulteriore componente di questo livello è quella di Monitoring che quando rileva che una condizione impostata in una politica viene soddisfatta (ad esempio, un valore di latenza supera una soglia prestabilita), essa genera un allarme.
 %Questo allarme viene inviato alla componente responsabile della gestione di quel servizio o flusso specifico all'interno del controller, che è in grado di eseguire l'azione predefinita specificata nella politica.
 %Ad esempio, nel caso di un eccesso di latenza, l'allarme viene inviato alla componente di Service, la quale può poi attivare il ricalcolo del percorso o altre azioni correttive.
 consentendo di ripristinare lo stato desiderato.
 \\La componente Policy utilizza il Context Database per identificare quali dispositivi o servizi sono coinvolti nella politica.
-Se viene fornito l'ID del servizio, la componente recupera i dispositivi associati a esso, in caso contrario scansiona una lista di dispositivi per individuare quelli che devono rispettare le regole impostate. 
+Se è stato fornito l'ID del servizio, la componente recupera i dispositivi associati a esso, in caso contrario scansiona una lista di dispositivi per individuare quelli che devono rispettare le regole impostate. \textbf{RIGUARDA QUESTA DEFINIZIONE, SEI SICURAA NON è PER LA COMPONENTE DI MONITORING} 
 \\Una regola di politica può avere vari stati che possono essere rappresentati tramite la macchina a stati in Figura \ref{fig:diagramma}:
 \begin{itemize}
     \item \textbf{inserted} (inserita)
@@ -177,7 +187,7 @@ Se viene fornito l'ID del servizio, la componente recupera i dispositivi associa
 \end{figure}
 %La componente di policy utilizza inoltre il paradigma publish-subscribe per associare dinamicamente condizioni di politica agli eventi rilevati
 %che richiedono azioni immediate.
-Grazie all'integrazione tra la componente di Policy e Monitoring, TeraFlow ha reso possibile l'associazione delle condizioni di politica con gli allarmi del sistema di Monitoring.
+Grazie all'integrazione tra le componenti di Policy e di Monitoring, TeraFlow ha reso possibile l'associazione delle condizioni di politica con gli allarmi generati dal sistema.
 In questo modo può implementare una gestione dinamica della rete 
 permettendo di mantenere gli SLA (Service Level Agreements) senza necessitare di interventi manuali continui da parte degli operatori riducendo anche la complessità operativa.
 In ambienti su larga scala, come le reti distribuite composte da microservizi, questa capacità di adattamento consente anche di prevenire potenziali criticità, ottimizzando continuamente le risorse di rete.
@@ -195,20 +205,13 @@ Per garantire l'interoperabilità tra le diverse componenti, TeraFlow utilizza u
 un framework che facilita la comunicazione tra servizi in modo efficiente e preciso. 
 %Questo protocollo è stato preferito a REST per la sua capacità più concreta di descrivere le interazioni tra entità in modo efficiente e preciso.
 %gRPC sfrutta i Protocol Buffers per definire in modo preciso gli schemi dei messaggi condivisi e scambiati tra le componenti. %,consentendo ai vari servizi di implementare le adeguate funzioni di comunicazione indipendentemente dalla piattaforma e dal linguaggio.
-\\Inizialmente i più popolari protocolli inter-processo erano basati sul paradigna RPC (Remote Procedure Call) \cite{librogrpc}.
-Esso utilizza uno scambio di messaggi con le caratteristiche di basso sovraccarico, semplicità e trasparenza.
-Per questi motivi è stato ampiamente usato per diverso tempo in sistemi applicativi distribuiti.
-Con RPC un client può invocare da remoto una funzione di un metodo chiamandola come se fosse una procedura locale \cite{grpcArt2}.
-Tuttavia, la maggior parte delle convenzionali implementazioni (un esempio è RMI) sono complesse dato che richiedono una gestione diretta dei protocolli di trasporto, come TCP, che ostacolano l'interoperabilità e richiedono specifiche eccessive \cite{librogrpc}.
-\\Google Remote Procedure Calls (gRPC\cite{grpc}) è un framework OpenSource sviluppato da Google. Permette di
+\\Google Remote Procedure Calls (gRPC\cite{grpc}) è un framework OpenSource sviluppato da Google che si ispira al paradigma RPC (Remote Procedure Call). Permette di
 connettere, invocare, operare e fare debug di programmi eterogenei in modo semplice.
-\\gRPC è basato sul protocollo di trasporto HTTP/2 che supporta la comunicazione bidirezionale. 
-Sebbene anche gRPC utilizzi TCP la differenza con i tradizionali protocolli RPC risiede nelle caratteristiche avanzate di HTTP/2 che includono funzionalità come il multiplexing delle connessioni, il flusso bidirezionale 
-e una migliore gestione delle prestazioni. 
-\\gRPC include supporto per il bilanciamento del carico, il tracciamento, il controllo dello stato e l'autentificazione\cite{grpcArt3} \cite{grpcArt1}.
+\\E' basato sul protocollo di trasporto HTTP/2 che supporta la comunicazione bidirezionale e il multiplexing delle connessioni.
+\\gRPC include supporto per il bilanciamento del carico, il tracciamento, il controllo dello stato e l'autentificazione\cite{grpcArt3} \cite{grpcArt1}, inoltre
 %Inoltre, ha la capacità di supportare alte performance di streaming in modalità push da parte del server, consentendo l'indipendenza basata sul set di dati e definizioni, grazie ai metodi YANG,
 %e la compressione di dati binari \cite{grpcArt3}.
-\\Consente di definire i servizi, i loro metodi di comunicazione e trasportare messaggi attraverso dei file di descrizione dell'interfaccia detti Protocol Buffer, o più semplicemente file proto.
+consente di definire i servizi, i loro metodi di comunicazione e trasportare messaggi attraverso dei file di descrizione dell'interfaccia detti Protocol Buffer, o più semplicemente file proto.
 \\I file proto sono un meccanismo indipendente dal linguaggio e dalla piattaforma 
 e permettono di serializzare le strutture dati in modo più efficiente rispetto a formati come JSON o XML, sia in termini di dimensione dei messaggi che di velocità di elaborazione.
 \begin{figure}[h]
@@ -222,7 +225,6 @@ In Figura \ref{fig:grpc} viene illustrata l'interazione tra un microservizio e u
 %il formato da utilizzare per i messaggi. 
 all'interno di un file proto (in Figura \ref{fig:grpc} ProductInfo.proto).
 Anche se a prima vista può sembrare un file di testo ordinario, come si può notare in Figura \ref{fig:proto}, in realtà specifica i metodi con i parametri di input e i valori di ritorno.
-Tutti i Protocol Buffers utilizzati da TeraFlow sono descritti nella pagina del sito \cite{ProtoBuf}.
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{file proto.png}
@@ -232,12 +234,20 @@ Tutti i Protocol Buffers utilizzati da TeraFlow sono descritti nella pagina del 
 \\Una volta definita l'interfaccia è possibile generare il codice per il server (server skeleton) e per il client (client stub) nel linguaggio desiderato usando il compilatore Protobuf \textit{protoc}\cite{librogrpc}.
 Ciò permette al client di invocare i metodi definiti da remoto.
 \\Quando il client richiede un servizio gRPC, utilizza i protocol buffer per serializzare la chiamata in un formato compatibile con il protocollo. 
-Successivamente, la richiesta viene inviata tramite HTTP/2 e, una volta ricevuta dal server, viene deserializzata, con il supporto dei Protocol Buffers, per invocare il metodo appropriato.
+Successivamente, la richiesta è stata inviata tramite HTTP/2 e, una volta ricevuta dal server, viene deserializzata, con il supporto dei Protocol Buffers, per invocare il metodo appropriato.
 La risposta segue il flusso inverso da server a client\cite{librogrpc}.
 \\Il framework gRPC semplifica quindi la gestione di aspetti complessi come vincoli di servizio, serializzazione dei dati, comunicazioni di rete e autenticazione.
 E' progettato per trasportare messaggi peer-to-peer in modo distribuito e non durevole, consentendo a più servizi di scambiarsi informazioni attraverso un bus condiviso.
-Questo lo rende particolarmente adatto per architetture basate su microservizi, come TeraFlow, dove scalabilità e prestazioni sono fondamentali.
+Questo lo rende particolarmente adatto per architetture basate su microservizi dove scalabilità e prestazioni sono fondamentali.
+Teraflow usa gRPC per la comunicazione tra le componenti e i Protocol Buffers utilizzati sono descritti alla pagina del sito \cite{ProtoBuf}.
 \\Negli esperimenti svolti in \cite{espgrpc} si è dimostrato che gRPC, grazie ai file proto, in scenari che coinvolgono ambienti più complessi con molte componenti (come server, DNS, firewall..)
+%the performance in terms of server creation time of an
+%orchestration is improved by up to 27\% compared to the traditional REST-based orchestration.
+%It is seen that the measures taken to reduce server creation time have proved to be effective. A
+%comparison with traditional REST-based orchestration method shows that the gRPC-based
+%orchestration method exhibits a reduction of almost up to 27\% in the server creation time that is
+%required to create instance and as well as to ensure an instance launch is successful. This
+%corresponds to a reduction in total overall execution time.
 può portare a una riduzione di quasi il 27\% nel tempo di creazione del server rispetto a REST (Representational State Transfer), uno tra i più moderni e utilizzati sistemi di trasmissione dati, riducendo il tempo di esecuzione complessivo.
 Infine, gRPC supporta nativamente TLS (Transport Layer Security), che garantisce la sicurezza delle comunicazioni cifrando i messaggi scambiati tra servizi.
 Questo aspetto è cruciale per assicurare la protezione dei dati in sistemi distribuiti e critici.

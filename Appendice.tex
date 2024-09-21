@@ -30,6 +30,591 @@ Per installarle invece
 feature:install <feature1> <feature2>..
 \end{lstlisting}
 
-\section{Script Agent per latenza e packet loss}
-\section{Script policyAddService}
+\section{Topologia mininet 8sw aggiunta link}
+\begin{lstlisting}[language=Python]
+        self.addLink(switch2, switch5) 
+        self.addLink(switch4, switch3)  
+        
+        # Host links
+        self.addLink(client, switch1)   # Switch1: port 4
+        self.addLink(server, switch8)   # Switch8: port 4
+\end{lstlisting}
+\section{Aggiunta costraints: Modifica ai file Objects e test\_functional\_create\_service.py}
+\subsection{Objects}
+\begin{lstlisting}[language=Python]
+SERVICE_SW1_SW8_UUID          = get_service_uuid(ENDPOINT_ID_SW1_4, ENDPOINT_ID_SW8_4)
+SERVICE_SW1_SW8               = json_service_p4_planned(SERVICE_SW1_SW8_UUID)
+SERVICE_SW1_SW8_ENDPOINT_IDS  = [DEVICE_SW1_ENDPOINT_IDS[3], DEVICE_SW8_ENDPOINT_IDS[3]]
+constraints     = [
+                {"sla_capacity": {"capacity_gbps": 10.0}},
+                {"sla_latency": {"e2e_latency_ms": 15.2}}
+            ]
+SERVICES = [
+    (SERVICE_SW1_SW8, SERVICE_SW1_SW8_ENDPOINT_IDS, constraints),
+]
+\end{lstlisting}
+\subsection{test\_functional\_create\_service.py}
+\begin{lstlisting}[language=Python]
+    for service, endpoints, constraints in SERVICES:
+        # Insert Service (table entries)
+        service_uuid = service['service_id']['service_uuid']['uuid']
+        print('Creating Service {:s}'.format(service_uuid))
+        service_p4 = copy.deepcopy(service)
+        service_client.CreateService(Service(**service_p4))
+        service_p4['service_endpoint_ids'].extend(endpoints)
+        service_p4['service_constraints'].extend(constraints)
+        service_client.UpdateService(Service(**service_p4))
+\end{lstlisting}
+\section{Modifica setup in p4}
+\begin{lstlisting}[language=Python]
+export POD_NAME=$(kubectl get pods -n=tfs | grep device | awk '{print $1}')
+
+kubectl exec ${POD_NAME} -n=tfs -c=server -- rm -rf /root/p4
+kubectl exec ${POD_NAME} -n=tfs -c=server -- mkdir /root/p4
+
+kubectl cp src/tests/p4/p4/p4info.txt tfs/${POD_NAME}:/root/p4 -c=server
+kubectl cp src/tests/p4/p4/bmv2.json tfs/${POD_NAME}:/root/p4 -c=server
+\end{lstlisting}
+
+\section{Script policyAddService packet loss}
+\begin{lstlisting}[language=json]
+{
+    "serviceId": {
+        "context_id": {
+            "context_uuid": {
+                "uuid": "43813baf-195e-5da6-af20-b3d0922e71a7"
+            }
+        },
+        "service_uuid": {
+            "uuid": "be1fbc16-fad4-5832-9a32-754a7d134b81"
+        }
+    },
+    "policyRuleBasic": {
+        "priority": 0,
+        "policyRuleId": {
+            "uuid": {
+                "uuid": "1"
+            }
+        },
+        "booleanOperator": "POLICYRULE_CONDITION_BOOLEAN_OR",
+        "policyRuleState": {
+            "policyRuleStateMessage": ""
+        },
+        "actionList": [
+            {
+                "action": "POLICY_RULE_ACTION_RECALCULATE_PATH",
+                "action_config": [
+                    {
+                        "action_key": "",
+                        "action_value": ""
+                    }
+                ]
+            }
+        ],
+        "conditionList": [
+            {
+                "numericalOperator": "POLICYRULE_CONDITION_NUMERICAL_GREATER_THAN",
+                "kpiValue": {
+                    "floatVal": 5
+                },
+                "kpiId": {
+                    "kpi_id": {
+                        "uuid": "1"
+                    }
+                }
+            },
+            {
+                "numericalOperator": "POLICYRULE_CONDITION_NUMERICAL_GREATER_THAN",
+                "kpiValue": {
+                    "floatVal": 100
+                },
+                "kpiId": {
+                    "kpi_id": {
+                        "uuid": "2"
+                    }
+                }
+            }
+        ]
+    }
+}
+\end{lstlisting}
+
 \section{script ping2 latenza e packet loss}
+
+\section{make file abilene}
+\begin{lstlisting}[language=Python]
+start: NGSDN_TOPO_PY := 4switch2path.py
+start: _start
+
+start-8: NGSDN_TOPO_PY := 8switch3path.py
+start-8: _start
+
+start-ab: NGSDN_TOPO_PY := abilene.py
+start-ab: _start
+
+start-v4: NGSDN_TOPO_PY := topo-v4.py
+start-v4: _start
+\end{lstlisting}
+
+\section{addservice con capacità}
+\begin{lstlisting}[language=json]
+{
+    "serviceId": {
+        "context_id": {
+            "context_uuid": {
+                "uuid": "43813baf-195e-5da6-af20-b3d0922e71a7"
+            }
+        },
+        "service_uuid": {
+            "uuid": "be1fbc16-fad4-5832-9a32-754a7d134b81"
+        }
+    },
+    "policyRuleBasic": {
+        "priority": 0,
+        "policyRuleId": {
+            "uuid": {
+                "uuid": "1"
+            }
+        },
+        "booleanOperator": "POLICYRULE_CONDITION_BOOLEAN_OR",
+        "policyRuleState": {
+            "policyRuleStateMessage": ""
+        },
+        "actionList": [
+            {
+                "action": "POLICY_RULE_ACTION_RECALCULATE_PATH",
+                "action_config": [
+                    {
+                        "action_key": "",
+                        "action_value": ""
+                    }
+                ]
+            }
+        ],
+        "conditionList": [
+            {
+                "numericalOperator": "POLICYRULE_CONDITION_NUMERICAL_GREATER_THAN",
+                "kpiValue": {
+                    "floatVal": 5
+                },
+                "kpiId": {
+                    "kpi_id": {
+                        "uuid": "1"
+                    }
+                }
+            },
+            {
+                "numericalOperator": "POLICYRULE_CONDITION_NUMERICAL_GREATER_THAN",
+                "kpiValue": {
+                    "floatVal": 100
+                },
+                "kpiId": {
+                    "kpi_id": {
+                        "uuid": "2"
+                    }
+                }
+            },
+            {
+                "numericalOperator": "POLICYRULE_CONDITION_NUMERICAL_LESS_THAN",
+                "kpiValue": {
+                    "floatVal": 0.002
+                },
+                "kpiId": {
+                    "kpi_id": {
+                        "uuid": "3"
+                    }
+                }
+            }
+        ]
+    }
+}
+\end{lstlisting}
+
+\section{probe con capacita}
+\subsection{agent}
+\begin{lstlisting}[language=Python]
+import os, threading, time, socket
+from common.Settings import get_setting
+from common.proto.context_pb2 import Empty, Timestamp
+from common.proto.monitoring_pb2 import KpiDescriptor, Kpi, KpiId, KpiValue
+from common.proto.kpi_sample_types_pb2 import KpiSampleType
+from monitoring.client.MonitoringClient import MonitoringClient
+from context.client.ContextClient import ContextClient
+
+# ----- If you want to use .env file
+#from dotenv import load_dotenv
+#load_dotenv()
+#def get_setting(key):
+#    return os.getenv(key)
+
+
+#### gRPC Clients
+monitoring_client = MonitoringClient(get_setting('MONITORINGSERVICE_SERVICE_HOST'), get_setting('MONITORINGSERVICE_SERVICE_PORT_GRPC'))
+context_client = ContextClient(get_setting('CONTEXTSERVICE_SERVICE_HOST'), get_setting('CONTEXTSERVICE_SERVICE_PORT_GRPC'))
+
+### Locks and common variables
+enabled_lock = threading.Lock()
+kpi_id_lock = threading.Lock()
+kpi_id_loss = KpiId()
+kpi_id_latency = KpiId()
+kpi_id_capacity = KpiId()
+enabled = False
+
+### Define the path to the Unix socket
+socket_path = "/home/teraflow/ngsdn-tutorial/tmp/tfsping"
+if os.path.exists(socket_path):
+    os.remove(socket_path)
+
+def thread_context_func():
+    global kpi_id_loss
+    global kpi_id_latency
+    global kpi_id_capacity
+    global enabled
+    while True:
+        # Listen to ContextService/GetServiceEvents stream 
+        events = context_client.GetServiceEvents(Empty())
+        for event in events:
+            event_service = event.service_id
+            event_service_uuid = event_service.service_uuid.uuid
+            event_type = event.event.event_type
+            if event_type == 1:
+                print(f"stream: New CREATE event:\n{event_service}")
+                #loss
+                kpi_descriptor_loss = KpiDescriptor(
+                        kpi_description = f"Loss Ratio for service {event_service_uuid}",
+                        service_id = event_service,
+                        kpi_sample_type = KpiSampleType.KPISAMPLETYPE_UNKNOWN
+                        )
+                with kpi_id_lock:
+                    response_loss = monitoring_client.SetKpi(kpi_descriptor_loss)
+                    kpi_id_loss = response_loss
+                    print("loss: "+str(kpi_id_loss))
+                    
+                #latency
+                kpi_descriptor_latency = KpiDescriptor(
+                        kpi_description = f"Latency for service {event_service_uuid}",
+                        service_id = event_service,
+                        kpi_sample_type = KpiSampleType.KPISAMPLETYPE_SERVICE_LATENCY_MS
+                        )
+                with kpi_id_lock:
+                    response_latency = monitoring_client.SetKpi(kpi_descriptor_latency)
+                    kpi_id_latency = response_latency
+                    print("latency: "+str(kpi_id_latency))
+
+                #capacity
+                kpi_descriptor_capacity = KpiDescriptor(
+                        kpi_description = f"Capacity for service {event_service_uuid}",
+                        service_id = event_service,
+                        kpi_sample_type = KpiSampleType.KPISAMPLETYPE_LINK_TOTAL_CAPACITY_GBPS
+                        )
+                with kpi_id_lock:
+                    response_capacity = monitoring_client.SetKpi(kpi_descriptor_capacity)
+                    kpi_id_capacity = response_capacity
+                    print("capacity: "+str(kpi_id_capacity))
+
+                with enabled_lock:
+                    enabled = True
+            elif event_type == 3:
+                print(f"stream: New REMOVE event:\n{event_service}")
+                with enabled_lock:
+                    enabled = False
+
+def thread_kpi_func():
+    global kpi_id_loss
+    global kpi_id_latency
+    global kpi_id_capacity
+    global enabled
+    try:
+        # Create socket object
+        server_socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+
+        # Bind the socket to the socket path
+        server_socket.bind(socket_path)
+
+        # Listen for incoming connections
+        server_socket.listen(1)
+        
+        while True:
+            print("Awaiting for new connection!")
+
+            # Accept incoming connection
+            connection, client_address = server_socket.accept()
+
+            # Read data from the connection
+            data = connection.recv(1024)
+
+            if data:
+                with enabled_lock:
+                    if enabled: 
+                        data = data.decode()
+                        print(f"Received: {data}")
+                        latency, loss, capacity = data.split(',')
+                        with kpi_id_lock:
+                            
+                            now = time.time()
+
+                            new_timestamp = Timestamp()
+                            new_timestamp.timestamp = now
+
+                            new_value = KpiValue()
+                            new_value.floatVal = float(latency)
+
+                            kpi_latency = Kpi (
+                                    kpi_id = kpi_id_latency,
+                                    timestamp = new_timestamp,
+                                    kpi_value = new_value
+                                    )
+                            print(kpi_latency)
+                            response_latency = monitoring_client.IncludeKpi(kpi_latency) 
+                        with kpi_id_lock:
+                            new_value.floatVal = float(loss)
+                            
+                            kpi_loss = Kpi(
+                                kpi_id=kpi_id_loss,
+                                timestamp=new_timestamp,
+                                kpi_value=new_value
+                            )
+                            print(kpi_loss)
+                            response_loss = monitoring_client.IncludeKpi(kpi_loss)
+
+                        with kpi_id_lock:
+                            new_value.floatVal = float(capacity)
+                            
+                            kpi_capacity = Kpi(
+                                kpi_id=kpi_id_capacity,
+                                timestamp=new_timestamp,
+                                kpi_value=new_value
+                            )
+                            print(kpi_capacity)
+                            response_capacity = monitoring_client.IncludeKpi(kpi_capacity)
+
+            # Close the connection 
+            connection.close()
+
+    
+    except Exception as e:
+        print(f"Error: {str(e)}")
+
+
+def main():
+
+    # Start Thread that listens to context events
+    thread_context = threading.Thread(target=thread_context_func)
+    thread_context.daemon = True
+    thread_context.start()
+
+    # Start Thread that listens to socket
+    thread_kpi = threading.Thread(target=thread_kpi_func)
+    thread_kpi.daemon = True
+    thread_kpi.start()
+
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        os.remove(socket_path)
+        print("Script terminated.")
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\subsection{ping}
+\begin{lstlisting}[language=Python]
+import socket, re, time, subprocess, sys, os
+
+socket_path = "/tmp/tfsping"
+
+#socket_path = "./tmp/sock"
+def main():
+    hostname = sys.argv[1]
+   # server_host = sys.argv[2]
+    count = 1
+    wait = 5
+    packet_sizes = [64, 512, 1024, 2048, 4096]
+
+    total_pings = 0
+    successful_pings = 0
+    try:
+        while True:
+            start_time = time.time()
+
+            try:
+                # Run the ping command and capture the output
+                result = subprocess.check_output(["ping", "-W", str(wait), "-c", str(count), hostname], universal_newlines=True)
+                response_time = float(re.findall(r"time=([0-9.]+) ms", result)[0])
+
+#cambia client_host e server_host
+                iperf_result = subprocess.check_output(["iperf", "-c", hostname], universal_newlines=True)
+                bandwidth_mb = re.findall(r"(\d+\.?\d*)\s+Mbits/sec", iperf_result)[-1]
+                #banda in gbps
+                bandwidth = float(bandwidth_mb)/1000
+           
+            except subprocess.CalledProcessError as e:
+                # If ping fails return negative response_time
+                response_time = -1
+
+            # Calculate new loss_ratio
+            if response_time != -1:
+                successful_pings += 1
+            total_pings += 1
+            moving_loss_ratio = round(((total_pings - successful_pings) / float(total_pings) * 100), 2)
+
+            print("Total pings: {}".format(total_pings))
+            print("Successful pings: {}".format(successful_pings))
+
+            print("Packet loss: {}\%".format(moving_loss_ratio))
+            print("Latency: {} ms".format(response_time))
+            print("Bandwidth: {} Gbps/sec".format(bandwidth))
+
+            data_latency = str(response_time)
+            data_loss = str(moving_loss_ratio)
+            data_bandwidth = str(bandwidth)
+            data = data_latency+","+data_loss+","+data_bandwidth
+
+            # Write results in socket
+            try:
+                client_socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+                client_socket.connect(socket_path)
+                client_socket.send(data.encode())
+                client_socket.close()
+            except Exception as e:
+                print(e)
+
+            # Calculate the time taken by ping
+            execution_time = time.time() - start_time
+            # Wait the rest of the time
+            wait_time = max(0, 6 - execution_time)
+            time.sleep(wait_time)
+
+    except KeyboardInterrupt:
+        print("Script terminated.")
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\section{topologia abilene}
+\begin{lstlisting}[language=Python]
+    def config(self, mac=None, ip=None, defaultRoute=None, lo='up', gw=None,
+               **_params):
+        super(IPv4Host, self).config(mac, ip, defaultRoute, lo, **_params)
+        self.cmd('ip -4 addr flush dev %s' % self.defaultIntf())
+        self.cmd('ip -6 addr flush dev %s' % self.defaultIntf())
+        self.cmd('ip -4 link set up %s' % self.defaultIntf())
+        self.cmd('ip -4 addr add %s dev %s' % (ip, self.defaultIntf()))
+        if gw:
+            self.cmd('ip -4 route add default via %s' % gw)
+        # Disable offload
+        for attr in ["rx", "tx", "sg"]:
+            cmd = "/sbin/ethtool --offload %s %s off" % (
+                self.defaultIntf(), attr)
+            self.cmd(cmd)
+
+        def updateIP():
+            return ip.split('/')[0]
+
+        self.defaultIntf().updateIP = updateIP
+
+class TutorialTopo(Topo):
+    """Abilene Topology"""
+
+    def __init__(self, *args, **kwargs):
+        Topo.__init__(self, *args, **kwargs)
+
+        # Switches
+        NewYork = self.addSwitch('s1', cls=StratumBmv2Switch, cpuport=CPU_PORT)
+        Chicago = self.addSwitch('s2', cls=StratumBmv2Switch, cpuport=CPU_PORT)
+        WashingtonDC = self.addSwitch('s3', cls=StratumBmv2Switch, cpuport=CPU_PORT)
+        Seattle = self.addSwitch('s4', cls=StratumBmv2Switch, cpuport=CPU_PORT)
+        Sunnyvale = self.addSwitch('s5', cls=StratumBmv2Switch, cpuport=CPU_PORT)
+        LosAngeles = self.addSwitch('s6', cls=StratumBmv2Switch, cpuport=CPU_PORT)
+        Denver = self.addSwitch('s7', cls=StratumBmv2Switch, cpuport=CPU_PORT)
+        KansasCity = self.addSwitch('s8', cls=StratumBmv2Switch, cpuport=CPU_PORT)
+        Houston = self.addSwitch('s9', cls=StratumBmv2Switch, cpuport=CPU_PORT)
+        Atlanta = self.addSwitch('s10', cls=StratumBmv2Switch, cpuport=CPU_PORT)
+        Indianapolis = self.addSwitch('s11', cls=StratumBmv2Switch, cpuport=CPU_PORT)
+
+
+        # ... and now hosts
+        NewYork_host = self.addHost( 'h0',cls=IPv4Host, mac="aa:bb:cc:dd:ee:11",
+                            ip='10.0.0.1/24', gw='10.0.0.100' )
+        Chicago_host = self.addHost( 'h1', cls=IPv4Host, mac="aa:bb:cc:dd:ee:22",
+                            ip='10.0.0.2/24', gw='10.0.0.100' )
+        WashingtonDC_host = self.addHost( 'h2',cls=IPv4Host, mac="aa:bb:cc:dd:ee:33",
+                            ip='10.0.0.3/24', gw='10.0.0.100' )
+        Seattle_host = self.addHost( 'h3',cls=IPv4Host, mac="aa:bb:cc:dd:ee:44",
+                            ip='10.0.0.4/24', gw='10.0.0.100' )
+        Sunnyvale_host = self.addHost( 'h4',cls=IPv4Host, mac="aa:bb:cc:dd:ee:55",
+                            ip='10.0.0.5/24', gw='10.0.0.100' )
+        LosAngeles_host = self.addHost( 'h5',cls=IPv4Host, mac="aa:bb:cc:dd:ee:66",
+                            ip='10.0.0.6/24', gw='10.0.0.100' )
+        Denver_host = self.addHost( 'h6', cls=IPv4Host, mac="aa:bb:cc:dd:ee:77",
+                            ip='10.0.0.7/24', gw='10.0.0.100' )
+        KansasCity_host = self.addHost( 'h7',cls=IPv4Host, mac="aa:bb:cc:dd:ee:88",
+                            ip='10.0.0.8/24', gw='10.0.0.100' )
+        Houston_host = self.addHost( 'h8',cls=IPv4Host, mac="aa:bb:cc:dd:ee:99",
+                            ip='10.0.0.9/24', gw='10.0.0.100' )
+        Atlanta_host = self.addHost( 'h9',cls=IPv4Host, mac="aa:bb:cc:dd:ee:10",
+                            ip='10.0.0.10/24', gw='10.0.0.100' )
+        Indianapolis_host = self.addHost( 'h10',cls=IPv4Host, mac="aa:bb:cc:dd:ee:11",
+                            ip='10.0.0.11/24', gw='10.0.0.100' )
+
+        # add edges between switches
+        self.addLink( NewYork , Chicago, bw=30, delay='0.806374975652ms')
+        self.addLink( NewYork , WashingtonDC, bw=30, delay='0.605826192092ms')
+        self.addLink( Chicago , Indianapolis, bw=30, delay='1.34462717203ms')
+        self.addLink( WashingtonDC , Atlanta, bw=30, delay='0.557636936322ms')
+        self.addLink( Seattle , Sunnyvale, bw=30, delay='1.28837123738ms')
+        self.addLink( Seattle , Denver, bw=30, delay='1.11169346865ms')
+        self.addLink( Sunnyvale , LosAngeles, bw=30, delay='0.590813628707ms')
+        self.addLink( Sunnyvale , Denver, bw=30, delay='0.997327682281ms')
+        self.addLink( LosAngeles , Houston, bw=30, delay='1.20160833263ms')
+        self.addLink( Denver , KansasCity, bw=30, delay='0.223328790403ms')
+        self.addLink( KansasCity , Houston, bw=30, delay='1.71325092726ms')
+        self.addLink( KansasCity , Indianapolis, bw=30, delay='0.240899959477ms')
+        self.addLink( Houston , Atlanta, bw=30, delay='1.34344500256ms')
+        self.addLink( Atlanta , Indianapolis, bw=30, delay='0.544962634977ms')
+
+
+        # add edges between switch and corresponding host
+        self.addLink( NewYork , NewYork_host )
+        self.addLink( Chicago , Chicago_host )
+        self.addLink( WashingtonDC , WashingtonDC_host )
+        self.addLink( Seattle , Seattle_host )
+        self.addLink( Sunnyvale , Sunnyvale_host )
+        self.addLink( LosAngeles , LosAngeles_host )
+        self.addLink( Denver , Denver_host )
+        self.addLink( KansasCity , KansasCity_host )
+        self.addLink( Houston , Houston_host )
+        self.addLink( Atlanta , Atlanta_host )
+        self.addLink( Indianapolis , Indianapolis_host )
+
+def main():
+    net = Mininet(topo=TutorialTopo(), controller=None)
+    net.start()
+    
+    #get hosts new york kansascity
+    NewYork_host = net.hosts[0]
+    NewYork_host.setARP('10.0.0.8', 'aa:bb:cc:dd:ee:88')
+    KansasCity_host = net.hosts[1]
+    KansasCity_host.setARP('10.0.0.1', 'aa:bb:cc:dd:ee:11')
+   
+    
+    CLI(net)
+    net.stop()
+    print '#' * 80
+    print 'ATTENTION: Mininet was stopped! Perhaps accidentally?'
+    print 'No worries, it will restart automatically in a few seconds...'
+    print 'To access again the Mininet CLI, use `make mn-cli`'
+    print 'To detach from the CLI (without stopping), press Ctrl-D'
+    print 'To permanently quit Mininet, use `make stop`'
+    print '#' * 80
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description='Mininet topology script for 2x2 fabric with stratum_bmv2 and IPv4 hosts')
+    args = parser.parse_args()
+    setLogLevel('info')
+
+    main()
+\end{lstlisting}

@@ -236,8 +236,8 @@ OUTPUT tesi.toc
 INPUT .\tesi.lof
 INPUT .\tesi.lof
 INPUT tesi.lof
-OUTPUT tesi.lof
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmro7t.tfm
+OUTPUT tesi.lof
 INPUT .\Introbuzione.tex
 INPUT .\Introbuzione.tex
 INPUT Introbuzione.tex
@@ -346,6 +346,13 @@ INPUT .\componenti.png
 INPUT .\componenti.png
 INPUT .\componenti.png
 INPUT .\componenti.png
+INPUT .\topologiasw4.png
+INPUT .\topologiasw4.png
+INPUT .\topologiasw4.png
+INPUT .\topologiasw4.png
+INPUT .\topologiasw4.png
+INPUT .\topologiasw4.png
+INPUT .\topologiasw4.png
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omsptm.fd
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omsptm.fd
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omsptm.fd
@@ -384,6 +391,13 @@ INPUT .\policy con sw3.png
 INPUT .\policy con sw3.png
 INPUT .\policy con sw3.png
 INPUT .\policy con sw3.png
+INPUT .\sw4.drawio.png
+INPUT .\sw4.drawio.png
+INPUT .\sw4.drawio.png
+INPUT .\sw4.drawio.png
+INPUT .\sw4.drawio.png
+INPUT .\sw4.drawio.png
+INPUT .\sw4.drawio.png
 INPUT .\service sw8.png
 INPUT .\service sw8.png
 INPUT .\service sw8.png
@@ -462,13 +476,21 @@ INPUT .\odl\feature.png
 INPUT .\odl\feature.png
 INPUT .\odl\feature.png
 INPUT .\odl\feature.png
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt12.tfm
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt10.tfm
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\base\ts1cmtt.fd
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\base\ts1cmtt.fd
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\base\ts1cmtt.fd
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tctt1095.tfm
 INPUT .\tesi.bbl
 INPUT .\tesi.bbl
 INPUT tesi.bbl
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt12.tfm
 INPUT tesi.aux
 INPUT .\tesi.out
 INPUT .\tesi.out
+INPUT C:\Users\ferra\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tctt1095.pk
+INPUT C:\Users\ferra\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tctt1095.pk
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt10.pfb
