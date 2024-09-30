@@ -184,6 +184,7 @@ INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT C:\Users\ferra\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
@@ -192,11 +193,12 @@ INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr7t.v
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
+INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
 INPUT .\tesi.toc
 INPUT .\tesi.toc
 INPUT tesi.toc
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1ztmcm.fd
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1ztmcm.fd
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1ztmcm.fd
@@ -226,8 +228,6 @@ INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
-INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
@@ -426,20 +426,20 @@ INPUT .\servizion constraints.png
 INPUT .\servizion constraints.png
 INPUT .\servizion constraints.png
 INPUT .\servizion constraints.png
-INPUT .\service abilene (10).png
-INPUT .\service abilene (10).png
-INPUT .\service abilene (10).png
-INPUT .\service abilene (10).png
-INPUT .\service abilene (10).png
-INPUT .\service abilene (10).png
-INPUT .\service abilene (10).png
-INPUT .\policy cap.png
-INPUT .\policy cap.png
-INPUT .\policy cap.png
-INPUT .\policy cap.png
-INPUT .\policy cap.png
-INPUT .\policy cap.png
-INPUT .\policy cap.png
+INPUT .\abilene.png
+INPUT .\abilene.png
+INPUT .\abilene.png
+INPUT .\abilene.png
+INPUT .\abilene.png
+INPUT .\abilene.png
+INPUT .\abilene.png
+INPUT .\ab_topologia.png
+INPUT .\ab_topologia.png
+INPUT .\ab_topologia.png
+INPUT .\ab_topologia.png
+INPUT .\ab_topologia.png
+INPUT .\ab_topologia.png
+INPUT .\ab_topologia.png
 INPUT .\service abilene (11).png
 INPUT .\service abilene (11).png
 INPUT .\service abilene (11).png
@@ -447,6 +447,13 @@ INPUT .\service abilene (11).png
 INPUT .\service abilene (11).png
 INPUT .\service abilene (11).png
 INPUT .\service abilene (11).png
+INPUT .\policy cap.png
+INPUT .\policy cap.png
+INPUT .\policy cap.png
+INPUT .\policy cap.png
+INPUT .\policy cap.png
+INPUT .\policy cap.png
+INPUT .\policy cap.png
 INPUT .\service 3 10 11.png
 INPUT .\service 3 10 11.png
 INPUT .\service 3 10 11.png

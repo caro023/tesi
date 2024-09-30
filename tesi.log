@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.23)  21 SEP 2024 18:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.23)  1 OCT 2024 00:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -427,7 +427,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 \c@lstlisting=\count304
-<cherubino_pant541.png, id=167, 287.6346pt x 293.1753pt>
+<cherubino_pant541.png, id=183, 287.6346pt x 293.1753pt>
 File: cherubino_pant541.png Graphic file (type png)
 <use cherubino_pant541.png>
 Package pdftex.def Info: cherubino_pant541.png  used on input line 88.
@@ -461,15 +461,10 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.30 ...\numberline {5}Conclusioni}{57}{chapter.5}
+l.31 ...4.3.2}Esperimento 2}{52}{subsection.4.3.2}
                                                   % [1
 
-]
-Overfull \hbox (10.99533pt too wide) in paragraph at lines 34--34
- [][] [][]\OT1/ptm/m/n/12 Aggiunta co-strain-ts: Mo-di-fi-ca ai fi-le Ob-jec-ts e te-st[]functional[]create[]service.py[] [][]  
- []
-
-)
+])
 \tf@toc=\write4
 \openout4 = `tesi.toc'.
 
@@ -485,7 +480,7 @@ Capitolo 1.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.124 
+l.132 
        [1
 
 
@@ -493,20 +488,20 @@ l.124
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.124 
+l.132 
        [2]
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.124 
+l.132 
        [3]
 pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.125 \clearpage
+l.133 \clearpage
                  [4] (Contesto.tex
 Capitolo 2.
-<sdn.png, id=352, 516.7305pt x 334.24875pt>
+<sdn.png, id=376, 516.7305pt x 334.24875pt>
 File: sdn.png Graphic file (type png)
 <use sdn.png>
 Package pdftex.def Info: sdn.png  used on input line 48.
@@ -520,7 +515,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1}) h
                                                   \__shipout_drop_firstpage_...
 l.81 
       <./sdn.png>] [8] [9] [10]
-<archonos.png, id=414, 817.25325pt x 453.49425pt>
+<archonos.png, id=438, 817.25325pt x 453.49425pt>
 File: archonos.png Graphic file (type png)
 <use archonos.png>
 Package pdftex.def Info: archonos.png  used on input line 135.
@@ -540,7 +535,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 161--190
  []
 
 [12] [13]
-<ODL-Architecture.png, id=443, 853.1875pt x 479.7925pt>
+<ODL-Architecture.png, id=467, 853.1875pt x 479.7925pt>
 File: ODL-Architecture.png Graphic file (type png)
 <use ODL-Architecture.png>
 Package pdftex.def Info: ODL-Architecture.png  used on input line 200.
@@ -556,7 +551,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3}) h
                                                   \__shipout_drop_firstpage_...
 l.239 \begin{itemize}
                       <./ODL-Architecture.png>] [15]
-<kubernetes.png, id=470, 442.65375pt x 211.992pt>
+<kubernetes.png, id=494, 442.65375pt x 211.992pt>
 File: kubernetes.png Graphic file (type png)
 <use kubernetes.png>
 Package pdftex.def Info: kubernetes.png  used on input line 260.
@@ -571,10 +566,10 @@ Capitolo 3.
 [22
 
 ]
-<architetturatf.png, id=529, 598.03426pt x 368.577pt>
+<architetturatf.png, id=553, 598.03426pt x 368.577pt>
 File: architetturatf.png Graphic file (type png)
 <use architetturatf.png>
-Package pdftex.def Info: architetturatf.png  used on input line 44.
+Package pdftex.def Info: architetturatf.png  used on input line 45.
 (pdftex.def)             Requested size: 429.3521pt x 264.61598pt.
 
 
@@ -584,28 +579,28 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.61 \begin{itemize}
+l.62 \begin{itemize}
                      <./architetturatf.png>] [25] [26] [27] [28] [29]
-<diagramma policy.png, id=582, 525.162pt x 224.63925pt>
+<diagramma policy.png, id=606, 525.162pt x 224.63925pt>
 File: diagramma policy.png Graphic file (type png)
 <use diagramma policy.png>
-Package pdftex.def Info: diagramma policy.png  used on input line 184.
+Package pdftex.def Info: diagramma policy.png  used on input line 190.
 (pdftex.def)             Requested size: 429.3521pt x 183.65692pt.
-<grpc.png, id=588, 483.60675pt x 213.79875pt>
+<grpc.png, id=612, 483.60675pt x 213.79875pt>
 File: grpc.png Graphic file (type png)
 <use grpc.png>
-Package pdftex.def Info: grpc.png  used on input line 219.
+Package pdftex.def Info: grpc.png  used on input line 225.
 (pdftex.def)             Requested size: 429.3521pt x 189.81703pt.
-<file proto.png, id=593, 504.6855pt x 333.04425pt>
+<file proto.png, id=617, 504.6855pt x 333.04425pt>
 File: file proto.png Graphic file (type png)
 <use file proto.png>
-Package pdftex.def Info: file proto.png  used on input line 230.
+Package pdftex.def Info: file proto.png  used on input line 236.
 (pdftex.def)             Requested size: 429.3521pt x 283.34303pt.
  [30
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.254 
+l.260 
        <./diagramma policy.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -614,36 +609,32 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.254 
+l.260 
        <./grpc.png>] [32
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.254 
+l.260 
        <./file proto.png>]) (Policy.tex [33]
 Capitolo 4.
 [34
 
 ]
-<mininet.png, id=634, 712.46175pt x 393.26926pt>
+<mininet.png, id=658, 712.46175pt x 393.26926pt>
 File: mininet.png Graphic file (type png)
 <use mininet.png>
-Package pdftex.def Info: mininet.png  used on input line 47.
+Package pdftex.def Info: mininet.png  used on input line 54.
 (pdftex.def)             Requested size: 429.3521pt x 237.00151pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[35] [36
+ [35] [36
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.69 \end{itemize}
-                   <./mininet.png>] [37] [38] [39]
-<p4.png, id=671, 467.94826pt x 351.11176pt>
+l.72 \begin{itemize}
+                     <./mininet.png>] [37] [38] [39]
+<p4.png, id=695, 467.94826pt x 351.11176pt>
 File: p4.png Graphic file (type png)
 <use p4.png>
-Package pdftex.def Info: p4.png  used on input line 153.
+Package pdftex.def Info: p4.png  used on input line 157.
 (pdftex.def)             Requested size: 429.3521pt x 322.1588pt.
 
 
@@ -653,224 +644,220 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.181 
+l.185 
        <./p4.png>]
-<componenti.png, id=686, 464.937pt x 417.35925pt>
+<componenti.png, id=711, 464.937pt x 417.35925pt>
 File: componenti.png Graphic file (type png)
 <use componenti.png>
-Package pdftex.def Info: componenti.png  used on input line 187.
+Package pdftex.def Info: componenti.png  used on input line 198.
 (pdftex.def)             Requested size: 429.3521pt x 385.43988pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 183--246
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 183--246
-
- []
-
-
-Overfull \hbox (13.21472pt too wide) in paragraph at lines 183--246
-\OT1/ptm/m/n/12 Una par-te fon-da-men-ta-le nei si-ste-mi mo-der-ni []e la ge-stio-ne a run-time del ser-vi-zio stabilito[[]].
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[42] [43
+ [42] [43
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.246 
-       <./componenti.png>] [44]
-<topologiasw4.png, id=717, 595.22375pt x 235.88126pt>
+l.233 ...ion{Vincoli e configurazioni di servizio}
+                                                   <./componenti.png>] [44]
+Overfull \hbox (33.77321pt too wide) in paragraph at lines 248--277
+\OT1/ptm/m/n/12 PLE-TY-PE[]LINK[]TOTAL[]CAPACITY[]GBPS, KPI-SAM-PLE-TY-PE[]LINK[]USED []CAPACITY[]
+ []
+
+[45] [46]
+<topologiasw4.png, id=752, 595.22375pt x 235.88126pt>
 File: topologiasw4.png Graphic file (type png)
 <use topologiasw4.png>
-Package pdftex.def Info: topologiasw4.png  used on input line 259.
+Package pdftex.def Info: topologiasw4.png  used on input line 297.
 (pdftex.def)             Requested size: 429.3521pt x 170.1475pt.
-LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 278.
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 318.
  (C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 278.
-<service active.png, id=720, 1154.51324pt x 363.15675pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 318.
+<service active.png, id=755, 1154.51324pt x 363.15675pt>
 File: service active.png Graphic file (type png)
 <use service active.png>
-Package pdftex.def Info: service active.png  used on input line 283.
+Package pdftex.def Info: service active.png  used on input line 323.
 (pdftex.def)             Requested size: 429.3521pt x 135.05301pt.
-<policy sw2.png, id=721, 1139.457pt x 455.90324pt>
+<policy sw2.png, id=756, 1139.457pt x 455.90324pt>
 File: policy sw2.png Graphic file (type png)
 <use policy sw2.png>
-Package pdftex.def Info: policy sw2.png  used on input line 289.
+Package pdftex.def Info: policy sw2.png  used on input line 329.
 (pdftex.def)             Requested size: 429.3521pt x 171.78415pt.
-<modificafile.png, id=723, 344.78813pt x 115.18031pt>
+<modificafile.png, id=758, 344.78813pt x 115.18031pt>
 File: modificafile.png Graphic file (type png)
 <use modificafile.png>
-Package pdftex.def Info: modificafile.png  used on input line 299.
+Package pdftex.def Info: modificafile.png  used on input line 341.
 (pdftex.def)             Requested size: 300.54515pt x 100.40112pt.
-<politica lat.png, id=725, 1397.22pt x 451.6875pt>
+<politica lat.png, id=760, 1397.22pt x 451.6875pt>
 File: politica lat.png Graphic file (type png)
 <use politica lat.png>
-Package pdftex.def Info: politica lat.png  used on input line 307.
+Package pdftex.def Info: politica lat.png  used on input line 356.
 (pdftex.def)             Requested size: 429.3521pt x 138.80176pt.
-<policy con sw3.png, id=727, 1136.44576pt x 483.0045pt>
+<policy con sw3.png, id=762, 1136.44576pt x 483.0045pt>
 File: policy con sw3.png Graphic file (type png)
 <use policy con sw3.png>
-Package pdftex.def Info: policy con sw3.png  used on input line 322.
+Package pdftex.def Info: policy con sw3.png  used on input line 371.
 (pdftex.def)             Requested size: 429.3521pt x 182.47495pt.
 
-Overfull \hbox (19.31024pt too wide) in paragraph at lines 253--331
-\OT1/ptm/m/n/12 Il pri-mo co-man-do da ese-gui-re sul ter-mi-na-le re-la-ti-vo al con-trol-ler (\OT1/ptm/m/it/12 ./sr-c/-tests/-hack-fe-st3/setup.sh\OT1/ptm/m/n/12 )
+Overfull \hbox (9.80635pt too wide) in paragraph at lines 287--382
+\OT1/ptm/m/it/12 probe-tfs\OT1/ptm/m/n/12 , si co-pia ri-cor-si-va-men-te la car-tel-la tar-get nel-la di-rec-to-ry cor-ren-te (\OT1/ptm/m/it/12 cp -r $\OMS/ztmcm/m/n/12 ^^X$\OT1/ptm/m/it/12 /controller
  []
 
 
-Overfull \hbox (4.57423pt too wide) in paragraph at lines 253--331
-\OT1/ptm/m/n/12 A que-sto pun-to si pu[]o crea-re il ser-vi-zio tra i due end-poin-ts (\OT1/ptm/m/it/12 ./sr-c/-tests/-hack-fe-st3/run[]test[]02[]
+Overfull \hbox (1.53888pt too wide) in paragraph at lines 287--382
+\OT1/ptm/m/n/12 A que-sto pun-to si pu[]o crea-re il ser-vi-zio tra i due end-poin-ts (\OT1/ptm/m/it/12 ./run[]test[]02[] crea-te[]service.sh\OT1/ptm/m/n/12 )
  []
 
-[45] [46
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[47] [48
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.331 \subsection{Esperimento 2}
-                                 <./topologiasw4.png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[47
+l.382 \subsection{Esperimento 2}
+                                 <./topologiasw4.png>] [49
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.331 \subsection{Esperimento 2}
-                                 <./service active.png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[48
+l.382 \subsection{Esperimento 2}
+                                
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.331 \subsection{Esperimento 2}
-                                
-pdfTeX warning (ext4): destination with the same identifier (name{figure.4.7}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.331 \subsection{Esperimento 2}
-                                 <./policy sw2.png> <./modificafile.png>]
-<sw4.drawio.png, id=754, 757.83125pt x 235.88126pt>
-File: sw4.drawio.png Graphic file (type png)
-<use sw4.drawio.png>
-Package pdftex.def Info: sw4.drawio.png  used on input line 336.
-(pdftex.def)             Requested size: 429.3521pt x 133.64027pt.
-<service sw8.png, id=758, 1126.2075pt x 413.74574pt>
-File: service sw8.png Graphic file (type png)
-<use service sw8.png>
-Package pdftex.def Info: service sw8.png  used on input line 363.
-(pdftex.def)             Requested size: 429.3521pt x 157.73639pt.
-<create new event ag.png, id=759, 298.716pt x 226.446pt>
-File: create new event ag.png Graphic file (type png)
-<use create new event ag.png>
-Package pdftex.def Info: create new event ag.png  used on input line 369.
-(pdftex.def)             Requested size: 214.67604pt x 162.74382pt.
-<policy 5 100.png, id=761, 1136.44576pt x 401.0985pt>
-File: policy 5 100.png Graphic file (type png)
-<use policy 5 100.png>
-Package pdftex.def Info: policy 5 100.png  used on input line 378.
-(pdftex.def)             Requested size: 429.3521pt x 151.53157pt.
-<servizion constraints.png, id=763, 1362.59062pt x 582.67688pt>
-File: servizion constraints.png Graphic file (type png)
-<use servizion constraints.png>
-Package pdftex.def Info: servizion constraints.png  used on input line 395.
-(pdftex.def)             Requested size: 429.3521pt x 183.59753pt.
-
-Overfull \hbox (45.0738pt too wide) in paragraph at lines 332--399
-\OT1/ptm/m/n/12 Prima di ini-zia-liz-za-re la to-po-lo-gia []e sta-to ne-ces-sa-rio mo-di-fi-ca-re il fi-le \OT1/ptm/m/it/12 ngsdn-tutorial/mininet/docker-
- []
-
-
-Overfull \hbox (30.60515pt too wide) in paragraph at lines 332--399
-\OT1/ptm/m/n/12 TS[]RECEIVED, BY-TES[]TRANSMITTED, BY-TES[]RECEIVED e LINK[]TOTAL[]CAPACITY
- []
-
-[49
-pdfTeX warning (ext4): destination with the same identifier (name{figure.4.8}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.399 
-      
-pdfTeX warning (ext4): destination with the same identifier (name{figure.4.9}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.399 
-       <./politica lat.png> <./policy con sw3.png>] [50
-pdfTeX warning (ext4): destination with the same identifier (name{figure.4.10}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.399 
-       <./sw4.drawio.png>]
+l.382 \subsection{Esperimento 2}
+                                 <./service active.png> <./policy sw2.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[51
+[50
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.7}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.382 \subsection{Esperimento 2}
+                                 <./modificafile.png>] [51
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.8}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.382 \subsection{Esperimento 2}
+                                
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.382 \subsection{Esperimento 2}
+                                 <./politica lat.png> <./policy con sw3.png>]
+<sw4.drawio.png, id=794, 757.83125pt x 235.88126pt>
+File: sw4.drawio.png Graphic file (type png)
+<use sw4.drawio.png>
+Package pdftex.def Info: sw4.drawio.png  used on input line 388.
+(pdftex.def)             Requested size: 429.3521pt x 133.64027pt.
+<service sw8.png, id=801, 1126.2075pt x 413.74574pt>
+File: service sw8.png Graphic file (type png)
+<use service sw8.png>
+Package pdftex.def Info: service sw8.png  used on input line 431.
+(pdftex.def)             Requested size: 429.3521pt x 157.73639pt.
+<create new event ag.png, id=802, 298.716pt x 226.446pt>
+File: create new event ag.png Graphic file (type png)
+<use create new event ag.png>
+Package pdftex.def Info: create new event ag.png  used on input line 437.
+(pdftex.def)             Requested size: 214.67604pt x 162.74382pt.
+<policy 5 100.png, id=805, 1136.44576pt x 401.0985pt>
+File: policy 5 100.png Graphic file (type png)
+<use policy 5 100.png>
+Package pdftex.def Info: policy 5 100.png  used on input line 446.
+(pdftex.def)             Requested size: 429.3521pt x 151.53157pt.
+<servizion constraints.png, id=807, 1362.59062pt x 582.67688pt>
+File: servizion constraints.png Graphic file (type png)
+<use servizion constraints.png>
+Package pdftex.def Info: servizion constraints.png  used on input line 461.
+(pdftex.def)             Requested size: 429.3521pt x 183.59753pt.
+
+Overfull \hbox (1.86288pt too wide) in paragraph at lines 383--465
+\OT1/ptm/m/n/12 Prima di ini-zia-liz-za-re la to-po-lo-gia []e sta-to ne-ces-sa-rio mo-di-fi-ca-re il fi-le \OT1/ptm/m/it/12 docker-compose.yaml
+ []
+
+
+Overfull \hbox (86.21211pt too wide) in paragraph at lines 383--465
+\OT1/ptm/m/n/12 KE-TS[]RECEIVED, BY-TES[]TRANSMITTED, BY-TES[]RECEIVED e LINK[]TOTAL []CAPACITY[]GBPS.
+ []
+
+[52
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.10}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.465 
+       <./sw4.drawio.png>] [53] [54
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.11}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.399 
-       <./service sw8.png>] [52
+l.465 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.12}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.399 
-      
+l.465 
+       <./service sw8.png> <./create new event ag.png>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<abilene.png, id=829, 627.5445pt x 296.307pt>
+File: abilene.png Graphic file (type png)
+<use abilene.png>
+Package pdftex.def Info: abilene.png  used on input line 472.
+(pdftex.def)             Requested size: 429.3521pt x 202.72945pt.
+<ab_topologia.png, id=832, 1016.79875pt x 359.3425pt>
+File: ab_topologia.png Graphic file (type png)
+<use ab_topologia.png>
+Package pdftex.def Info: ab_topologia.png  used on input line 481.
+(pdftex.def)             Requested size: 429.3521pt x 151.73431pt.
+<service abilene (11).png, id=837, 1046.10825pt x 447.47176pt>
+File: service abilene (11).png Graphic file (type png)
+<use service abilene (11).png>
+Package pdftex.def Info: service abilene (11).png  used on input line 496.
+(pdftex.def)             Requested size: 429.3521pt x 183.65578pt.
+<policy cap.png, id=838, 1136.44576pt x 398.08725pt>
+File: policy cap.png Graphic file (type png)
+<use policy cap.png>
+Package pdftex.def Info: policy cap.png  used on input line 502.
+(pdftex.def)             Requested size: 429.3521pt x 150.39395pt.
+<service 3 10 11.png, id=840, 1012.38225pt x 486.01575pt>
+File: service 3 10 11.png Graphic file (type png)
+<use service 3 10 11.png>
+Package pdftex.def Info: service 3 10 11.png  used on input line 522.
+(pdftex.def)             Requested size: 429.3521pt x 206.12012pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[55
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.13}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.399 
-       <./create new event ag.png> <./policy 5 100.png>]
-<service abilene (10).png, id=793, 993.7125pt x 486.618pt>
-File: service abilene (10).png Graphic file (type png)
-<use service abilene (10).png>
-Package pdftex.def Info: service abilene (10).png  used on input line 416.
-(pdftex.def)             Requested size: 429.3521pt x 210.25148pt.
-<policy cap.png, id=794, 1136.44576pt x 398.08725pt>
-File: policy cap.png Graphic file (type png)
-<use policy cap.png>
-Package pdftex.def Info: policy cap.png  used on input line 422.
-(pdftex.def)             Requested size: 429.3521pt x 150.39395pt.
-<service abilene (11).png, id=797, 1046.10825pt x 447.47176pt>
-File: service abilene (11).png Graphic file (type png)
-<use service abilene (11).png>
-Package pdftex.def Info: service abilene (11).png  used on input line 439.
-(pdftex.def)             Requested size: 429.3521pt x 183.65578pt.
-<service 3 10 11.png, id=798, 1012.38225pt x 486.01575pt>
-File: service 3 10 11.png Graphic file (type png)
-<use service 3 10 11.png>
-Package pdftex.def Info: service 3 10 11.png  used on input line 445.
-(pdftex.def)             Requested size: 429.3521pt x 206.12012pt.
- [53
+l.526 
+       <./policy 5 100.png>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[56
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.14}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.449 
+l.526 
        <./servizion constraints.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[54
+) (Conclusioni.tex [57
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.15}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.449 
-       <./service abilene (10).png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-) (Conclusioni.tex [55
+l.1 \chapter
+            {Conclusioni} <./abilene.png>] [58
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.16}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
@@ -880,25 +867,30 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.4.17}) 
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.1 \chapter
-            {Conclusioni} <./policy cap.png> <./service abilene (11).png>] [56
+            {Conclusioni} <./ab_topologia.png> <./service abilene (11).png>] [59
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.18}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.1 \chapter
-            {Conclusioni} <./service 3 10 11.png>]
+            {Conclusioni}
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.19}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1 \chapter
+            {Conclusioni} <./policy cap.png> <./service 3 10 11.png>]
 Capitolo 5.
-) (Appendice.tex [57
+) (Appendice.tex [60
 
 ]
 Capitolo 6.
-<odl/Potassium.png, id=829, 762.4485pt x 226.446pt>
+<odl/Potassium.png, id=877, 762.4485pt x 226.446pt>
 File: odl/Potassium.png Graphic file (type png)
 <use odl/Potassium.png>
 Package pdftex.def Info: odl/Potassium.png  used on input line 14.
 (pdftex.def)             Requested size: 429.3521pt x 127.51721pt.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 20.
-<odl/feature.png, id=830, 1088.26575pt x 237.88875pt>
+<odl/feature.png, id=878, 1088.26575pt x 237.88875pt>
 File: odl/feature.png Graphic file (type png)
 <use odl/feature.png>
 Package pdftex.def Info: odl/feature.png  used on input line 24.
@@ -906,35 +898,30 @@ Package pdftex.def Info: odl/feature.png  used on input line 24.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[58
+[61
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.34 \begin{lstlisting}[language=Python]
-                                         <./odl/Potassium.png>]
-Overfull \hbox (182.56097pt too wide) in paragraph at lines 42--42
-|[]\OT1/ptm/b/n/17.28 Aggiunta co-strain-ts: Mo-di-fi-ca ai fi-le Ob-jec-ts e te-st[]functional[]create[]service.py| 
- []
-
-[59
+l.36 \begin{lstlisting}[language=Python]
+                                         <./odl/Potassium.png>] [62
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.53     (S
-           ERVICE_SW1_SW8, SERVICE_SW1_SW8_ENDPOINT_IDS, constraints), <./odl/feature.png>]
+l.54 LINK_SW5_SW2 
+                                 = json_link(LINK_SW5_SW2_UUID, [ENDPOINT_ID... <./odl/feature.png>] [63]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 58.
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 70.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 84.
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 96.
  (C:\Users\ferra\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmtt.fd
 File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-) [60] [61] [62] [63] [64] [65] [66] [67]
-Overfull \hbox (18.35481pt too wide) in paragraph at lines 308--309
+) [64] [65] [66] [67] [68] [69] [70] [71]
+Overfull \hbox (18.35481pt too wide) in paragraph at lines 334--335
 [][][] 
  []
 
-[68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78] [79] [80]) (tesi.bbl [81]
+[72] [73] [74] [75] [76] [77] [78] [79] [80] [81] [82] [83] [84]) (tesi.bbl [85]
 Underfull \hbox (badness 2088) in paragraph at lines 34--37
 []\OT1/ptm/m/n/12 D3.2: Fi-nal eva-lua-tion of life-cycle au-to-ma-tion and hi-gh per-for-man-ce sdn
  []
@@ -944,70 +931,70 @@ Underfull \hbox (badness 10000) in paragraph at lines 45--48
 []\OT1/ptm/m/n/12 Protocol buf-fer del-le com-po-nen-ti in te-ra-flow.  []$\OT1/cmtt/m/n/12 https : / / gitlab . com /
  []
 
-[82
+[86
 
 ]
-Underfull \hbox (badness 1721) in paragraph at lines 133--137
+Underfull \hbox (badness 1721) in paragraph at lines 141--145
 []\OT1/ptm/m/n/12 Diego Kreu-tz, Fer-nan-do Ra-mos, Pau-lo Ver[]^^Pssimo, Chri-stian Este-ve Ro-then-
  []
 
-[83]
-Underfull \hbox (badness 10000) in paragraph at lines 160--163
+[87]
+Underfull \hbox (badness 10000) in paragraph at lines 168--171
 []\OT1/ptm/m/it/12 MEC\OT1/ptm/m/n/12 .  url: []$\OT1/cmtt/m/n/12 https : / / www . etsi . org / technologies /
  []
 
-[84]
-Underfull \hbox (badness 10000) in paragraph at lines 236--239
+[88]
+Underfull \hbox (badness 10000) in paragraph at lines 244--247
 []\OT1/ptm/m/n/12 Modulo nic di odl.  []$\OT1/cmtt/m/n/12 https : / / test-[]odl-[]docs . readthedocs . io / en /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 236--239
+Underfull \hbox (badness 10000) in paragraph at lines 244--247
 \OT1/cmtt/m/n/12 stable-[]boron / user-[]guide / network-[]intent-[]composition-[](nic )
  []
 
-[85]
-Underfull \hbox (badness 10000) in paragraph at lines 290--293
+[89]
+Underfull \hbox (badness 10000) in paragraph at lines 298--301
 \OT1/cmtt/m/n/12 funding / funding-[]opportunities / funding-[]programmes-[]and-[]open-[]calls /
  []
 
 
-Underfull \hbox (badness 5696) in paragraph at lines 309--312
+Underfull \hbox (badness 5696) in paragraph at lines 317--320
 []\OT1/ptm/m/n/12 Teraflowsdn co-re com-po-nen-ts.  []$\OT1/cmtt/m/n/12 https : / / www . teraflow-[]h2020 . eu / blog /
  []
 
 
-Underfull \hbox (badness 3354) in paragraph at lines 319--324
+Underfull \hbox (badness 3354) in paragraph at lines 327--332
 []\OT1/ptm/m/n/12 Daniel Adan-za, Lluis Gi-fre, Pol Ale-ma-ny, Juan-Pedro Fern[]andez-Palacios,
  []
 
-[86]
-Underfull \hbox (badness 10000) in paragraph at lines 362--364
+[90]
+Underfull \hbox (badness 10000) in paragraph at lines 370--372
 []\OT1/ptm/m/n/12 Hackfest 3.  []$\OT1/cmtt/m/n/12 https : / / labs . etsi . org / rep / groups / tfs / -[] / wikis /
  []
 
 
-Underfull \hbox (badness 3240) in paragraph at lines 371--373
+Underfull \hbox (badness 3240) in paragraph at lines 379--381
 []\OT1/ptm/m/it/12 Cartella ngsdn-tutorial\OT1/ptm/m/n/12 .  url: []$\OT1/cmtt/m/n/12 https : / / github . com / opennetworkinglab /
  []
 
-[87]
-Underfull \hbox (badness 1810) in paragraph at lines 389--393
+[91]
+Underfull \hbox (badness 1810) in paragraph at lines 397--401
 []\OT1/ptm/m/n/12 Nikhil Han-di-gol Bob Lan-tz and Vi-mal Jeya-ku-mar Bran-don Hel-ler.  \OT1/ptm/m/it/12 In-tro-
  []
 
 
-Underfull \hbox (badness 2961) in paragraph at lines 389--393
+Underfull \hbox (badness 2961) in paragraph at lines 397--401
 \OT1/ptm/m/it/12 duc-tion to Mi-ni-net\OT1/ptm/m/n/12 .  url: []$\OT1/cmtt/m/n/12 https : / / github . com / mininet / mininet / wiki /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 411--414
+Underfull \hbox (badness 10000) in paragraph at lines 419--422
 []\OT1/ptm/m/it/12 File Ser-vi-ce-Ser-vi-ce-Ser-vi-ce-rIm-pl\OT1/ptm/m/n/12 .  url: []$\OT1/cmtt/m/n/12 https : / / labs . etsi . org /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 411--414
+Underfull \hbox (badness 10000) in paragraph at lines 419--422
 \OT1/cmtt/m/n/12 rep / tfs / controller / -[] / blob / master / src / service / service /
  []
 
@@ -1018,7 +1005,7 @@ Underfull \hbox (badness 1221) in paragraph at lines 429--432
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 429--432
-\OT1/cmtt/m/n/12 -[] / blob / master / src / context / service / database / models / enums /
+\OT1/cmtt/m/n/12 -[] / blob / master / src / ztp / target / generated-[]sources / grpc / kpi _ sample _
  []
 
 
@@ -1026,46 +1013,66 @@ Underfull \hbox (badness 10000) in paragraph at lines 434--437
 \OT1/cmtt/m/n/12 -[] / blob / master / src / policy / src / main / java / org / etsi / tfs / policy /
  []
 
-[88]
-Underfull \hbox (badness 2080) in paragraph at lines 460--466
+[92]
+Underfull \hbox (badness 2111) in paragraph at lines 455--458
+[]\OT1/ptm/m/it/12 File con la to-po-lo-gia Mi-ni-net 8 switch e 3 path\OT1/ptm/m/n/12 .  url: []$\OT1/cmtt/m/n/12 https : / / labs .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 455--458
+\OT1/cmtt/m/n/12 etsi . org / rep / tfs / controller / -[] / blob / master / src / tests / p4 / mininet /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--468
+[]\OT1/ptm/m/it/12 Cartella con l'im-ple-men-ta-zio-ne del pro-be il Py-thon\OT1/ptm/m/n/12 .  url: []$\OT1/cmtt/m/n/12 https :
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--468
+\OT1/cmtt/m/n/12 / / labs . etsi . org / rep / tfs / controller / -[] / blob / master / src / tests /
+ []
+
+
+Underfull \hbox (badness 2080) in paragraph at lines 470--476
 []\OT1/ptm/m/n/12 Wikipedia con-tri-bu-tors.  Abi-le-ne net-work --- Wi-ki-pe-dia, the free en-cy-clo-
  []
 
 
-Underfull \hbox (badness 8094) in paragraph at lines 468--471
+Underfull \hbox (badness 8094) in paragraph at lines 478--481
 []\OT1/ptm/m/it/12 File Mi-ni-net per la to-po-lo-gia Abi-le-ne\OT1/ptm/m/n/12 .  url: []$\OT1/cmtt/m/n/12 https : / / github . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 468--471
+Underfull \hbox (badness 10000) in paragraph at lines 478--481
 \OT1/cmtt/m/n/12 sjas / assessing-[]mininet / blob / master / parser / topologies / Abilene .
  []
 
 
-Underfull \hbox (badness 2521) in paragraph at lines 473--475
+Underfull \hbox (badness 2521) in paragraph at lines 483--485
 []\OT1/ptm/m/n/12 Installazione open-day-light.  []$\OT1/cmtt/m/n/12 https : / / docs . opendaylight . org / en / latest /
  []
 
-) [89] (tesi.aux)
+) [93] (tesi.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `tesi.out' has not changed.
-(rerunfilecheck)             Checksum: 9FDE74DE0C2F1318ACDA6D655A8FFCC6;6697.
+(rerunfilecheck)             Checksum: 1385E030BC8CE678F8FB0240654A977D;7432.
  ) 
 Here is how much of TeX's memory you used:
- 16830 strings out of 474486
- 292585 string characters out of 5743755
- 2182542 words of memory out of 5000000
- 38068 multiletter control sequences out of 15000+600000
+ 16899 strings out of 474486
+ 293587 string characters out of 5743755
+ 2187542 words of memory out of 5000000
+ 38105 multiletter control sequences out of 15000+600000
  583353 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  123i,20n,121p,788b,2081s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\ferra\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt1095.pk><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/ferra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on tesi.pdf (94 pages, 3196638 bytes).
+Output written on tesi.pdf (98 pages, 3477037 bytes).
 PDF statistics:
- 1808 PDF objects out of 2073 (max. 8388607)
- 816 named destinations out of 1000 (max. 500000)
- 474 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1895 PDF objects out of 2073 (max. 8388607)
+ 848 named destinations out of 1000 (max. 500000)
+ 511 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -31,6 +31,8 @@ feature:install <feature1> <feature2>..
 \end{lstlisting}
 
 \section{Topologia mininet 8sw aggiunta link}
+\label{cap:link}
+\subsection{File Mininet}
 \begin{lstlisting}[language=Python]
         self.addLink(switch2, switch5) 
         self.addLink(switch4, switch3)  
@@ -39,8 +41,32 @@ feature:install <feature1> <feature2>..
         self.addLink(client, switch1)   # Switch1: port 4
         self.addLink(server, switch8)   # Switch8: port 4
 \end{lstlisting}
-\section{Aggiunta costraints: Modifica ai file Objects e test\_functional\_create\_service.py}
-\subsection{Objects}
+\subsection{File Objects.py}
+\begin{lstlisting}[language=Python]
+# SW2_3 - SW5_3
+LINK_SW2_SW5_UUID           = get_link_uuid(ENDPOINT_ID_SW2_3, ENDPOINT_ID_SW5_3)
+LINK_SW2_SW5_ID             = json_link_id(LINK_SW2_SW5_UUID)
+LINK_SW2_SW5                = json_link(LINK_SW2_SW5_UUID, [ENDPOINT_ID_SW2_3, ENDPOINT_ID_SW5_3])
+
+# SW5_3 - SW2_3
+LINK_SW5_SW2_UUID           = get_link_uuid(ENDPOINT_ID_SW5_3, ENDPOINT_ID_SW2_3)
+LINK_SW5_SW2_ID             = json_link_id(LINK_SW5_SW2_UUID)
+LINK_SW5_SW2                = json_link(LINK_SW5_SW2_UUID, [ENDPOINT_ID_SW5_3, ENDPOINT_ID_SW2_3])
+
+# SW4_3 - SW3_3
+LINK_SW4_SW3_UUID           = get_link_uuid(ENDPOINT_ID_SW4_3, ENDPOINT_ID_SW3_3)
+LINK_SW4_SW3_ID             = json_link_id(LINK_SW4_SW3_UUID)
+LINK_SW4_SW3                = json_link(LINK_SW4_SW3_UUID, [ENDPOINT_ID_SW4_3, ENDPOINT_ID_SW3_3])
+
+# SW3_3 - SW4_3
+LINK_SW3_SW4_UUID           = get_link_uuid(ENDPOINT_ID_SW3_3, ENDPOINT_ID_SW4_3)
+LINK_SW3_SW4_ID             = json_link_id(LINK_SW3_SW4_UUID)
+LINK_SW3_SW4 
+\end{lstlisting}
+
+\section{Aggiunta costraints}
+\subsection{File Objects}
+\label{cap:obj}
 \begin{lstlisting}[language=Python]
 SERVICE_SW1_SW8_UUID          = get_service_uuid(ENDPOINT_ID_SW1_4, ENDPOINT_ID_SW8_4)
 SERVICE_SW1_SW8               = json_service_p4_planned(SERVICE_SW1_SW8_UUID)
@@ -53,7 +79,7 @@ SERVICES = [
     (SERVICE_SW1_SW8, SERVICE_SW1_SW8_ENDPOINT_IDS, constraints),
 ]
 \end{lstlisting}
-\subsection{test\_functional\_create\_service.py}
+\subsection{File test\_functional\_create\_service.py}
 \begin{lstlisting}[language=Python]
     for service, endpoints, constraints in SERVICES:
         # Insert Service (table entries)
@@ -77,6 +103,7 @@ kubectl cp src/tests/p4/p4/bmv2.json tfs/${POD_NAME}:/root/p4 -c=server
 \end{lstlisting}
 
 \section{Script policyAddService packet loss}
+\label{cap:pktl}
 \begin{lstlisting}[language=json]
 {
     "serviceId": {
@@ -139,8 +166,6 @@ kubectl cp src/tests/p4/p4/bmv2.json tfs/${POD_NAME}:/root/p4 -c=server
 }
 \end{lstlisting}
 
-\section{script ping2 latenza e packet loss}
-
 \section{make file abilene}
 \begin{lstlisting}[language=Python]
 start: NGSDN_TOPO_PY := 4switch2path.py
@@ -156,7 +181,8 @@ start-v4: NGSDN_TOPO_PY := topo-v4.py
 start-v4: _start
 \end{lstlisting}
 
-\section{addservice con capacità}
+\section{File addService con aggiunta capacità}
+\label{cap:polcap}
 \begin{lstlisting}[language=json]
 {
     "serviceId": {
@@ -230,8 +256,8 @@ start-v4: _start
 }
 \end{lstlisting}
 
-\section{probe con capacita}
-\subsection{agent}
+\section{implementazione probe con aggiunta capacità}
+\subsection{agent.py}
 \begin{lstlisting}[language=Python]
 import os, threading, time, socket
 from common.Settings import get_setting
@@ -418,7 +444,7 @@ def main():
 if __name__ == "__main__":
     main()
 \end{lstlisting}
-\subsection{ping}
+\subsection{ping2.py}
 \begin{lstlisting}[language=Python]
 import socket, re, time, subprocess, sys, os
 
@@ -452,6 +478,7 @@ def main():
             except subprocess.CalledProcessError as e:
                 # If ping fails return negative response_time
                 response_time = -1
+                bandwidth = -1
 
             # Calculate new loss_ratio
             if response_time != -1:
@@ -492,7 +519,8 @@ def main():
 if __name__ == "__main__":
     main()
 \end{lstlisting}
-\section{topologia abilene}
+\section{Rete emulata con la topologia Abilene}
+\label{cap:ab}
 \begin{lstlisting}[language=Python]
     def config(self, mac=None, ip=None, defaultRoute=None, lo='up', gw=None,
                **_params):

@@ -51,6 +51,14 @@ Ya~Gao and Zhenling Wang.
 \newblock A review of p4 programmable data planes for network security.
 \newblock {\em Mobile Information Systems}, 2021(1):1257046, 2021.
 
+\bibitem{demo}
+Panagiotis Famelis, Georgios~P. Katsikas, Vasilios Katopodis, Carlos Natalino,
+  Lluis~Gifre Renom, Ricardo Martinez, Ricard Vilalta, Dimitrios Klonidis,
+  Paolo Monti, Daniel King, and Adrian Farrel.
+\newblock P5: Event-driven policy framework for p4-based traffic engineering.
+\newblock In {\em 2023 IEEE 24th International Conference on High Performance
+  Switching and Routing (HPSR)}, pages 1--3, 2023.
+
 \bibitem{sdnart}
 B.~Martini, M.~Gharbaoui, and P.~Castoldi.
 \newblock Intent-based zero-touch service chaining layer for software-defined
@@ -417,18 +425,10 @@ Pat Bosshart, Dan Daly, Glen Gibb, Martin Izzard, Nick McKeown, Jennifer
 \newblock url:
   \url{https://labs.etsi.org/rep/tfs/controller/-/blob/master/src/common/tools/object_factory/Constraint.py}.
 
-\bibitem{demo}
-Panagiotis Famelis, Georgios~P. Katsikas, Vasilios Katopodis, Carlos Natalino,
-  Lluis~Gifre Renom, Ricardo Martinez, Ricard Vilalta, Dimitrios Klonidis,
-  Paolo Monti, Daniel King, and Adrian Farrel.
-\newblock P5: Event-driven policy framework for p4-based traffic engineering.
-\newblock In {\em 2023 IEEE 24th International Conference on High Performance
-  Switching and Routing (HPSR)}, pages 1--3, 2023.
-
 \bibitem{kpi}
 {\em File KpiSampleType}.
 \newblock url:
-  \url{https://labs.etsi.org/rep/tfs/controller/-/blob/master/src/context/service/database/models/enums/KpiSampleType.py}.
+  \url{https://labs.etsi.org/rep/tfs/controller/-/blob/master/src/ztp/target/generated-sources/grpc/kpi_sample_types/KpiSampleTypes.java}.
 
 \bibitem{op}
 {\em File Operatori Numerici}.
@@ -451,10 +451,20 @@ Topologia mininet 4 switch.
 \newblock
   \url{https://labs.etsi.org/rep/tfs/controller/-/blob/master/src/tests/hackfest3/mininet/4switch2path.py}.
 
+\bibitem{8sw}
+{\em File con la topologia Mininet 8 switch e 3 path}.
+\newblock url:
+  \url{https://labs.etsi.org/rep/tfs/controller/-/blob/master/src/tests/p4/mininet/8switch3path.py}.
+
 \bibitem{ofc}
 Cartella p4.
 \newblock
   \url{https://labs.etsi.org/rep/tfs/controller/-/tree/master/src/tests/p4}.
+
+\bibitem{probe}
+{\em Cartella con l'implementazione del probe il Python}.
+\newblock url:
+  \url{https://labs.etsi.org/rep/tfs/controller/-/blob/master/src/tests/hackfest3/new-probe/solution}.
 
 \bibitem{abilene}
 {Wikipedia contributors}.
