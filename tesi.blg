@@ -17,45 +17,45 @@ Warning--empty author in D22
 Warning--empty author in D41
 Warning--empty author in D31
 Warning--empty author in D53
-You've used 88 entries,
+You've used 90 entries,
             1791 wiz_defined-function locations,
-            827 strings with 15131 characters,
-and the built_in function-call counts, 13938 in all, are:
-= -- 1125
-> -- 553
+            833 strings with 15458 characters,
+and the built_in function-call counts, 14112 in all, are:
+= -- 1139
+> -- 555
 < -- 7
-+ -- 234
++ -- 236
 - -- 146
-* -- 692
-:= -- 2025
-add.period$ -- 225
-call.type$ -- 88
+* -- 696
+:= -- 2043
+add.period$ -- 229
+call.type$ -- 90
 change.case$ -- 66
 chr.to.int$ -- 0
-cite$ -- 100
-duplicate$ -- 691
-empty$ -- 1640
+cite$ -- 102
+duplicate$ -- 703
+empty$ -- 1668
 format.name$ -- 146
-if$ -- 3248
+if$ -- 3292
 int.to.chr$ -- 0
-int.to.str$ -- 88
+int.to.str$ -- 90
 missing$ -- 43
-newline$ -- 404
+newline$ -- 412
 num.names$ -- 45
-pop$ -- 353
+pop$ -- 359
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 422
+skip$ -- 430
 stack$ -- 0
 substring$ -- 466
-swap$ -- 146
+swap$ -- 148
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 12
 while$ -- 79
-width$ -- 90
-write$ -- 796
+width$ -- 92
+write$ -- 810
 (There were 12 warnings)

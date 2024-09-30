@@ -19,27 +19,31 @@
 \contentsline {section}{\numberline {3.3}gRPC}{30}{section.3.3}%
 \contentsline {chapter}{\numberline {4}Studio e sperimentazione della gestione di policy in Teraflow}{34}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Strumenti per la sperimentazione}{35}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Mininet}{35}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.1}Mininet}{36}{subsection.4.1.1}%
 \contentsline {subsubsection}{Alcuni comandi fondamentali}{37}{figure.4.1}%
-\contentsline {subsection}{\numberline {4.1.2}P4}{39}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Descrizione Workflow}{42}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Sperimentazione}{45}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Demo}{46}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Esperimento 2}{50}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Esperimento 3}{53}{subsection.4.3.3}%
-\contentsline {chapter}{\numberline {5}Conclusioni}{57}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Appendice}{58}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Installazione ODL}{58}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Topologia mininet 8sw aggiunta link}{59}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Aggiunta costraints: Modifica ai file Objects e test\_functional\_create\_service.py}{59}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Objects}{59}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}test\_functional\_create\_service.py}{60}{subsection.6.3.2}%
-\contentsline {section}{\numberline {6.4}Modifica setup in p4}{60}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Script policyAddService packet loss}{61}{section.6.5}%
-\contentsline {section}{\numberline {6.6}script ping2 latenza e packet loss}{63}{section.6.6}%
-\contentsline {section}{\numberline {6.7}make file abilene}{63}{section.6.7}%
-\contentsline {section}{\numberline {6.8}addservice con capacità}{63}{section.6.8}%
-\contentsline {section}{\numberline {6.9}probe con capacita}{66}{section.6.9}%
-\contentsline {subsection}{\numberline {6.9.1}agent}{66}{subsection.6.9.1}%
-\contentsline {subsection}{\numberline {6.9.2}ping}{73}{subsection.6.9.2}%
-\contentsline {section}{\numberline {6.10}topologia abilene}{75}{section.6.10}%
+\contentsline {subsection}{\numberline {4.1.2}P4}{40}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Flusso di lavoro dell'esperimento}{42}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Servizio end-to-end}{43}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Vincoli e configurazioni di servizio}{45}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Politica}{46}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Sperimentazione}{47}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Esperimento 1}{47}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Esperimento 2}{52}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Esperimento 3}{55}{subsection.4.3.3}%
+\contentsline {chapter}{\numberline {5}Conclusioni}{60}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Appendice}{61}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Installazione ODL}{61}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Topologia mininet 8sw aggiunta link}{62}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}File Mininet}{62}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}File Objects.py}{62}{subsection.6.2.2}%
+\contentsline {section}{\numberline {6.3}Aggiunta costraints}{63}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}File Objects}{63}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}File test\_functional\_create\_service.py}{64}{subsection.6.3.2}%
+\contentsline {section}{\numberline {6.4}Modifica setup in p4}{64}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Script policyAddService packet loss}{65}{section.6.5}%
+\contentsline {section}{\numberline {6.6}make file abilene}{67}{section.6.6}%
+\contentsline {section}{\numberline {6.7}File addService con aggiunta capacità}{67}{section.6.7}%
+\contentsline {section}{\numberline {6.8}implementazione probe con aggiunta capacità}{70}{section.6.8}%
+\contentsline {subsection}{\numberline {6.8.1}agent.py}{70}{subsection.6.8.1}%
+\contentsline {subsection}{\numberline {6.8.2}ping2.py}{77}{subsection.6.8.2}%
+\contentsline {section}{\numberline {6.9}Rete emulata con la topologia Abilene}{79}{section.6.9}%
