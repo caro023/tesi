@@ -5,18 +5,30 @@ Abbiamo presentato il paradigma SDN come uno dei più promettenti per conseguire
 sono state discusse le implementazioni più popolari per i controller SDN. 
 Ci siamo concentrati sull'architettura e sulle funzionalità di TeraFlow, un controller SDN emergente progettato per le reti B5G, e abbiamo analizzato i suoi meccanismi di creazione e gestione dei servizi di rete.
 La sperimentazione si è focalizzata sulla creazione di servizi di connettività tra due end points, 
-l'introduzione di politiche di rete specifiche, e la verifica della risposta del sistema a condizioni introdotte artificialmente.
-I test sono stati resi possibili dall'emulatore di rete Mininet.
-La valutazione è stata fatta su prove di raggiungibilità e di performance che, pur
-essendo abbastanza semplici, rappresentano un punto di partenza per analisi più complesse ed
+sull'introduzione di politiche di rete specifiche, e sulla verifica della risposta del sistema a condizioni introdotte artificialmente.
+I test sono stati eseguiti utilizzando l'emulatore di rete Mininet.
+Inizialmente, è stato condotto un esperimento di base per verificare la connettività tra i nodi e l'applicazione di una politica di routing. 
+Successivamente, la topologia è stata estesa per simulare una rete più complessa
+e sono state modificate le metriche di monitoraggio e relative alla politica per introdurre 
+i vincoli di latenza, packet loss e capacità.
+La valutazione finale è stata effettuata su prove di raggiungibilità e performance che, pur
+essendo relativamente semplici, rappresentano un punto di partenza per analisi più complesse ed
 esegubili su reti più ampie. 
-\newline In una rete reale, tuttavia, andrebbero svolti ulteriori accertamenti per garantire le stesse performance.
-\newline Durante la sperimentazione si sono riscontrate delle problematiche dovute alla mancanza di implementazione
-di alcune funzioni che hanno limitato lo sviluppo completo delle funzionalità desiderate.
+%\newline In una rete reale, tuttavia, andrebbero svolti ulteriori verifiche e test per garantire che le performance raggiunte negli esperimenti siano replicate e mantenute.
+%Questo perché vari fattori, come la congestione della rete, le fluttuazioni del traffico e il comportamento degli utenti, possono influenzare significativamente il funzionamento del sistema.
+\newline Durante la sperimentazione sono emerse alcune problematiche legate alla mancanza di implementazione
+di specifiche funzioni che hanno rallentato lo sviluppo delle funzionalità desiderate.
+In particolare, alcune regole di politica avrebbero potuto essere sostituite con vincoli aggiunti durante la fase di creazione del servizio,
+ma l'implementazione non era adeguata. 
+Inoltre, è stata necessaria la configurazione completa della macchina virtuale a causa di problemi con quella fornita e preconfigurata per l'Hackfest 3.
+Un altro inconveniente riscontrato è stato il dover ripetere più volte gli stessi comandi affinché avessero effetto, soprattutto nelle fasi di definizione e di eliminazione della politica.
 \newline Nonostante queste limitazioni, l'approccio sperimentale adottato ha permesso di ottenere risultati significativi, 
 evidenziando la capacità del sistema di rispondere a condizioni di rete variabili e di applicare politiche di gestione del traffico in modo efficace.
-\newline Per lavori futuri si potrebbe pensare di implementare il servizio tramite interfaccia Web.
-Attualmente la creazione dei servizi tramite WebUI non supporta il tipo L2MV utilizzato in questa sperimetazione.
+\newline Per lavori futuri si potrebbe pensare di implementare il servizio tramite interfaccia Web
+che facilita la configurazione e la gestione del servizio 
+consentendo agli utenti di interagire con il sistema senza dover modificare direttamente i file JSON o utilizzare comandi da terminale.
+Attualmente i tipi supportati per la creazione del servizio tramite WebUI sono: ACL\_L2 ,ACL\_IPV4, ACL\_IPV6, L2VPN, L3VPN.
+Quindi il tipo di servizio utilizzato in questa sperimetazione non è supportato.
 \newline Si potrebbe inoltre sperimentare con topologie più grandi e politiche più complesse per approfondire ulteriormente le capacità e i limiti del sistema. 
 Infine, si potrebbero verificare le stesse prove  con altri protocolli e tipi di switch differenti da P4,
 ampliando così le possibilità di applicazione e la robustezza delle soluzioni proposte.

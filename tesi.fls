@@ -292,13 +292,6 @@ INPUT .\architetturatf.png
 INPUT .\architetturatf.png
 INPUT .\architetturatf.png
 INPUT .\architetturatf.png
-INPUT .\diagramma policy.png
-INPUT .\diagramma policy.png
-INPUT .\diagramma policy.png
-INPUT .\diagramma policy.png
-INPUT .\diagramma policy.png
-INPUT .\diagramma policy.png
-INPUT .\diagramma policy.png
 INPUT .\grpc.png
 INPUT .\grpc.png
 INPUT .\grpc.png
@@ -339,13 +332,20 @@ INPUT .\p4.png
 INPUT .\p4.png
 INPUT .\p4.png
 INPUT .\p4.png
-INPUT .\componenti.png
-INPUT .\componenti.png
-INPUT .\componenti.png
-INPUT .\componenti.png
-INPUT .\componenti.png
-INPUT .\componenti.png
-INPUT .\componenti.png
+INPUT .\Componenti teraflow.png
+INPUT .\Componenti teraflow.png
+INPUT .\Componenti teraflow.png
+INPUT .\Componenti teraflow.png
+INPUT .\Componenti teraflow.png
+INPUT .\Componenti teraflow.png
+INPUT .\Componenti teraflow.png
+INPUT .\diagramma policy.png
+INPUT .\diagramma policy.png
+INPUT .\diagramma policy.png
+INPUT .\diagramma policy.png
+INPUT .\diagramma policy.png
+INPUT .\diagramma policy.png
+INPUT .\diagramma policy.png
 INPUT .\topologiasw4.png
 INPUT .\topologiasw4.png
 INPUT .\topologiasw4.png
@@ -363,13 +363,13 @@ INPUT .\service active.png
 INPUT .\service active.png
 INPUT .\service active.png
 INPUT .\service active.png
-INPUT .\policy sw2.png
-INPUT .\policy sw2.png
-INPUT .\policy sw2.png
-INPUT .\policy sw2.png
-INPUT .\policy sw2.png
-INPUT .\policy sw2.png
-INPUT .\policy sw2.png
+INPUT .\Copia di 4sw_2.png
+INPUT .\Copia di 4sw_2.png
+INPUT .\Copia di 4sw_2.png
+INPUT .\Copia di 4sw_2.png
+INPUT .\Copia di 4sw_2.png
+INPUT .\Copia di 4sw_2.png
+INPUT .\Copia di 4sw_2.png
 INPUT .\modificafile.png
 INPUT .\modificafile.png
 INPUT .\modificafile.png
@@ -384,13 +384,13 @@ INPUT .\politica lat.png
 INPUT .\politica lat.png
 INPUT .\politica lat.png
 INPUT .\politica lat.png
-INPUT .\policy con sw3.png
-INPUT .\policy con sw3.png
-INPUT .\policy con sw3.png
-INPUT .\policy con sw3.png
-INPUT .\policy con sw3.png
-INPUT .\policy con sw3.png
-INPUT .\policy con sw3.png
+INPUT .\Copia di topologiasw4.png
+INPUT .\Copia di topologiasw4.png
+INPUT .\Copia di topologiasw4.png
+INPUT .\Copia di topologiasw4.png
+INPUT .\Copia di topologiasw4.png
+INPUT .\Copia di topologiasw4.png
+INPUT .\Copia di topologiasw4.png
 INPUT .\sw4.drawio.png
 INPUT .\sw4.drawio.png
 INPUT .\sw4.drawio.png
@@ -398,13 +398,13 @@ INPUT .\sw4.drawio.png
 INPUT .\sw4.drawio.png
 INPUT .\sw4.drawio.png
 INPUT .\sw4.drawio.png
-INPUT .\service sw8.png
-INPUT .\service sw8.png
-INPUT .\service sw8.png
-INPUT .\service sw8.png
-INPUT .\service sw8.png
-INPUT .\service sw8.png
-INPUT .\service sw8.png
+INPUT .\Copia di sw8_dopo.png
+INPUT .\Copia di sw8_dopo.png
+INPUT .\Copia di sw8_dopo.png
+INPUT .\Copia di sw8_dopo.png
+INPUT .\Copia di sw8_dopo.png
+INPUT .\Copia di sw8_dopo.png
+INPUT .\Copia di sw8_dopo.png
 INPUT .\create new event ag.png
 INPUT .\create new event ag.png
 INPUT .\create new event ag.png
@@ -419,13 +419,13 @@ INPUT .\policy 5 100.png
 INPUT .\policy 5 100.png
 INPUT .\policy 5 100.png
 INPUT .\policy 5 100.png
-INPUT .\servizion constraints.png
-INPUT .\servizion constraints.png
-INPUT .\servizion constraints.png
-INPUT .\servizion constraints.png
-INPUT .\servizion constraints.png
-INPUT .\servizion constraints.png
-INPUT .\servizion constraints.png
+INPUT .\Copia di sw8_dopo1.png
+INPUT .\Copia di sw8_dopo1.png
+INPUT .\Copia di sw8_dopo1.png
+INPUT .\Copia di sw8_dopo1.png
+INPUT .\Copia di sw8_dopo1.png
+INPUT .\Copia di sw8_dopo1.png
+INPUT .\Copia di sw8_dopo1.png
 INPUT .\abilene.png
 INPUT .\abilene.png
 INPUT .\abilene.png
@@ -440,13 +440,13 @@ INPUT .\ab_topologia.png
 INPUT .\ab_topologia.png
 INPUT .\ab_topologia.png
 INPUT .\ab_topologia.png
-INPUT .\service abilene (11).png
-INPUT .\service abilene (11).png
-INPUT .\service abilene (11).png
-INPUT .\service abilene (11).png
-INPUT .\service abilene (11).png
-INPUT .\service abilene (11).png
-INPUT .\service abilene (11).png
+INPUT .\ab_def_11.png
+INPUT .\ab_def_11.png
+INPUT .\ab_def_11.png
+INPUT .\ab_def_11.png
+INPUT .\ab_def_11.png
+INPUT .\ab_def_11.png
+INPUT .\ab_def_11.png
 INPUT .\policy cap.png
 INPUT .\policy cap.png
 INPUT .\policy cap.png
@@ -454,13 +454,13 @@ INPUT .\policy cap.png
 INPUT .\policy cap.png
 INPUT .\policy cap.png
 INPUT .\policy cap.png
-INPUT .\service 3 10 11.png
-INPUT .\service 3 10 11.png
-INPUT .\service 3 10 11.png
-INPUT .\service 3 10 11.png
-INPUT .\service 3 10 11.png
-INPUT .\service 3 10 11.png
-INPUT .\service 3 10 11.png
+INPUT .\ab_def_10.png
+INPUT .\ab_def_10.png
+INPUT .\ab_def_10.png
+INPUT .\ab_def_10.png
+INPUT .\ab_def_10.png
+INPUT .\ab_def_10.png
+INPUT .\ab_def_10.png
 INPUT .\Conclusioni.tex
 INPUT .\Conclusioni.tex
 INPUT Conclusioni.tex
@@ -493,6 +493,9 @@ INPUT C:\Users\ferra\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tctt109
 INPUT .\tesi.bbl
 INPUT .\tesi.bbl
 INPUT tesi.bbl
+INPUT .\Ring.tex
+INPUT .\Ring.tex
+INPUT Ring.tex
 INPUT tesi.aux
 INPUT .\tesi.out
 INPUT .\tesi.out

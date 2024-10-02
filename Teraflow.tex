@@ -97,13 +97,13 @@ agli elementi monitorati utilizzando i protocolli SBI necessari. %I dati estratt
 alla componente che ha
 originariamente richiesto il monitoraggio della metrica all'interno del controller.
 %Questa API permette al controller di notificare in tempo reale le componenti del sistema (ad esempio, quelle di gestione o sicurezza) sugli eventi critici, consentendo interventi tempestivi e automatizzati \cite{D32}.
-\newline Ogni evento è composto da una KPI che identifica la regola a cui si riferisce, un timestamp e un KPIValue che rappresenta il valore della specifica metrica monitorata in tempo reale dalla KPI al momento indicato dal timestamp.
+\newline Ogni evento è composto da una KPI che identifica la regola a cui si riferisce, un timestamp e un KpiValue che rappresenta il valore della specifica metrica monitorata in tempo reale dalla KPI al momento indicato dal timestamp.
 Supponendo che la componente di Monitoring stia monitorando la latenza di un collegamento di rete tramite una KPI denominata "Latency" e che la latenza massima accettabile sia 100ms,
 se la latenza supera questa soglia, ad esempio 120ms, si genera un evento così composto: 
 \begin{itemize}
     \item KPI: "Latency"
     \item Timestamp: "06-09-2024 14:35:20" (la data e l'ora a cui si è verificato l'evento)
-    \item KPIValue: 120 ms
+    \item KpiValue: 120 ms
 \end{itemize}
 che sarà poi gestito dai livelli sovrastanti.
 Questa funzione, e quindi la componente stessa, è di supporto al Management-level per garantire l'automazione dei servizi.
@@ -164,7 +164,7 @@ specificato come servizio continuo da essere realizzato nella rete.
 \newline Una componente fondamentale è la componente di Policy che interagisce strettamente con la componente di Monitoring descritta precedentemente.
 \newline Si occupa di definire condizioni di politica, associate a un determinato servizio, che possono essere applicate sia a livello di singoli dispositivi che a livello di dominio di rete.
 Le politiche possono includere più regole collegate tra loro tramite condizioni logiche di AND/OR \cite{D32}, ognuna delle quali genera una KPI specifica da monitorare.
-\newline Ogni regola è composta, oltre che dalla KPI che la identifica, da un operatore numerico di confronto (maggiore, minore o uguale), e da un KPIValue.
+\newline Ogni regola è composta, oltre che dalla KPI che la identifica, da un operatore numerico di confronto (maggiore, minore o uguale), e da un KpiValue.
 Quest'ultimo, in combinazione con l'operatore numerico, definisce l'intervallo di valori accettabili o non accettabili per quella specifica metrica.
 \newline Se le regole definite nella politica vengono soddisfatte la componente di Monitoring genera un allarme che viene inviato, in questo caso, alla componente di Policy, che reagisce attivando le azioni predefinite.
 Ad esempio, se si verifica un eccesso di latenza, la componente di Policy può attivare il ricalcolo del percorso, o altre azioni correttive, tramite la componente di Service
@@ -175,22 +175,7 @@ Ad esempio, se si verifica un eccesso di latenza, la componente di Policy può a
 consentendo di ripristinare lo stato desiderato.
 \newline La componente Policy utilizza il Context Database per identificare quali dispositivi o servizi sono coinvolti nella politica.
 Se è stato fornito l'ID del servizio, la componente recupera i dispositivi associati a esso, in caso contrario scansiona una lista di dispositivi per individuare quelli che devono rispettare le regole impostate. 
-\newline Una regola di politica può avere vari stati che possono essere rappresentati tramite la macchina a stati in Figura \ref{fig:diagramma}:
-\begin{itemize}
-    \item \textbf{inserted} (inserita)
-    \item \textbf{validated} (convalidata)
-    \item \textbf{provisioned} (provvista)
-    \item \textbf{actively enforced} (attivamente applicata)
-    \item \textbf{failed} (fallita)
-    \item \textbf{updated} (aggiornata)
-    \item \textbf{removed} (rimossa)
-\end{itemize}
-\begin{figure}[h]
-    \centering
-   \includegraphics[width=1\textwidth]{diagramma policy.png}
-    \caption{Macchina a stati interna alla componente di policy \cite{D32}}
-    \label{fig:diagramma}
-\end{figure}
+
 %La componente di policy utilizza inoltre il paradigma publish-subscribe per associare dinamicamente condizioni di politica agli eventi rilevati
 %che richiedono azioni immediate.
 Grazie all'integrazione tra le componenti di Policy e di Monitoring, TeraFlow ha reso possibile l'associazione delle condizioni di politica con gli allarmi generati dal sistema.
