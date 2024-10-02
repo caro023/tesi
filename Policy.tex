@@ -6,10 +6,10 @@ In questo Capitolo verranno esposti i vari esperimenti eseguiti utilizzando il c
 Nella fase iniziale è stato replicato l'esperimento seguito nell'Hackfest 3 \cite{hackfest} organizzato da ETSI presso la sede del CTTC a Barcellona.
 L'Hackfest è un evento con scopi formativi e di sperimentazione in cui viene fornito un ambiente di test pre-configurato, in questa edizione 
 per il controller TeraFlow, con l'obiettivo di eseguire esperimenti e dimostrazioni pratiche delle sue funzionalità. 
-Il lavoro è iniziato con l'installazione della macchina virtuale \cite{VM} su VirtualBox 7.0.
+\newline Il lavoro è iniziato con l'installazione della macchina virtuale \cite{VM} su VirtualBox 7.0.
 %Gli esperimenti sono stati svolti all'interno di un'infrastruttura virtualizzata configurata per eseguire sia TeraFlow che Mininet, permettendo di simulare e analizzare vari scenari di rete.
 %La macchina virtuale (VM) utilizzata inizialmente per gli esperimenti è stata quella utilizzata durante l'Hackfest 3 \cite{hackfest}, dove è stato fornito un ambiente pre-configurato per testare TeraFlow SDN. 
-\newline Di seguito vengono riportate le specifiche della VM utilizzata:
+Di seguito vengono riportate le specifiche della VM utilizzata:
 \begin{itemize}
     \item IP Address: 10.0.2.X/24 (DHCP)
     \item Gateway: 10.0.2.1
@@ -19,11 +19,11 @@ Il lavoro è iniziato con l'installazione della macchina virtuale \cite{VM} su V
     \item Sistema operativo Ubuntu Server 22.04.4 LST (compatibile anche con la versione successiva 22.04.6 LTS), senza interfaccia grafica per ridurre il consumo di risorse.
 \end{itemize}
 Per configurare l'ambiente necessario viene installato Docker CE (Community Edition) insieme al plugin Docker BuildX. Succcessivamente 
-viene installato MicroK8 con Kubernetes v1.24.17 assicurandosi di disabilitare il firewall ufw e abilitare tutti i plugin necessari.
+viene installato MicroK8 con Kubernetes v1.24.17 assicurandosi di disabilitare il firewall ufw. 
 A questo punto viene installata la versione di TeraFlow 3.0 in una nuova cartella tfs-ctrl.
 Successivamente si eseguono i comandi \textit{source my\_deploy.sh} e \textit{./deploy/all.sh} per distribuire il controller su MicroK8.
 TeraFlow ha preinstallato al suo interno Mininet containerizzato.
-Per avere a disposizione più topologie e poter riuscire a connetterle correttamente alle componenti del controller SDN è stata integrata
+Per avere a disposizione più topologie emulate su Mininet e poter riuscire a connetterle correttamente alle componenti del controller SDN è stata integrata
 la cartella ngsdn-tutorial \cite{ngsdn}. 
 Al suo interno contiene esercizi pratici e topologie per l'utilizzo di P4 e ONOS, e in questo caso è stata adattata per funzionare con TeraFlow, 
 con l'obiettivo di agevolare le sperimentazioni e testare le capacità del controller SDN. 
@@ -85,7 +85,7 @@ infatti anche se è fornito un controller di default, consente di connetterne un
 Questa funzionalià ci ha permesso di poter effettuare la simulazione.
 \subsubsection{Alcuni comandi fondamentali}
 Di seguito sono stati elencati i comandi fondamentali di Mininet usati per la sperimentazione tramite linea di comando.
-La documentazione completa si può trovare \cite{walkmin}.
+La documentazione completa si può trovare al sito ufficiale \cite{walkmin}.
 \newline Innanzitutto è fondamentale creare una topologia di rete con il seguente comando\cite{walkmin}:
 \newline \textit{\$ sudo mn}
 \newline Di default è stata inizializzata la topologia minimale (--topo=minimal) che consiste in uno switch connesso a due host e un controller OpenFlow.
@@ -183,11 +183,11 @@ I dettagli hardware del piano dati sono nascosti al piano di controllo rendendol
 P4 rappresenta un passo significativo verso reti più flessibili e programmabili, consentendo agli sviluppatori di adattarsi rapidamente ai cambiamenti dei requisiti di rete.
 Si propone come una soluzione innovativa e versatile per superare le limitazioni degli attuali protocolli e dispositivi di rete fornendo un linguaggio dinamico e indipendente dall'hardware.
 
-\section{Flusso di lavoro dell'esperimento}
+\section{Flusso di lavoro degli esperimenti}
 L'ambiente di sperimentazione utilizzato è costituito da due componenti principali eseguite all'interno della macchina virtuale: il controller e la rete emulata P4.
-\newline Il controller rappresenta l'elemento centrale che gestisce e orchestra la rete consentendo di monitorare lo stato dei collegamenti
+Il controller rappresenta l'elemento centrale che gestisce e orchestra la rete consentendo di monitorare lo stato dei collegamenti
 e di applicare le politiche.
-\newline La rete è costituita da dispositivi P4 emulati su Mininet che consentono la programmazione dinamica del piano dati attraverso il linguaggio P4.
+La rete è costituita da dispositivi P4 emulati su Mininet che consentono la programmazione dinamica del piano dati attraverso il linguaggio P4.
 Quesi due elementi riescono a comunicare tramite P4 Runtime e la componente SBI del controller.
 \newline Nei paragrafi successivi verrà descritto
 il flusso di lavoro della sperimentazione e l'interazione tra le componenti che ne fanno parte.
@@ -195,11 +195,12 @@ La Figura \ref{fig:componenti} rappresenta una visione complessiva della configu
 In seguito verranno forniti i dettagli più pratici relativi a un'analisi approfondita del codice e della documentazione delle funzioni del controller utilizzate relative ai servizi e alle politiche.
 \begin{figure}[h]
     \centering
-   \includegraphics[width=1\textwidth]{componenti.png}
-    \caption{Interazione tra le componenti in TeraFlow per la creazione di un intento \cite{demo}}
+   \includegraphics[width=1\textwidth]{Componenti teraflow.png}
+    \caption{Interazione tra le componenti in TeraFlow per la creazione di un intento}
     \label{fig:componenti}
 \end{figure}
 \subsection{Servizio end-to-end}
+\label{cap:service}
 Come già detto in precedenza il controller sfrutta una South-Bound Interface (SBI) per interagire con i device, in questo caso, tramite l'API P4Runtime. 
 Inizialmente, il codice P4 compilato, ossia la rappresentazione del programma P4 dopo il processo di compilazione (nella sperimentazione è rappresentato dai file p4info.txt e bmv2.json),
 viene copiato nel pod SBI.
@@ -208,15 +209,15 @@ mentre il file \textit{bmv2.json} descrive i tipi di header, il parser e altre c
 Questo primo passo permette di poter configurare dinamicamente i dispositivi di rete per instradare il traffico in base alle specifiche del programma P4.
 \newline Successivamente vengono registrati i dispositivi e i link nel Context database del controller SDN tramite lo script \textit{run\_test\_01\_bootstrap.sh}.
 Lo script richiama il file \textit{test\_functional \_bootstrap.py} che ha più funzionalità: verifica che il contesto sia pronto; crea i dispositivi all'interno del controller aggiungendo a ciascuno le regole di connessione e configurazione; verifica che i dispositivi siano stati registrati nel database.
-A questo punto, siamo in grado di richiedere la prima parte dell'intento che sarà impelentato: una connessione tra due end points alla componente di Service tramite un servizio.
+A questo punto, siamo in grado di richiedere la prima parte dell'intento che sarà implementato: una connessione tra due end points alla componente di Service tramite un servizio.
 \newline Per mantenere il processo agnostico rispetto ai dettagli della tecnologia, la componente  
 sfrutta una definizione minima permettendo agli utenti di specificare solo quali sono i dispositivi finali.
 La richiesta del servizio è composta quindi solo dagli indirizzi IP e dalle porte che si vogliono connettere.
-Questi vengono tradotti in 
+Questi vengono tradotti 
 in regole P4 specifiche dal driver del dispositivo, come la creazione delle tabella di instradamento nei dispositivi lungo il percorso che determinano l'uscita dei pacchetti sulla 
 base delle regole specificate.
-\newline La creazione del servizio è realizzata grazie alle funzioni messe a disposizione dalla componente di Service all'interno del controller descritte in seguito. 
-L'implementazione di queste funzioni è presente nella repository pubblica \cite{servserv}.
+\newline La creazione del servizio è realizzata grazie alle funzioni messe a disposizione dalla componente di Service all'interno del controller descritte in seguito, 
+la cui implementazione è presente nella repository pubblica \cite{servserv}.
 \newline Inizialmente, la funzione \textit{CreateService} viene utilizzata per creare un servizio di connettività vuoto, specificandone solamente il tipo. 
 Questa funzione salva l'identificativo del servizio creato nel database del Context e lo restituisce.
 %Nella Figura \ref{fig:componenti} il servizio è stato richiesto dalla componente Web UI, mentre nella nostra sperimentazione si è usato uno script interno al controller.
@@ -231,8 +232,8 @@ Come ultima operazione, il \textit{Task Scheduler} , esegue il metodo \textit{Ex
 Dopo l'esecuzione, lo stato del servizio viene impostato su "Active" (attivo).
 \newline Parallelamente, il database della componente Context viene aggiornato con le nuove informazioni, e l'identificativo del servizio viene restituito all'entità chiamante.
 \subsection{Vincoli e configurazioni di servizio}
-Oltre alla specifica degli endpoints è possibile richiedere azioni supplementari come l'aggiunta di vincoli o configurazioni di servizio specifiche, 
-come la posizione di un endpoints o il numero di giorni per cui un servizio deve rimanere attivo. 
+Oltre alla specifica degli endpoints è possibile richiedere azioni supplementari quali l'aggiunta di vincoli o configurazioni di servizio specifiche, 
+come la posizione di un endpoint o il numero di giorni per cui un servizio deve rimanere attivo. 
 Anche se nella documentazione ufficiale non sono menzionati, tutti i tipi di vincoli supportati 
 si possono ritrovare nella repository pubblica \cite{vincoli}.
 %In questo modo il componente Policy offre SLA basati sugli eventi per servizi di connettività end-to-end tramite pipeline P4
@@ -243,32 +244,39 @@ come si può vedere nella Figura \ref{fig:abilene}.
 Questa aggiunta non ha prodotto cambiamenti nella gestione del servizio,
 poiché le funzionalità che consentirebbero di monitorare e adeguare automaticamente il servizio 
 in base alle condizioni della rete non sono ancora state implementate nel controller, ma sono previste per release future.
-Questo impedimento ha reso necessaria l'introduzione di una politica per far rispettare i vincoli richiesti dall'intento.
+Al momento questa funzionalità può essere implementata andando ad eseguire un passo successivo di specifica e immissione di una politica.
 \subsection{Politica}
-Per finire l'implementazione dell'intento viene aggiunta una politica.
-\newline Inizialmente alla creazione del servizio si associano le differenti Kpi tramite i KpiDescriptor.
-In ogni KpiDescriptor  si devono specificare i valori numerici da rispettare insieme al tipo di Kpi (KpiSampleType).
+Per finire l'implementazione dell'intento viene aggiunta una politica al fine di far rispettare al servizio specifici vincoli 
+a tempo di esecuzione. 
+\newline Inizialmente alla creazione del servizio si associano le differenti KPI tramite i KpiDescriptor.
+In ogni KpiDescriptor  si devono specificare i valori numerici da rispettare insieme al tipo di KPI (KpiSampleType).
 Quest'ultimo può essere predefinito,
-come i KpiSampleType per la latenza (KPISAMPLETYPE\_SERVICE\_LATENCY\_MS) o la capacità (KPISAMPLETYPE\_LINK\_TOTAL\_CAPACITY\_GBPS,  KPISAMPLETYPE\_LINK\_USED \_CAPACITY\_ GBPS) (illustrati nel File pubblico \cite{kpi}),
+come i KpiSampleType per la latenza (KPISAMPLETYPE\_SERVICE\_LATENCY\_MS) o la capacità (KPISAMPLETYPE\_LINK\_TOTAL\_CAPACITY\_GBPS,  KPISAMPLETYPE\_LINK\_USED\_CAPA CITY\_GBPS) (illustrati nel File pubblico \cite{kpi}),
 oppure, utilizzando il tipo UNKNOWN, si può personalizzare tramite una descrizione.
-\newline Successivamente si richiama la funzione della componente di Monitoring \textit{SetKpi} per ogni regola, passando il KpiDescriptor come parametro, così da
-associare il monitoraggio delle metriche richieste a una kpi nel Monitoring database e restituire il relativo identificatore.
-Se a uno stesso servizio si associano più KPI ognuna deve avere associato un KpiSampleType diverso, altrimenti, anche se con una descrizione differente,
+\newline Successivamente viene richiamata la funzione della componente di Monitoring \textit{SetKpi} per ogni regola, passando il KpiDescriptor come parametro, così da
+associare il monitoraggio delle metriche richieste a una KPI nel Monitoring database e restituire il relativo identificatore.
+Se a uno stesso servizio vengono associate più KPI ognuna deve avere un KpiSampleType diverso, altrimenti, anche se con una descrizione differente,
 verrà associato lo stesso identificativo per monitorare metriche diverse creando conflitti. 
 Infine al servizio è stata associata una politica specificando le diverse regole collegate tra loro da operatori booleani come AND/OR tramite file JSON.
-Per definire una politica va specificato l'id del contesto a cui si vuole associare e l'id del relativo servizio, successivamente si specificano le regole.
-Ogni regola è composta dall'identificatore della Kpi, l'operatore numerico (maggiore, minore o uguale \cite{op}) insieme al valore limite 
+Per definire una politica va specificato l'id del contesto a cui si vuole associare e l'id del relativo servizio, successivamente vengono specificate le regole.
+Ogni regola è composta dall'identificatore della KPI, l'operatore numerico (maggiore, minore o uguale \cite{op}) insieme al valore limite 
 per definire l'intervallo di valori non ammessi e infine l'azione da eseguire (le possibili azioni sono riportare nel file \cite{az}).
-Appena creata la politica si trova nello stato di VALIDATED. Quando le metriche delle Kpi monitorate
+Appena creata la politica si trova nello stato di VALIDATED. Quando le metriche delle KPI monitorate
 specificate nelle regole vengono sottoscritte dalla componente di Monitoring al Metrics database, la politica passa allo stato PROVISIONED.
 Se i requisiti richiesti non vengono più soddisfatti, la componente di Monitoring solleva un allarme che invia alla componente di Policy
 e la politica passa allo stato ACTIVE.
 A questo punto, la componente di Policy recupera il servizio interessato dalla componente Context e applica le azioni correttive specificate.
-Nel caso di ricalcolo del percorso viene richiamata la funzione \textit{UpdateService} il cui funzionamento è stato descritto precedentemente.
+Nel caso di ricalcolo del percorso viene richiamata la funzione \textit{UpdateService} il cui funzionamento è stato descritto precedentemente \ref{cap:service}.
 Durante questa fase lo stato della politica passa a ENFORCED e la politica viene monitorata per un certo periodo per verificare l'efficacia effettiva delle azioni.
 Se le metriche continuano a non rispettare i requisiti, la politica passa allo stato INEFFECTIVE, segnalando la necessità di ulteriori interventi.
-In caso contrario, se l'azione risolve il problema, la politica viene contrassegnata come EFFECTIVE.
-Il flusso dello stato della politica è descritto anche nella Figura \ref{fig:diagramma}.
+In caso contrario, se l'azione risolve il problema, la politica viene contrassegnata come EFFECTIVE \cite{D32}.
+Il flusso dello stato della politica è descritto anche nella macchina a stati in Figura \ref{fig:diagramma}.
+\begin{figure}[h]
+    \centering
+   \includegraphics[width=1\textwidth]{diagramma policy.png}
+    \caption{Macchina a stati interna alla componente di policy \cite{D32}}
+    \label{fig:diagramma}
+\end{figure}
 %\newline Nella sperimentazione abbiamo introdotto una politica per il servizio stabilito tramite un file JSON
 %con tre condizioni: una per la latenza (che non deve superare i 100ms), una per la loss (che non deve superare il 5\%) 
 %e infine una per la capacità\ref{fig:policy}.
@@ -309,14 +317,11 @@ inizializza i driver degli switch per supportare la gestione dei dispositivi all
 Questo comando registra la topologia collegata a Mininet al controller, inserendo i dispositivi e i collegamenti nel Context database, così da poter proseguire con l'installazione del servizio.
 \newline Alla URL http://localhost:8080/webui si può accedere all'interfaccia grafica del controller e, selezionando il contesto \textit{Context:(admin):Topology(admin)},
 si può verificare la corretta registrazione nel controller della topologia di rete e delle configurazioni ad essa associate.
-\newline Prima di continuare con la creazione del servizio, in un altro terminale, dalla cartella
-\textit{probe-tfs}, si copia ricorsivamente la cartella target nella directory corrente (\textit{cp -r $\sim$/controller /src/tests/p4/probe/probe-tfs/target . })
-necessaria per eseguire i comandi successivi.
-Dallo stesso terminale ci si collega al container di Mininet (\textit{./connect-to-mininet.sh}) e
+Dal terminale Mininet (connettendosi tramite \textit{./connect-to-mininet.sh}) e
 si attiva lo script \textit{tfsagent} (\textit{./tfsagent.sh}) che permette di ascoltare gli eventi dalla componente di Context e, 
 quando un servizio viene registrato, crea la KpiDescriptor relativa alla latenza e la registra nel Monitoring database.
 In questo script il KpiSampleType specificato è UNKNOWN e il relativo commento è "\textit{Latency value for service \{\}}".
-Successivamente si mette in attesa dei dati dal tfsping per ricevere le metriche relative alla latenza del collegamento e crea delle kpi da mandare alla componente di Monitoring.
+Successivamente si mette in attesa dei dati dal tfsping per ricevere le metriche relative alla latenza del collegamento e crea delle KPI da mandare alla componente di Monitoring.
 \newline A questo punto si può creare il servizio tra i due endpoints (\textit{./run\_test\_02\_ create\_service.sh}) e visualizzarlo sull'interfaccia web, come si può vedere nelle Figure \ref{fig:ser} \ref{fig:sw4}.
 \begin{figure}[h]
     \centering
@@ -326,7 +331,7 @@ Successivamente si mette in attesa dei dati dal tfsping per ricevere le metriche
 \end{figure}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{policy sw2.png}
+    \includegraphics[width=1\textwidth]{Copia di 4sw_2.png}
     \caption{Servizio iniziale con topologia a 4 switch}
     \label{fig:sw4}
 \end{figure}
@@ -350,7 +355,7 @@ alla politica viene associata una sola regola rappresentata dall'identificativo 
 specificando la condizione che il valore non deve superare 10000.
 Se tale richiesta viene violata, la regola indicata è il ricalcolo del percorso.
 Lo script è richiamato eseguendo \textit{./addPolicy.sh}.
-Dalla Web UI si può constatare che la politica è stata correttamente implementata nella Figura \ref{fig:lat}.
+Dalla Web UI si può constatare che la politica è stata correttamente implementata, come rappresentato in Figura \ref{fig:lat}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\textwidth]{politica lat.png}
@@ -368,21 +373,30 @@ Quest'ultimo trasmette la metrica alla componente di Monitoring, che ha il compi
 In questo caso, il superamento del limite di latenza ha attivato correttamente l'azione prevista come si può vedere dal nuovo percorso in Figura \ref{fig:sw4 dopo}.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{policy con sw3.png}
-    \caption{Servizio con cambiamento di percorso}
+    \includegraphics[width=1\textwidth]{Copia di topologiasw4.png}
+    \caption{Servizio con cambiamento di percorso dovuto all'introduzione di un aumento della latenza}
     \label{fig:sw4 dopo}
 \end{figure}
 Si è fatta anche un'ulteriore prova, invece di aumentare la latenza si è direttamente disattivato un link tra due switch, 
 in questo caso switch2 e switch4, tramite \textit{link switch2 switch4 down} e si è potuto constatare che anche in questo caso è stata attivata l’azione della politica.
-\newline Prima di spengere la macchina virtuale del controller ci si deve assicurare di disattivare correttamente le risorse istanziate.
+\newline Prima di spengere la macchina virtuale del controller bisogna disattivare correttamente le risorse istanziate.
 Per prima cosa va rimossa la politica dalla quale dipende il servizio \textit{./removePolicy.sh}. Dopo aver eseguito il comando 
 è opportuno verificare tramite l'interfaccia web che la politica non è più disponibile; vista l'instabilità del controller potrebbe essere necessario rieseguirlo una seconda volta prima di continuare.
 Successivamente si disattiva il servizio (\textit{./run\_test\_03\_ delete\_service.sh}) e si rimuovono i dispositivi e l'ambiente allocati (\textit{./run\_test\_04\_ cleanup.sh}).
+\newline Questo primo esperimento ha permesso di acquisire familiarità con l'ambiente del controller, 
+comprendere l'interazione con esso e configurare correttamente i file necessari per l'implementazione dell'ambiente di test, confermando così la corretta installazione del sistema.
+Sono state verificate le funzionalità di interazione con la rete attraverso il programma P4 e l'interfaccia SBI per la
+gestione degli intenti grazie all'utilizzo delle componenti di Service e di Policy.
+E' stato implementato un servizio nel sistema al quale è stata applicata una politica di routing 
+verificata tramite il monitoraggio della relativa KPI.
+Infine, sono stati simulati eventi di aumento di latenza e disattivazione di link, che hanno permesso di 
+verificare il comportamento del sistema in risposta a tali cambiamenti.
 %Inoltre, si è notato che una volta rimosso il ritardo, la perdita di pacchetti, o riattivato un link, il controller percepisce questo cambiamento e modifica automaticamente il percorso precedente, poiché è memorizzato nel database della Path Comp come percorso preferito per le sue caratteristiche.
 \subsection{Esperimento 2}
 In questo esperimento la topologia di base da cui ha avuto inizio è stata quella descritta nel file del controller \textit{8switch3path.py} \cite{8sw}.
-Dopo lo script è stato modificato al fine di aggiungere dei link per creare 5 possibili percorsi al posto di 3; 
-la topologia finale, con 8 nodi e 11 link, è illustrata nella Figura \ref{fig:top8}. 
+Dopo lo script è stato modificato al fine di aggiungere due link.
+Il primo tra gli switch sw2 e sw5, l'altro tra sw4 e sw3, al fine di creare 5 possibili percorsi tra client e server al posto di 3. 
+La topologia finale, con 8 nodi e 11 link, è illustrata nella Figura \ref{fig:top8}. 
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\textwidth]{sw4.drawio.png}
@@ -394,52 +408,54 @@ per abilitare ulteriori porte di rete (50005,50006,50007,50008) al fine di stabi
 tra Mininet containerizzato e il controller.
 Queste porte vengono esposte per consentire di comunicare con i dispositivi P4 emulati in Mininet, in modo che i comandi possano essere inviati e ricevuti correttamente.
 \newline Per questa sperimentazione sono stati utilizzati gli script presenti nella cartella P4 del controller \cite{ofc}.
-E' stata necessaria l'aggiunta dei nuovi collegamenti al file \textit{Objects.py} per una corretta sincronizzazione con il container Mininet.
-Queste modifiche consistono nell'inserimento di una interfaccia agli switch interessati (sw2, sw3, sw4, sw5) per poter 
-supportare un nuovo collegamento e la specifica di quest'ultimi in modo unidirezionale come riportato \ref{cap:link}.
-Nello stesso file sono stati aggiunti alla definizione del servizio dei vincoli di configurazione relativi alla latenza e alla capacità, con la conseguente modifica anche del file \textit{test\_functional\_create\_service.py}.
+E' stato necessario il cambiamento del file \textit{Objects.py} per una corretta sincronizzazione con la topologia istanziata.
+Le modifiche consistono nell'inserimento di una interfaccia agli switch interessati (sw2, sw3, sw4, sw5) per poter 
+supportare un nuovo collegamento e la specifica di quest'ultimi in modo unidirezionale come riportato in Appendice \ref{cap:link}.
+Nello stesso file sono stati aggiunti dei vincoli di configurazione relativi alla latenza e alla capacità nella definizione del servizio, con la conseguente modifica anche del file \textit{test\_functional\_create\_service.py}.
 I cambiamenti sono evidenziati in Appendice \ref{cap:obj}.
 \newline Per quanto riguarda la parte iniziale i comandi per la configurazione dei dispositivi sono gli stessi della sezione precedente.
 \newline Successivamente viene definito un probe, necessario per il monitoraggio della rete e la raccolta di informazioni.
 Il probe in questione è costituito da due componenti principali: l'agent e il ping.
 L'agent è responsabile della creazione delle KpiId, della raccolta dei dati e dell'invio delle metriche al sistema di Monitoring del controller.
 Il ping, invece, viene utilizzato per testare la latenza del percorso di rete e la packet loss.
-L'implementazione utilizzata è disponibile al link \cite{probe} e rappresentano gli script  
+\newline L'implementazione utilizzata è disponibile nella cartella del controller \cite{probe} e sono gli script  
 utilizzati nella seconda parte della demo dell'Hackfest 3.
 \newline I file sono stati modificati per aggiungere la metrica della packet loss. 
 Per quanto riguarda l'agent si è aggiunta la relativa KpiDescriptor da sottoscrivere alla componente di Monitoring ed
-è stata necessaria l'aggiunta del KpiSampleType per il KpiDescriptor della latenza. 
+è stata necessaria la modifica del KpiSampleType per il KpiDescriptor della latenza da UNKNOWN a SERVICE\_LATENCY\_MS. 
 Pur essendo uno dei tipi predefiniti, non tutti sono implementati completamente, infatti
 i KpiSampleType in stato finale sono: UNKNOWN, PACKETS\_TRANSMITTED, PACKETS\_RECEIVED, BYTES\_TRANSMITTED, BYTES\_RECEIVED e LINK\_TOTAL \_CAPACITY\_GBPS.
-Per questo motivo all'inizio la Kpi relativa alla latenza non aveva l'effetto desiderato; per sistemare questo problema è stata necessaria la 
+Per questo motivo all'inizio la KPI relativa alla latenza non aveva l'effetto desiderato; per sistemare questo problema è stata necessaria la 
 modifica di alcuni file di configurazione del controller relativi alla gestione dei kpiSampleType.
-La stessa cosa non è stata possibile per la packet loss in quanto non era tra i tipi, anche solo parzialmente, implementati.  
-La seconda parte dello script è stata adattata per ricevere la metrica aggiunta e inviare l'evento alla componente di Monitoring.
-Per quanto riguarda il file \textit{ping2.py} si è calcolata la packet loss grazie ai risultati ricevuti dall'esecuzione
-del comando ping di Mininet.
-Affinchè ciò sia possibile vengono mantenute le informazioni del totale dei ping e quelli effettuati con successo e per calcolare la percentuale dei pacchetti persi,
-infine la metrica appena computata viene inviatra tramite la socket all'agent.
+Utilizzare un KpiSampleType specifico non è stato possibile per la packet loss in quanto non era tra i tipi, anche solo parzialmente, implementati.  
+La seconda parte dello script dell'agent è stata adattata per ricevere la metrica aggiunta e inviare entrambi i valori di latenza e packet loss alla componente di Monitoring.
+Per quanto riguarda il file \textit{ping2.py} viene calcolata la packet loss grazie ai risultati ottenuti dall'esecuzione
+del comando ping in Mininet.
+Per effettuare questo calcolo, vengono mantenute le informazioni sul numero totale di ping inviati e sul numero di quelli riusciti.
+La percentuale di pacchetti persi viene quindi calcolata sottraendo i ping riusciti dal totale e dividendo il risultato per il totale dei ping, moltiplicando poi per 100. 
+Una volta calcolata la percentuale, questa metrica viene inviata all'agent tramite una socket.
 Per un problema di comunicazione si è modificato il percorso della socket, infatti inizialmente era \textit{/home/teraflow/ngsdn-tutorial/tmp/sock} ed
 è stata cambiata in \textit{"/home/teraflow/ngsdn-tutorial/tmp/tfsping"}.
-\newline In un terminale relativo alla cartella si eseguono i seguenti comandi: \textit{source $\sim$/tfs-ctrl/tfs\_ runtime\_env\_vars.sh} per inserire le variabili di TeraFlow
+\newline In un terminale si eseguono i seguenti comandi per avviare l'agent del probe: \textit{source $\sim$/tfs-ctrl/tfs\_ runtime\_env\_vars.sh} per inserire le variabili di TeraFlow
 necessarie, se l'ambiente Python è disattivato \textit{pyenv activate 3.9.18/envs/tfs}, e infine \textit{python agent.py}.
-Quando si eseguirà il comando relativo alla creazione del servizio (\textit{./run\_test\_02\_create\_service.sh}),
-sul terminale in cui è in esecuzione l'agent si vedrà l'output in Figura \ref{fig:ag}.
-\newline Il servizio richiesto ha come endpoints "SW1-port4” e “SW8-port4”, come si può vedere in Figura \ref{fig:sw8}.
+Quando si esegue il comando relativo alla creazione del servizio (\textit{./run\_test\_02\_create\_service.sh}),
+sul terminale in cui è in esecuzione l'agent viene visualizzato l'output in Figura \ref{fig:ag} che indica la corretta creazione e la sottoscrizione al
+Metrics database dei KPI richiesti al servizio creato.
+\newline Il servizio ha come endpoints "SW1-port4” e “SW8-port4”, come si può vedere in Figura \ref{fig:sw8}.
 \begin{figure}[h]
     \centering
-   \includegraphics[width=1\textwidth]{service sw8.png}
+   \includegraphics[width=1\textwidth]{Copia di sw8_dopo.png}
     \caption{Servizio iniziale con topologia a 8 switch}
     \label{fig:sw8}
 \end{figure}
 \begin{figure}[h]
     \centering
    \includegraphics[width=0.5\textwidth]{create new event ag.png}
-    \caption{Creazione kpi dallo script agent.py}
+    \caption{Creazione KPI dallo script agent.py}
     \label{fig:ag}
 \end{figure}
 \newline Per creare la politica si riutilizzano gli script precedenti assicurandosi di cambiare nel file \textit{policyAddService.json}
-gli id relativi al contesto e al servizio e di aggiungere alle regole quella relativa alla packet loss. Il relativo script è riposrtato \ref{cap:pktl} e
+gli id relativi al contesto e al servizio e di aggiungere alle regole quella relativa alla packet loss. Lo script è riportato in Appendice \ref{cap:pktl} e
 la politica risultante è illustrata in Figura \ref{fig:policy}.
 \begin{figure}[h]
     \centering
@@ -454,46 +470,55 @@ Questo avviene tramite il comando
 che applica una perdita del 7\% dei pacchetti sull'interfaccia eth2 dello switch 6.
 Al fine di verificare la politica viene attivato lo script \textit{ping2.py} tramite Mininet
 (\textit{client python ping2.py 10.0.0.2}).
-Anche in questo caso si è riscontato un cambiamento nel persorso come mostrato in Figura \ref{fig:sw8 dopo}.
+Anche in questo caso, dopo aver alterato lo stato della rete in modo tale che le regole della politica non fossero più rispettate,
+si è riscontato un cambiamento nel persorso come mostrato in Figura \ref{fig:sw8 dopo}.
 Infine tramite i comandi esposti in precendenza, cambiando nello script \textit{removePolicy.json} l'identificativo della politica, si sono disattivati in ordine la politica, il servizio e i dispositivi.
 \begin{figure}[h]
     \centering
-   \includegraphics[width=1\textwidth]{servizion constraints.png}
-    \caption{Servizio con cambiamento di percorso}
+   \includegraphics[width=1\textwidth]{Copia di sw8_dopo1.png}
+    \caption{Servizio con cambiamento di percorso dovuto all'introduzione di una perdita di pacchetti}
     \label{fig:sw8 dopo}
 \end{figure}
-
+Lo scopo principale di questo secondo esperimento è stato di consolidare le conoscenze acquisite nel primo esperimento,
+consentendo di apportare modifiche autonome agli script forniti e di esplorare come il controller gestisce una politica con più di una regola
+in un ambiente di rete dinamico e con una topologia più ampia. 
+Simulando la perdita di pacchetti, è stato verificato il comportamento del sistema nella gestione,
+e nell'applicazione, di entrambe le regole.
 \subsection{Esperimento 3}
 L'ultima topologia utilizzata è stata Abilene \cite{abilene}, raffigurata in Figura \ref{fig:ab}; una rete di trasporto creata da Internet2 con 11 nodi e 14 link.
-La configurazione della rete emulata in Mininet per questa topologia è disponibile su \cite{topab}. 
-Per simulare l'ambiente, i valori di larghezza di banda vengono impostati a 30 Mbps
+La configurazione della rete emulata in Mininet per questa topologia è disponibile in \cite{topab}. 
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{abilene.png}
     \caption{Topologia Abilene}
     \label{fig:ab}
 \end{figure}
-e vengono effettuati dei cambiamenti 
-per garantire una corretta connessione con il container, nonché la configurazione del servizio da istanziare successivamente, come la configurazione ARP per i due endpoint.
-Lo script è riportato in Appendice \ref{cap:ab} e La relativa topologia è rappresentata in Figura \ref{fig:d}. 
+Partendo da questo script, è stato modificato al fine di garantire la connessione tra il container e il controller e 
+la corretta configurazione del servizio da istanziare successivamente per l'intento.
+Una delle modifiche apportate è stata la configurazione manuale delle associazioni ARP nei due endpoints, tramite il comando setARP,
+per garantire il corretto instradamento dei pacchetti e evitare ritardi dovuti alla risoluzione ARP.
+Inoltre la larghezza di banda è stata impostata a 30 Mbps per simulare l'ambiente.
+Lo script è riportato in Appendice \ref{cap:ab} e la relativa topologia è rappresentata in Figura \ref{fig:d}. 
 \begin{figure}[h]
     \centering
    \includegraphics[width=1\textwidth]{ab_topologia.png}
     \caption{Topologia Abilene in Teraflow}
     \label{fig:d}
 \end{figure}
-Per poter utilizzare la topologia sono state aggiunte ulteriori porte a Mininet (5009, 5010, 5011).
+Per poter utilizzare la topologia sono state abilitate ulteriori porte di rete nel file \textit{docker-compose.yaml} (5009, 5010, 5011).
 \newline Per quanto riguarda gli script sono stati riutilizzati quelli della sperimentazione precedente nella cartella P4 \cite{ofc} con le 
-modifiche necessarie al file \textit{Objects.py}. 
-I comandi per configurare i dispositivi sono i medesimi.
+modifiche al file \textit{Objects.py} per rappresentare la topologia; l'aggiunta dei nuovi dispositivi con le relative interfacce 
+e il cambiamento dei link descritti. 
+I comandi iniziali per la configurazione dei dispositivi sono i medesimi degli esperimenti precedenti.
 \newline In questa sperimentazione è stata introdotta una nuova regola di politica relativa alla capacità.
 A tal fine è stato modificato nuovamente il file \textit{agent.py} con l'aggiunta di una nuova KpiDescriptor, con il relativo KpiSampleType LINK\_TOTAL\_CAPACITY\_GBPS, e si è avviato.
-Si è creato il servizio, illustrato in Figura \ref{fig:abilene}, con endpoints "SW1-port3” e “SW8-port4” che nella topologia corrispondono alle città di New York e Kansas City.
-Successivamente si istanzia la politica, raffigurata in Figura \ref{fig:policy cap}, cambiando nel file JSON i campi relativi
-al contesto, al servizio e alle regole \ref{cap:polcap}.
+Il file è riportato in Appendice \ref{cap:agcap}.
+Successivamente viene creato il servizio, illustrato in Figura \ref{fig:abilene}, con endpoints "SW1-port3” e “SW8-port4”, che nella topologia corrispondono alle città di New York e Kansas City,
+poi si istanzia la politica, raffigurata in Figura \ref{fig:policy cap}, cambiando nel file JSON i campi relativi
+al contesto, al servizio e alle regole (in Appendice \ref{cap:polcap}).
 \begin{figure}[h]
     \centering
-   \includegraphics[width=1\textwidth]{service abilene (11).png}
+   \includegraphics[width=1\textwidth]{ab_def_11.png}
     \caption{Servizio iniziale con Abilene}
     \label{fig:abilene}
 \end{figure}
@@ -504,24 +529,30 @@ al contesto, al servizio e alle regole \ref{cap:polcap}.
     \label{fig:policy cap}
 \end{figure}
 Infine per verificarla , oltre ai test effettuati anche negli altri esperimenti, 
-si è modificata la capacità tramite due differenti comandi: \textit{switch4 tc qdisc add dev switch4-eth2 root tbf rate 1mbit burst 10kb latency 50ms} che 
-limita la velocità di trasmissione a 1Mbps per secondo e imposta un ritardo massimo di 50ms per i pacchetti nella coda; 
+si è modificata la capacità tramite due differenti comandi: \textit{switch2 tc qdisc add dev switch2-eth2 root tbf rate 1mbit burst 10kb latency 50ms} che 
+limita la velocità di trasmissione a 1Mbps e imposta un ritardo massimo di 50ms per i pacchetti nella coda nell'interfaccia eth2 dello switch2; 
 \textit{switch1 tc qdisc add dev switch1-eth1 root tbf rate 1mbit burst 10kb limit 10000} che
-limita la velocità di trasmissione e specifica un limite sulla dimensione massima della coda a 10.000 byte.
-\newline Prima di attivare lo script del ping vanno effettuate delle modifiche.
+limita la velocità di trasmissione a 1Mbps e specifica un limite sulla dimensione massima della coda dell'interfaccia eth1 dello switch1 a 10.000 byte.
+\newline Prima di attivare lo script del ping vanno effettuate delle modifiche per poter monitorare anche la capacità e inviare la metrica all'agent.
 Mentre la latenza e la packet loss potevano essere calcolate tramite il comando ping, per la capacità questo non è possibile.
-Per calcolare la nuova metrica si è introdotto nel codice la chiamata anche al comando iperf,
-un comando per misurare attivamente l'ampiezza di banda disponibile nel percorso tra due endpoints.
-Prima di eseguire il codice su Mininet (\textit{h0 python ping2.py 10.0.0.8}), è necessario attivare iperf sul dispositivo finale \textit{h7} tramite il comando \textit{iperf -s \&}.
+Viene introdotto nel codice la chiamata al comando iperf,
+questo serve per misurare attivamente l'ampiezza di banda disponibile nel percorso tra due endpoints.
+Il codice è riportato in Appendice \ref{cap:pingcap}.
+\newline Prima di eseguire il comando su Mininet per avviare lo script (\textit{h0 python ping2.py 10.0.0.8}), è necessario attivare iperf sul dispositivo finale \textit{h7} tramite il comando \textit{iperf -s \&},.
 L'opzione \& permette di avviare iperf in background e riutilizzare lo stesso terminale per altre operazioni.
-Se gli script sono attivi dopo aver modificato il rate si verifica un cambiamento del percorso,
-come si può vedere nella Figura \ref{fig:abilene post}.
-Come negli altri esperimenti, con le solite modifiche ai file, si sono disattivati politica, servizio e dispositivi per ricreare l'ambiente iniziale.
+Se gli script sono attivi dopo aver modificato la velocità di trasmissione, o altre metriche nello stato della rete
+in modo tale che le regole della politica non siano più rispettare, si verifica un cambiamento del percorso,
+come si può vedere dalla Figura \ref{fig:abilene post}.
 \begin{figure}[h]
     \centering
-   \includegraphics[width=1\textwidth]{service 3 10 11.png}
-    \caption{Servizio con un percorso modificato}
+   \includegraphics[width=1\textwidth]{ab_def_10.png}
+    \caption{Servizio con cambiamento di percorso dovuto a un'introduzione di limitata capacità}
     \label{fig:abilene post}
 \end{figure}
-
-
+Come negli altri esperimenti, con le solite modifiche ai file, si sono disattivati politica, servizio e dispositivi ripristinando l'ambiente alle condizioni iniziali.
+\newline Questo esperimento si è distinto per l'utilizzo della topologia Abilene, che ha permesso di lavorare su una rete più ampia e realistica.
+Alla politica è stata aggiunta una nuova regola introducendo un vincolo sulla capacità.
+Per monitorare questo nuovo valore, è stato integrato l'uso di iperf nel probe per misurare la larghezza di banda effettiva.
+Attraverso comandi eseguiti tramite Mininet, è stata limitata la velocità di trasmissione dei pacchetti. 
+Ciò ha permesso di simulare le limitazioni sulla capacità, garantendo una verifica accurata della corretta attivazione di tutte le regole di politica e 
+dimostrando l'abilità del sistema di ricalcolare dinamicamente i percorsi in base ai vincoli definiti.

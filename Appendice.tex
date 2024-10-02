@@ -65,8 +65,8 @@ LINK_SW3_SW4
 \end{lstlisting}
 
 \section{Aggiunta costraints}
-\subsection{File Objects}
 \label{cap:obj}
+\subsection{File Objects}
 \begin{lstlisting}[language=Python]
 SERVICE_SW1_SW8_UUID          = get_service_uuid(ENDPOINT_ID_SW1_4, ENDPOINT_ID_SW8_4)
 SERVICE_SW1_SW8               = json_service_p4_planned(SERVICE_SW1_SW8_UUID)
@@ -258,6 +258,7 @@ start-v4: _start
 
 \section{implementazione probe con aggiunta capacità}
 \subsection{agent.py}
+\label{cap:agcap}
 \begin{lstlisting}[language=Python]
 import os, threading, time, socket
 from common.Settings import get_setting
@@ -445,6 +446,7 @@ if __name__ == "__main__":
     main()
 \end{lstlisting}
 \subsection{ping2.py}
+\label{cap:pingcap}
 \begin{lstlisting}[language=Python]
 import socket, re, time, subprocess, sys, os
 
